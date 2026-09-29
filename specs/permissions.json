@@ -1,0 +1,9 @@
+{
+  "roles": {
+    "ADMIN": ["Dashboard.View","Patient.View","Patient.EditBasic","MedicalProfile.View","Queue.View","Queue.Move","Queue.Exit","Visit.View","Reports.View","Users.Manage","RBAC.View","Config.Manage","Audit.View","Settings.Manage","FollowUp.View"],
+    "RECEPTIONIST": ["Dashboard.View","Patient.View","Patient.Create","Patient.EditBasic","Queue.View","Queue.CheckIn","Queue.Move","Queue.Exit","FollowUp.View"],
+    "DOCTOR": ["Dashboard.View","Patient.View","MedicalProfile.View","MedicalProfile.Edit","Measurement.Create","Queue.View","Visit.View","Visit.Start","Visit.Edit","Visit.Session","Prescription.Create","Documentation.Complete","FollowUp.View","Reports.View"],
+    "NURSE": ["Dashboard.View","Patient.View","MedicalProfile.View","Measurement.Create","Queue.View","Visit.View"]
+  },
+  "notes": ["Starter catalog extracted from approved prototype intent.","The executable backend permission catalog is authoritative when it contains newer atomic codes.","Platform actions use Platform actor authorization, not clinic roles."]
+}

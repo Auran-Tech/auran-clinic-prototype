@@ -1,157 +1,28 @@
-# AURAN Clinic Management — Prototype
+# AURAN Clinic V1 — Canonical Agent Kit
 
-Interactive UI/UX prototype for the **AURAN Clinic Management System**.
+This repository is the canonical source of truth for AURAN Clinic V1. The prototype and reference assets live alongside these canonical contracts; when they disagree, follow `AGENTS.md`. Start with `AGENTS.md`, then `docs/product/scope-v1.md`, then the module you are implementing.
 
-This repository contains the current product prototype used for:
-
-- Product discussions
-- UI/UX reviews
-- Workflow validation
-- Client demonstrations
-- Feature planning
-- Early usability testing
-
-> This is a prototype only. It is not the production application.
-
----
-
-## Live Demo
-
-The prototype is deployed using GitHub Pages.
-
-**Demo:** Add GitHub Pages URL here
-
----
-
-## Current Scope
-
-The prototype currently demonstrates the planned V1 experience for:
-
-- Authentication
-- Post-login clinic welcome screen
-- Dashboard and statistics
-- Patient management
-- Duplicate patient detection
-- Dynamic patient profiles
-- Live clinic queue
-- Configurable clinic workflow
-- Multi-session patient visits
-- Clinical documentation
-- Prescription sections
-- Attachments and images
-- Pending documentation
-- Patient follow-ups
-- Employees
-- System roles
-- RBAC permissions
-- Permission-aware navigation
-- Reports
-- PDF / Excel export flow
-- Clinic configuration
-- System settings
-- Timezone and localization
-- Audit log
-- System guide
-
----
-
-## Clinic Workflow
-
-The workflow is configurable per clinic.
-
-Different clinics may require different patient stages.
-
-For example:
-
-Patient Check-In  
-→ Waiting  
-→ Doctor  
-→ Drops / Observation  
-→ Waiting Again  
-→ Doctor Re-check  
-→ Exit
-
-The prototype also supports multiple clinical sessions inside the same patient visit.
-
----
-
-## Roles & Permissions
-
-The system uses Role-Based Access Control (RBAC).
-
-A user can have multiple roles.
-
-System roles are protected and cannot be renamed, deleted, or have their built-in permissions modified.
-
-Navigation and available actions change according to the user's effective permissions.
-
-A protected Super User has full system access.
-
----
-
-## Running Locally
-
-No installation is required.
-
-Clone the repository:
-
-git clone <repository-url>
-
-Then open:
-
-index.html
-
-in any modern browser.
-
----
+## Product boundaries
+AURAN Clinic V1 contains two bounded areas: **Platform Foundation** for AURAN administrators to provision and control clinics, and the **Clinic Workspace** used by clinic staff for patients, queue, visits, clinical documentation, reports and administration.
 
 ## Technology
+Backend: .NET 8 / ASP.NET Core Web API / EF Core / SQL Server. Frontend: Angular / TypeScript / SCSS. Authentication: Identity + JWT/refresh sessions. Authorization: permission-based RBAC. Deployment style: modular monolith.
 
-This prototype is intentionally implemented as a standalone:
+## Documentation map
+- `docs/product/`: why the product exists, scope, personas and terminology.
+- `docs/requirements/`: functional/NFR/business/permission rules.
+- `docs/modules/`: one implementation contract per module.
+- `docs/architecture/`: backend, frontend, database and API boundaries.
+- `docs/design/`: design system, screens and user flows.
+- `docs/engineering/`: coding, security, testing and completion rules.
+- `docs/delivery/`: build order and task/acceptance templates.
+- `specs/`: machine-oriented contracts and starter schema/data.
 
-- HTML
-- CSS
-- JavaScript
-- Browser LocalStorage
+## Current V1
+Platform Admin, provisioning and suspension are **in scope**. Appointments and commercial billing/subscriptions remain **out of scope**.
 
-No backend or database is required for the prototype.
+## Prototype reference
+The root `index.html` remains the approved interactive UX/workflow reference. It is not the production architecture and MUST NOT override canonical product, security, data, or engineering contracts.
 
----
-
-## Important
-
-The architecture of this prototype does **not** represent the final production architecture.
-
-The production system will be developed separately using:
-
-- .NET Backend API
-- Angular Frontend
-- SQL Server
-- Production authentication and authorization
-- Persistent server-side storage
-
----
-
-## Repository Purpose
-
-This repository should remain focused on the interactive product prototype.
-
-Production source code should be maintained in separate repositories.
-
-Suggested repositories:
-
-- `auran-clinic-prototype`
-- `auran-clinic-api`
-- `auran-clinic-web`
-
----
-
-## Status
-
-**Current Stage:** Interactive Product Prototype
-
-The prototype is actively evolving based on product discussions, clinic requirements, and UI/UX feedback.
-
----
-
-© AURAN Technology
+## Repository role
+This repository owns the canonical product definition and implementation contracts. Production backend/frontend source may live in separate repositories, but implementation changes must remain aligned with the contracts here. Any intentional behavior change must update this repository's canonical docs/specs in the same delivery process.

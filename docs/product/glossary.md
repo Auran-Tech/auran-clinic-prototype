@@ -1,0 +1,16 @@
+# Glossary
+- **Platform Admin:** AURAN-level administrator outside a clinic tenant.
+- **Clinic:** Tenant boundary for clinic-owned data.
+- **Clinic Context:** Resolved authenticated `ClinicId`, user and authorization context.
+- **Super User:** Protected clinic user flag granting all clinic permissions; not a normal role.
+- **Role:** Static clinic role such as Admin, Receptionist, Doctor or Nurse.
+- **Permission:** Atomic capability used for authorization and UI visibility.
+- **Visit:** Complete patient encounter.
+- **Visit Session:** One doctor interaction within a Visit; a Visit can have multiple sessions.
+- **Queue Entry:** Operational representation of a Visit in the live clinic workflow.
+- **Workflow Status:** Clinic-configured operational state.
+- **Documentation Status:** Clinical-note completion state, independent from operational Visit status.
+- **Clinical Order:** Configurable prescription/order document containing structured/text/file/image sections.
+- **Follow-up:** Clinical recommendation for later review; not an appointment.
+- **Platform Boundary:** APIs/data/actions reserved for Platform actors.
+- **Tenant Isolation:** Guarantee that one clinic cannot access another clinic's data.

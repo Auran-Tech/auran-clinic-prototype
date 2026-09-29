@@ -1,0 +1,11 @@
+{
+  "clinic": {"name":"VisionCare Clinic","code":"VISIONCARE","patientNumberPrefix":"AU","timezone":"Africa/Cairo","locale":"en-EG","dateFormat":"DD/MM/YYYY","timeFormat":"12h","documentationReminderHours":12},
+  "roles": ["ADMIN","RECEPTIONIST","DOCTOR","NURSE"],
+  "workflow": [
+    {"code":"WAITING","name":"Waiting","color":"#316DF4","sortOrder":1},
+    {"code":"WITH_DOCTOR","name":"With Doctor","color":"#22A06B","sortOrder":2},
+    {"code":"WAITING_DROPS","name":"Waiting For Drops","color":"#D99A00","sortOrder":3},
+    {"code":"READY_RECHECK","name":"Ready For Recheck","color":"#7C4DFF","sortOrder":4}
+  ],
+  "warning": "Demo/dev seed only. Never include real credentials or patient data."
+}

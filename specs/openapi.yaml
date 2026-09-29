@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: AURAN Clinic API
+  version: 1.0.0
+  description: Starter canonical surface. The generated OpenAPI from the tested running API is authoritative for exact current routes/schemas.
+servers:
+  - url: /
+paths:
+  /health/live: {get: {summary: Liveness, responses: {'200': {description: Alive}}}}
+  /health/ready: {get: {summary: Readiness, responses: {'200': {description: Ready}}}}
+  /auth/login: {post: {summary: Clinic login, responses: {'200': {description: Authenticated}, '401': {description: Invalid credentials}, '429': {description: Rate limited}}}}
+  /auth/me: {get: {summary: Current clinic user context, security: [{bearerAuth: []}], responses: {'200': {description: Current context}, '401': {description: Unauthorized}}}}
+  /patients: {get: {summary: List patients, security: [{bearerAuth: []}], responses: {'200': {description: Patients}}}, post: {summary: Register patient, security: [{bearerAuth: []}], responses: {'200': {description: Created}, '409': {description: Duplicate phone}}}}
+  /queue: {get: {summary: Live queue, security: [{bearerAuth: []}], responses: {'200': {description: Queue}}}}
+  /queue/check-in: {post: {summary: Check in patient, security: [{bearerAuth: []}], responses: {'200': {description: Checked in}}}}
+  /visits: {get: {summary: List visits, security: [{bearerAuth: []}], responses: {'200': {description: Visits}}}}
+  /follow-ups: {get: {summary: List follow-ups, security: [{bearerAuth: []}], responses: {'200': {description: Follow-ups}}}}
+  /users: {get: {summary: Clinic users, security: [{bearerAuth: []}], responses: {'200': {description: Users}}}}
+  /permissions: {get: {summary: Permission catalog, security: [{bearerAuth: []}], responses: {'200': {description: Permissions}}}}
+  /settings: {get: {summary: Clinic settings, security: [{bearerAuth: []}], responses: {'200': {description: Settings}}}, put: {summary: Update clinic settings, security: [{bearerAuth: []}], responses: {'200': {description: Updated}}}}
+  /audit: {get: {summary: Clinic audit, security: [{bearerAuth: []}], responses: {'200': {description: Audit}}}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
