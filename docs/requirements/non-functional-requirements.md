@@ -1,21 +1,25 @@
-# Non-Functional Requirements
+# Non-Functional Requirements — V1
+
 ## Security
-HTTPS; strong password hashing via Identity; JWT validation; refresh rotation/replay protection; login rate limiting; CORS allow-list; secrets outside source control; actor and tenant isolation; file authorization; no sensitive token/password/medical-note logging.
+HTTPS outside local; Identity hashing/lockout; JWT signature/issuer/audience/expiry validation; rotating hashed refresh sessions with replay rejection; login rate limit; CORS allow-list; secrets outside source; Platform↔Clinic actor isolation; tenant isolation; parent-aware file authorization; no credentials/tokens/full sensitive notes in logs/audit. Input binding rejects malformed/empty identifiers rather than silently using Guid.Empty.
 
-## Reliability
-Multi-record business operations are transactional. Concurrency-sensitive operational records should use optimistic concurrency where appropriate. Session-invalidating actions must take effect immediately according to current foundation behavior.
+## Reliability & integrity
+All multi-record use cases transactional. Database composite tenant FKs reinforce application isolation. Unique constraints back duplicate/codes/roles/transitions. Concurrency-safe code counters; operational records use optimistic/persistence invariants where appropriate. State-invalidating actions take effect immediately.
 
-## Performance
-All list endpoints are paginated where data can grow. Queries are tenant-filtered and indexed on common tenant/search keys. Reports must filter before generating large result sets. Avoid N+1 queries.
+## Performance targets
+Normal interactive list/search endpoints should be designed for sub-second server processing at V1 clinic scale under healthy local-region infrastructure; exact SLO requires production measurement. Paginate unbounded lists, cap audit at 200, cap report preview, index ClinicId + common filters, avoid N+1 and client-side full-dataset filtering.
 
 ## Observability
-Structured Serilog logging, correlation ID on responses, `/health/live` and `/health/ready`, auditable security/administrative actions.
+Serilog structured logs; `X-Correlation-ID`; `/health/live` process health and `/health/ready` dependency/database readiness; exception middleware returns safe envelope; audit for privileged/domain actions. No stack traces in production responses.
+
+## Localization/time
+API messages/catalog support English/Arabic resources. Store UTC; use clinic TimeZoneId for business day and display. Locale/date/time formats are presentation settings. Angular architecture must support RTL without feature rewrites.
+
+## Accessibility
+Keyboard usable, visible focus, semantic labels, contrast, status not by color alone, validation announced/readable. Target WCAG 2.1 AA for production UI.
+
+## Browser/responsive
+Current evergreen Chrome/Edge/Firefox/Safari; desktop-first clinic operations with usable tablet widths. Critical workflows must not depend on hover.
 
 ## Maintainability
-Modular monolith; thin controllers; no customer branches; one shared response/pagination convention; migrations tracked in source; automated tests around business/security boundaries.
-
-## Localization
-Persist UTC. Use clinic timezone/locale/date/time settings at presentation/business-date boundaries. V1 UI should be architected so Arabic/RTL can be added without rewriting features; exact localization content can evolve separately.
-
-## Data integrity
-Database uniqueness/FK constraints reinforce application rules. Audit records are immutable through normal application APIs.
+.NET 8 modular monolith, Angular feature architecture, no customer forks, migrations/tests/docs with behavior, stable permission/error codes, generated Swagger usable as integration contract.

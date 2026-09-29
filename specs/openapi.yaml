@@ -1,27 +1,62 @@
 openapi: 3.0.3
 info:
-  title: AURAN Clinic API
+  title: AURAN Clinic V1 Target API
   version: 1.0.0
-  description: Starter canonical surface. The generated OpenAPI from the tested running API is authoritative for exact current routes/schemas.
-servers:
-  - url: /
+  description: Canonical target surface. For foundation endpoints already implemented, generated Swagger from a tested backend is authoritative for exact schemas.
+servers: [{url: /}]
+security: [{bearerAuth: []}]
 paths:
-  /health/live: {get: {summary: Liveness, responses: {'200': {description: Alive}}}}
-  /health/ready: {get: {summary: Readiness, responses: {'200': {description: Ready}}}}
-  /auth/login: {post: {summary: Clinic login, responses: {'200': {description: Authenticated}, '401': {description: Invalid credentials}, '429': {description: Rate limited}}}}
-  /auth/me: {get: {summary: Current clinic user context, security: [{bearerAuth: []}], responses: {'200': {description: Current context}, '401': {description: Unauthorized}}}}
-  /patients: {get: {summary: List patients, security: [{bearerAuth: []}], responses: {'200': {description: Patients}}}, post: {summary: Register patient, security: [{bearerAuth: []}], responses: {'200': {description: Created}, '409': {description: Duplicate phone}}}}
-  /queue: {get: {summary: Live queue, security: [{bearerAuth: []}], responses: {'200': {description: Queue}}}}
-  /queue/check-in: {post: {summary: Check in patient, security: [{bearerAuth: []}], responses: {'200': {description: Checked in}}}}
-  /visits: {get: {summary: List visits, security: [{bearerAuth: []}], responses: {'200': {description: Visits}}}}
-  /follow-ups: {get: {summary: List follow-ups, security: [{bearerAuth: []}], responses: {'200': {description: Follow-ups}}}}
-  /users: {get: {summary: Clinic users, security: [{bearerAuth: []}], responses: {'200': {description: Users}}}}
-  /permissions: {get: {summary: Permission catalog, security: [{bearerAuth: []}], responses: {'200': {description: Permissions}}}}
-  /settings: {get: {summary: Clinic settings, security: [{bearerAuth: []}], responses: {'200': {description: Settings}}}, put: {summary: Update clinic settings, security: [{bearerAuth: []}], responses: {'200': {description: Updated}}}}
-  /audit: {get: {summary: Clinic audit, security: [{bearerAuth: []}], responses: {'200': {description: Audit}}}}
+  /health/live: {get: {security: [], summary: Liveness, responses: {'200': {description: Alive}}}}
+  /health/ready: {get: {security: [], summary: Readiness, responses: {'200': {description: Ready}}}}
+  /api/platform/auth/login: {post: {security: [], summary: Platform login, responses: {'200': {description: Authenticated}, '401': {description: Invalid credentials}, '429': {description: Rate limited}}}}
+  /api/platform/auth/refresh: {post: {security: [], summary: Rotate platform refresh session, responses: {'200': {description: Rotated}, '401': {description: Invalid session}}}}
+  /api/platform/auth/logout: {post: {summary: Platform logout, responses: {'200': {description: Revoked}, '403': {description: Wrong actor}}}}
+  /api/platform/clinics: {get: {summary: List clinics, responses: {'200': {description: Clinics}}}, post: {summary: Provision clinic and initial Super User/Admin, responses: {'201': {description: Provisioned}, '409': {description: Provision conflict}}}}
+  /api/platform/clinics/details: {get: {summary: Get clinic by clinicId query, responses: {'200': {description: Clinic}, '404': {description: Not found}}}}
+  /api/platform/clinics/status: {put: {summary: Activate or suspend clinic, responses: {'200': {description: Updated}, '404': {description: Not found}}}}
+  /api/auth/login: {post: {security: [], summary: Clinic login, responses: {'200': {description: Authenticated}, '401': {description: Invalid credentials}, '429': {description: Rate limited}}}}
+  /api/auth/refresh: {post: {security: [], summary: Rotate clinic refresh session, responses: {'200': {description: Rotated}, '401': {description: Invalid session}}}}
+  /api/auth/logout: {post: {summary: Clinic logout, responses: {'200': {description: Revoked}}}}
+  /api/users: {get: {summary: List clinic users, responses: {'200': {description: Users}}}, post: {summary: Create clinic user, responses: {'201': {description: Created}, '409': {description: Conflict}}}, put: {summary: Update clinic user, responses: {'200': {description: Updated}}}}
+  /api/users/roles: {put: {summary: Replace roles and revoke sessions, responses: {'200': {description: Updated}}}}
+  /api/users/status: {put: {summary: Activate/deactivate user, responses: {'200': {description: Updated}, '409': {description: Last Super User protected}}}}
+  /api/users/disable-self: {post: {summary: Disable own account, responses: {'200': {description: Disabled}, '409': {description: Last Super User protected}}}}
+  /api/permissions/list: {get: {summary: Localized permission catalog, responses: {'200': {description: Permissions}}}}
+  /api/audit-logs: {get: {summary: Recent tenant audit, responses: {'200': {description: Audit events}}}}
+  /api/patients: {get: {summary: Paginated patients, responses: {'200': {description: Patients}}}, post: {summary: Register patient, responses: {'201': {description: Created}, '409': {description: Duplicate}}}}
+  /api/patients/search: {get: {summary: Search patients, responses: {'200': {description: Matches}}}}
+  /api/patients/duplicates: {get: {summary: Duplicate assistance, responses: {'200': {description: Candidates}}}}
+  /api/patients/{id}: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Patient detail, responses: {'200': {description: Patient}, '404': {description: Not found}}}, put: {summary: Update basic patient data, responses: {'200': {description: Updated}, '409': {description: Duplicate phone}}}}
+  /api/patients/{id}/profile: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Dynamic profile, responses: {'200': {description: Profile}}}}
+  /api/patients/{id}/medical-profile: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Medical profile, responses: {'200': {description: Profile}}}, put: {summary: Update normalized medical profile, responses: {'200': {description: Updated}}}}
+  /api/patients/{id}/measurements: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Measurement history, responses: {'200': {description: Measurements}}}, post: {summary: Record measurement, responses: {'201': {description: Recorded}}}}
+  /api/patients/{id}/timeline: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Patient timeline, responses: {'200': {description: Timeline}}}}
+  /api/queue: {get: {summary: Live queue, responses: {'200': {description: Queue}}}}
+  /api/queue/check-in: {post: {summary: Transactional check-in, responses: {'201': {description: Checked in}, '409': {description: Conflict}}}}
+  /api/queue/{id}/transition: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: Apply configured transition, responses: {'200': {description: Moved}, '409': {description: Transition/concurrency conflict}}}}
+  /api/queue/{id}/exit: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: Exit queue, responses: {'200': {description: Exited}}}}
+  /api/queue/{id}/history: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Queue history, responses: {'200': {description: History}}}}
+  /api/visits: {get: {summary: List/filter visits, responses: {'200': {description: Visits}}}}
+  /api/visits/{id}: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Visit workspace, responses: {'200': {description: Visit}}}}
+  /api/visits/{id}/documentation: {parameters: [{$ref: '#/components/parameters/Id'}], put: {summary: Save documentation, responses: {'200': {description: Saved}}}}
+  /api/visits/{id}/sessions/start: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: Start doctor session, responses: {'201': {description: Started}, '409': {description: Already active}}}}
+  /api/visits/{id}/sessions/end: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: End active session, responses: {'200': {description: Ended}, '409': {description: No active session}}}}
+  /api/visits/{id}/complete-documentation: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: Complete documentation, responses: {'200': {description: Completed}}}}
+  /api/visits/{id}/clinical-orders: {parameters: [{$ref: '#/components/parameters/Id'}], get: {summary: Visit clinical orders, responses: {'200': {description: Orders}}}, post: {summary: Create clinical order, responses: {'201': {description: Created}}}}
+  /api/follow-ups: {get: {summary: Filter follow-ups, responses: {'200': {description: Follow-ups}}}}
+  /api/visits/{id}/follow-up: {parameters: [{$ref: '#/components/parameters/Id'}], post: {summary: Create follow-up recommendation, responses: {'201': {description: Created}}}}
+  /api/follow-ups/{id}: {parameters: [{$ref: '#/components/parameters/Id'}], put: {summary: Update follow-up, responses: {'200': {description: Updated}}}}
+  /api/settings: {get: {summary: Clinic settings, responses: {'200': {description: Settings}}}, put: {summary: Update clinic settings, responses: {'200': {description: Updated}}}}
+  /api/configuration/workflow: {get: {summary: Workflow configuration, responses: {'200': {description: Configuration}}}}
+  /api/configuration/profile: {get: {summary: Patient profile configuration, responses: {'200': {description: Configuration}}}}
+  /api/configuration/clinical-fields: {get: {summary: Measurement configuration, responses: {'200': {description: Configuration}}}}
+  /api/configuration/order-sections: {get: {summary: Clinical order configuration, responses: {'200': {description: Configuration}}}}
+  /api/reports/{reportCode}/preview: {post: {summary: Preview report, responses: {'200': {description: Preview}}}}
+  /api/reports/{reportCode}/export: {post: {summary: Export PDF/Excel, responses: {'200': {description: File}}}}
+  /api/dashboard: {get: {summary: Permission-safe dashboard, responses: {'200': {description: Dashboard}}}}
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+  securitySchemes: {bearerAuth: {type: http, scheme: bearer, bearerFormat: JWT}}
+  parameters:
+    Id: {name: id, in: path, required: true, schema: {type: string, format: uuid}}
+  schemas:
+    BaseResponse: {type: object, properties: {message: {type: string, nullable: true}, status: {type: boolean}, error: {type: string, nullable: true}}}

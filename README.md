@@ -1,28 +1,28 @@
-# AURAN Clinic V1 — Canonical Agent Kit
+# AURAN Clinic V1 — Canonical Source of Truth
 
-This repository is the canonical source of truth for AURAN Clinic V1. The prototype and reference assets live alongside these canonical contracts; when they disagree, follow `AGENTS.md`. Start with `AGENTS.md`, then `docs/product/scope-v1.md`, then the module you are implementing.
+This repository is the authoritative product and implementation specification for AURAN Clinic V1, plus the approved interactive prototype (`index.html`). Start with `AGENTS.md`.
 
-## Product boundaries
-AURAN Clinic V1 contains two bounded areas: **Platform Foundation** for AURAN administrators to provision and control clinics, and the **Clinic Workspace** used by clinic staff for patients, queue, visits, clinical documentation, reports and administration.
+## What an implementation agent gets here
+- Exact V1 scope and approved decisions.
+- Business/security/permission rules.
+- Implementation contracts per module: data, commands/queries, validation, APIs, UI, transactions, audit, edge cases and tests.
+- Backend/frontend/database/API architecture.
+- Screen and user-flow contracts.
+- Engineering Definition of Done and task/acceptance templates.
+- Target OpenAPI surface, logical schema inventory, permission catalog and safe demo seed.
 
-## Technology
-Backend: .NET 8 / ASP.NET Core Web API / EF Core / SQL Server. Frontend: Angular / TypeScript / SCSS. Authentication: Identity + JWT/refresh sessions. Authorization: permission-based RBAC. Deployment style: modular monolith.
+## Source precedence
+Current product decisions/canonical specs here come first. For foundation behavior already implemented, tested current `Auran-Tech/auran-clinic-backend` code/generated Swagger is the detailed executable reference. Root `index.html` is UX/workflow intent, not production architecture. Legacy specs are references only.
 
-## Documentation map
-- `docs/product/`: why the product exists, scope, personas and terminology.
-- `docs/requirements/`: functional/NFR/business/permission rules.
-- `docs/modules/`: one implementation contract per module.
-- `docs/architecture/`: backend, frontend, database and API boundaries.
-- `docs/design/`: design system, screens and user flows.
-- `docs/engineering/`: coding, security, testing and completion rules.
-- `docs/delivery/`: build order and task/acceptance templates.
-- `specs/`: machine-oriented contracts and starter schema/data.
+## V1 product
+**Platform:** Platform Admin auth, clinic provisioning, initial protected clinic Super User/Admin, clinic metadata, activation/suspension/reactivation, actor-boundary/session security.
 
-## Current V1
-Platform Admin, provisioning and suspension are **in scope**. Appointments and commercial billing/subscriptions remain **out of scope**.
+**Clinic:** authentication, RBAC/users, settings/configuration, patients, medical/dynamic profile, measurements, live queue/workflow, visits/multi-session/delayed documentation, clinical orders/files, follow-ups, reports, dashboard and audit.
 
-## Prototype reference
-The root `index.html` remains the approved interactive UX/workflow reference. It is not the production architecture and MUST NOT override canonical product, security, data, or engineering contracts.
+**Deferred:** appointment scheduling, subscriptions/commercial billing, branches, patient mobile app, insurance/accounting/pharmacy, external lab/radiology, family linking and advanced distributed/offline architecture.
 
-## Repository role
-This repository owns the canonical product definition and implementation contracts. Production backend/frontend source may live in separate repositories, but implementation changes must remain aligned with the contracts here. Any intentional behavior change must update this repository's canonical docs/specs in the same delivery process.
+## Repository map
+`docs/product` product decisions/scope/personas/glossary; `docs/requirements` functional/NFR/business/permissions; `docs/modules` module implementation contracts; `docs/architecture` system/backend/frontend/database/API/integrations; `docs/design` UI/screens/flows; `docs/engineering` coding/security/testing/DoD; `docs/delivery` implementation order/templates; `specs` machine-oriented target contracts.
+
+## Implementation synchronization rule
+Production code may live in separate backend/frontend repos, but an intentional contract/scope change is incomplete until this canonical repo is updated. Do not copy old prototype localStorage/demo auth into production.

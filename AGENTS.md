@@ -1,59 +1,51 @@
 # AURAN Clinic — Agent Operating Contract
 
-This repository is governed by this file. An implementation agent MUST read it before changing code.
+This repository is the canonical product/implementation specification for AURAN Clinic V1. Read this before any implementation task.
 
-## Mission
-Build AURAN Clinic V1 as one production-ready multi-clinic product with two security boundaries: **AURAN Platform** and **Clinic Workspace**. Deliver working vertical slices, not isolated scaffolding.
+## Source precedence
+When details conflict:
+1. Explicit approved decisions in `docs/product/decisions.md` and current V1 scope.
+2. Canonical module/requirements/architecture/spec files in this repository.
+3. Current tested implementation/generated Swagger in `Auran-Tech/auran-clinic-backend` for foundation behavior already implemented.
+4. Root `index.html` approved prototype for UX/workflow intent not otherwise specified.
+5. Legacy backend specs/old notes.
 
-## Canonical source order
-When sources disagree, use this order:
-1. Explicit current product decisions recorded in this kit.
-2. `docs/product/scope-v1.md`, module specs, requirements, architecture and engineering docs in this kit.
-3. Executable tests and behavior already implemented in the current codebase.
-4. Approved V1 prototype for UX intent and clinic workflows.
-5. Legacy backend specifications and old notes.
+Never silently choose between contradictions. For a genuinely missing medical/commercial/destructive/security decision, record `OPEN_DECISION` and stop only that affected behavior; continue independent work.
 
-Never silently choose between contradictory sources. If levels 1–3 conflict and the correct behavior cannot be proven, stop that feature and record an `OPEN_DECISION`.
+## Mission & architecture
+Build one production-ready configurable multi-clinic product with AURAN Platform and Clinic Workspace security boundaries. Backend .NET 8/ASP.NET Core/EF Core/SQL Server modular monolith; frontend Angular/TypeScript/SCSS. Shared DB with ClinicId tenant boundary. Configuration over customer forks.
 
-## Non-negotiable product rules
-- Platform Admin and clinic provisioning/suspension are official V1 foundation capabilities.
-- One backend product and one Angular clinic application; platform UI may be a bounded area of the same frontend unless the repository already separates it.
-- Backend: .NET 8, ASP.NET Core Web API, EF Core, SQL Server.
-- Architecture: modular monolith. No microservices/message broker unless a later approved decision changes this.
-- Shared SQL database; clinic-owned data is tenant-scoped by `ClinicId`.
-- Platform actors MUST NOT call Clinic APIs; Clinic actors MUST NOT call Platform APIs.
-- Authentication uses ASP.NET Core Identity + JWT/refresh sessions.
-- Authorization is permission-based. Do not hard-code role checks in controllers.
-- Clinic users may have multiple roles; effective permissions are their union.
-- Clinic Super User is protected and tenant-scoped. The last active Super User cannot be disabled through normal administration.
-- Customer-specific branches are forbidden. Clinic differences belong in configuration/data.
-- Controllers stay thin. Business behavior belongs to Application/Domain services.
-- Use DTOs; never expose EF entities as public API contracts.
-- Use FluentValidation for incoming requests.
-- Use EF migrations for schema changes.
-- All persisted timestamps are UTC; clinic timezone is for display/business-date interpretation.
-- Sensitive medical data, passwords, access tokens and refresh tokens must not be logged.
+## V1 boundaries
+Platform Admin/provisioning/suspension are in V1. Clinic modules: auth/RBAC/settings, patients, medical/dynamic profile, measurements, workflow/live queue, visits/sessions/delayed docs, clinical orders/files, follow-ups, reports, dashboard, audit. Deferred: appointments, subscriptions/billing, branches, insurance/accounting/pharmacy, patient mobile, external lab/radiology, family linking, advanced offline, microservices/message broker.
 
-## V1 scope
-Implement only capabilities listed in `docs/product/scope-v1.md`. Appointment scheduling, billing/subscriptions, insurance, accounting, pharmacy, branches, patient mobile app and external lab/radiology integrations are deferred.
+## Non-negotiable engineering rules
+- Platform actor cannot call Clinic APIs; Clinic actor cannot call Platform APIs.
+- Never trust caller ClinicId for authorization. Enforce tenant scope in service/query and DB relationships.
+- Identity + JWT + rotating hashed refresh sessions. Session invalidation rules in authentication spec.
+- Permission policies, never role-name controller logic. Multi-role union; protected tenant-scoped Super User.
+- Thin controllers; Application orchestrates; Domain owns invariants; Infrastructure owns EF/Identity/storage.
+- DTOs at API; FluentValidation; global exception handling; stable BaseResponse/Pagination conventions.
+- EF migrations only for schema evolution. Inspect latest snapshot/migrations first.
+- UTC persistence; clinic timezone for display/business date.
+- Transactions for multi-record operations; concurrency-safe counters and operational state.
+- No sensitive credentials/tokens/full medical notes in logs/audit.
+- No autonomous medical diagnosis/treatment/recommendation logic.
+- No customer-specific branches.
 
-## Required workflow for every task
-1. Read this file and `README.md`.
-2. Read the relevant module spec and cross-cutting requirements.
-3. Inspect existing implementation/tests before designing changes.
-4. State assumptions in code/PR notes; do not invent product rules.
-5. Design the smallest complete vertical slice.
-6. Implement domain/application behavior, persistence, API, frontend and permissions as applicable.
-7. Add/update migration when persistence changes.
-8. Add unit tests for business rules and integration tests for security/transactions/tenant isolation.
-9. Verify Swagger/OpenAPI behavior.
-10. Run build, automated tests and relevant E2E/Postman tests.
-11. Fix failures; do not mark a task complete with known regressions.
-12. Update canonical docs/contracts when behavior changes.
-13. Check `docs/engineering/definition-of-done.md`.
+## Task workflow
+1. Read relevant product decision, module spec, business rules, permission/security/API/database docs.
+2. Inspect current backend/frontend implementation and tests before designing.
+3. Identify implemented vs missing behavior; extend, do not duplicate foundation.
+4. Implement smallest complete vertical slice: domain/application → persistence/migration → API → Angular UI → tests/docs.
+5. Add permission catalog/localization when a new protected action is introduced.
+6. Add unit tests for invariants; integration tests for actor/tenant/permission/transaction/concurrency; UI/E2E for critical flow.
+7. Verify generated Swagger and API response/error behavior.
+8. Run builds/tests and relevant Postman E2E. Fix failures.
+9. Update canonical docs/specs in this repo whenever intentional behavior changes.
+10. Check Definition of Done.
 
 ## Stop conditions
-Do not guess: medical decision logic, legal/compliance requirements, destructive migration behavior, permission grants, cross-tenant access, platform-vs-clinic ownership, or a new feature outside V1. Raise an `OPEN_DECISION` with options and impact.
+Do not invent: medical decision rules; legal/compliance retention requirements; destructive migration/data deletion policy; permission grants; cross-tenant/platform ownership; new out-of-scope commercial feature. Record options/impact as OPEN_DECISION.
 
-## Quality gates
-No feature is complete if it lacks tenant/actor isolation, authorization, validation, error handling, critical tests, migration where needed, API documentation, or frontend permission handling where applicable.
+## Completion rule
+A feature is not complete without actor+tenant isolation, permission, validation, persistence integrity, transaction/concurrency consideration, stable errors, audit where required, Swagger, critical automated tests, Angular permission/error/loading behavior where applicable, and updated canonical docs.
