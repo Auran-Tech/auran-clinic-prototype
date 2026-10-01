@@ -67,6 +67,11 @@ jobs:
           HTML
           touch dist/.nojekyll
 
+      - name: Runtime render smoke test
+        run: |
+          npx esbuild ui-reference/smoke-entry.js --bundle --platform=node --format=cjs --loader:.js=jsx --outfile=/tmp/auran-smoke.cjs
+          node /tmp/auran-smoke.cjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
         with:
