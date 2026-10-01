@@ -1,0 +1,82 @@
+name: Deploy bundled AURAN UI Reference
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ui-reference/**'
+      - '.github/workflows/ui-reference-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install bundler dependencies
+        run: npm install --no-save react@19.1.1 react-dom@19.1.1 esbuild@0.25.10
+
+      - name: Build static reference
+        run: |
+          rm -rf dist
+          mkdir -p dist/ui-reference
+          npx esbuild ui-reference/main.js --bundle --minify --format=esm --platform=browser --outfile=dist/ui-reference/app.js
+          cp ui-reference/styles-a.css dist/ui-reference/styles-a.css
+          cp ui-reference/styles-b.css dist/ui-reference/styles-b.css
+          cat > dist/ui-reference/index.html <<'HTML'
+          <!doctype html>
+          <html lang="ar" dir="rtl">
+          <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width,initial-scale=1" />
+            <meta name="theme-color" content="#050816" />
+            <title>AURAN Clinic — UI Reference</title>
+            <meta name="description" content="AURAN Clinic interactive UI/UX reference prototype" />
+            <link rel="stylesheet" href="./styles-a.css" />
+            <link rel="stylesheet" href="./styles-b.css" />
+          </head>
+          <body>
+            <div id="root"></div>
+            <script type="module" src="./app.js"></script>
+          </body>
+          </html>
+          HTML
+          cat > dist/index.html <<'HTML'
+          <!doctype html>
+          <html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./ui-reference/"><script>location.replace('./ui-reference/')</script></head><body></body></html>
+          HTML
+          touch dist/.nojekyll
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
