@@ -3,7 +3,11 @@ name: Deploy AURAN UI Reference
 on:
   push:
     branches:
+      - main
       - ui-reference/react-prototype-v1
+    paths:
+      - 'ui-reference-pages/**'
+      - '.github/workflows/ui-reference-pages.yml'
   workflow_dispatch:
 
 permissions:
