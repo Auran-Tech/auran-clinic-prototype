@@ -43,6 +43,19 @@ jobs:
           npx esbuild ui-reference/main-fixed.js --bundle --minify --format=esm --platform=browser --loader:.js=jsx --outfile=dist/ui-reference/app.js
           cp ui-reference/styles-a.css dist/ui-reference/styles-a.css
           cp ui-reference/styles-b.css dist/ui-reference/styles-b.css
+          cat > dist/index.html <<'HTML'
+          <!doctype html>
+          <html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./ui-reference/"><script>location.replace('./ui-reference/')</script></head><body></body></html>
+          HTML
+          touch dist/.nojekyll
+
+      - name: Runtime render smoke test
+        run: |
+          npx esbuild ui-reference/smoke-entry.js --bundle --platform=node --format=cjs --loader:.js=jsx --outfile=/tmp/auran-smoke.cjs
+          node /tmp/auran-smoke.cjs
+
+      - name: Embed SSR fallback shell
+        run: |
           cat > dist/ui-reference/index.html <<'HTML'
           <!doctype html>
           <html lang="ar" dir="rtl">
@@ -56,21 +69,15 @@ jobs:
             <link rel="stylesheet" href="./styles-b.css" />
           </head>
           <body>
-            <div id="root"></div>
+            <div id="root">
+          HTML
+          cat /tmp/auran-ssr.html >> dist/ui-reference/index.html
+          cat >> dist/ui-reference/index.html <<'HTML'
+            </div>
             <script type="module" src="./app.js"></script>
           </body>
           </html>
           HTML
-          cat > dist/index.html <<'HTML'
-          <!doctype html>
-          <html><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=./ui-reference/"><script>location.replace('./ui-reference/')</script></head><body></body></html>
-          HTML
-          touch dist/.nojekyll
-
-      - name: Runtime render smoke test
-        run: |
-          npx esbuild ui-reference/smoke-entry.js --bundle --platform=node --format=cjs --loader:.js=jsx --outfile=/tmp/auran-smoke.cjs
-          node /tmp/auran-smoke.cjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
