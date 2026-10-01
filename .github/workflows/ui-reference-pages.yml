@@ -40,7 +40,7 @@ jobs:
         run: |
           rm -rf dist
           mkdir -p dist/ui-reference
-          npx esbuild ui-reference/main.js --bundle --minify --format=esm --platform=browser --outfile=dist/ui-reference/app.js
+          npx esbuild ui-reference/main-fixed.js --bundle --minify --format=esm --platform=browser --loader:.js=jsx --outfile=dist/ui-reference/app.js
           cp ui-reference/styles-a.css dist/ui-reference/styles-a.css
           cp ui-reference/styles-b.css dist/ui-reference/styles-b.css
           cat > dist/ui-reference/index.html <<'HTML'
