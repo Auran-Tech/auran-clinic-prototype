@@ -19,19 +19,21 @@ import Login from './screens/Login.js';
 import {PlatformAudit,PlatformClinic,PlatformClinics} from './screens/Platform.js';
 
 const validScreens=new Set(['login','dashboard','patients','patientProfile','visits','queue','clinical','followups','reports','employees','roles','settings','audit','states','profileSettings','platformLogin','platformClinics','platformClinic','platformAudit']);
-function initialScreen(){const h=window.location.hash.replace('#/','').replace('#','');return validScreens.has(h)?h:'dashboard'}
+function initialScreen(){try{const h=window.location.hash.replace('#/','').replace('#','');return validScreens.has(h)?h:'dashboard'}catch{return'dashboard'}}
+function readPreference(key,fallback){try{return window.localStorage?.getItem(key)||fallback}catch{return fallback}}
+function writePreference(key,value){try{window.localStorage?.setItem(key,value)}catch{}}
 
 export default function App(){
- const[theme,setTheme]=useState(()=>localStorage.getItem('auran-theme')||'dark');
- const[lang,setLang]=useState(()=>localStorage.getItem('auran-lang')||'ar');
+ const[theme,setTheme]=useState(()=>readPreference('auran-theme','dark'));
+ const[lang,setLang]=useState(()=>readPreference('auran-lang','ar'));
  const[screen,setScreen]=useState(initialScreen);
  const[toast,setToast]=useState('');
  const ar=lang==='ar';
  const t=useMemo(()=>(a,e)=>ar?a:e,[ar]);
- useEffect(()=>{document.documentElement.dataset.theme=theme;localStorage.setItem('auran-theme',theme)},[theme]);
- useEffect(()=>{document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';localStorage.setItem('auran-lang',lang)},[lang,ar]);
+ useEffect(()=>{document.documentElement.dataset.theme=theme;writePreference('auran-theme',theme)},[theme]);
+ useEffect(()=>{document.documentElement.lang=lang;document.documentElement.dir=ar?'rtl':'ltr';writePreference('auran-lang',lang)},[lang,ar]);
  useEffect(()=>{const handler=()=>setScreen(initialScreen());window.addEventListener('hashchange',handler);return()=>window.removeEventListener('hashchange',handler)},[]);
- const navigate=next=>{if(!validScreens.has(next))return;window.location.hash=`/${next}`;setScreen(next);window.scrollTo({top:0,behavior:'smooth'})};
+ const navigate=next=>{if(!validScreens.has(next))return;window.location.hash=`/${next}`;setScreen(next);try{window.scrollTo({top:0,behavior:'smooth'})}catch{window.scrollTo?.(0,0)}};
  const notify=message=>{setToast(message);window.clearTimeout(window.__auranToast);window.__auranToast=window.setTimeout(()=>setToast(''),2200)};
  const common={t,lang,setLang,theme,setTheme,navigate,notify};
  let content;
