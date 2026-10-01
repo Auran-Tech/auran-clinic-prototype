@@ -19,5 +19,5 @@ function showFatal(error){
 window.addEventListener('error',e=>showFatal(e.error||e.message));
 window.addEventListener('unhandledrejection',e=>showFatal(e.reason));
 try{
-  createRoot(root,{onUncaughtError:showFatal,onCaughtError:showFatal,recoverableError:showFatal}).render(<React.StrictMode><App/></React.StrictMode>);
+  createRoot(root,{onUncaughtError:showFatal,onCaughtError:showFatal,onRecoverableError:showFatal}).render(<React.StrictMode><App/></React.StrictMode>);
 }catch(error){showFatal(error)}
