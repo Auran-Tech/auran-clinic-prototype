@@ -1,1 +1,862 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AURAN Clinic UI Reference</title><meta http-equiv="refresh" content="0; url=./ui-reference/"><script>location.replace('./ui-reference/'+location.search+location.hash)</script></head><body></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Clinic Management V1 — Full Interactive Demo v3</title>
+<style>
+:root{
+  --bg:#f5f7fb;--panel:#ffffff;--panel2:#fbfcff;--line:#e4e9f1;--text:#172033;--muted:#718096;
+  --navy:#0f2340;--navy2:#18375e;--blue:#316df4;--blue2:#eaf1ff;--cyan:#34c5d8;
+  --green:#18965d;--green2:#e8f8f0;--amber:#c68100;--amber2:#fff4d8;--red:#d34c4c;--red2:#fdeaea;
+  --violet:#7458d8;--violet2:#efeafe;--shadow:0 18px 50px rgba(26,42,72,.10);--shadow2:0 9px 24px rgba(24,40,68,.07);
+  --r:18px;--side:264px;--trans:180ms cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Aptos","Segoe UI Variable","Segoe UI",Tahoma,Arial,sans-serif;background:
+radial-gradient(circle at 8% 0%,rgba(49,109,244,.08),transparent 26%),
+radial-gradient(circle at 96% 18%,rgba(52,197,216,.08),transparent 24%),var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+.app{display:grid;grid-template-columns:var(--side) 1fr;min-height:100vh}
+.sidebar{background:linear-gradient(180deg,#0e2039 0%,#112945 56%,#163656 100%);color:#fff;padding:18px 14px;position:sticky;top:0;height:100vh;overflow:auto;box-shadow:18px 0 50px rgba(15,35,64,.06);z-index:30}
+.sidebar:before,.sidebar:after{display:none}
+.brand{display:flex;gap:11px;align-items:center;padding:4px 8px 22px;position:relative}.brandmark{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#4b7dff,#3fd4c1);display:grid;place-items:center;font-weight:950;box-shadow:0 10px 28px rgba(60,122,255,.28);transform:rotate(-4deg)}
+.brand strong{display:block;letter-spacing:.08em;font-size:13px}.brand small{display:block;color:#9db1c9;font-size:10px;margin-top:2px}.sidetitle{font-size:9px;color:#7890ad;text-transform:uppercase;letter-spacing:.14em;padding:9px 10px 6px;font-weight:900}
+.nav{display:grid;gap:6px;position:relative}.nav button{position:relative;border:0;background:transparent;color:#bfccdc;padding:10px 11px;border-radius:12px;text-align:left;display:flex;gap:10px;align-items:center;font-weight:750;transition:var(--trans)}
+.nav button .ico{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.04);transition:var(--trans)}
+.nav button:hover{background:rgba(255,255,255,.06);color:#fff;transform:translateX(2px)}.nav button.active{background:linear-gradient(90deg,rgba(58,111,236,.28),rgba(58,111,236,.11));color:#fff;box-shadow:inset 3px 0 0 #5e8cff}
+.nav button.active .ico{background:#2f6fed;box-shadow:0 7px 18px rgba(47,111,237,.32);transform:translateY(-1px)}
+.sidefoot{margin-top:20px;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.05);border-radius:15px;padding:12px;backdrop-filter:blur(6px);position:relative}.sidefoot small{display:block;color:#94abc5}.sidefoot b{display:block;margin:3px 0 2px}
+.main{min-width:0}.topbar{height:82px;background:rgba(255,255,255,.90);border-bottom:1px solid rgba(228,233,241,.9);display:flex;align-items:center;justify-content:space-between;padding:0 24px;position:sticky;top:0;z-index:20;backdrop-filter:blur(14px)}
+.eyebrow{font-size:10px;color:var(--blue);font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}.topbar h1{margin:0;font-size:22px}.topactions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.content{padding:22px;animation:pageIn .28s ease both;position:relative}.content:before{display:none}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(2deg)}}@keyframes pop{0%{transform:scale(.98);opacity:.4}100%{transform:scale(1);opacity:1}}
+.panel,.metric,.card{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow2);transition:var(--trans)}.panel:hover,.metric:hover{box-shadow:var(--shadow)}.pad{padding:17px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.metric{padding:16px;position:relative;overflow:hidden}.metric:after{content:"";position:absolute;width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,rgba(49,109,244,.12),rgba(52,197,216,.06));right:-12px;top:-13px;transform:rotate(24deg)}
+.metric span{font-size:11px;color:var(--muted);font-weight:750}.metric strong{font-size:27px;display:block;margin:5px 0}.metric small{color:var(--muted)}
+.sectionhead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:14px}.sectionhead h2,.sectionhead h3{margin:0}.sectionhead p{margin:4px 0 0;color:var(--muted);font-size:12px}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn{border:0;border-radius:11px;height:39px;padding:0 13px;font-weight:850;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:var(--trans)}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.02)}.btn:active{transform:translateY(0) scale(.99)}.btn.primary{background:var(--navy);color:#fff;box-shadow:0 8px 20px rgba(15,35,64,.14)}.btn.blue{background:linear-gradient(135deg,#316df4,#4b7fff);color:#fff;box-shadow:0 8px 20px rgba(49,109,244,.18)}.btn.secondary{background:#edf1f6}.btn.outline{background:#fff;border:1px solid var(--line)}.btn.success{background:var(--green2);color:#176c47}.btn.danger{background:var(--red2);color:#a52e2e}.btn.small{height:31px;font-size:11px;padding:0 9px}
+.input,.select,.field input,.field select,.field textarea{border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 10px;outline:none;color:var(--text);transition:var(--trans)}.input:focus,.select:focus,.field input:focus,.field select:focus,.field textarea:focus{border-color:#a9c0ff;box-shadow:0 0 0 4px rgba(49,109,244,.08)}.input{height:41px;min-width:260px}
+.field{display:grid;gap:6px}.field label{font-size:10px;color:var(--muted);font-weight:900;text-transform:uppercase;letter-spacing:.04em}.field textarea{min-height:84px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.formactions{display:flex;gap:8px;justify-content:flex-end;margin-top:13px}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:11px 9px;border-bottom:1px solid var(--line);text-align:left;font-size:12px;white-space:nowrap}th{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;background:#fbfcfe;position:sticky;top:0}tr:hover td{background:#fbfdff}
+.status{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900}.blue{background:var(--blue2);color:#2253b8}.green{background:var(--green2);color:#176743}.amber{background:var(--amber2);color:#916000}.red{background:var(--red2);color:#9f3030}.gray{background:#edf1f6;color:#5e6978}.violet{background:var(--violet2);color:#5f46ba}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.tab{height:34px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:0 11px;font-weight:800;font-size:11px;color:var(--muted);transition:var(--trans)}.tab:hover{transform:translateY(-1px)}.tab.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:0 7px 18px rgba(15,35,64,.14)}
+.card{padding:13px}.card:hover{transform:translateY(-1px)}.divider{height:1px;background:var(--line);margin:13px 0}.muted{color:var(--muted)}.small{font-size:11px}.empty{text-align:center;color:var(--muted);padding:30px}
+.profilehead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}.profilehead h2{margin:7px 0 3px}.profilehead p{margin:0;color:var(--muted)}
+.suggestions{border:1px solid var(--line);border-radius:13px;overflow:auto;background:#fff;max-height:320px;box-shadow:var(--shadow2)}.suggestion{padding:11px 12px;border-bottom:1px solid var(--line);transition:var(--trans)}.suggestion:hover{background:#f6f9ff;padding-left:15px}
+.queueboard{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:11px;overflow:auto}.qcol{background:linear-gradient(180deg,#f9fbfe,#f4f7fb);border:1px solid var(--line);border-radius:15px;padding:10px;min-height:410px}.qcol h3{font-size:12px;margin:0 0 9px;display:flex;justify-content:space-between}.pcard{background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px;margin-bottom:9px;box-shadow:0 6px 16px rgba(20,38,63,.05);animation:pop .18s ease both}.pcard:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,38,63,.09)}.pcard .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.modalback{position:fixed;inset:0;background:rgba(10,20,35,.52);z-index:100;display:grid;place-items:center;padding:16px;animation:pop .16s ease both}.modal{width:min(740px,96vw);max-height:90vh;overflow:auto;background:#fff;border-radius:20px;padding:18px;box-shadow:0 34px 90px rgba(0,0,0,.26)}.modal.large{width:min(1040px,96vw)}.modalhead{display:flex;justify-content:space-between;gap:10px;margin-bottom:14px}.modalhead h3{margin:0}.iconbtn{width:35px;height:35px;border:1px solid var(--line);background:#fff;border-radius:10px}
+.toastroot{position:fixed;right:18px;bottom:18px;display:grid;gap:7px;z-index:130}.toast{background:#10233f;color:#fff;padding:11px 13px;border-radius:11px;box-shadow:0 18px 45px rgba(0,0,0,.18);animation:pop .18s ease both}
+.builder{display:grid;gap:8px}.builderrow{border:1px solid var(--line);border-radius:12px;padding:11px;display:flex;justify-content:space-between;gap:10px;align-items:center;background:#fff}.switch{width:42px;height:23px;border-radius:999px;background:#cfd7e3;position:relative;transition:var(--trans)}.switch:after{content:"";position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:#fff;transition:var(--trans)}.switch.on{background:var(--blue)}.switch.on:after{left:22px}
+.chip{display:inline-flex;padding:5px 8px;border-radius:999px;background:#eef3fb;font-size:10px;margin:2px}.quickgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.quick{border:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbfdff);border-radius:13px;padding:13px;text-align:left;transition:var(--trans)}.quick:hover{background:#f8fbff;border-color:#bdd0ff;transform:translateY(-2px)}
+.timeline{display:grid;gap:9px}.trow{display:grid;grid-template-columns:95px 12px 1fr;gap:9px}.dot{width:9px;height:9px;border-radius:50%;background:var(--blue);margin-top:5px;box-shadow:0 0 0 5px rgba(49,109,244,.08)}.banner{padding:11px 12px;border-radius:12px;background:var(--amber2);border:1px solid #ffe2a2;color:#865a00;margin-bottom:11px}.rxsec{border:1px solid var(--line);border-radius:13px;padding:12px;margin-bottom:10px;background:#fff}.rxsec h3{margin:0 0 9px}.auto{position:relative}.autolist{position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);z-index:10;max-height:170px;overflow:auto}.autoitem{padding:8px 9px;border-bottom:1px solid var(--line)}.autoitem:hover{background:#f6f9ff}
+.kpirow{display:flex;gap:8px;flex-wrap:wrap}.kpi{padding:8px 10px;background:#f6f8fc;border-radius:10px;font-size:11px}.permgroup{border:1px solid var(--line);border-radius:15px;overflow:hidden;background:#fff}.permgroup h3{margin:0;padding:12px 13px;background:#f8faff;border-bottom:1px solid var(--line);font-size:13px}.permrow{display:grid;grid-template-columns:1.6fr repeat(4,90px);gap:8px;padding:10px 12px;border-bottom:1px solid var(--line);align-items:center}.permrow:last-child{border-bottom:0}.permname b{display:block}.permname small{color:var(--muted);display:block;margin-top:2px}.check{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;margin:auto;background:#edf1f6;color:#8b96a8;font-weight:900}.check.y{background:var(--green2);color:var(--green)}
+.rolecard{display:flex;align-items:center;gap:9px}.rolebadge{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,#edf2ff,#eefbf9);font-weight:900;color:var(--blue)}
+.fieldtype{font-size:10px;padding:5px 7px;border-radius:999px;background:#f0f3f8;color:#586579}.filepreview{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px}.thumb{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}.thumb img{width:100%;height:105px;object-fit:cover;display:block}.thumb div{padding:8px}.logoPreview{width:82px;height:82px;border-radius:18px;border:1px dashed #b9c7db;background:#f8fbff;display:grid;place-items:center;overflow:hidden}.logoPreview img{width:100%;height:100%;object-fit:cover}
+@media(max-width:1150px){:root{--side:88px}.brand>div:last-child,.sidetitle,.nav span:last-child,.sidefoot{display:none}.brand,.nav button{justify-content:center}.grid4{grid-template-columns:repeat(2,1fr)}.permrow{grid-template-columns:1.5fr repeat(4,70px)}}
+@media(max-width:840px){.grid4,.grid3,.grid2,.formgrid{grid-template-columns:1fr}.content{padding:14px}.input{min-width:0;width:100%}.permrow{grid-template-columns:1fr;gap:4px}.permrow>div:not(.permname){display:inline-flex;margin-right:4px}}
+@media(max-width:680px){.app{display:block}.sidebar{position:fixed;left:0;right:0;bottom:0;top:auto;height:64px;z-index:50;padding:6px}.brand,.sidetitle,.sidefoot{display:none}.nav{display:flex;justify-content:flex-start;overflow:auto}.nav button{padding:8px;min-width:58px}.main{padding-bottom:70px}.topbar{height:auto;min-height:72px;padding:10px 12px}}
+
+/* v4 — quieter shapes, richer icon-led UI */
+.hero-strip{background:linear-gradient(110deg,#10233f,#173b67 62%,#23568c);color:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero-strip:after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;background:linear-gradient(90deg,#54d2c0,#6a96ff,#54d2c0);background-size:200% 100%;animation:lineMove 5s linear infinite}
+@keyframes lineMove{to{background-position:200% 0}}
+.hero-strip h2{margin:0 0 5px;font-size:21px}.hero-strip p{margin:0;color:#c6d6ea;font-size:12px}.hero-actions{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+.hero-btn{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.09);color:#fff;border-radius:10px;padding:9px 11px;font-weight:800;transition:var(--trans)}
+.hero-btn:hover{background:rgba(255,255,255,.15);transform:translateY(-1px)}
+.statline{display:flex;gap:10px;align-items:center}.stat-icon{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:#eef3ff;color:#275ed0;font-size:17px}
+.metric{border-radius:14px}.metric:after{display:none}.metric:hover{transform:translateY(-2px)}
+.metric .trend{font-size:10px;color:var(--green);font-weight:800;margin-top:3px}
+.section-icon{width:32px;height:32px;border-radius:9px;background:#eef3ff;color:#2e63d9;display:grid;place-items:center;margin-right:8px}
+.section-title-row{display:flex;align-items:center}
+.activity-row{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.activity-row:last-child{border-bottom:0}.activity-icon{width:36px;height:36px;border-radius:10px;background:#f0f4fb;display:grid;place-items:center;font-size:16px}
+.progress-track{height:7px;background:#edf1f6;border-radius:999px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,#316df4,#44cbb8);border-radius:999px;animation:growBar .5s ease both}
+@keyframes growBar{from{width:0}}
+.dashboard-list{display:grid;gap:8px}.dashboard-list .row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.report-layout{display:grid;grid-template-columns:300px 1fr;gap:14px}
+.report-list{display:grid;gap:8px}.report-item{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px;display:grid;grid-template-columns:38px 1fr;gap:10px;text-align:left;transition:var(--trans)}
+.report-item:hover{border-color:#bfd0f7;transform:translateX(2px)}.report-item.active{border-color:#8fb0ff;background:#f7f9ff;box-shadow:inset 3px 0 0 var(--blue)}
+.report-icon{width:36px;height:36px;border-radius:10px;background:#edf3ff;color:#2c62d8;display:grid;place-items:center;font-size:17px}.report-item b{display:block}.report-item small{color:var(--muted);display:block;margin-top:2px;line-height:1.35}
+.report-builder{min-height:520px}.filterbar{display:grid;grid-template-columns:repeat(3,minmax(140px,1fr));gap:10px;padding:13px;background:#f8fafc;border:1px solid var(--line);border-radius:13px;margin-bottom:13px}
+.preview-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}.preview-meta{font-size:11px;color:var(--muted)}
+.exportbar{display:flex;gap:8px;flex-wrap:wrap}.report-empty{padding:60px 20px;text-align:center;color:var(--muted)}.report-empty .bigicon{font-size:34px;margin-bottom:8px}
+.role-layout{display:grid;grid-template-columns:280px 1fr;gap:14px}.role-list{display:grid;gap:8px}.role-option{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px;display:grid;grid-template-columns:38px 1fr auto;gap:9px;align-items:center;text-align:left;transition:var(--trans)}
+.role-option:hover{border-color:#bfd0f7}.role-option.active{border-color:#8fb0ff;background:#f6f9ff;box-shadow:inset 3px 0 0 var(--blue)}
+.permission-card{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:11px 12px;border-bottom:1px solid var(--line)}
+.permission-card:last-child{border-bottom:0}.perm-ico{width:32px;height:32px;border-radius:9px;background:#edf8f2;color:#168557;display:grid;place-items:center;font-weight:900}
+.permission-card .code{font-size:9px;color:#99a4b4;margin-top:3px}
+.duplicate-box{border:1px solid #f2cf7c;background:#fff9e8;border-radius:12px;padding:11px;margin-top:10px}.duplicate-box.danger{border-color:#f0a4a4;background:#fff0f0}.duplicate-title{display:flex;gap:8px;align-items:center;font-weight:900}
+.duplicate-person{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid rgba(120,100,50,.12);margin-top:7px}.duplicate-person:first-of-type{border-top:0}
+.qsummary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}.qsummary .qs{background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px;display:flex;gap:9px;align-items:center}.qsicon{width:34px;height:34px;border-radius:9px;background:#eef3ff;color:#2d62d7;display:grid;place-items:center}
+.pcard{position:relative;overflow:hidden}.pcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#cad5e7}.qmeta{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.qmeta div{background:#f8fafc;border-radius:8px;padding:6px}.qmeta span{display:block;font-size:9px;color:var(--muted);text-transform:uppercase}.qmeta b{font-size:11px}
+.next-step{margin-top:8px;padding:7px 8px;border-radius:9px;background:#f4f7fb;font-size:10px;color:#526071}.pcard .status{margin-top:7px}
+.page-section-head{display:flex;align-items:center;gap:9px}.page-section-head .pi{width:34px;height:34px;border-radius:10px;background:#edf3ff;color:#2b62d8;display:grid;place-items:center}
+@media(max-width:1050px){.report-layout,.role-layout{grid-template-columns:1fr}.report-list,.role-list{grid-template-columns:repeat(2,1fr)}.filterbar{grid-template-columns:repeat(2,1fr)}.qsummary{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.report-list,.role-list,.filterbar,.qsummary{grid-template-columns:1fr}}
+
+
+/* v5 — Configuration & Settings redesign */
+.config-shell{display:grid;grid-template-columns:240px 1fr;gap:14px}
+.config-nav{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow2);height:max-content;position:sticky;top:98px}
+.config-nav button{width:100%;border:0;background:transparent;border-radius:11px;padding:11px 10px;display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;text-align:left;color:var(--text);transition:var(--trans)}
+.config-nav button:hover{background:#f7f9fc}.config-nav button.active{background:#eef4ff;color:#2456bc;box-shadow:inset 3px 0 0 var(--blue)}
+.config-nav .navico{width:32px;height:32px;border-radius:9px;background:#f0f4fb;display:grid;place-items:center}
+.config-nav button.active .navico{background:#dce8ff;color:#2456bc}
+.config-nav b{display:block}.config-nav small{display:block;color:var(--muted);margin-top:1px}
+.config-main{display:grid;gap:14px}
+.config-hero{background:linear-gradient(120deg,#f8fbff,#ffffff 52%,#f7fbff);border:1px solid #dfe7f2;border-radius:16px;padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.config-hero .copy h2{margin:0}.config-hero .copy p{margin:5px 0 0;color:var(--muted);font-size:12px}.config-hero .heroico{width:48px;height:48px;border-radius:14px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center;font-size:22px}
+.config-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2)}
+.config-card + .config-card{margin-top:0}
+.config-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.config-card-head h3{margin:0}.config-card-head p{margin:4px 0 0;color:var(--muted);font-size:11px}
+.config-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.config-item{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fbfcff;display:flex;justify-content:space-between;gap:10px;align-items:center;transition:var(--trans)}
+.config-item:hover{border-color:#bfd0f7;background:#f8fbff;transform:translateY(-1px)}
+.config-item .meta{display:flex;gap:9px;align-items:center}.config-item .itemico{width:34px;height:34px;border-radius:9px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center}
+.config-item small{display:block;color:var(--muted);margin-top:2px}
+.config-actions{display:flex;gap:8px;flex-wrap:wrap}
+.settings-shell{display:grid;grid-template-columns:260px 1fr;gap:14px}
+.settings-side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow2);height:max-content;position:sticky;top:98px}
+.settings-side .identity{text-align:center;padding:8px 6px 14px}.settings-side .identity .logoPreview{margin:auto}.settings-side .identity h3{margin:10px 0 3px}.settings-side .identity p{margin:0;color:var(--muted);font-size:11px}
+.settings-side .mini{display:flex;gap:8px;align-items:center;padding:9px;border-radius:10px;background:#f8fafc;margin-top:7px}
+.settings-side .mini .mi{width:30px;height:30px;border-radius:8px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center}
+.settings-main{display:grid;gap:14px}
+.settings-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2)}
+.settings-section-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}.settings-section-head .sico{width:38px;height:38px;border-radius:10px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center;font-size:17px}
+.settings-section-head h3{margin:0}.settings-section-head p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.settings-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.setting-help{font-size:10px;color:var(--muted);margin-top:4px}
+.settings-footer{position:sticky;bottom:12px;z-index:5;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center;box-shadow:var(--shadow)}
+.preview-box{border:1px dashed #c9d5e5;background:#fbfdff;border-radius:12px;padding:12px}
+.preview-box b{display:block}.preview-box small{color:var(--muted)}
+@media(max-width:980px){.config-shell,.settings-shell{grid-template-columns:1fr}.config-nav,.settings-side{position:static}.config-nav{display:grid;grid-template-columns:repeat(2,1fr)}.settings-row,.config-grid{grid-template-columns:1fr}}
+
+
+/* v6 — Workflow diagram, live filtering, charts, and first-open welcome */
+.welcome-screen{min-height:100vh;background:linear-gradient(135deg,#0e2039 0%,#16395e 55%,#235a89 100%);display:grid;place-items:center;padding:26px;color:#fff;position:relative;overflow:hidden}
+.welcome-screen:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.035) 46% 47%,transparent 47% 100%);background-size:42px 42px}
+.welcome-card{width:min(880px,96vw);position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px);border-radius:22px;padding:34px;box-shadow:0 35px 100px rgba(0,0,0,.22);animation:pageIn .35s ease both}
+.welcome-logo{width:68px;height:68px;border-radius:18px;background:linear-gradient(135deg,#4c7eff,#42d0bf);display:grid;place-items:center;font-size:26px;font-weight:950;box-shadow:0 16px 38px rgba(40,107,220,.3);overflow:hidden}
+.welcome-logo img{width:100%;height:100%;object-fit:cover}.welcome-card h1{font-size:34px;margin:19px 0 8px}.welcome-card p{color:#cfdaea;line-height:1.65;max-width:680px;margin:0}.welcome-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.welcome-meta span{padding:7px 9px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.06);font-size:11px}.welcome-actions{margin-top:24px}.welcome-actions .btn{height:44px;padding:0 18px}
+.chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.chart-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2);min-height:300px}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}.chart-head h3{margin:0}.chart-head p{margin:3px 0 0;color:var(--muted);font-size:11px}.chart-badge{font-size:10px;padding:5px 8px;border-radius:999px;background:#eef3ff;color:#2d62d8;font-weight:850}
+.bar-chart{display:grid;gap:11px}.bar-row{display:grid;grid-template-columns:120px 1fr 36px;gap:9px;align-items:center}.bar-label{font-size:11px;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bar-track{height:10px;border-radius:6px;background:#edf1f6;overflow:hidden}.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#356ff4,#49c6b7);animation:growBar .55s ease both}.bar-value{text-align:right;font-size:11px;font-weight:850}
+.line-chart{height:210px;width:100%;display:block}.chart-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:var(--muted)}.legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;background:#316df4;margin-right:5px}
+.stackbar{height:18px;border-radius:7px;overflow:hidden;display:flex;background:#edf1f6}.stackbar span{display:block;height:100%}.stack-complete{background:#2aa56e}.stack-pending{background:#f1b64d}.stack-draft{background:#6b8ff6}.stack-notstarted{background:#aab4c4}
+.queue-filterbar{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:9px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:var(--shadow2)}
+.queue-filterbar .field{min-width:0}.filter-clear{align-self:end}.queue-count-note{font-size:10px;color:var(--muted);margin-top:4px}
+.workflow-stage{background:linear-gradient(180deg,#fff,#f9fbfe);border:1px solid var(--line);border-radius:16px;padding:16px;overflow:auto;box-shadow:var(--shadow2)}
+.workflow-canvas{display:flex;align-items:center;gap:0;min-width:max-content;padding:16px 4px}
+.wf-node{width:176px;min-height:104px;border:1px solid var(--line);border-top:4px solid var(--node-color,#316df4);border-radius:13px;background:#fff;padding:11px;box-shadow:0 8px 20px rgba(26,42,72,.07);position:relative;transition:var(--trans)}
+.wf-node:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(26,42,72,.11)}.wf-node .nnum{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:900}.wf-node h4{margin:5px 0 4px}.wf-node small{color:var(--muted);display:block}.wf-color{width:14px;height:14px;border-radius:4px;display:inline-block;vertical-align:middle;margin-right:5px;background:var(--node-color)}
+.wf-arrow{width:54px;height:2px;background:#b8c5d7;position:relative;margin:0 5px}.wf-arrow:after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid #b8c5d7;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.color-picker-row{display:flex;gap:7px;flex-wrap:wrap}.color-swatch{width:30px;height:30px;border-radius:8px;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.color-swatch.active{border-color:#0f2340;box-shadow:0 0 0 2px #fff,0 0 0 4px #0f2340}
+.config-status-row{display:grid;grid-template-columns:40px 1fr auto auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.status-color-dot{width:22px;height:22px;border-radius:6px;background:var(--dot)}.settings-theme-preview{height:96px;border-radius:12px;background:linear-gradient(135deg,#10233f,#24527e);padding:12px;color:#fff;display:flex;align-items:end;font-size:11px}
+@media(max-width:980px){.chart-grid{grid-template-columns:1fr}.queue-filterbar{grid-template-columns:1fr 1fr}.queue-filterbar .field:first-child{grid-column:1/-1}}
+@media(max-width:680px){.queue-filterbar{grid-template-columns:1fr}.queue-filterbar .field:first-child{grid-column:auto}.welcome-card{padding:24px}.welcome-card h1{font-size:27px}.bar-row{grid-template-columns:90px 1fr 30px}}
+
+
+/* v7 */
+.auth-screen{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);background:#f5f7fb}.auth-visual{background:linear-gradient(145deg,#0d213b,#16436d 58%,#286593);color:#fff;padding:54px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.auth-visual:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#49d2bd,#6c9cff,#49d2bd);background-size:200% 100%;animation:lineMove 5s linear infinite}.auth-brand{display:flex;gap:12px;align-items:center}.auth-brand .mark{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#5b8cff,#48d0bd);display:grid;place-items:center;font-weight:950;font-size:20px}.auth-copy h1{font-size:42px;line-height:1.08;margin:0 0 14px;max-width:640px}.auth-copy p{color:#ccdae9;line-height:1.7;max-width:630px}.auth-points{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px;max-width:640px}.auth-point{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:12px;padding:12px}.auth-point b{display:block}.auth-point small{color:#c8d4e3;display:block;margin-top:3px}.auth-form-wrap{display:grid;place-items:center;padding:34px}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 24px 65px rgba(19,39,70,.12)}.auth-card h2{margin:0}.auth-card p{color:var(--muted);font-size:12px;line-height:1.55}.auth-users{display:grid;gap:7px;margin:14px 0}.auth-user{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px;display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;text-align:left;transition:var(--trans)}.auth-user:hover{border-color:#a9c2ff;background:#f8fbff}.auth-user.active{border-color:#7ea4ff;background:#eef4ff}.user-avatar{width:34px;height:34px;border-radius:10px;background:#eaf1ff;color:#2a61d2;display:grid;place-items:center;font-weight:900}.account-menu{position:relative}.account-btn{border:1px solid var(--line);background:#fff;border-radius:11px;height:40px;padding:0 10px;display:flex;align-items:center;gap:8px;font-weight:800}.account-dd{position:absolute;right:0;top:47px;width:235px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:7px;box-shadow:var(--shadow);z-index:40}.account-dd .head{padding:8px;border-bottom:1px solid var(--line);margin-bottom:6px}.account-dd button{width:100%;border:0;background:#fff;padding:9px;border-radius:9px;text-align:left;font-weight:750}.account-dd button:hover{background:#f5f8fc}.help-layout{display:grid;grid-template-columns:260px 1fr;gap:14px}.help-nav{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;height:max-content;position:sticky;top:98px;box-shadow:var(--shadow2)}.help-nav button{width:100%;border:0;background:#fff;padding:10px;border-radius:10px;text-align:left;font-weight:750}.help-nav button:hover,.help-nav button.active{background:#eef4ff;color:#285ecb}.help-content{display:grid;gap:14px}.help-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow2)}.help-section h2{margin:0 0 6px}.help-section p{color:var(--muted);line-height:1.6}.help-feature{display:grid;grid-template-columns:38px 1fr;gap:10px}.help-ico{width:36px;height:36px;border-radius:10px;background:#edf3ff;color:#2a61d2;display:grid;place-items:center;font-size:17px}.filter-drawer{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow2);margin-bottom:12px;animation:pageIn .2s ease both}.filter-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}.wf-map{position:relative;min-width:980px;min-height:360px;background:linear-gradient(#f4f7fb 1px,transparent 1px),linear-gradient(90deg,#f4f7fb 1px,transparent 1px);background-size:24px 24px;border:1px solid var(--line);border-radius:15px;overflow:hidden}.wf-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.wf-map-node{position:absolute;width:168px;min-height:86px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:11px;box-shadow:0 10px 24px rgba(26,42,72,.08);transition:var(--trans);z-index:2}.wf-map-node:hover{transform:translateY(-2px)}.wf-map-node .code{font-size:9px;color:var(--muted);margin-top:4px}.wf-map-node .color{width:11px;height:11px;border-radius:3px;background:var(--c);display:inline-block;margin-right:5px}.wf-map-node .out{font-size:10px;color:var(--muted);margin-top:6px}.color-input-row{display:flex;gap:10px;align-items:center}.color-input-row input[type=color]{width:54px;height:38px;padding:2px;border:1px solid var(--line);border-radius:9px;background:#fff}@media(max-width:900px){.auth-screen{grid-template-columns:1fr}.auth-visual{display:none}.help-layout{grid-template-columns:1fr}.help-nav{position:static}.auth-form-wrap{min-height:100vh}}
+
+
+.applied-filters{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}
+.applied-label{font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-right:2px}
+.filter-chip{display:inline-flex;align-items:center;gap:7px;background:#0d8ecf;color:#fff;border-radius:8px;padding:7px 9px;font-size:11px;font-weight:850;box-shadow:0 5px 14px rgba(13,142,207,.14)}
+.filter-chip button{border:0;background:rgba(255,255,255,.16);color:#fff;width:19px;height:19px;border-radius:6px;display:grid;place-items:center;padding:0;font-weight:900}
+.filter-chip button:hover{background:rgba(255,255,255,.26)}
+.no-filters{font-size:11px;color:var(--muted);padding:7px 0}
+.guide-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.guide-step{border:1px solid var(--line);background:#fbfcff;border-radius:12px;padding:12px}
+.guide-step .num{width:28px;height:28px;border-radius:8px;background:#edf3ff;color:#2b62d8;display:grid;place-items:center;font-weight:900;margin-bottom:8px}
+.guide-step b{display:block}.guide-step small{display:block;color:var(--muted);margin-top:4px;line-height:1.45}
+.guide-note{margin-top:10px;padding:10px;border-left:3px solid #316df4;background:#f6f9ff;border-radius:8px;color:#536176;font-size:11px}
+@media(max-width:900px){.guide-flow{grid-template-columns:1fr}}
+
+
+/* v9 — Welcome as an in-app page */
+.welcome-page{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:14px;align-items:stretch}
+.welcome-main-card{background:linear-gradient(135deg,#10233f,#173e68 58%,#225a8e);color:#fff;border-radius:18px;padding:28px;box-shadow:var(--shadow);min-height:420px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.welcome-main-card:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#4ad1bd,#6d9cff,#4ad1bd);background-size:200% 100%;animation:lineMove 5s linear infinite}
+.welcome-main-card .clinic-mark{width:62px;height:62px;border-radius:17px;background:linear-gradient(135deg,#5b88ff,#44ceb9);display:grid;place-items:center;font-size:24px;font-weight:950;overflow:hidden}
+.welcome-main-card .clinic-mark img{width:100%;height:100%;object-fit:cover}
+.welcome-main-card h2{font-size:31px;line-height:1.15;margin:20px 0 9px;max-width:680px}.welcome-main-card p{color:#d2dfed;line-height:1.7;max-width:720px;margin:0}
+.welcome-main-card .welcome-user{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.welcome-main-card .welcome-user span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:7px 9px;border-radius:9px;font-size:11px}
+.welcome-side-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow2);display:flex;flex-direction:column;gap:12px}
+.welcome-side-card h3{margin:0}.welcome-side-card p{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.5}.welcome-side-item{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fbfcff}.welcome-side-item .wi{width:32px;height:32px;border-radius:9px;background:#edf3ff;color:#2a61d2;display:grid;place-items:center}
+@media(max-width:900px){.welcome-page{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div id="app"><div style="padding:24px">Loading Clinic Demo...</div></div>
+<div id="modal"></div><div id="toasts" class="toastroot"></div>
+<script>
+const KEY="clinic_full_demo_v3";
+const PERMISSIONS=[
+ {code:"Dashboard.View",label:"View Dashboard",desc:"Open the main clinic dashboard",group:"Dashboard"},
+ {code:"Patient.View",label:"View Patients",desc:"Search and open patient profiles",group:"Patients"},
+ {code:"Patient.Create",label:"Register Patient",desc:"Create a new patient record",group:"Patients"},
+ {code:"Patient.EditBasic",label:"Edit Patient Basic Data",desc:"Edit name, phone, gender and date of birth",group:"Patients"},
+ {code:"MedicalProfile.View",label:"View Medical Profile",desc:"View medical history, conditions and allergies",group:"Clinical"},
+ {code:"MedicalProfile.Edit",label:"Edit Medical Profile",desc:"Update conditions, allergies and ongoing medications",group:"Clinical"},
+ {code:"Measurement.Create",label:"Record Clinical Measurements",desc:"Add blood pressure, sugar, IOP and configured measurements",group:"Clinical"},
+ {code:"Queue.View",label:"View Live Queue",desc:"Open the live clinic workflow board",group:"Clinic Workflow"},
+ {code:"Queue.CheckIn",label:"Check In Patient",desc:"Add a patient to today's clinic queue",group:"Clinic Workflow"},
+ {code:"Queue.Move",label:"Move Patient in Workflow",desc:"Apply allowed workflow transitions",group:"Clinic Workflow"},
+ {code:"Queue.Exit",label:"Exit Patient",desc:"Mark the patient as exited from the clinic",group:"Clinic Workflow"},
+ {code:"Visit.View",label:"View Visits",desc:"View patient visits and doctor sessions",group:"Visits"},
+ {code:"Visit.Start",label:"Start Doctor Session",desc:"Start a doctor session inside the visit",group:"Visits"},
+ {code:"Visit.Edit",label:"Edit Visit Documentation",desc:"Write complaint, examination, diagnosis and notes",group:"Visits"},
+ {code:"Visit.Session",label:"Manage Visit Sessions",desc:"Support multiple doctor sessions in one visit",group:"Visits"},
+ {code:"Prescription.Create",label:"Create Prescription / Orders",desc:"Create medications, tests, radiology or upload prescription images",group:"Clinical Orders"},
+ {code:"Documentation.Complete",label:"Complete Documentation",desc:"Mark medical documentation as completed",group:"Visits"},
+ {code:"FollowUp.View",label:"View Follow-ups",desc:"View follow-up recommendations",group:"Follow-ups"},
+ {code:"Reports.View",label:"View Reports",desc:"Open clinic reports and KPIs",group:"Reports"},
+ {code:"Users.Manage",label:"Manage Employees",desc:"Create, edit, enable or disable clinic users",group:"Administration"},
+ {code:"RBAC.View",label:"View Roles & Permissions",desc:"View protected system roles and full permission matrix",group:"Administration"},
+ {code:"Config.Manage",label:"Manage Clinic Configuration",desc:"Configure workflow, profile fields, clinical fields and prescription sections",group:"Administration"},
+ {code:"Audit.View",label:"View Audit Log",desc:"View important clinical and administrative actions",group:"Administration"},
+ {code:"Settings.Manage",label:"Manage Clinic Settings",desc:"Manage identity, timezone, localization, logo and document settings",group:"Administration"}
+];
+const ROLE_META={
+ ADMIN:{name:"Admin",icon:"A",desc:"Administrative control without changing system role definitions"},
+ RECEPTIONIST:{name:"Receptionist",icon:"R",desc:"Front-desk patient registration and queue operations"},
+ DOCTOR:{name:"Doctor",icon:"D",desc:"Clinical visits, documentation and prescriptions"},
+ NURSE:{name:"Nurse",icon:"N",desc:"Clinical measurements and patient support"}
+};
+const SEED={
+ clinic:{name:"VisionCare Clinic",prefix:"AU",timezone:"Africa/Cairo",locale:"en-EG",dateFormat:"DD/MM/YYYY",timeFormat:"12h",phone:"+20 2 5555 0101",email:"hello@visioncare.demo",address:"New Cairo, Cairo",website:"",logo:null,prescriptionHeader:"VisionCare Clinic",prescriptionFooter:"For follow-up, contact the clinic.",documentationReminderHours:12,welcomeTitle:"Welcome to VisionCare Clinic",welcomeMessage:"A smarter clinic workspace for patients, live flow, clinical documentation and reporting.",welcomeButton:"Enter Clinic System"},
+ users:[
+  {id:"u1",name:"Clinic Owner",roles:["SUPER_USER"],active:true,email:"owner@clinic.demo"},
+  {id:"u2",name:"Ahmed Samir",roles:["RECEPTIONIST"],active:true,email:"reception@clinic.demo"},
+  {id:"u3",name:"Dr. Mohamed Adel",roles:["DOCTOR"],active:true,email:"mohamed@clinic.demo"},
+  {id:"u4",name:"Mona Ali",roles:["NURSE"],active:true,email:"mona@clinic.demo"},
+  {id:"u5",name:"Dr. Sara Nabil",roles:["DOCTOR","ADMIN"],active:true,email:"sara@clinic.demo"}
+ ],
+ roles:[
+  {code:"ADMIN",permissions:["Dashboard.View","Patient.View","Patient.EditBasic","MedicalProfile.View","Queue.View","Queue.Move","Queue.Exit","Visit.View","Reports.View","Users.Manage","RBAC.View","Config.Manage","Audit.View","Settings.Manage","FollowUp.View"]},
+  {code:"RECEPTIONIST",permissions:["Dashboard.View","Patient.View","Patient.Create","Patient.EditBasic","Queue.View","Queue.CheckIn","Queue.Move","Queue.Exit","FollowUp.View"]},
+  {code:"DOCTOR",permissions:["Dashboard.View","Patient.View","MedicalProfile.View","MedicalProfile.Edit","Measurement.Create","Queue.View","Visit.View","Visit.Start","Visit.Edit","Visit.Session","Prescription.Create","Documentation.Complete","FollowUp.View","Reports.View"]},
+  {code:"NURSE",permissions:["Dashboard.View","Patient.View","MedicalProfile.View","Measurement.Create","Queue.View","Visit.View"]}
+ ],
+ patients:[
+  {id:"p1",number:"AU-2026-152",name:"Ahmed Mohamed Ali",phone:"01012345678",gender:"Male",dob:"1985-04-12",conditions:["Diabetes","Hypertension"],allergies:["Penicillin"],currentMeds:["Metformin"],notes:"Long-term follow-up patient",createdAt:"2026-07-02T09:10:00",custom:{}},
+  {id:"p2",number:"AU-2026-153",name:"Sara Ali Hassan",phone:"01156789911",gender:"Female",dob:"1991-08-20",conditions:[],allergies:[],currentMeds:[],notes:"",createdAt:"2026-08-03T10:20:00",custom:{}}
+ ],
+ workflow:[
+  {id:"w1",code:"WAITING",name:"Waiting",color:"blue",order:1},{id:"w2",code:"WITH_DOCTOR",name:"With Doctor",color:"green",order:2},
+  {id:"w3",code:"WAITING_DROPS",name:"Waiting For Drops",color:"amber",order:3},{id:"w4",code:"READY_RECHECK",name:"Ready For Recheck",color:"violet",order:4},
+  {id:"w5",code:"COMPLETED",name:"Completed",color:"green",order:5},{id:"w6",code:"EXITED",name:"Exited",color:"gray",order:6}
+ ],
+ transitions:[{from:"WAITING",to:"WITH_DOCTOR"},{from:"WITH_DOCTOR",to:"WAITING_DROPS"},{from:"WITH_DOCTOR",to:"COMPLETED"},{from:"WAITING_DROPS",to:"READY_RECHECK"},{from:"READY_RECHECK",to:"WITH_DOCTOR"},{from:"COMPLETED",to:"EXITED"}],
+ queue:[{id:"q1",patientId:"p1",doctorId:"u3",status:"WAITING",entryAt:"2026-08-22T10:14:00",exitAt:null,visitId:"v1"},{id:"q2",patientId:"p2",doctorId:"u5",status:"EXITED",entryAt:"2026-08-20T11:10:00",exitAt:"2026-08-20T11:42:00",visitId:"v2"}],
+ visits:[{id:"v1",patientId:"p1",doctorId:"u3",status:"Open",documentationStatus:"Draft",chiefComplaint:"Blurred vision",examination:"",diagnosis:"",notes:"",treatmentPlan:"",followUp:"Review IOP and response to drops after 7 days",entryAt:"2026-08-22T10:14:00",exitAt:null},{id:"v2",patientId:"p2",doctorId:"u5",status:"Completed",documentationStatus:"Completed",chiefComplaint:"Eye dryness",examination:"Mild dry eye signs",diagnosis:"Dry eye syndrome",notes:"Avoid prolonged screen exposure",treatmentPlan:"Lubricating drops",followUp:"Follow up after 14 days if symptoms persist",entryAt:"2026-08-20T11:10:00",exitAt:"2026-08-20T11:42:00"}],
+ sessions:[],
+ measurements:[
+  {id:"m1",patientId:"p1",visitId:null,type:"Blood Pressure",value:"138/88",unit:"mmHg",at:"2026-08-22T09:40:00"},
+  {id:"m2",patientId:"p1",visitId:null,type:"Blood Sugar",value:"156",unit:"mg/dL",at:"2026-08-22T09:42:00"},
+  {id:"m3",patientId:"p1",visitId:null,type:"IOP Right",value:"18",unit:"mmHg",at:"2026-08-22T09:45:00"},
+  {id:"m4",patientId:"p1",visitId:null,type:"IOP Left",value:"17",unit:"mmHg",at:"2026-08-22T09:45:00"}
+ ],
+ clinicalFields:[
+  {id:"cf1",name:"Blood Pressure",type:"text",unit:"mmHg",enabled:true,options:[]},
+  {id:"cf2",name:"Blood Sugar",type:"number",unit:"mg/dL",enabled:true,options:[]},
+  {id:"cf3",name:"Weight",type:"number",unit:"kg",enabled:false,options:[]},
+  {id:"cf4",name:"Temperature",type:"number",unit:"°C",enabled:false,options:[]},
+  {id:"cf5",name:"IOP Right",type:"number",unit:"mmHg",enabled:true,options:[]},
+  {id:"cf6",name:"IOP Left",type:"number",unit:"mmHg",enabled:true,options:[]},
+  {id:"cf7",name:"Visual Acuity",type:"text",unit:"",enabled:true,options:[]}
+ ],
+ profileSections:[
+  {id:"ps1",name:"Overview",enabled:true,order:1,system:true},{id:"ps2",name:"Medical Profile",enabled:true,order:2,system:true},
+  {id:"ps3",name:"Measurements",enabled:true,order:3,system:true},{id:"ps4",name:"Visits",enabled:true,order:4,system:true},
+  {id:"ps5",name:"Prescriptions",enabled:true,order:5,system:true},{id:"ps6",name:"Investigations",enabled:true,order:6,system:true},
+  {id:"ps7",name:"Attachments",enabled:true,order:7,system:true},{id:"ps8",name:"Follow-ups",enabled:true,order:8,system:true},
+  {id:"ps9",name:"Timeline",enabled:true,order:9,system:true},
+  {id:"ps10",name:"Lifestyle",enabled:true,order:10,system:false}
+ ],
+ customProfileFields:[
+  {id:"pf1",section:"Lifestyle",label:"Smoker",type:"boolean",required:false,options:[]},
+  {id:"pf2",section:"Lifestyle",label:"Exercise Level",type:"single-select",required:false,options:["Low","Moderate","High"]},
+  {id:"pf3",section:"Lifestyle",label:"Preferred Contact",type:"multi-select",required:false,options:["Phone","WhatsApp","Email"]},
+  {id:"pf4",section:"Medical Profile",label:"Insurance Card Image",type:"image",required:false,options:[]}
+ ],
+ rxSections:[
+  {id:"r1",name:"Medications",type:"structured",enabled:true,order:1},
+  {id:"r2",name:"Investigations",type:"structured",enabled:true,order:2},
+  {id:"r3",name:"Radiology",type:"structured",enabled:true,order:3},
+  {id:"r4",name:"Prescription Image",type:"image",enabled:true,order:4},
+  {id:"r5",name:"Instructions",type:"text",enabled:true,order:5},
+  {id:"r6",name:"Follow-up",type:"text",enabled:true,order:6}
+ ],
+ suggestions:{MEDICATIONS:["Augmentin 1g","Augmentin 625mg","Panadol 500mg","Tobradex Eye Drops","Metformin 500mg"],INVESTIGATIONS:["CBC","HbA1c","Liver Function","Kidney Function","Visual Field Test"],RADIOLOGY:["X-Ray Chest","Ultrasound Abdomen","CT Brain","MRI Orbit"]},
+ prescriptions:[],attachments:[],audit:[{id:"a1",at:"2026-08-22T10:14:00",actor:"Ahmed Samir",action:"Checked in patient",entity:"AU-2026-152"}]
+};
+const clone=x=>JSON.parse(JSON.stringify(x));function load(){try{return JSON.parse(localStorage.getItem(KEY))||clone(SEED)}catch{return clone(SEED)}}let db=load();
+let state={view:"dashboard",patientId:null,ptab:"Overview",currentUser:"u1",configTab:"workflow",reportKey:null,reportPreview:null,selectedRole:"ADMIN",queueSearch:"",queueDoctor:"",queueStatus:"",queueFilterOpen:false};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)],uid=p=>p+Math.random().toString(36).slice(2,9),now=()=>new Date().toISOString();
+function save(){localStorage.setItem(KEY,JSON.stringify(db))}function fmt(x){return x?new Date(x).toLocaleString([], {day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"}):"—"}function age(d){if(!d)return"—";const b=new Date(d),n=new Date();let a=n.getFullYear()-b.getFullYear();if(n<new Date(n.getFullYear(),b.getMonth(),b.getDate()))a--;return a}
+function usr(){return db.users.find(x=>x.id===state.currentUser)}function pat(i){return db.patients.find(x=>x.id===i)}function doctor(i){return db.users.find(x=>x.id===i)}function wf(c){return db.workflow.find(x=>x.code===c)||{name:c,color:"gray"}}
+function isSuper(){return usr()?.roles.includes("SUPER_USER")}function permsForUser(){if(isSuper())return new Set(PERMISSIONS.map(p=>p.code));const set=new Set();usr()?.roles.forEach(rc=>{const r=db.roles.find(x=>x.code===rc);r?.permissions.forEach(p=>set.add(p))});return set}
+function can(p){return isSuper()||permsForUser().has(p)}function roleLabel(rc){return rc==="SUPER_USER"?"Super User":ROLE_META[rc]?.name||rc}
+function toast(m){const e=document.createElement("div");e.className="toast";e.textContent=m;$("#toasts").appendChild(e);setTimeout(()=>e.remove(),2200)}function audit(action,entity){db.audit.unshift({id:uid("a"),at:now(),actor:usr()?.name||"Demo User",action,entity});save()}
+function modal(title,body,large=false){$("#modal").innerHTML=`<div class="modalback" data-close><div class="modal ${large?"large":""}" onclick="event.stopPropagation()"><div class="modalhead"><div><div class="eyebrow">Clinic Demo</div><h3>${title}</h3></div><button class="iconbtn" data-close>×</button></div>${body}</div></div>`;$$("[data-close]").forEach(x=>x.onclick=()=>$("#modal").innerHTML="")}
+const NAV=[
+ ["dashboard","⌂","Dashboard","Dashboard.View"],["patients","◎","Patients","Patient.View"],["queue","▦","Live Queue","Queue.View"],["visits","✚","Visits","Visit.View"],
+ ["pending","◷","Pending Docs","Visit.Edit"],["followups","↻","Follow-ups","FollowUp.View"],["reports","▥","Reports","Reports.View"],["employees","♙","Employees","Users.Manage"],
+ ["rbac","⌘","Roles & Permissions","RBAC.View"],["config","⚙","Configuration","Config.Manage"],["settings","⚲","Settings","Settings.Manage"],["audit","≡","Audit","Audit.View"],["help","?","System Guide","Dashboard.View"]
+];
+function visibleNav(){return NAV.filter(n=>can(n[3]))}
+function isLoggedIn(){return sessionStorage.getItem("clinicLoggedIn")==="1"}
+function welcomeSeen(){return sessionStorage.getItem("clinicWelcomeSeen")==="1"}
+function showLogin(){const available=db.users.filter(u=>u.active),selected=state.currentUser&&available.some(u=>u.id===state.currentUser)?state.currentUser:available[0]?.id;state.currentUser=selected;$("#app").innerHTML=`<div class="auth-screen"><section class="auth-visual"><div class="auth-brand"><div class="mark">A</div><div><b>AURAN TECHNOLOGY</b><div style="opacity:.65;font-size:11px">Clinic Management Platform</div></div></div><div class="auth-copy"><h1>Clinic operations, delivered by AURAN Technology.</h1><p>A configurable clinic management platform for patient records, live workflow, clinical documentation, prescriptions, follow-ups, reporting and secure access.</p><div class="auth-points"><div class="auth-point"><b>▦ Live Workflow</b><small>Track patients through clinic-specific stages.</small></div><div class="auth-point"><b>🩺 Clinical Visits</b><small>Support multi-session visits and delayed documentation.</small></div><div class="auth-point"><b>⌘ RBAC</b><small>Workspace adapts to user permissions.</small></div><div class="auth-point"><b>▥ Reports</b><small>Filter, preview, then export.</small></div></div></div><small style="opacity:.55">Interactive prototype · Browser-local demo data</small></section><section class="auth-form-wrap"><div class="auth-card"><div class="eyebrow">Sign in</div><h2>Access the clinic workspace</h2><p>Select a demo user. Sidebar pages and actions will adapt to the selected user's roles.</p><div class="auth-users">${available.map(u=>`<button class="auth-user ${u.id===selected?"active":""}" data-login-user="${u.id}"><span class="user-avatar">${u.name.charAt(0)}</span><span><b>${u.name}</b><small class="muted" style="display:block">${u.roles.map(roleLabel).join(" + ")}</small></span><span>✓</span></button>`).join("")}</div><button class="btn blue" style="width:100%" id="login-btn">Sign In →</button></div></section></div>`;$$('[data-login-user]').forEach(b=>b.onclick=()=>{state.currentUser=b.dataset.loginUser;showLogin()});$('#login-btn').onclick=()=>{sessionStorage.setItem('clinicLoggedIn','1');sessionStorage.removeItem('clinicWelcomeSeen');location.hash='#welcome';showWelcomeAfterLogin()}}
+function welcomePage(){
+ const c=db.clinic;
+ return `<div class="welcome-page">
+  <section class="welcome-main-card">
+   <div>
+    <div class="clinic-mark">${c.logo?`<img src="${c.logo}">`:"C"}</div>
+    <h2>${c.welcomeTitle||("Welcome to "+c.name)}</h2>
+    <p>${c.welcomeMessage||"Welcome to the clinic management system."}</p>
+    <div class="welcome-user"><span>👤 ${usr().name}</span><span>🏥 ${c.name}</span><span>🌍 ${c.timezone}</span></div>
+   </div>
+   <div><button class="btn blue" id="enter-system">${c.welcomeButton||"Enter Clinic System"} →</button></div>
+  </section>
+  <aside class="welcome-side-card">
+   <div><h3>Your workspace is ready</h3><p>This page appears once after every successful sign-in. It is not part of normal navigation.</p></div>
+   <div class="welcome-side-item"><span class="wi">⌂</span><div><b>Dashboard</b><div class="small muted">Statistics and charts</div></div></div>
+   <div class="welcome-side-item"><span class="wi">▦</span><div><b>Live Queue</b><div class="small muted">Clinic workflow</div></div></div>
+   <div class="welcome-side-item"><span class="wi">◎</span><div><b>Patients</b><div class="small muted">Profiles and search</div></div></div>
+   <div class="welcome-side-item"><span class="wi">?</span><div><b>System Guide</b><div class="small muted">Detailed help</div></div></div>
+  </aside>
+ </div>`;
+}
+function showWelcomeAfterLogin(){state.view="welcome";render()}
+function logout(){sessionStorage.removeItem('clinicLoggedIn');sessionStorage.removeItem('clinicWelcomeSeen');state.view='dashboard';location.hash='';showLogin()}
+function profileModal(){const u=usr();modal('My Profile',`<div class="grid2"><div class="card"><div class="rolecard"><span class="rolebadge">${u.name.charAt(0)}</span><div><b>${u.name}</b><div class="small muted">${u.email||"No email"}</div></div></div></div><div class="card"><b>Assigned Roles</b><div style="margin-top:7px">${u.roles.map(r=>`<span class="chip">${roleLabel(r)}</span>`).join("")}</div></div></div><div class="divider"></div><div class="card"><b>Effective Workspace</b><p class="small muted">Sidebar pages and actions are generated from your effective permissions.</p></div>`)}
+function title(){if(state.view==="welcome")return "Welcome";return Object.fromEntries(NAV.map(n=>[n[0],n[2]]))[state.view]||"Clinic"}
+function ensureView(){if(state.view==="welcome"&&!welcomeSeen())return;const allowed=visibleNav().map(n=>n[0]);if(!allowed.includes(state.view))state.view=allowed[0]||"dashboard"}
+function render(){
+ if(!isLoggedIn()){showLogin();return}
+ if(location.hash==="#welcome"){
+   if(welcomeSeen()){state.view="dashboard";location.hash="#dashboard";return}
+   state.view="welcome"
+ } else if(location.hash){
+   const hv=location.hash.replace("#","");
+   if(NAV.some(n=>n[0]===hv)&&visibleNav().some(n=>n[0]===hv))state.view=hv
+ }
+ ensureView();$("#app").innerHTML=`<div class="app"><aside class="sidebar"><div class="brand"><div class="brandmark">${db.clinic.logo?`<img src="${db.clinic.logo}" style="width:100%;height:100%;object-fit:cover;border-radius:14px">`:"C"}</div><div><strong>CLINIC V1</strong><small>Interactive Client Demo</small></div></div><div class="sidetitle">Workspace</div><div class="nav">${visibleNav().map(n=>`<button data-nav="${n[0]}" class="${state.view===n[0]?"active":""}"><span class="ico">${n[1]}</span><span>${n[2]}</span></button>`).join("")}</div><div class="sidefoot"><small>Current user</small><b>${usr().name}</b><small>${usr().roles.map(roleLabel).join(" + ")}</small></div></aside><main class="main"><header class="topbar"><div><div class="eyebrow">${db.clinic.name}</div><h1>${title()}</h1></div><div class="topactions"><span class="status blue">● Demo Mode</span><div class="account-menu"><button class="account-btn" id="account-btn"><span class="user-avatar" style="width:28px;height:28px">${usr().name.charAt(0)}</span><span>${usr().name}</span><span>⌄</span></button><div class="account-dd hidden" id="account-dd"><div class="head"><b>${usr().name}</b><div class="small muted">${usr().roles.map(roleLabel).join(" + ")}</div></div><button id="profile-btn">👤 My Profile</button><button id="logout-btn">↪ Sign Out</button></div></div><button class="btn outline small" id="reset">Reset Demo</button></div></header><section class="content">${view()}</section></main></div>`;bind()}
+function bind(){
+ $$("[data-nav]").forEach(b=>b.onclick=()=>{if(state.view==="welcome")sessionStorage.setItem("clinicWelcomeSeen","1");state.view=b.dataset.nav;state.patientId=null;location.hash="#"+state.view;render()});
+ $("#enter-system")&&($("#enter-system").onclick=()=>{sessionStorage.setItem("clinicWelcomeSeen","1");state.view="dashboard";location.hash="#dashboard";render()});
+ $("#account-btn").onclick=()=>$("#account-dd").classList.toggle("hidden");
+ $("#profile-btn").onclick=()=>profileModal();
+ $("#logout-btn").onclick=()=>logout();
+ $("#reset").onclick=()=>{localStorage.removeItem(KEY);db=clone(SEED);save();sessionStorage.clear();state={view:"dashboard",patientId:null,ptab:"Overview",currentUser:"u1",configTab:"workflow",reportKey:null,reportPreview:null,selectedRole:"ADMIN",queueSearch:"",queueDoctor:"",queueStatus:"",queueFilterOpen:false};showLogin();toast("Demo reset")};
+ bindView()
+}
+function view(){return ({welcome:welcomePage,dashboard,patients,queue,visits,pending,followups,reports,employees,rbac,config,settings,audit:auditView,help:helpPage}[state.view]||dashboard)()}function bindView(){({patients:bindPatients,queue:bindQueue,visits:bindVisits,pending:bindPending,reports:bindReports,employees:bindEmployees,rbac:bindRbac,config:bindConfig,settings:bindSettings,help:bindHelp}[state.view]||(()=>{}))()}
+
+function dashboard(){
+ const active=db.queue.filter(q=>q.status!=="EXITED"),pendingCount=db.visits.filter(v=>v.documentationStatus!=="Completed").length;
+ const waiting=active.filter(q=>["WAITING","WAITING_DROPS","READY_RECHECK"].includes(q.status)).length;
+ const withDoctor=active.filter(q=>q.status==="WITH_DOCTOR").length;
+ const doctors=db.users.filter(u=>u.roles.includes("DOCTOR")&&u.active);
+ const statusData=db.workflow.filter(w=>w.code!=="EXITED").map(w=>({name:w.name,value:active.filter(q=>q.status===w.code).length,color:w.color}));
+ const maxStatus=Math.max(1,...statusData.map(x=>x.value));
+ const doctorData=doctors.map(d=>({name:d.name,value:db.visits.filter(v=>v.doctorId===d.id).length}));
+ const maxDoctor=Math.max(1,...doctorData.map(x=>x.value));
+ const docStats={Completed:db.visits.filter(v=>v.documentationStatus==="Completed").length,Draft:db.visits.filter(v=>v.documentationStatus==="Draft").length,Pending:db.visits.filter(v=>v.documentationStatus==="Pending").length,NotStarted:db.visits.filter(v=>v.documentationStatus==="NotStarted").length};
+ const totalDocs=Math.max(1,Object.values(docStats).reduce((a,b)=>a+b,0));
+ const trend=[6,9,7,12,10,14,db.queue.length||8];const maxT=Math.max(...trend,1),w=520,h=180,pad=22,step=(w-pad*2)/(trend.length-1);const pts=trend.map((v,i)=>`${pad+i*step},${h-pad-(v/maxT)*(h-pad*2)}`).join(" ");
+ return `<div class="grid4">
+   <div class="metric"><div class="statline"><span class="stat-icon">👥</span><div><span>Patients Today</span><strong>${db.queue.length}</strong><small>Registered clinic entries</small></div></div></div>
+   <div class="metric"><div class="statline"><span class="stat-icon">⏳</span><div><span>Waiting / Recheck</span><strong>${waiting}</strong><small>Current waiting load</small></div></div></div>
+   <div class="metric"><div class="statline"><span class="stat-icon">🩺</span><div><span>With Doctors</span><strong>${withDoctor}</strong><small>Active clinical sessions</small></div></div></div>
+   <div class="metric"><div class="statline"><span class="stat-icon">📝</span><div><span>Pending Documentation</span><strong>${pendingCount}</strong><small>Needs doctor completion</small></div></div></div>
+ </div>
+ <div class="chart-grid">
+  <div class="chart-card"><div class="chart-head"><div><h3>Live Queue by Status</h3><p>Current clinic distribution across the configured workflow</p></div><span class="chart-badge">Live</span></div><div class="bar-chart">${statusData.map(x=>`<div class="bar-row"><div class="bar-label">${x.name}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(x.value?8:0,(x.value/maxStatus)*100)}%"></div></div><div class="bar-value">${x.value}</div></div>`).join("")}</div></div>
+  <div class="chart-card"><div class="chart-head"><div><h3>Visits by Doctor</h3><p>Total visit load for each doctor in the demo dataset</p></div><span class="chart-badge">Clinical</span></div><div class="bar-chart">${doctorData.map(x=>`<div class="bar-row"><div class="bar-label">${x.name}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(x.value?8:0,(x.value/maxDoctor)*100)}%"></div></div><div class="bar-value">${x.value}</div></div>`).join("")}</div></div>
+  <div class="chart-card"><div class="chart-head"><div><h3>Patient Activity Trend</h3><p>Daily activity trend preview for the clinic dashboard</p></div><span class="chart-badge">7 days</span></div><svg class="line-chart" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none"><line x1="${pad}" y1="${h-pad}" x2="${w-pad}" y2="${h-pad}" stroke="#dfe5ee"/><polyline fill="none" stroke="#316df4" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>${trend.map((v,i)=>`<circle cx="${pad+i*step}" cy="${h-pad-(v/maxT)*(h-pad*2)}" r="4.5" fill="#fff" stroke="#316df4" stroke-width="3"/>`).join("")}</svg><div class="chart-legend"><span><i class="legend-dot"></i>Patients / day</span></div></div>
+  <div class="chart-card"><div class="chart-head"><div><h3>Documentation Status</h3><p>Clinical documentation completion health</p></div><span class="chart-badge">${totalDocs} visits</span></div><div class="stackbar">${docStats.Completed?`<span class="stack-complete" style="width:${docStats.Completed/totalDocs*100}%"></span>`:""}${docStats.Draft?`<span class="stack-draft" style="width:${docStats.Draft/totalDocs*100}%"></span>`:""}${docStats.Pending?`<span class="stack-pending" style="width:${docStats.Pending/totalDocs*100}%"></span>`:""}${docStats.NotStarted?`<span class="stack-notstarted" style="width:${docStats.NotStarted/totalDocs*100}%"></span>`:""}</div><div class="dashboard-list" style="margin-top:16px">${Object.entries(docStats).map(([k,v])=>`<div class="row"><span>${k}</span><b>${v}</b></div>`).join("")}</div></div>
+ </div>`;
+}
+document.addEventListener("click",e=>{})
+
+function patients(){if(state.patientId)return profile(state.patientId);return `<div class="panel pad"><div class="sectionhead"><div><h2>Search Patient First</h2><p>Live match by name, phone, or patient number before registration</p></div>${can("Patient.Create")?'<button class="btn primary" id="newp">+ Register Patient</button>':""}</div><input id="psearch" class="input" style="width:100%" placeholder="Type patient name or phone..."><div id="presults" style="margin-top:10px">${patientResults("")}</div></div>`}
+function patientResults(q){q=q.trim().toLowerCase();const xs=db.patients.filter(p=>!q||p.name.toLowerCase().includes(q)||p.phone.includes(q)||p.number.toLowerCase().includes(q));return xs.length?`<div class="suggestions">${xs.map(p=>`<div class="suggestion" data-openp="${p.id}"><b>${p.name}</b><div class="small muted">${p.number} · ${p.phone} · ${age(p.dob)} years</div></div>`).join("")}</div>`:`<div class="empty">No matching patient${can("Patient.Create")?'<br><button class="btn primary" id="newp2" style="margin-top:10px">Register New Patient</button>':""}</div>`}
+function enabledTabs(){return db.profileSections.filter(x=>x.enabled).sort((a,b)=>a.order-b.order).map(x=>x.name)}
+function profile(pid){const p=pat(pid),tabs=enabledTabs();if(!tabs.includes(state.ptab))state.ptab=tabs[0]||"Overview";return `<div class="profilehead"><div><button class="btn outline small" id="backp">← Patients</button><h2>${p.name}</h2><p>${p.number} · ${age(p.dob)} years · ${p.gender} · ${p.phone}</p></div><div class="toolbar">${can("Queue.CheckIn")?'<button class="btn blue" id="checkin">Check In</button>':""}${can("Patient.EditBasic")?'<button class="btn outline" id="editp">Edit</button>':""}</div></div><div class="tabs">${tabs.map(t=>`<button class="tab ${state.ptab===t?"active":""}" data-pt="${t}">${t}</button>`).join("")}</div>${profileTab(p,state.ptab)}`}
+function latest(pid,type){return db.measurements.filter(x=>x.patientId===pid&&x.type===type).sort((a,b)=>b.at.localeCompare(a.at))[0]}
+function renderCustomField(p,f){const v=p.custom?.[f.id];if(f.type==="image"&&v)return `<div class="thumb"><img src="${v}"><div>${f.label}</div></div>`;if(f.type==="file"&&v)return `<div class="card"><b>${f.label}</b><div class="small muted">${v.name||"Uploaded file"}</div></div>`;if(Array.isArray(v))return `<div class="card"><b>${f.label}</b><p>${v.join(", ")||"—"}</p></div>`;if(f.type==="boolean")return `<div class="card"><b>${f.label}</b><p>${v===true?"Yes":v===false?"No":"—"}</p></div>`;return `<div class="card"><b>${f.label}</b><p>${v??"—"}</p></div>`}
+function profileTab(p,t){
+ if(t==="Overview")return `<div class="grid2"><div class="panel pad"><h3>Patient Summary</h3><div class="divider"></div><b>Conditions</b><p>${p.conditions.join(", ")||"None"}</p><b>Allergies</b><p>${p.allergies.join(", ")||"None"}</p><b>Current Medications</b><p>${p.currentMeds.join(", ")||"None"}</p></div><div class="panel pad"><h3>Latest Measurements</h3><div class="divider"></div>${db.clinicalFields.filter(x=>x.enabled).map(f=>{const m=latest(p.id,f.name);return `<div class="card" style="margin-bottom:7px"><b>${f.name}</b><div>${m?`${m.value} ${m.unit||""}`:"No data"}</div><span class="fieldtype">${f.type}</span></div>`}).join("")}</div></div>`;
+ if(t==="Medical Profile")return `<div class="panel pad"><div class="sectionhead"><div><h2>Medical Profile</h2><p>Core medical data + dynamic configured fields</p></div>${can("MedicalProfile.Edit")?'<button class="btn primary" id="editmedical">Edit</button>':""}</div><div class="grid3"><div class="card"><b>Conditions</b><p>${p.conditions.join(", ")||"None"}</p></div><div class="card"><b>Allergies</b><p>${p.allergies.join(", ")||"None"}</p></div><div class="card"><b>Current Medications</b><p>${p.currentMeds.join(", ")||"None"}</p></div></div>${db.customProfileFields.filter(f=>f.section==="Medical Profile").length?`<div class="divider"></div><div class="grid3">${db.customProfileFields.filter(f=>f.section==="Medical Profile").map(f=>renderCustomField(p,f)).join("")}</div>`:""}</div>`;
+ if(t==="Measurements"){const xs=db.measurements.filter(x=>x.patientId===p.id).sort((a,b)=>b.at.localeCompare(a.at));return `<div class="panel pad"><div class="sectionhead"><div><h2>Measurements History</h2><p>Configured field types are respected</p></div>${can("Measurement.Create")?'<button class="btn primary" id="addmeasure">+ Add Measurement</button>':""}</div><div class="tablewrap"><table><thead><tr><th>Type</th><th>Value</th><th>Date</th></tr></thead><tbody>${xs.map(x=>`<tr><td>${x.type}</td><td><b>${x.value} ${x.unit||""}</b></td><td>${fmt(x.at)}</td></tr>`).join("")}</tbody></table></div></div>`}
+ if(t==="Visits"){const xs=db.visits.filter(x=>x.patientId===p.id).sort((a,b)=>b.entryAt.localeCompare(a.entryAt));return `<div class="panel pad"><h2>Visits</h2>${xs.map(v=>`<div class="card" style="margin-top:8px"><div class="sectionhead"><div><b>${fmt(v.entryAt)} · ${doctor(v.doctorId)?.name}</b><div class="small muted">${v.diagnosis||"Diagnosis pending"}</div></div><span class="status ${v.documentationStatus==="Completed"?"green":"amber"}">${v.documentationStatus}</span></div><div class="kpirow"><span class="kpi">${db.sessions.filter(s=>s.visitId===v.id).length} doctor sessions</span><span class="kpi">${v.status}</span></div></div>`).join("")||'<div class="empty">No visits</div>'}</div>`}
+ if(t==="Prescriptions"||t==="Investigations"){const xs=db.prescriptions.filter(x=>x.patientId===p.id);return `<div class="panel pad"><h2>${t}</h2>${xs.map(r=>`<div class="card" style="margin-top:8px"><b>${fmt(r.createdAt)}</b><div class="small muted" style="margin-top:5px">${r.sections.map(s=>`${s.name}: ${s.items?.join(", ")||""}`).join(" · ")}</div>${r.images?.length?`<div class="filepreview" style="margin-top:8px">${r.images.map(i=>`<div class="thumb"><img src="${i.data}"><div>${i.name}</div></div>`).join("")}</div>`:""}</div>`).join("")||'<div class="empty">No records</div>'}</div>`}
+ if(t==="Attachments"){const xs=db.attachments.filter(x=>x.patientId===p.id);return `<div class="panel pad"><div class="sectionhead"><div><h2>Attachments</h2><p>Images and files are supported</p></div><button class="btn primary" id="addattach">+ Add Attachment</button></div>${xs.length?`<div class="filepreview">${xs.map(a=>a.data&&a.mime?.startsWith("image/")?`<div class="thumb"><img src="${a.data}"><div><b>${a.name}</b><div class="small muted">${a.type}</div></div></div>`:`<div class="card"><b>${a.name}</b><div class="small muted">${a.type} · ${a.mime||"file"}</div></div>`).join("")}</div>`:'<div class="empty">No attachments</div>'}</div>`}
+ if(t==="Follow-ups"){const xs=db.visits.filter(v=>v.patientId===p.id&&v.followUp);return `<div class="panel pad"><h2>Follow-ups</h2>${xs.map(v=>`<div class="card" style="margin-top:8px"><b>${v.followUp}</b><div class="small muted">${fmt(v.entryAt)}</div></div>`).join("")||'<div class="empty">No follow-up recommendations</div>'}</div>`}
+ if(t==="Timeline"){let items=[{at:p.createdAt,text:"Patient registered"}];db.measurements.filter(x=>x.patientId===p.id).forEach(x=>items.push({at:x.at,text:`${x.type} recorded · ${x.value} ${x.unit||""}`}));db.visits.filter(x=>x.patientId===p.id).forEach(x=>items.push({at:x.entryAt,text:`Visit ${x.status} · ${doctor(x.doctorId)?.name}`}));db.prescriptions.filter(x=>x.patientId===p.id).forEach(x=>items.push({at:x.createdAt,text:"Prescription / Clinical Orders saved"}));items.sort((a,b)=>b.at.localeCompare(a.at));return `<div class="panel pad"><h2>Timeline</h2><div class="timeline" style="margin-top:12px">${items.map(i=>`<div class="trow"><div class="small muted">${fmt(i.at)}</div><div class="dot"></div><div>${i.text}</div></div>`).join("")}</div></div>`}
+ const custom=db.customProfileFields.filter(f=>f.section===t);return `<div class="panel pad"><div class="sectionhead"><div><h2>${t}</h2><p>Dynamic patient profile section</p></div>${can("MedicalProfile.Edit")?`<button class="btn primary" id="editcustom" data-section="${t}">Edit Section</button>`:""}</div><div class="grid3">${custom.map(f=>renderCustomField(p,f)).join("")||'<div class="empty">No fields configured in this section</div>'}</div></div>`
+}
+function bindPatients(){const s=$("#psearch");if(s)s.oninput=e=>{$("#presults").innerHTML=patientResults(e.target.value);bindPResults()};bindPResults();$("#newp")&&($("#newp").onclick=newPatient);$("#newp2")&&($("#newp2").onclick=newPatient);$("#backp")&&($("#backp").onclick=()=>{state.patientId=null;render()});$$("[data-pt]").forEach(b=>b.onclick=()=>{state.ptab=b.dataset.pt;render()});$("#checkin")&&($("#checkin").onclick=()=>checkIn(state.patientId));$("#editp")&&($("#editp").onclick=()=>editPatient(state.patientId));$("#editmedical")&&($("#editmedical").onclick=()=>editMedical(state.patientId));$("#addmeasure")&&($("#addmeasure").onclick=()=>addMeasurement(state.patientId));$("#addattach")&&($("#addattach").onclick=()=>addAttachment(state.patientId));$("#editcustom")&&($("#editcustom").onclick=()=>editCustomSection(state.patientId,$("#editcustom").dataset.section))}
+function bindPResults(){$$("[data-openp]").forEach(x=>x.onclick=()=>{state.patientId=x.dataset.openp;state.ptab="Overview";render()})}
+function patientDuplicateMatches(name,phone){
+ const n=(name||"").trim().toLowerCase(),ph=(phone||"").replace(/\s+/g,"");
+ return db.patients.map(p=>{
+   const pn=p.name.toLowerCase(),pp=p.phone.replace(/\s+/g,"");
+   let score=0,reasons=[];
+   if(ph&&pp===ph){score=100;reasons.push("Same phone number")}
+   else if(ph&&ph.length>=5&&(pp.includes(ph)||ph.includes(pp))){score=Math.max(score,75);reasons.push("Similar phone number")}
+   if(n&&pn===n){score=Math.max(score,90);reasons.push("Same full name")}
+   else if(n.length>=4&&(pn.includes(n)||n.includes(pn))){score=Math.max(score,65);reasons.push("Similar name")}
+   const nt=n.split(/\s+/).filter(x=>x.length>2),pt=pn.split(/\s+/);const shared=nt.filter(x=>pt.includes(x)).length;
+   if(shared>=2){score=Math.max(score,70);reasons.push("Matching name parts")}
+   return {p,score,reasons:[...new Set(reasons)]};
+ }).filter(x=>x.score>=60).sort((a,b)=>b.score-a.score);
+}
+function renderDuplicateCheck(){
+ const box=$("#dupcheck");if(!box)return;const name=$("#npn").value,phone=$("#npp").value,matches=patientDuplicateMatches(name,phone);
+ const exactPhone=matches.some(x=>x.score===100&&x.reasons.includes("Same phone number"));
+ if(!matches.length){box.innerHTML=name||phone?'<div class="duplicate-box"><div class="duplicate-title">✓ No strong duplicate found</div><div class="small muted" style="margin-top:4px">The system is checking the patient database while you type.</div></div>':"";$("#savenp").disabled=false;$("#savenp").style.opacity="1";return}
+ box.innerHTML=`<div class="duplicate-box ${exactPhone?"danger":""}"><div class="duplicate-title">${exactPhone?"⚠ Existing phone number detected":"⚠ Possible existing patient"}</div><div class="small muted" style="margin-top:4px">${exactPhone?"Registration is blocked until you open or correct the existing patient.":"Review the matches before creating another patient."}</div>${matches.slice(0,4).map(x=>`<div class="duplicate-person"><div><b>${x.p.name}</b><div class="small muted">${x.p.number} · ${x.p.phone}</div><div class="small">${x.reasons.join(" · ")}</div></div><button class="btn outline small" data-dupopen="${x.p.id}">Open Patient</button></div>`).join("")}</div>`;
+ $("#savenp").disabled=exactPhone;$("#savenp").style.opacity=exactPhone?".45":"1";
+ $$("[data-dupopen]").forEach(b=>b.onclick=()=>{$("#modal").innerHTML="";state.patientId=b.dataset.dupopen;state.ptab="Overview";render()});
+}
+function newPatient(){
+ modal("Register Patient",`<div class="banner" style="background:#eef5ff;border-color:#cadcff;color:#2859ad">⌕ Duplicate assistance is active. The system checks name and phone while you type.</div><div class="formgrid"><div class="field"><label>Full Name</label><input id="npn" autocomplete="off"></div><div class="field"><label>Phone</label><input id="npp" autocomplete="off"></div><div class="field"><label>Gender</label><select id="npg"><option>Male</option><option>Female</option></select></div><div class="field"><label>Date of Birth</label><input id="npd" type="date"></div></div><div id="dupcheck"></div><div class="field" style="margin-top:10px"><label>Notes</label><textarea id="npnotes"></textarea></div><div class="formactions"><button class="btn primary" id="savenp">Create Patient</button></div>`);
+ $("#npn").oninput=renderDuplicateCheck;$("#npp").oninput=renderDuplicateCheck;
+ $("#savenp").onclick=()=>{const name=$("#npn").value.trim(),phone=$("#npp").value.trim();if(!name||!phone)return toast("Name and phone required");const exact=db.patients.find(p=>p.phone.replace(/\s+/g,"")===phone.replace(/\s+/g,""));if(exact){toast("This phone number already belongs to an existing patient");renderDuplicateCheck();return}const seq=db.patients.length+151,p={id:uid("p"),number:`${db.clinic.prefix}-${new Date().getFullYear()}-${seq}`,name,phone,gender:$("#npg").value,dob:$("#npd").value,conditions:[],allergies:[],currentMeds:[],notes:$("#npnotes").value,createdAt:now(),custom:{}};db.patients.push(p);save();audit("Created patient",p.number);$("#modal").innerHTML="";state.patientId=p.id;render();toast("Patient created")}
+}function editPatient(pid){const p=pat(pid);modal("Edit Patient",`<div class="formgrid"><div class="field"><label>Name</label><input id="epn" value="${p.name}"></div><div class="field"><label>Phone</label><input id="epp" value="${p.phone}"></div><div class="field"><label>Gender</label><select id="epg"><option ${p.gender==="Male"?"selected":""}>Male</option><option ${p.gender==="Female"?"selected":""}>Female</option></select></div><div class="field"><label>Date of Birth</label><input id="epd" type="date" value="${p.dob}"></div></div><div class="formactions"><button class="btn primary" id="saveep">Save</button></div>`);$("#saveep").onclick=()=>{p.name=$("#epn").value;p.phone=$("#epp").value;p.gender=$("#epg").value;p.dob=$("#epd").value;save();audit("Updated patient",p.number);$("#modal").innerHTML="";render();toast("Patient updated")}}
+function editMedical(pid){const p=pat(pid);modal("Edit Medical Profile",`<div class="field"><label>Conditions (comma separated)</label><textarea id="mc">${p.conditions.join(", ")}</textarea></div><div class="field" style="margin-top:10px"><label>Allergies</label><textarea id="ma">${p.allergies.join(", ")}</textarea></div><div class="field" style="margin-top:10px"><label>Current Medications</label><textarea id="mm">${p.currentMeds.join(", ")}</textarea></div><div class="formactions"><button class="btn primary" id="savem">Save Medical Profile</button></div>`);$("#savem").onclick=()=>{p.conditions=$("#mc").value.split(",").map(x=>x.trim()).filter(Boolean);p.allergies=$("#ma").value.split(",").map(x=>x.trim()).filter(Boolean);p.currentMeds=$("#mm").value.split(",").map(x=>x.trim()).filter(Boolean);save();audit("Updated medical profile",p.number);$("#modal").innerHTML="";render();toast("Medical profile saved")}}
+function fieldInput(f,prefix="cf"){const idd=prefix+f.id,v="";if(f.type==="boolean")return `<select id="${idd}"><option value="">Not set</option><option value="true">Yes</option><option value="false">No</option></select>`;if(f.type==="single-select")return `<select id="${idd}"><option value="">Select...</option>${f.options.map(o=>`<option>${o}</option>`).join("")}</select>`;if(f.type==="multi-select")return `<select id="${idd}" multiple size="4">${f.options.map(o=>`<option>${o}</option>`).join("")}</select>`;if(f.type==="image"||f.type==="file")return `<input id="${idd}" type="file" ${f.type==="image"?'accept="image/*"':""}>`;if(f.type==="textarea")return `<textarea id="${idd}"></textarea>`;return `<input id="${idd}" type="${f.type==="number"?"number":f.type==="date"?"date":"text"}">`}
+function editCustomSection(pid,section){const p=pat(pid),fields=db.customProfileFields.filter(f=>f.section===section);modal(`Edit ${section}`,`${fields.map(f=>`<div class="field" style="margin-bottom:10px"><label>${f.label} <span class="fieldtype">${f.type}</span></label>${fieldInput(f,"pf")}</div>`).join("")}<div class="formactions"><button class="btn primary" id="savecustom">Save Section</button></div>`);$("#savecustom").onclick=async()=>{p.custom=p.custom||{};for(const f of fields){const el=$("#pf"+f.id);if(f.type==="boolean")p.custom[f.id]=el.value===""?null:el.value==="true";else if(f.type==="multi-select")p.custom[f.id]=[...el.selectedOptions].map(o=>o.value);else if(f.type==="image"||f.type==="file"){if(el.files[0]){const data=await fileToData(el.files[0]);p.custom[f.id]=f.type==="image"?data:{name:el.files[0].name,data,mime:el.files[0].type}}}else p.custom[f.id]=el.value}save();audit(`Updated dynamic section ${section}`,p.number);$("#modal").innerHTML="";render();toast("Section saved")}}
+function addMeasurement(pid,visitId=null){const fs=db.clinicalFields.filter(x=>x.enabled);modal("Add Measurement",`<div class="field"><label>Type</label><select id="mt">${fs.map(f=>`<option value="${f.id}">${f.name} · ${f.type}</option>`).join("")}</select></div><div id="measureinput" class="field" style="margin-top:10px"></div><div class="formactions"><button class="btn primary" id="savemeas">Save Measurement</button></div>`);function redraw(){const f=db.clinicalFields.find(x=>x.id===$("#mt").value);$("#measureinput").innerHTML=`<label>Value ${f.unit?`(${f.unit})`:""}</label>${f.type==="boolean"?'<select id="mv"><option value="Yes">Yes</option><option value="No">No</option></select>':f.type==="single-select"?`<select id="mv">${f.options.map(o=>`<option>${o}</option>`).join("")}</select>`:f.type==="multi-select"?`<select id="mv" multiple size="4">${f.options.map(o=>`<option>${o}</option>`).join("")}</select>`:`<input id="mv" type="${f.type==="number"?"number":"text"}">`}`};$("#mt").onchange=redraw;redraw();$("#savemeas").onclick=()=>{const f=db.clinicalFields.find(x=>x.id===$("#mt").value),el=$("#mv"),value=f.type==="multi-select"?[...el.selectedOptions].map(o=>o.value).join(", "):el.value;if(!value)return toast("Enter value");db.measurements.push({id:uid("m"),patientId:pid,visitId,type:f.name,value,unit:f.unit,at:now()});save();audit("Recorded measurement",pat(pid).number);$("#modal").innerHTML="";render();toast("Measurement saved")}}
+async function fileToData(file){return await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(file)})}
+function addAttachment(pid){modal("Add Attachment",`<div class="formgrid"><div class="field"><label>Display Name</label><input id="an"></div><div class="field"><label>Category</label><select id="at"><option>Lab Result</option><option>Radiology</option><option>Prescription</option><option>Medical Report</option><option>Other</option></select></div><div class="field"><label>File / Image</label><input id="af" type="file" accept="image/*,.pdf"></div></div><div class="formactions"><button class="btn primary" id="saveatt">Upload</button></div>`);$("#saveatt").onclick=async()=>{const f=$("#af").files[0],n=$("#an").value.trim()||f?.name;if(!f||!n)return toast("Choose a file");const data=await fileToData(f);db.attachments.push({id:uid("att"),patientId:pid,name:n,type:$("#at").value,mime:f.type,data,at:now()});save();audit("Added attachment",pat(pid).number);$("#modal").innerHTML="";render();toast("Attachment added")}}
+function checkIn(pid){const existing=db.queue.find(q=>q.patientId===pid&&q.status!=="EXITED");if(existing){state.view="queue";render();return toast("Patient already in clinic")}const ds=db.users.filter(u=>u.roles.includes("DOCTOR")&&u.active);modal("Check In",`<div class="field"><label>Doctor</label><select id="cid">${ds.map(d=>`<option value="${d.id}">${d.name}</option>`).join("")}</select></div><div class="formactions"><button class="btn blue" id="saveci">Check In Now</button></div>`);$("#saveci").onclick=()=>{const entry=now(),vid=uid("v");db.visits.push({id:vid,patientId:pid,doctorId:$("#cid").value,status:"Open",documentationStatus:"NotStarted",chiefComplaint:"",examination:"",diagnosis:"",notes:"",treatmentPlan:"",followUp:"",entryAt:entry,exitAt:null});db.queue.push({id:uid("q"),patientId:pid,doctorId:$("#cid").value,status:db.workflow[0].code,entryAt:entry,exitAt:null,visitId:vid});save();audit("Checked in patient",pat(pid).number);$("#modal").innerHTML="";state.view="queue";render();toast("Checked in")}}
+
+function minutesSince(dt){return Math.max(0,Math.round((Date.now()-new Date(dt).getTime())/60000))}
+function queue(){
+ const sts=db.workflow.filter(x=>x.code!=="EXITED").sort((a,b)=>a.order-b.order),allActive=db.queue.filter(q=>q.status!=="EXITED"),doctors=db.users.filter(u=>u.roles.includes("DOCTOR")&&u.active),sq=state.queueSearch.trim().toLowerCase();
+ const active=allActive.filter(q=>{const p=pat(q.patientId);return(!sq||p.name.toLowerCase().includes(sq)||p.phone.includes(sq)||p.number.toLowerCase().includes(sq))&&(!state.queueDoctor||q.doctorId===state.queueDoctor)&&(!state.queueStatus||q.status===state.queueStatus)});
+ const waiting=active.filter(q=>["WAITING","WAITING_DROPS","READY_RECHECK"].includes(q.status)).length,activeSessions=db.sessions.filter(s=>!s.endAt&&active.some(q=>q.visitId===s.visitId)).length,avg=active.length?Math.round(active.reduce((a,q)=>a+minutesSince(q.entryAt),0)/active.length):0;
+ const activeFilters=[];
+ if(state.queueSearch)activeFilters.push({key:"search",label:"Search",value:state.queueSearch});
+ if(state.queueDoctor){const d=doctors.find(x=>x.id===state.queueDoctor);activeFilters.push({key:"doctor",label:"Doctor",value:d?.name||state.queueDoctor})}
+ if(state.queueStatus){activeFilters.push({key:"status",label:"Status",value:wf(state.queueStatus).name})}
+ return `<div class="sectionhead"><div><h2>Clinic Workflow Board</h2><p>Track all active patients and filter the board without leaving this page.</p></div><div class="toolbar"><button class="btn outline" id="toggle-filter">⌕ Filter${activeFilters.length?` (${activeFilters.length})`:""}</button></div></div>
+ ${activeFilters.length?`<div class="applied-filters"><span class="applied-label">Applied filters</span>${activeFilters.map(f=>`<span class="filter-chip">${f.label}: ${f.value}<button data-remove-filter="${f.key}" title="Remove filter">×</button></span>`).join("")}<button class="btn outline small" id="qf-clear-inline">Clear all</button></div>`:`<div class="no-filters">No filters applied.</div>`}
+ ${state.queueFilterOpen?`<div class="filter-drawer"><div class="formgrid"><div class="field"><label>Search patient</label><input id="qf-search" value="${state.queueSearch}" placeholder="Name, phone or patient number"></div><div class="field"><label>Doctor</label><select id="qf-doctor"><option value="">All doctors</option>${doctors.map(d=>`<option value="${d.id}" ${state.queueDoctor===d.id?"selected":""}>${d.name}</option>`).join("")}</select></div><div class="field"><label>Status</label><select id="qf-status"><option value="">All statuses</option>${sts.map(s=>`<option value="${s.code}" ${state.queueStatus===s.code?"selected":""}>${s.name}</option>`).join("")}</select></div></div><div class="filter-actions"><button class="btn outline" id="qf-clear">Clear Filters</button><button class="btn blue" id="qf-close">Done</button></div></div>`:""}
+ <div class="qsummary"><div class="qs"><span class="qsicon">👥</span><div><b>${active.length}</b><div class="small muted">Shown patients</div></div></div><div class="qs"><span class="qsicon">⏳</span><div><b>${waiting}</b><div class="small muted">Waiting / recheck</div></div></div><div class="qs"><span class="qsicon">🩺</span><div><b>${activeSessions}</b><div class="small muted">Active sessions</div></div></div><div class="qs"><span class="qsicon">◷</span><div><b>${avg} min</b><div class="small muted">Average shown time</div></div></div></div>
+ <div class="queue-count-note">Showing ${active.length} of ${allActive.length} active patients.</div>
+ <div class="queueboard" style="margin-top:9px">${sts.map(s=>`<div class="qcol"><h3><span>${s.name}</span><span class="status" style="background:${statusColorSoft(s.color)};color:${statusColor(s.color)}">${active.filter(q=>q.status===s.code).length}</span></h3>${active.filter(q=>q.status===s.code).map(qcard).join("")||'<div class="empty small">No matching patients</div>'}</div>`).join("")}</div>`;
+}
+function qcard(q){
+ const p=pat(q.patientId),v=db.visits.find(x=>x.id===q.visitId),sessions=db.sessions.filter(s=>s.visitId===q.visitId),last=sessions[sessions.length-1];
+ const allowed=db.transitions.filter(t=>t.from===q.status).map(t=>wf(t.to).name);
+ return `<div class="pcard">
+   <div style="display:flex;justify-content:space-between;gap:8px"><div><b>${p.name}</b><div class="small muted">${p.number}</div></div><span class="status" style="background:${statusColorSoft(wf(q.status).color)};color:${statusColor(wf(q.status).color)}">${wf(q.status).name}</span></div>
+   <div class="small muted" style="margin-top:6px">🩺 ${doctor(q.doctorId)?.name||"Unassigned"}</div>
+   <div class="qmeta">
+     <div><span>Entered</span><b>${fmt(q.entryAt)}</b></div>
+     <div><span>In Clinic</span><b>${minutesSince(q.entryAt)} min</b></div>
+     <div><span>Sessions</span><b>${sessions.length}</b></div>
+     <div><span>Documentation</span><b>${v.documentationStatus}</b></div>
+   </div>
+   ${last?`<div class="small muted" style="margin-top:7px">Last session: ${fmt(last.startAt)} ${last.endAt?"→ "+fmt(last.endAt):"· active"}</div>`:""}
+   ${allowed.length?`<div class="next-step">Next allowed: ${allowed.join(" · ")}</div>`:""}
+   <div class="actions"><button class="btn outline small" data-qprofile="${p.id}">👤 Profile</button>${can("Queue.Move")||can("Visit.Edit")?`<button class="btn blue small" data-qaction="${q.id}">⚡ Action</button>`:""}</div>
+ </div>`;
+}
+function bindQueue(){
+ $("#toggle-filter")&&($("#toggle-filter").onclick=()=>{state.queueFilterOpen=!state.queueFilterOpen;render()});
+ $("#qf-close")&&($("#qf-close").onclick=()=>{state.queueFilterOpen=false;render()});
+ const sr=$("#qf-search"),dr=$("#qf-doctor"),st=$("#qf-status");
+ if(sr)sr.oninput=e=>{state.queueSearch=e.target.value;render()};
+ if(dr)dr.onchange=e=>{state.queueDoctor=e.target.value;render()};
+ if(st)st.onchange=e=>{state.queueStatus=e.target.value;render()};
+ const clearAll=()=>{state.queueSearch="";state.queueDoctor="";state.queueStatus="";render()};
+ $("#qf-clear")&&($("#qf-clear").onclick=clearAll);
+ $("#qf-clear-inline")&&($("#qf-clear-inline").onclick=clearAll);
+ $$("[data-remove-filter]").forEach(b=>b.onclick=()=>{const k=b.dataset.removeFilter;if(k==="search")state.queueSearch="";if(k==="doctor")state.queueDoctor="";if(k==="status")state.queueStatus="";render()});
+ $$("[data-qprofile]").forEach(b=>b.onclick=()=>{state.view="patients";state.patientId=b.dataset.qprofile;location.hash="#patients";render()});
+ $$("[data-qaction]").forEach(b=>b.onclick=()=>queueAction(b.dataset.qaction))
+}
+function queueAction(qid){const q=db.queue.find(x=>x.id===qid),p=pat(q.patientId),v=db.visits.find(x=>x.id===q.visitId),allowed=can("Queue.Move")?db.transitions.filter(t=>t.from===q.status).map(t=>t.to):[];modal(`${p.name} — Queue Action`,`<div class="card"><b>Current</b><div style="margin-top:5px">${wf(q.status).name}</div></div>${allowed.length?`<div class="field" style="margin-top:10px"><label>Allowed transition</label><select id="nexts">${allowed.map(c=>`<option value="${c}">${wf(c).name}</option>`).join("")}</select></div>`:""}<div class="formactions">${can("Visit.Edit")?'<button class="btn outline" id="openvisit">Doctor Workspace</button>':""}${allowed.length?'<button class="btn blue" id="moveq">Apply</button>':""}</div>`);$("#openvisit")&&($("#openvisit").onclick=()=>{$("#modal").innerHTML="";doctorWorkspace(v.id)});$("#moveq")&&($("#moveq").onclick=()=>{const n=$("#nexts").value;if(n==="WITH_DOCTOR")startSession(v.id);if(q.status==="WITH_DOCTOR")endSession(v.id);q.status=n;if(n==="COMPLETED"){v.status="Completed";if(v.documentationStatus==="NotStarted")v.documentationStatus="Pending"}if(n==="EXITED"){q.exitAt=now();v.exitAt=q.exitAt;v.status="Completed"}save();audit(`Moved patient to ${wf(n).name}`,p.number);$("#modal").innerHTML="";render();toast("Workflow updated")})}
+function startSession(vid){if(!db.sessions.some(s=>s.visitId===vid&&!s.endAt))db.sessions.push({id:uid("s"),visitId:vid,startAt:now(),endAt:null})}function endSession(vid){const s=db.sessions.find(s=>s.visitId===vid&&!s.endAt);if(s)s.endAt=now()}
+function doctorWorkspace(vid){const v=db.visits.find(x=>x.id===vid),p=pat(v.patientId),sessions=db.sessions.filter(s=>s.visitId===vid);modal(`Doctor Workspace — ${p.name}`,`${v.documentationStatus!=="Completed"?`<div class="banner">Documentation status: <b>${v.documentationStatus}</b>. Patient workflow can finish before documentation.</div>`:""}<div class="grid2"><div class="card"><b>Conditions</b><p>${p.conditions.join(", ")||"None"}</p><b>Allergies</b><p>${p.allergies.join(", ")||"None"}</p></div><div class="card"><b>Doctor Sessions</b>${sessions.length?sessions.map((s,i)=>`<p>#${i+1} ${fmt(s.startAt)} → ${s.endAt?fmt(s.endAt):"Active"}</p>`).join(""):"<p>No session yet</p>"}</div></div><div class="divider"></div><div class="formgrid"><div class="field"><label>Chief Complaint</label><textarea id="dc">${v.chiefComplaint}</textarea></div><div class="field"><label>Examination</label><textarea id="de">${v.examination}</textarea></div><div class="field"><label>Diagnosis</label><textarea id="dd">${v.diagnosis}</textarea></div><div class="field"><label>Treatment Plan</label><textarea id="dp">${v.treatmentPlan}</textarea></div><div class="field"><label>Notes</label><textarea id="dn">${v.notes}</textarea></div><div class="field"><label>Follow-up</label><textarea id="df">${v.followUp}</textarea></div></div><div class="formactions">${can("Measurement.Create")?'<button class="btn outline" id="dm">Measurement</button>':""}${can("Prescription.Create")?'<button class="btn secondary" id="drx">Prescription / Orders</button>':""}<button class="btn blue" id="dsave">Save Draft</button>${can("Documentation.Complete")?'<button class="btn success" id="dcomplete">Complete Documentation</button>':""}</div>`,true);$("#dsave").onclick=()=>saveDoc(v,false);$("#dcomplete")&&($("#dcomplete").onclick=()=>saveDoc(v,true));$("#dm")&&($("#dm").onclick=()=>addMeasurement(v.patientId,v.id));$("#drx")&&($("#drx").onclick=()=>rxModal(v.id))}
+function saveDoc(v,complete){v.chiefComplaint=$("#dc").value;v.examination=$("#de").value;v.diagnosis=$("#dd").value;v.treatmentPlan=$("#dp").value;v.notes=$("#dn").value;v.followUp=$("#df").value;v.documentationStatus=complete?"Completed":"Draft";save();audit(complete?"Completed documentation":"Saved documentation draft",pat(v.patientId).number);$("#modal").innerHTML="";render();toast(complete?"Documentation completed":"Draft saved")}
+function rxModal(vid){const v=db.visits.find(x=>x.id===vid),p=pat(v.patientId),secs=db.rxSections.filter(x=>x.enabled).sort((a,b)=>a.order-b.order),data=secs.map(s=>({name:s.name,type:s.type,items:[],images:[]}));modal(`Prescription / Clinical Orders — ${p.name}`,`${secs.map((s,i)=>`<div class="rxsec"><div class="sectionhead"><div><h3>${s.name}</h3><span class="fieldtype">${s.type}</span></div></div>${s.type==="image"?`<div class="field"><label>Upload Image</label><input id="rxi${i}" type="file" accept="image/*" multiple></div><div id="rit${i}" class="filepreview" style="margin-top:8px"></div>`:s.type==="text"?`<div class="field"><textarea id="rxi${i}" placeholder="Write ${s.name.toLowerCase()}..."></textarea></div>`:`<div class="auto"><input id="rxi${i}" class="input" style="width:100%" placeholder="Type..."><div id="ral${i}"></div></div><div id="rit${i}" style="margin:7px 0"></div><button class="btn outline small" data-addrx="${i}">+ Add</button>`}</div>`).join("")}<div class="formactions"><button class="btn blue" id="saverx">Save Prescription / Orders</button></div>`,true);
+ secs.forEach((s,i)=>{if(s.type==="structured"){$(`#rxi${i}`).oninput=()=>{const q=$(`#rxi${i}`).value.trim().toLowerCase();let key=s.name.toUpperCase().includes("MED")?"MEDICATIONS":s.name.toUpperCase().includes("RAD")?"RADIOLOGY":"INVESTIGATIONS";const list=(db.suggestions[key]||[]).filter(x=>x.toLowerCase().includes(q)).slice(0,6);$(`#ral${i}`).innerHTML=q&&list.length?`<div class="autolist">${list.map(x=>`<div class="autoitem" data-autoi="${i}" data-v="${x}">${x}</div>`).join("")}</div>`:"";$$(`[data-autoi="${i}"]`).forEach(x=>x.onclick=()=>{$(`#rxi${i}`).value=x.dataset.v;$(`#ral${i}`).innerHTML=""})}}});
+ $$("[data-addrx]").forEach(b=>b.onclick=()=>{const i=+b.dataset.addrx,val=$(`#rxi${i}`).value.trim();if(!val)return;data[i].items.push(val);let key=secs[i].name.toUpperCase().includes("MED")?"MEDICATIONS":secs[i].name.toUpperCase().includes("RAD")?"RADIOLOGY":"INVESTIGATIONS";if(!db.suggestions[key].includes(val))db.suggestions[key].push(val);$(`#rxi${i}`).value="";$(`#rit${i}`).innerHTML=data[i].items.map(x=>`<span class="chip">${x}</span>`).join("")});
+ $("#saverx").onclick=async()=>{const images=[];for(let i=0;i<secs.length;i++){const s=secs[i],el=$(`#rxi${i}`);if(s.type==="text"&&el.value.trim())data[i].items=[el.value.trim()];if(s.type==="image"&&el.files.length){for(const f of el.files){images.push({name:f.name,data:await fileToData(f)})}}}db.prescriptions.push({id:uid("rx"),visitId:vid,patientId:v.patientId,createdAt:now(),sections:data.filter(x=>x.items.length),images});save();audit("Saved prescription / clinical orders",p.number);$("#modal").innerHTML="";render();toast("Prescription saved")}}
+function visits(){return `<div class="panel pad"><div class="sectionhead"><div><h2>Visits</h2><p>Visit, sessions and documentation are independent</p></div></div><div class="tablewrap"><table><thead><tr><th>Patient</th><th>Doctor</th><th>Entry</th><th>Visit</th><th>Documentation</th><th>Sessions</th></tr></thead><tbody>${db.visits.sort((a,b)=>b.entryAt.localeCompare(a.entryAt)).map(v=>`<tr data-openvisit="${v.id}"><td><b>${pat(v.patientId)?.name}</b></td><td>${doctor(v.doctorId)?.name}</td><td>${fmt(v.entryAt)}</td><td>${v.status}</td><td><span class="status ${v.documentationStatus==="Completed"?"green":"amber"}">${v.documentationStatus}</span></td><td>${db.sessions.filter(s=>s.visitId===v.id).length}</td></tr>`).join("")}</tbody></table></div></div>`}
+function bindVisits(){$$("[data-openvisit]").forEach(r=>r.onclick=()=>doctorWorkspace(r.dataset.openvisit))}
+function pending(){const xs=db.visits.filter(v=>v.documentationStatus!=="Completed");return `<div class="panel pad"><div class="sectionhead"><div><h2>Pending Documentation</h2><p>Finish notes after operational visit ends</p></div></div>${xs.map(v=>`<div class="card" style="margin-bottom:7px"><div class="sectionhead"><div><b>${pat(v.patientId)?.name}</b><div class="small muted">${fmt(v.entryAt)} · ${doctor(v.doctorId)?.name}</div></div><button class="btn blue small" data-pdoc="${v.id}">Open</button></div></div>`).join("")||'<div class="empty">No pending documentation</div>'}</div>`}
+function bindPending(){$$("[data-pdoc]").forEach(b=>b.onclick=()=>doctorWorkspace(b.dataset.pdoc))}
+function followups(){const xs=db.visits.filter(v=>v.followUp);return `<div class="panel pad"><div class="sectionhead"><div><h2>Follow-ups</h2><p>Recommendations only; appointment scheduling is deferred</p></div></div>${xs.map(v=>`<div class="card" style="margin-bottom:7px"><b>${pat(v.patientId)?.name}</b><p>${v.followUp}</p><div class="small muted">${doctor(v.doctorId)?.name} · ${fmt(v.entryAt)}</div></div>`).join("")||'<div class="empty">No follow-ups yet</div>'}</div>`}
+const REPORTS=[
+ {key:"visits",icon:"🩺",name:"Visits Report",desc:"Completed and open clinical visits with doctor and documentation status"},
+ {key:"patients",icon:"👥",name:"Patients Report",desc:"Registered patients with demographics and medical summary"},
+ {key:"queue",icon:"▦",name:"Clinic Queue Report",desc:"Entry, exit, current workflow status and clinic duration"},
+ {key:"doctors",icon:"👨‍⚕️",name:"Doctor Activity Report",desc:"Patient and visit workload grouped by doctor"},
+ {key:"pending",icon:"📝",name:"Pending Documentation",desc:"Visits that still require medical documentation"},
+ {key:"followups",icon:"↻",name:"Follow-up Report",desc:"Patients with recorded follow-up recommendations"}
+];
+function reportDef(key){return REPORTS.find(r=>r.key===key)}
+function reportFilters(key){
+ const ds=db.users.filter(u=>u.roles.includes("DOCTOR")&&u.active);
+ const doctorFilter=`<div class="field"><label>Doctor</label><select id="rf-doctor"><option value="">All Doctors</option>${ds.map(d=>`<option value="${d.id}">${d.name}</option>`).join("")}</select></div>`;
+ const dates=`<div class="field"><label>From</label><input id="rf-from" type="date"></div><div class="field"><label>To</label><input id="rf-to" type="date"></div>`;
+ if(key==="patients")return `${dates}<div class="field"><label>Gender</label><select id="rf-gender"><option value="">All</option><option>Male</option><option>Female</option></select></div>`;
+ if(key==="visits")return `${dates}${doctorFilter}<div class="field"><label>Documentation</label><select id="rf-docstatus"><option value="">All</option><option>NotStarted</option><option>Draft</option><option>Pending</option><option>Completed</option></select></div>`;
+ if(key==="queue")return `${dates}${doctorFilter}<div class="field"><label>Workflow Status</label><select id="rf-qstatus"><option value="">All</option>${db.workflow.map(w=>`<option value="${w.code}">${w.name}</option>`).join("")}</select></div>`;
+ if(key==="doctors")return `${dates}${doctorFilter}`;
+ if(key==="pending")return `${dates}${doctorFilter}<div class="field"><label>Documentation</label><select id="rf-docstatus"><option value="">All Pending</option><option>NotStarted</option><option>Draft</option><option>Pending</option></select></div>`;
+ return `${dates}${doctorFilter}`;
+}
+function datePass(value,from,to){if(!value)return true;const d=value.slice(0,10);return (!from||d>=from)&&(!to||d<=to)}
+function buildReportPreview(key){
+ const from=$("#rf-from")?.value||"",to=$("#rf-to")?.value||"",doctorId=$("#rf-doctor")?.value||"",gender=$("#rf-gender")?.value||"",ds=$("#rf-docstatus")?.value||"",qs=$("#rf-qstatus")?.value||"";
+ let columns=[],rows=[];
+ if(key==="visits"){columns=["Patient","Doctor","Entry","Visit Status","Documentation","Sessions"];rows=db.visits.filter(v=>datePass(v.entryAt,from,to)&&(!doctorId||v.doctorId===doctorId)&&(!ds||v.documentationStatus===ds)).map(v=>[pat(v.patientId)?.name,doctor(v.doctorId)?.name,fmt(v.entryAt),v.status,v.documentationStatus,db.sessions.filter(s=>s.visitId===v.id).length])}
+ if(key==="patients"){columns=["Patient Number","Name","Phone","Gender","Age","Conditions"];rows=db.patients.filter(p=>datePass(p.createdAt,from,to)&&(!gender||p.gender===gender)).map(p=>[p.number,p.name,p.phone,p.gender,age(p.dob),p.conditions.join(", ")||"—"])}
+ if(key==="queue"){columns=["Patient","Doctor","Entry","Exit","Status","Clinic Time"];rows=db.queue.filter(q=>datePass(q.entryAt,from,to)&&(!doctorId||q.doctorId===doctorId)&&(!qs||q.status===qs)).map(q=>[pat(q.patientId)?.name,doctor(q.doctorId)?.name,fmt(q.entryAt),fmt(q.exitAt),wf(q.status).name,q.exitAt?Math.round((new Date(q.exitAt)-new Date(q.entryAt))/60000)+" min":minutesSince(q.entryAt)+" min (active)"])}
+ if(key==="doctors"){columns=["Doctor","Current Queue","Total Visits","Completed Docs","Pending Docs"];rows=db.users.filter(u=>u.roles.includes("DOCTOR")&&(!doctorId||u.id===doctorId)).map(d=>{const vs=db.visits.filter(v=>v.doctorId===d.id&&datePass(v.entryAt,from,to));return[d.name,db.queue.filter(q=>q.doctorId===d.id&&q.status!=="EXITED").length,vs.length,vs.filter(v=>v.documentationStatus==="Completed").length,vs.filter(v=>v.documentationStatus!=="Completed").length]})}
+ if(key==="pending"){columns=["Patient","Doctor","Visit Date","Documentation","Diagnosis"];rows=db.visits.filter(v=>v.documentationStatus!=="Completed"&&datePass(v.entryAt,from,to)&&(!doctorId||v.doctorId===doctorId)&&(!ds||v.documentationStatus===ds)).map(v=>[pat(v.patientId)?.name,doctor(v.doctorId)?.name,fmt(v.entryAt),v.documentationStatus,v.diagnosis||"—"])}
+ if(key==="followups"){columns=["Patient","Doctor","Visit Date","Follow-up"];rows=db.visits.filter(v=>v.followUp&&datePass(v.entryAt,from,to)&&(!doctorId||v.doctorId===doctorId)).map(v=>[pat(v.patientId)?.name,doctor(v.doctorId)?.name,fmt(v.entryAt),v.followUp])}
+ state.reportPreview={key,columns,rows,filters:{from,to,doctorId,gender,ds,qs}};
+ render();
+}
+function reportPreviewHtml(){
+ const p=state.reportPreview;if(!p||p.key!==state.reportKey)return `<div class="report-empty"><div class="bigicon">▥</div><b>Choose filters and generate preview</b><div class="small" style="margin-top:5px">The report table will appear here before exporting.</div></div>`;
+ return `<div class="preview-head"><div><h3 style="margin:0">Preview</h3><div class="preview-meta">${p.rows.length} record${p.rows.length===1?"":"s"} matched the selected filters</div></div><div class="exportbar"><button class="btn outline small" id="export-excel">▦ Export Excel</button><button class="btn primary small" id="export-pdf">▤ Export PDF</button></div></div><div class="tablewrap"><table id="report-preview-table"><thead><tr>${p.columns.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${p.rows.map(r=>`<tr>${r.map(c=>`<td>${c??"—"}</td>`).join("")}</tr>`).join("")||`<tr><td colspan="${p.columns.length}"><div class="empty">No data matched these filters</div></td></tr>`}</tbody></table></div>`;
+}
+function reports(){
+ const r=reportDef(state.reportKey);
+ return `<div class="report-layout">
+   <div class="panel pad"><div class="sectionhead"><div class="page-section-head"><span class="pi">▥</span><div><h2>Reports</h2><p>Select a report to configure</p></div></div></div><div class="report-list">${REPORTS.map(x=>`<button class="report-item ${state.reportKey===x.key?"active":""}" data-report="${x.key}"><span class="report-icon">${x.icon}</span><span><b>${x.name}</b><small>${x.desc}</small></span></button>`).join("")}</div></div>
+   <div class="panel pad report-builder">${!r?`<div class="report-empty"><div class="bigicon">▥</div><b>Select a report from the list</b><div class="small" style="margin-top:5px">Each report has its own filters, preview, and export options.</div></div>`:`<div class="sectionhead"><div class="page-section-head"><span class="pi">${r.icon}</span><div><h2>${r.name}</h2><p>${r.desc}</p></div></div></div><div class="filterbar">${reportFilters(r.key)}</div><div class="formactions" style="margin:0 0 14px"><button class="btn blue" id="preview-report">⌕ Generate Preview</button></div><div class="divider"></div>${reportPreviewHtml()}`}</div>
+ </div>`;
+}
+function bindReports(){
+ $$("[data-report]").forEach(b=>b.onclick=()=>{state.reportKey=b.dataset.report;state.reportPreview=null;render()});
+ $("#preview-report")&&($("#preview-report").onclick=()=>buildReportPreview(state.reportKey));
+ $("#export-excel")&&($("#export-excel").onclick=exportReportExcel);
+ $("#export-pdf")&&($("#export-pdf").onclick=exportReportPdf);
+}
+function exportReportExcel(){
+ const p=state.reportPreview;if(!p)return;const esc=v=>`"${String(v??"").replace(/"/g,'""')}"`;const lines=[p.columns.map(esc).join("\t"),...p.rows.map(r=>r.map(esc).join("\t"))];const blob=new Blob([lines.join("\n")],{type:"application/vnd.ms-excel;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=(reportDef(p.key)?.name||"Report").replace(/\s+/g,"_")+".xls";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast("Excel export created")}
+function exportReportPdf(){
+ const p=state.reportPreview;if(!p)return;const r=reportDef(p.key);const w=window.open("","_blank");w.document.write(`<html><head><title>${r.name}</title><style>body{font-family:Arial;padding:28px;color:#172033}h1{margin-bottom:3px}small{color:#667}table{border-collapse:collapse;width:100%;margin-top:18px}th,td{border:1px solid #ddd;padding:8px;text-align:left;font-size:12px}th{background:#f3f5f8}
+/* v5 — Configuration & Settings redesign */
+.config-shell{display:grid;grid-template-columns:240px 1fr;gap:14px}
+.config-nav{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;box-shadow:var(--shadow2);height:max-content;position:sticky;top:98px}
+.config-nav button{width:100%;border:0;background:transparent;border-radius:11px;padding:11px 10px;display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;text-align:left;color:var(--text);transition:var(--trans)}
+.config-nav button:hover{background:#f7f9fc}.config-nav button.active{background:#eef4ff;color:#2456bc;box-shadow:inset 3px 0 0 var(--blue)}
+.config-nav .navico{width:32px;height:32px;border-radius:9px;background:#f0f4fb;display:grid;place-items:center}
+.config-nav button.active .navico{background:#dce8ff;color:#2456bc}
+.config-nav b{display:block}.config-nav small{display:block;color:var(--muted);margin-top:1px}
+.config-main{display:grid;gap:14px}
+.config-hero{background:linear-gradient(120deg,#f8fbff,#ffffff 52%,#f7fbff);border:1px solid #dfe7f2;border-radius:16px;padding:16px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.config-hero .copy h2{margin:0}.config-hero .copy p{margin:5px 0 0;color:var(--muted);font-size:12px}.config-hero .heroico{width:48px;height:48px;border-radius:14px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center;font-size:22px}
+.config-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2)}
+.config-card + .config-card{margin-top:0}
+.config-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:12px}
+.config-card-head h3{margin:0}.config-card-head p{margin:4px 0 0;color:var(--muted);font-size:11px}
+.config-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.config-item{border:1px solid var(--line);border-radius:12px;padding:11px;background:#fbfcff;display:flex;justify-content:space-between;gap:10px;align-items:center;transition:var(--trans)}
+.config-item:hover{border-color:#bfd0f7;background:#f8fbff;transform:translateY(-1px)}
+.config-item .meta{display:flex;gap:9px;align-items:center}.config-item .itemico{width:34px;height:34px;border-radius:9px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center}
+.config-item small{display:block;color:var(--muted);margin-top:2px}
+.config-actions{display:flex;gap:8px;flex-wrap:wrap}
+.settings-shell{display:grid;grid-template-columns:260px 1fr;gap:14px}
+.settings-side{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow2);height:max-content;position:sticky;top:98px}
+.settings-side .identity{text-align:center;padding:8px 6px 14px}.settings-side .identity .logoPreview{margin:auto}.settings-side .identity h3{margin:10px 0 3px}.settings-side .identity p{margin:0;color:var(--muted);font-size:11px}
+.settings-side .mini{display:flex;gap:8px;align-items:center;padding:9px;border-radius:10px;background:#f8fafc;margin-top:7px}
+.settings-side .mini .mi{width:30px;height:30px;border-radius:8px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center}
+.settings-main{display:grid;gap:14px}
+.settings-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2)}
+.settings-section-head{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px}.settings-section-head .sico{width:38px;height:38px;border-radius:10px;background:#edf3ff;color:#2d62d8;display:grid;place-items:center;font-size:17px}
+.settings-section-head h3{margin:0}.settings-section-head p{margin:3px 0 0;color:var(--muted);font-size:11px}
+.settings-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.setting-help{font-size:10px;color:var(--muted);margin-top:4px}
+.settings-footer{position:sticky;bottom:12px;z-index:5;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;justify-content:space-between;gap:10px;align-items:center;box-shadow:var(--shadow)}
+.preview-box{border:1px dashed #c9d5e5;background:#fbfdff;border-radius:12px;padding:12px}
+.preview-box b{display:block}.preview-box small{color:var(--muted)}
+@media(max-width:980px){.config-shell,.settings-shell{grid-template-columns:1fr}.config-nav,.settings-side{position:static}.config-nav{display:grid;grid-template-columns:repeat(2,1fr)}.settings-row,.config-grid{grid-template-columns:1fr}}
+
+
+/* v6 — Workflow diagram, live filtering, charts, and first-open welcome */
+.welcome-screen{min-height:100vh;background:linear-gradient(135deg,#0e2039 0%,#16395e 55%,#235a89 100%);display:grid;place-items:center;padding:26px;color:#fff;position:relative;overflow:hidden}
+.welcome-screen:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 0 46%,rgba(255,255,255,.035) 46% 47%,transparent 47% 100%);background-size:42px 42px}
+.welcome-card{width:min(880px,96vw);position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(14px);border-radius:22px;padding:34px;box-shadow:0 35px 100px rgba(0,0,0,.22);animation:pageIn .35s ease both}
+.welcome-logo{width:68px;height:68px;border-radius:18px;background:linear-gradient(135deg,#4c7eff,#42d0bf);display:grid;place-items:center;font-size:26px;font-weight:950;box-shadow:0 16px 38px rgba(40,107,220,.3);overflow:hidden}
+.welcome-logo img{width:100%;height:100%;object-fit:cover}.welcome-card h1{font-size:34px;margin:19px 0 8px}.welcome-card p{color:#cfdaea;line-height:1.65;max-width:680px;margin:0}.welcome-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.welcome-meta span{padding:7px 9px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.06);font-size:11px}.welcome-actions{margin-top:24px}.welcome-actions .btn{height:44px;padding:0 18px}
+.chart-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:14px}.chart-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow2);min-height:300px}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}.chart-head h3{margin:0}.chart-head p{margin:3px 0 0;color:var(--muted);font-size:11px}.chart-badge{font-size:10px;padding:5px 8px;border-radius:999px;background:#eef3ff;color:#2d62d8;font-weight:850}
+.bar-chart{display:grid;gap:11px}.bar-row{display:grid;grid-template-columns:120px 1fr 36px;gap:9px;align-items:center}.bar-label{font-size:11px;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bar-track{height:10px;border-radius:6px;background:#edf1f6;overflow:hidden}.bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,#356ff4,#49c6b7);animation:growBar .55s ease both}.bar-value{text-align:right;font-size:11px;font-weight:850}
+.line-chart{height:210px;width:100%;display:block}.chart-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:var(--muted)}.legend-dot{display:inline-block;width:8px;height:8px;border-radius:2px;background:#316df4;margin-right:5px}
+.stackbar{height:18px;border-radius:7px;overflow:hidden;display:flex;background:#edf1f6}.stackbar span{display:block;height:100%}.stack-complete{background:#2aa56e}.stack-pending{background:#f1b64d}.stack-draft{background:#6b8ff6}.stack-notstarted{background:#aab4c4}
+.queue-filterbar{display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:9px;align-items:end;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px;box-shadow:var(--shadow2)}
+.queue-filterbar .field{min-width:0}.filter-clear{align-self:end}.queue-count-note{font-size:10px;color:var(--muted);margin-top:4px}
+.workflow-stage{background:linear-gradient(180deg,#fff,#f9fbfe);border:1px solid var(--line);border-radius:16px;padding:16px;overflow:auto;box-shadow:var(--shadow2)}
+.workflow-canvas{display:flex;align-items:center;gap:0;min-width:max-content;padding:16px 4px}
+.wf-node{width:176px;min-height:104px;border:1px solid var(--line);border-top:4px solid var(--node-color,#316df4);border-radius:13px;background:#fff;padding:11px;box-shadow:0 8px 20px rgba(26,42,72,.07);position:relative;transition:var(--trans)}
+.wf-node:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(26,42,72,.11)}.wf-node .nnum{font-size:9px;color:var(--muted);text-transform:uppercase;font-weight:900}.wf-node h4{margin:5px 0 4px}.wf-node small{color:var(--muted);display:block}.wf-color{width:14px;height:14px;border-radius:4px;display:inline-block;vertical-align:middle;margin-right:5px;background:var(--node-color)}
+.wf-arrow{width:54px;height:2px;background:#b8c5d7;position:relative;margin:0 5px}.wf-arrow:after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid #b8c5d7;border-top:5px solid transparent;border-bottom:5px solid transparent}
+.color-picker-row{display:flex;gap:7px;flex-wrap:wrap}.color-swatch{width:30px;height:30px;border-radius:8px;border:2px solid transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.color-swatch.active{border-color:#0f2340;box-shadow:0 0 0 2px #fff,0 0 0 4px #0f2340}
+.config-status-row{display:grid;grid-template-columns:40px 1fr auto auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px;background:#fff}
+.status-color-dot{width:22px;height:22px;border-radius:6px;background:var(--dot)}.settings-theme-preview{height:96px;border-radius:12px;background:linear-gradient(135deg,#10233f,#24527e);padding:12px;color:#fff;display:flex;align-items:end;font-size:11px}
+@media(max-width:980px){.chart-grid{grid-template-columns:1fr}.queue-filterbar{grid-template-columns:1fr 1fr}.queue-filterbar .field:first-child{grid-column:1/-1}}
+@media(max-width:680px){.queue-filterbar{grid-template-columns:1fr}.queue-filterbar .field:first-child{grid-column:auto}.welcome-card{padding:24px}.welcome-card h1{font-size:27px}.bar-row{grid-template-columns:90px 1fr 30px}}
+
+
+/* v7 */
+.auth-screen{min-height:100vh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);background:#f5f7fb}.auth-visual{background:linear-gradient(145deg,#0d213b,#16436d 58%,#286593);color:#fff;padding:54px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.auth-visual:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#49d2bd,#6c9cff,#49d2bd);background-size:200% 100%;animation:lineMove 5s linear infinite}.auth-brand{display:flex;gap:12px;align-items:center}.auth-brand .mark{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#5b8cff,#48d0bd);display:grid;place-items:center;font-weight:950;font-size:20px}.auth-copy h1{font-size:42px;line-height:1.08;margin:0 0 14px;max-width:640px}.auth-copy p{color:#ccdae9;line-height:1.7;max-width:630px}.auth-points{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px;max-width:640px}.auth-point{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:12px;padding:12px}.auth-point b{display:block}.auth-point small{color:#c8d4e3;display:block;margin-top:3px}.auth-form-wrap{display:grid;place-items:center;padding:34px}.auth-card{width:min(440px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 24px 65px rgba(19,39,70,.12)}.auth-card h2{margin:0}.auth-card p{color:var(--muted);font-size:12px;line-height:1.55}.auth-users{display:grid;gap:7px;margin:14px 0}.auth-user{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px;display:grid;grid-template-columns:34px 1fr auto;gap:9px;align-items:center;text-align:left;transition:var(--trans)}.auth-user:hover{border-color:#a9c2ff;background:#f8fbff}.auth-user.active{border-color:#7ea4ff;background:#eef4ff}.user-avatar{width:34px;height:34px;border-radius:10px;background:#eaf1ff;color:#2a61d2;display:grid;place-items:center;font-weight:900}.account-menu{position:relative}.account-btn{border:1px solid var(--line);background:#fff;border-radius:11px;height:40px;padding:0 10px;display:flex;align-items:center;gap:8px;font-weight:800}.account-dd{position:absolute;right:0;top:47px;width:235px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:7px;box-shadow:var(--shadow);z-index:40}.account-dd .head{padding:8px;border-bottom:1px solid var(--line);margin-bottom:6px}.account-dd button{width:100%;border:0;background:#fff;padding:9px;border-radius:9px;text-align:left;font-weight:750}.account-dd button:hover{background:#f5f8fc}.help-layout{display:grid;grid-template-columns:260px 1fr;gap:14px}.help-nav{background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px;height:max-content;position:sticky;top:98px;box-shadow:var(--shadow2)}.help-nav button{width:100%;border:0;background:#fff;padding:10px;border-radius:10px;text-align:left;font-weight:750}.help-nav button:hover,.help-nav button.active{background:#eef4ff;color:#285ecb}.help-content{display:grid;gap:14px}.help-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow2)}.help-section h2{margin:0 0 6px}.help-section p{color:var(--muted);line-height:1.6}.help-feature{display:grid;grid-template-columns:38px 1fr;gap:10px}.help-ico{width:36px;height:36px;border-radius:10px;background:#edf3ff;color:#2a61d2;display:grid;place-items:center;font-size:17px}.filter-drawer{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow2);margin-bottom:12px;animation:pageIn .2s ease both}.filter-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:10px}.wf-map{position:relative;min-width:980px;min-height:360px;background:linear-gradient(#f4f7fb 1px,transparent 1px),linear-gradient(90deg,#f4f7fb 1px,transparent 1px);background-size:24px 24px;border:1px solid var(--line);border-radius:15px;overflow:hidden}.wf-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.wf-map-node{position:absolute;width:168px;min-height:86px;background:#fff;border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:11px;box-shadow:0 10px 24px rgba(26,42,72,.08);transition:var(--trans);z-index:2}.wf-map-node:hover{transform:translateY(-2px)}.wf-map-node .code{font-size:9px;color:var(--muted);margin-top:4px}.wf-map-node .color{width:11px;height:11px;border-radius:3px;background:var(--c);display:inline-block;margin-right:5px}.wf-map-node .out{font-size:10px;color:var(--muted);margin-top:6px}.color-input-row{display:flex;gap:10px;align-items:center}.color-input-row input[type=color]{width:54px;height:38px;padding:2px;border:1px solid var(--line);border-radius:9px;background:#fff}@media(max-width:900px){.auth-screen{grid-template-columns:1fr}.auth-visual{display:none}.help-layout{grid-template-columns:1fr}.help-nav{position:static}.auth-form-wrap{min-height:100vh}}
+
+
+.applied-filters{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:8px 0 12px}
+.applied-label{font-size:10px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-right:2px}
+.filter-chip{display:inline-flex;align-items:center;gap:7px;background:#0d8ecf;color:#fff;border-radius:8px;padding:7px 9px;font-size:11px;font-weight:850;box-shadow:0 5px 14px rgba(13,142,207,.14)}
+.filter-chip button{border:0;background:rgba(255,255,255,.16);color:#fff;width:19px;height:19px;border-radius:6px;display:grid;place-items:center;padding:0;font-weight:900}
+.filter-chip button:hover{background:rgba(255,255,255,.26)}
+.no-filters{font-size:11px;color:var(--muted);padding:7px 0}
+.guide-flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+.guide-step{border:1px solid var(--line);background:#fbfcff;border-radius:12px;padding:12px}
+.guide-step .num{width:28px;height:28px;border-radius:8px;background:#edf3ff;color:#2b62d8;display:grid;place-items:center;font-weight:900;margin-bottom:8px}
+.guide-step b{display:block}.guide-step small{display:block;color:var(--muted);margin-top:4px;line-height:1.45}
+.guide-note{margin-top:10px;padding:10px;border-left:3px solid #316df4;background:#f6f9ff;border-radius:8px;color:#536176;font-size:11px}
+@media(max-width:900px){.guide-flow{grid-template-columns:1fr}}
+
+
+/* v9 — Welcome as an in-app page */
+.welcome-page{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:14px;align-items:stretch}
+.welcome-main-card{background:linear-gradient(135deg,#10233f,#173e68 58%,#225a8e);color:#fff;border-radius:18px;padding:28px;box-shadow:var(--shadow);min-height:420px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.welcome-main-card:after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;background:linear-gradient(90deg,#4ad1bd,#6d9cff,#4ad1bd);background-size:200% 100%;animation:lineMove 5s linear infinite}
+.welcome-main-card .clinic-mark{width:62px;height:62px;border-radius:17px;background:linear-gradient(135deg,#5b88ff,#44ceb9);display:grid;place-items:center;font-size:24px;font-weight:950;overflow:hidden}
+.welcome-main-card .clinic-mark img{width:100%;height:100%;object-fit:cover}
+.welcome-main-card h2{font-size:31px;line-height:1.15;margin:20px 0 9px;max-width:680px}.welcome-main-card p{color:#d2dfed;line-height:1.7;max-width:720px;margin:0}
+.welcome-main-card .welcome-user{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.welcome-main-card .welcome-user span{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:7px 9px;border-radius:9px;font-size:11px}
+.welcome-side-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow2);display:flex;flex-direction:column;gap:12px}
+.welcome-side-card h3{margin:0}.welcome-side-card p{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.5}.welcome-side-item{display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:11px;background:#fbfcff}.welcome-side-item .wi{width:32px;height:32px;border-radius:9px;background:#edf3ff;color:#2a61d2;display:grid;place-items:center}
+@media(max-width:900px){.welcome-page{grid-template-columns:1fr}}
+
+</style></head><body><h1>${r.name}</h1><small>${db.clinic.name} · Generated ${new Date().toLocaleString()}</small><table><thead><tr>${p.columns.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${p.rows.map(row=>`<tr>${row.map(c=>`<td>${c??"—"}</td>`).join("")}</tr>`).join("")}</tbody></table><script>setTimeout(()=>window.print(),250)<\/script></body></html>`);w.document.close()
+}
+
+function employees(){return `<div class="panel pad"><div class="sectionhead"><div><h2>Employees & Roles</h2><p>One user may have multiple protected system roles</p></div><button class="btn primary" id="adde">+ Add Employee</button></div><div class="tablewrap"><table><thead><tr><th>Name</th><th>Email</th><th>Assigned Roles</th><th>Status</th><th>Protection</th><th></th></tr></thead><tbody>${db.users.map(u=>`<tr><td><b>${u.name}</b></td><td>${u.email||"—"}</td><td>${u.roles.map(r=>`<span class="chip">${roleLabel(r)}</span>`).join("")}</td><td>${u.active?"Active":"Disabled"}</td><td>${u.roles.includes("SUPER_USER")?"Protected Super User":"—"}</td><td>${u.roles.includes("SUPER_USER")?"":`<button class="btn outline small" data-edite="${u.id}">Edit</button>`}</td></tr>`).join("")}</tbody></table></div></div>`}
+function bindEmployees(){$("#adde").onclick=()=>employeeModal();$$("[data-edite]").forEach(b=>b.onclick=()=>employeeModal(b.dataset.edite))}
+function employeeModal(userid=null){const u=userid?db.users.find(x=>x.id===userid):null;modal(u?"Edit Employee":"Add Employee",`<div class="formgrid"><div class="field"><label>Name</label><input id="en" value="${u?.name||""}"></div><div class="field"><label>Email</label><input id="ee" value="${u?.email||""}"></div></div><div class="divider"></div><div class="field"><label>Assign Roles</label><div class="grid2">${db.roles.map(r=>`<label class="card rolecard"><input type="checkbox" name="rolecb" value="${r.code}" ${u?.roles.includes(r.code)?"checked":""}><span class="rolebadge">${ROLE_META[r.code].icon}</span><span><b>${ROLE_META[r.code].name}</b><small class="muted" style="display:block">${ROLE_META[r.code].desc}</small></span></label>`).join("")}</div></div><div class="field" style="margin-top:10px"><label>Status</label><select id="es"><option value="1" ${!u||u.active?"selected":""}>Active</option><option value="0" ${u&&!u.active?"selected":""}>Disabled</option></select></div><div class="formactions"><button class="btn primary" id="savee">Save Employee</button></div>`,true);$("#savee").onclick=()=>{const name=$("#en").value.trim(),roles=$$('input[name="rolecb"]:checked').map(x=>x.value);if(!name||!roles.length)return toast("Name and at least one role required");if(u){u.name=name;u.email=$("#ee").value;u.roles=roles;u.active=$("#es").value==="1";audit("Updated employee",u.name)}else{db.users.push({id:uid("u"),name,email:$("#ee").value,roles,active:$("#es").value==="1"});audit("Created employee",name)}save();$("#modal").innerHTML="";render();toast("Employee saved")}}
+
+function rbac(){
+ const selected=db.roles.find(r=>r.code===state.selectedRole)||db.roles[0];const granted=new Set(selected.permissions);const groups=[...new Set(PERMISSIONS.filter(p=>granted.has(p.code)).map(p=>p.group))];
+ return `<div class="role-layout">
+  <div class="panel pad"><div class="sectionhead"><div class="page-section-head"><span class="pi">⌘</span><div><h2>System Roles</h2><p>Select a role to inspect its permissions</p></div></div></div>
+    <div class="role-list">${db.roles.map(r=>`<button class="role-option ${selected.code===r.code?"active":""}" data-roleview="${r.code}"><span class="rolebadge">${ROLE_META[r.code].icon}</span><span><b>${ROLE_META[r.code].name}</b><small>${ROLE_META[r.code].desc}</small></span><span>›</span></button>`).join("")}</div>
+    <div class="card" style="margin-top:12px"><div class="rolecard"><span class="rolebadge">★</span><div><b>Super User</b><div class="small muted">All permissions automatically. Protected from normal administration.</div></div></div></div>
+  </div>
+  <div class="panel pad"><div class="sectionhead"><div class="page-section-head"><span class="pi">${ROLE_META[selected.code].icon}</span><div><h2>${ROLE_META[selected.code].name}</h2><p>${ROLE_META[selected.code].desc}</p></div></div><span class="status blue">${selected.permissions.length} permissions · Read-only</span></div>
+    ${groups.map(g=>`<div class="permgroup" style="margin-bottom:12px"><h3>${g}</h3>${PERMISSIONS.filter(p=>p.group===g&&granted.has(p.code)).map(p=>`<div class="permission-card"><span class="perm-ico">✓</span><div><b>${p.label}</b><div class="small muted">${p.desc}</div><div class="code">${p.code}</div></div><span class="status green">Granted</span></div>`).join("")}</div>`).join("")}
+  </div>
+ </div>`;
+}
+function bindRbac(){$$("[data-roleview]").forEach(b=>b.onclick=()=>{state.selectedRole=b.dataset.roleview;render()})}
+
+function config(){
+ const items=[
+  ["workflow","⚡","Workflow","Statuses and allowed transitions"],
+  ["profile","👤","Patient Profile","Sections and dynamic fields"],
+  ["clinical","🩺","Clinical Fields","Measurements and field types"],
+  ["rx","🧾","Prescription & Orders","Structured, text and image sections"]
+ ];
+ return `<div class="config-shell">
+   <aside class="config-nav">
+     ${items.map(i=>`<button class="${state.configTab===i[0]?"active":""}" data-ct="${i[0]}"><span class="navico">${i[1]}</span><span><b>${i[2]}</b><small>${i[3]}</small></span><span>›</span></button>`).join("")}
+   </aside>
+   <section class="config-main">${configBody()}</section>
+ </div>`;
+}
+function configHero(icon,title,desc,actions=""){
+ return `<div class="config-hero"><div class="copy"><h2>${title}</h2><p>${desc}</p><div class="config-actions" style="margin-top:12px">${actions}</div></div><div class="heroico">${icon}</div></div>`;
+}
+function configBody(){
+ if(state.configTab==="workflow")return workflowCfg();
+ if(state.configTab==="profile")return profileCfg();
+ if(state.configTab==="clinical")return clinicalCfg();
+ return rxCfg();
+}
+function statusColor(c){const map={blue:"#316df4",green:"#22a06b",amber:"#d29216",red:"#d34c4c",gray:"#8995a7",violet:"#7458d8",cyan:"#2bb8ca"};return map[c]||c||"#316df4"}function statusColorSoft(c){const h=statusColor(c).replace("#","");if(h.length!==6)return"#eef3ff";const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);return`rgba(${r},${g},${b},.12)`}function workflowMapHtml(){const nodes=db.workflow.slice().sort((a,b)=>a.order-b.order),W=980,H=Math.max(360,Math.ceil(nodes.length/4)*150+50),pos={};nodes.forEach((n,i)=>{pos[n.code]={x:35+(i%4)*235,y:35+Math.floor(i/4)*145}});const edges=db.transitions.filter(t=>pos[t.from]&&pos[t.to]);const svg=`<svg class="wf-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#a8b5c6"/></marker></defs>${edges.map(e=>{const a=pos[e.from],b=pos[e.to],x1=a.x+168,y1=a.y+43,x2=b.x,y2=b.y+43,mid=(x1+x2)/2;return`<path d="M ${x1} ${y1} C ${mid} ${y1}, ${mid} ${y2}, ${x2} ${y2}" fill="none" stroke="#a8b5c6" stroke-width="2" marker-end="url(#arr)"/>`}).join("")}</svg>`;return `<div class="wf-map" style="min-height:${H}px">${svg}${nodes.map(n=>{const p=pos[n.code],outs=db.transitions.filter(t=>t.from===n.code).length;return`<div class="wf-map-node" style="left:${p.x}px;top:${p.y}px;--c:${statusColor(n.color)}"><b><span class="color"></span>${n.name}</b><div class="code">${n.code}</div><div class="out">${outs} outgoing transition${outs===1?"":"s"}</div></div>`}).join("")}</div>`}
+function workflowCfg(){const ordered=db.workflow.slice().sort((a,b)=>a.order-b.order);return `${configHero("⚡","Clinic Workflow","Every status and transition updates the 2D preview immediately. Colors are fully customizable.",'<button class="btn primary" id="addws">+ Add Status</button><button class="btn outline" id="addtr">+ Add Transition</button>')}<div class="workflow-stage"><div class="config-card-head"><div><h3>2D Workflow Preview</h3><p>Generated directly from actual statuses and transitions.</p></div><span class="status blue">${ordered.length} stages · ${db.transitions.length} transitions</span></div>${workflowMapHtml()}</div><div class="config-card"><div class="config-card-head"><div><h3>Status Configuration</h3><p>Use any color you want. Changes update the preview immediately.</p></div></div><div class="builder">${ordered.map((w,i)=>`<div class="config-status-row"><span class="status-color-dot" style="--dot:${statusColor(w.color)}"></span><div><b>${i+1}. ${w.name}</b><div class="small muted">${w.code}</div></div><span class="fieldtype">${w.color}</span><button class="btn outline small" data-editcolor="${w.id}">Change Color</button></div>`).join("")}</div></div><div class="config-card"><div class="config-card-head"><div><h3>Allowed Transitions</h3><p>Connections are drawn in the 2D preview above.</p></div></div><div class="builder">${db.transitions.map((t,i)=>`<div class="builderrow"><div class="meta"><span class="itemico">→</span><div><b>${wf(t.from).name}</b><small>moves to ${wf(t.to).name}</small></div></div><button class="btn danger small" data-deltr="${i}">Remove</button></div>`).join("")}</div></div>`}
+function profileCfg(){
+ return `${configHero("👤","Patient Profile Configuration","Control which sections appear in every patient profile and add clinic-specific fields with different data types.",'<button class="btn primary" id="addps">+ Add Section</button><button class="btn outline" id="addpf">+ Add Field</button>')}
+ <div class="config-card"><div class="config-card-head"><div><h3>Profile Sections</h3><p>Enable, disable and extend the patient profile.</p></div><span class="status blue">${db.profileSections.filter(x=>x.enabled).length} enabled</span></div>
+   <div class="config-grid">${db.profileSections.sort((a,b)=>a.order-b.order).map(x=>`<div class="config-item"><div class="meta"><span class="itemico">${x.system?"◉":"＋"}</span><div><b>${x.name}</b><small>${x.system?"System section":"Custom section"} · Order ${x.order}</small></div></div><span class="switch ${x.enabled?"on":""}" data-pst="${x.id}"></span></div>`).join("")}</div>
+ </div>
+ <div class="config-card"><div class="config-card-head"><div><h3>Dynamic Fields</h3><p>Fields can be text, number, Yes/No, date, image, file, single-select or multi-select.</p></div><span class="status violet">${db.customProfileFields.length} custom fields</span></div>
+   <div class="config-grid">${db.customProfileFields.map(f=>`<div class="config-item"><div class="meta"><span class="itemico">◇</span><div><b>${f.label}</b><small>${f.section}${f.required?" · Required":""}</small></div></div><span class="fieldtype">${f.type}</span></div>`).join("")}</div>
+ </div>`;
+}
+function clinicalCfg(){
+ return `${configHero("🩺","Clinical Measurement Fields","Choose which measurements the clinic uses and add specialty-specific fields without changing the core patient model.",'<button class="btn primary" id="addcf">+ Add Clinical Field</button>')}
+ <div class="config-card"><div class="config-card-head"><div><h3>Measurement Catalog</h3><p>Only enabled fields appear when nurses or doctors add measurements.</p></div><span class="status green">${db.clinicalFields.filter(x=>x.enabled).length} active</span></div>
+   <div class="config-grid">${db.clinicalFields.map(x=>`<div class="config-item"><div class="meta"><span class="itemico">∿</span><div><b>${x.name}</b><small>${x.unit||"No unit"} · ${x.type}</small></div></div><span class="switch ${x.enabled?"on":""}" data-cft="${x.id}"></span></div>`).join("")}</div>
+ </div>`;
+}
+function rxCfg(){
+ return `${configHero("🧾","Prescription & Clinical Orders","Build the prescription workspace from structured autocomplete sections, free text, or direct image upload.",'<button class="btn primary" id="addrxs">+ Add Section</button>')}
+ <div class="config-card"><div class="config-card-head"><div><h3>Prescription Sections</h3><p>Doctors see these sections in the same order inside the prescription workspace.</p></div><span class="status blue">${db.rxSections.filter(x=>x.enabled).length} enabled</span></div>
+   <div class="config-grid">${db.rxSections.sort((a,b)=>a.order-b.order).map(x=>`<div class="config-item"><div class="meta"><span class="itemico">${x.type==="image"?"🖼":x.type==="text"?"T":"⌘"}</span><div><b>${x.name}</b><small>${x.type} · Order ${x.order}</small></div></div><span class="switch ${x.enabled?"on":""}" data-rxt="${x.id}"></span></div>`).join("")}</div>
+ </div>`;
+}
+
+function bindConfig(){$$("[data-ct]").forEach(b=>b.onclick=()=>{state.configTab=b.dataset.ct;render()});bindCfgInner()}
+function bindCfgInner(){
+ $$("[data-pst]").forEach(x=>x.onclick=()=>{const r=db.profileSections.find(y=>y.id===x.dataset.pst);r.enabled=!r.enabled;save();render()});
+ $$("[data-cft]").forEach(x=>x.onclick=()=>{const r=db.clinicalFields.find(y=>y.id===x.dataset.cft);r.enabled=!r.enabled;save();render()});
+ $$("[data-rxt]").forEach(x=>x.onclick=()=>{const r=db.rxSections.find(y=>y.id===x.dataset.rxt);r.enabled=!r.enabled;save();render()});
+ $$("[data-deltr]").forEach(b=>b.onclick=()=>{db.transitions.splice(+b.dataset.deltr,1);save();audit("Removed workflow transition","Workflow");render();toast("Transition removed")});
+ $$("[data-editcolor]").forEach(b=>b.onclick=()=>workflowColorModal(b.dataset.editcolor));
+ $("#addws")&&($("#addws").onclick=()=>workflowStatusModal());
+ $("#addtr")&&($("#addtr").onclick=()=>workflowTransitionModal());
+ $("#addps")&&($("#addps").onclick=()=>simple("Add Patient Profile Section","Section Name",v=>db.profileSections.push({id:uid("ps"),name:v,enabled:true,order:db.profileSections.length+1,system:false})));
+ $("#addpf")&&($("#addpf").onclick=()=>addProfileFieldModal());
+ $("#addcf")&&($("#addcf").onclick=()=>addClinicalFieldModal());
+ $("#addrxs")&&($("#addrxs").onclick=()=>addRxSectionModal());
+}
+function workflowStatusModal(){modal("Add Workflow Status",`<div class="formgrid"><div class="field"><label>Status Name</label><input id="ws-name" placeholder="e.g. Waiting For Test"></div><div class="field"><label>Status Color</label><div class="color-input-row"><input id="ws-color" type="color" value="#316df4"><input id="ws-hex" value="#316df4" placeholder="#316df4"></div><div class="setting-help">Choose any color — not a fixed palette.</div></div></div><div class="formactions"><button class="btn primary" id="savews">Add Status</button></div>`);$("#ws-color").oninput=e=>$("#ws-hex").value=e.target.value;$("#ws-hex").oninput=e=>{if(/^#[0-9a-fA-F]{6}$/.test(e.target.value))$("#ws-color").value=e.target.value};$("#savews").onclick=()=>{const n=$("#ws-name").value.trim();if(!n)return toast("Status name required");const code=n.toUpperCase().replace(/[^A-Z0-9]+/g,"_");if(db.workflow.some(w=>w.code===code))return toast("A status with this code already exists");const color=/^#[0-9a-fA-F]{6}$/.test($("#ws-hex").value)?$("#ws-hex").value:$("#ws-color").value;db.workflow.push({id:uid("w"),code,name:n,color,order:db.workflow.length+1});save();audit("Added workflow status",n);$("#modal").innerHTML="";render();toast("Workflow status added")}}
+function workflowTransitionModal(){
+ modal("Add Workflow Transition",`<div class="banner" style="background:#eef5ff;border-color:#cadcff;color:#2859ad">Choose exactly how a patient is allowed to move between two workflow statuses.</div><div class="formgrid"><div class="field"><label>From Status</label><select id="trf">${db.workflow.map(w=>`<option value="${w.code}">${w.name}</option>`).join("")}</select></div><div class="field"><label>To Status</label><select id="trt">${db.workflow.map(w=>`<option value="${w.code}">${w.name}</option>`).join("")}</select></div></div><div class="formactions"><button class="btn primary" id="savetr">Add Transition</button></div>`);
+ $("#savetr").onclick=()=>{const from=$("#trf").value,to=$("#trt").value;if(from===to)return toast("From and To cannot be the same");if(db.transitions.some(t=>t.from===from&&t.to===to))return toast("This transition already exists");db.transitions.push({from,to});save();audit("Added workflow transition",`${from} -> ${to}`);$("#modal").innerHTML="";render();toast("Transition added successfully")}
+}
+function workflowColorModal(id){const w=db.workflow.find(x=>x.id===id),current=statusColor(w.color);modal(`Workflow Color — ${w.name}`,`<div class="field"><label>Choose Any Color</label><div class="color-input-row"><input id="wc-color" type="color" value="${current}"><input id="wc-hex" value="${current}" placeholder="#316df4"></div><div class="setting-help">The selected color is used in the workflow preview and live queue.</div></div><div class="formactions"><button class="btn primary" id="savewc">Save Color</button></div>`);$("#wc-color").oninput=e=>$("#wc-hex").value=e.target.value;$("#wc-hex").oninput=e=>{if(/^#[0-9a-fA-F]{6}$/.test(e.target.value))$("#wc-color").value=e.target.value};$("#savewc").onclick=()=>{w.color=/^#[0-9a-fA-F]{6}$/.test($("#wc-hex").value)?$("#wc-hex").value:$("#wc-color").value;save();audit("Changed workflow status color",w.name);$("#modal").innerHTML="";render();toast("Workflow color updated")}}
+function addProfileFieldModal(){const types=["text","textarea","number","boolean","date","image","file","single-select","multi-select"];modal("Add Dynamic Patient Profile Field",`<div class="formgrid"><div class="field"><label>Section</label><select id="pfs">${db.profileSections.filter(s=>!s.system||["Medical Profile"].includes(s.name)).map(s=>`<option>${s.name}</option>`).join("")}</select></div><div class="field"><label>Field Label</label><input id="pfl"></div><div class="field"><label>Field Type</label><select id="pft">${types.map(t=>`<option>${t}</option>`).join("")}</select></div><div class="field"><label>Required</label><select id="pfr"><option value="0">No</option><option value="1">Yes</option></select></div></div><div class="field" style="margin-top:10px"><label>Options (comma separated, for select types)</label><input id="pfo"></div><div class="formactions"><button class="btn primary" id="savepf">Add Field</button></div>`);$("#savepf").onclick=()=>{const label=$("#pfl").value.trim();if(!label)return toast("Field label required");db.customProfileFields.push({id:uid("pf"),section:$("#pfs").value,label,type:$("#pft").value,required:$("#pfr").value==="1",options:$("#pfo").value.split(",").map(x=>x.trim()).filter(Boolean)});save();audit("Added dynamic profile field",label);$("#modal").innerHTML="";render();toast("Profile field added")}}
+function addClinicalFieldModal(){const types=["text","number","boolean","single-select","multi-select"];modal("Add Clinical Measurement Field",`<div class="formgrid"><div class="field"><label>Name</label><input id="cfn"></div><div class="field"><label>Type</label><select id="cft">${types.map(t=>`<option>${t}</option>`).join("")}</select></div><div class="field"><label>Unit</label><input id="cfu"></div><div class="field"><label>Options</label><input id="cfo" placeholder="For select types"></div></div><div class="formactions"><button class="btn primary" id="savecf">Add</button></div>`);$("#savecf").onclick=()=>{const n=$("#cfn").value.trim();if(!n)return;db.clinicalFields.push({id:uid("cf"),name:n,type:$("#cft").value,unit:$("#cfu").value,enabled:true,options:$("#cfo").value.split(",").map(x=>x.trim()).filter(Boolean)});save();audit("Added clinical field",n);$("#modal").innerHTML="";render();toast("Clinical field added")}}
+function addRxSectionModal(){modal("Add Prescription / Order Section",`<div class="formgrid"><div class="field"><label>Name</label><input id="rxsn"></div><div class="field"><label>Section Type</label><select id="rxst"><option value="structured">Structured / Autocomplete</option><option value="text">Free Text</option><option value="image">Image Upload</option></select></div></div><div class="formactions"><button class="btn primary" id="saverxs">Add</button></div>`);$("#saverxs").onclick=()=>{const n=$("#rxsn").value.trim();if(!n)return;db.rxSections.push({id:uid("rs"),name:n,type:$("#rxst").value,enabled:true,order:db.rxSections.length+1});save();audit("Added prescription section",n);$("#modal").innerHTML="";render();toast("Section added")}}
+function simple(title,label,fn){modal(title,`<div class="field"><label>${label}</label><input id="sv"></div><div class="formactions"><button class="btn primary" id="ss">Save</button></div>`);$("#ss").onclick=()=>{const v=$("#sv").value.trim();if(!v)return;fn(v);save();audit(title,v);$("#modal").innerHTML="";render();toast("Saved")}}
+
+function settings(){
+ return `<div class="settings-shell">
+   <aside class="settings-side">
+     <div class="identity">
+       <div class="logoPreview" id="logoPreview">${db.clinic.logo?`<img src="${db.clinic.logo}">`:"Logo"}</div>
+       <h3>${db.clinic.name}</h3><p>${db.clinic.email||"No email configured"}</p>
+     </div>
+     <div class="mini"><span class="mi">🌍</span><div><b>${db.clinic.timezone}</b><div class="small muted">Timezone</div></div></div>
+     <div class="mini"><span class="mi">#</span><div><b>${db.clinic.prefix}-${new Date().getFullYear()}-...</b><div class="small muted">Patient number format</div></div></div>
+     <div class="mini"><span class="mi">📝</span><div><b>${db.clinic.documentationReminderHours||12} hours</b><div class="small muted">Documentation reminder</div></div></div>
+   </aside>
+   <section class="settings-main">
+     <div class="settings-section">
+       <div class="settings-section-head"><span class="sico">🏥</span><div><h3>Clinic Identity</h3><p>Branding and public clinic information.</p></div></div>
+       <div class="settings-row">
+         <div class="field"><label>Clinic Name</label><input id="sname" value="${db.clinic.name}"><div class="setting-help">Shown across the product and printed documents.</div></div>
+         <div class="field"><label>Patient Number Prefix</label><input id="sprefix" value="${db.clinic.prefix}"><div class="setting-help">Only the prefix is editable. Year and sequence are generated automatically.</div></div>
+         <div class="field"><label>Phone</label><input id="sphone" value="${db.clinic.phone||""}"></div>
+         <div class="field"><label>Email</label><input id="semail" value="${db.clinic.email||""}"></div>
+         <div class="field"><label>Address</label><input id="saddress" value="${db.clinic.address||""}"></div>
+         <div class="field"><label>Website</label><input id="sweb" value="${db.clinic.website||""}"></div>
+       </div>
+       <div class="divider"></div>
+       <div class="field"><label>Clinic Logo</label><input id="slogo" type="file" accept="image/*"><div class="setting-help">Used in the sidebar, prescriptions and printed reports.</div></div>
+     </div>
+
+     <div class="settings-section">
+       <div class="settings-section-head"><span class="sico">🕒</span><div><h3>Localization & Time</h3><p>Control how dates and times appear throughout the clinic.</p></div></div>
+       <div class="settings-row">
+         <div class="field"><label>Timezone</label><select id="stimezone">${["Africa/Cairo","Asia/Riyadh","Asia/Dubai","Europe/London","UTC"].map(x=>`<option ${db.clinic.timezone===x?"selected":""}>${x}</option>`).join("")}</select></div>
+         <div class="field"><label>Locale</label><select id="slocale">${["en-EG","ar-EG","en-US","ar-SA"].map(x=>`<option ${db.clinic.locale===x?"selected":""}>${x}</option>`).join("")}</select></div>
+         <div class="field"><label>Date Format</label><select id="sdate">${["DD/MM/YYYY","MM/DD/YYYY","YYYY-MM-DD"].map(x=>`<option ${db.clinic.dateFormat===x?"selected":""}>${x}</option>`).join("")}</select></div>
+         <div class="field"><label>Time Format</label><select id="stime"><option value="12h" ${db.clinic.timeFormat==="12h"?"selected":""}>12-hour</option><option value="24h" ${db.clinic.timeFormat==="24h"?"selected":""}>24-hour</option></select></div>
+       </div>
+       <div class="preview-box" style="margin-top:12px"><b>Preview</b><small>${db.clinic.timezone} · ${db.clinic.dateFormat} · ${db.clinic.timeFormat==="12h"?"12-hour clock":"24-hour clock"}</small></div>
+     </div>
+
+     <div class="settings-section">
+       <div class="settings-section-head"><span class="sico">✦</span><div><h3>System Welcome Screen</h3><p>Shown immediately after successful sign-in. Once the user enters the workspace, it does not appear again during normal navigation.</p></div></div>
+       <div class="settings-row">
+         <div class="field"><label>Welcome Title</label><input id="swtitle" value="${db.clinic.welcomeTitle||""}"></div>
+         <div class="field"><label>Enter Button Text</label><input id="swbutton" value="${db.clinic.welcomeButton||"Enter Clinic System"}"></div>
+       </div>
+       <div class="field" style="margin-top:11px"><label>Welcome Message</label><textarea id="swmessage">${db.clinic.welcomeMessage||""}</textarea><div class="setting-help">Clinic-specific text shown before the user enters the workspace.</div></div>
+       <div class="settings-theme-preview" style="margin-top:12px"><div><b>${db.clinic.welcomeTitle||("Welcome to "+db.clinic.name)}</b><div style="opacity:.72;margin-top:3px">${db.clinic.welcomeMessage||""}</div></div></div>
+     </div>
+
+     <div class="settings-section">
+       <div class="settings-section-head"><span class="sico">◷</span><div><h3>Operational Preferences</h3><p>Clinic-wide behavior that affects daily work.</p></div></div>
+       <div class="settings-row">
+         <div class="field"><label>Pending Documentation Reminder</label><input id="sreminder" type="number" min="1" value="${db.clinic.documentationReminderHours||12}"><div class="setting-help">Number of hours before incomplete visit documentation is highlighted.</div></div>
+         <div class="field"><label>Patient Number Example</label><input value="${db.clinic.prefix}-${new Date().getFullYear()}-${db.patients.length+151}" disabled></div>
+       </div>
+     </div>
+
+     <div class="settings-section">
+       <div class="settings-section-head"><span class="sico">🧾</span><div><h3>Prescription & Document Defaults</h3><p>Header and footer used on printed prescription and clinical documents.</p></div></div>
+       <div class="settings-row">
+         <div class="field"><label>Prescription Header</label><textarea id="sheader">${db.clinic.prescriptionHeader||""}</textarea></div>
+         <div class="field"><label>Prescription Footer</label><textarea id="sfooter">${db.clinic.prescriptionFooter||""}</textarea></div>
+       </div>
+       <div class="preview-box" style="margin-top:12px"><b>Document Preview</b><small>${db.clinic.prescriptionHeader||db.clinic.name}<br>${db.clinic.prescriptionFooter||"No footer text"}</small></div>
+     </div>
+
+     <div class="settings-footer"><div><b>Clinic Settings</b><div class="small muted">Changes are saved to this demo browser.</div></div><button class="btn primary" id="savesettings">Save All Settings</button></div>
+   </section>
+ </div>`;
+}
+function bindSettings(){
+ $("#slogo").onchange=async()=>{const f=$("#slogo").files[0];if(f){db.clinic.logo=await fileToData(f);$("#logoPreview").innerHTML=`<img src="${db.clinic.logo}">`}};
+ $("#savesettings").onclick=()=>{
+   db.clinic.name=$("#sname").value;
+   db.clinic.prefix=$("#sprefix").value.trim().toUpperCase()||"AU";
+   db.clinic.phone=$("#sphone").value;
+   db.clinic.email=$("#semail").value;
+   db.clinic.address=$("#saddress").value;
+   db.clinic.website=$("#sweb").value;
+   db.clinic.timezone=$("#stimezone").value;
+   db.clinic.locale=$("#slocale").value;
+   db.clinic.dateFormat=$("#sdate").value;
+   db.clinic.timeFormat=$("#stime").value;
+   db.clinic.documentationReminderHours=+$("#sreminder").value||12;db.clinic.welcomeTitle=$("#swtitle").value;db.clinic.welcomeMessage=$("#swmessage").value;db.clinic.welcomeButton=$("#swbutton").value;
+   db.clinic.prescriptionHeader=$("#sheader").value;
+   db.clinic.prescriptionFooter=$("#sfooter").value;
+   save();audit("Updated clinic settings",db.clinic.name);render();toast("Settings saved")
+ };
+}
+
+window.addEventListener("hashchange",()=>{if(!isLoggedIn()){showLogin();return}if(location.hash==="#welcome"){if(welcomeSeen()){state.view="dashboard";location.hash="#dashboard"}else{state.view="welcome";render()}}else render()});
+function helpPage(){
+ const sections=[
+  {icon:"⌂",title:"Dashboard",summary:"Statistics and charts only.",why:"Use it to understand clinic activity without performing operational actions.",flow:["Review today’s KPIs","Read queue and doctor workload charts","Check documentation health"],note:"No quick-action buttons are intentionally placed on the dashboard."},
+  {icon:"◎",title:"Patients",summary:"Search first, register second.",why:"The system actively helps avoid duplicates before a new patient is created.",flow:["Search by name or phone","Open an existing match when found","Register only when no correct record exists"],note:"Exact duplicate phone numbers are blocked during registration."},
+  {icon:"▦",title:"Live Queue",summary:"The operational board for patients currently inside the clinic.",why:"Reception, doctors and nurses see the same clinic flow; permissions control what each user can do.",flow:["Press Filter when needed","Review applied filter chips under the toolbar","Open patient card actions when allowed"],note:"Applied filters remain visible below the Filter button, exactly so users always know why the board is filtered."},
+  {icon:"✚",title:"Visits",summary:"The medical encounter record.",why:"A single visit may contain multiple clinical sessions for drops, observation, tests, procedures and re-check.",flow:["Patient enters a visit","One or more doctor sessions occur","Visit is operationally completed","Documentation may finish later"],note:"Visit status and documentation status are separate by design."},
+  {icon:"◷",title:"Pending Documentation",summary:"A worklist for incomplete clinical notes.",why:"Doctors do not have to slow the queue while writing every note during consultation.",flow:["Open incomplete visit","Finish diagnosis, notes or treatment","Mark documentation completed"],note:"The clinic controls the reminder delay from Settings."},
+  {icon:"↻",title:"Follow-ups",summary:"Clinical follow-up recommendations.",why:"Useful for long-term treatment without introducing appointment scheduling in V1.",flow:["Doctor writes recommendation","Patient appears in Follow-ups","Staff reviews the recommendation later"],note:"The demo contains ready follow-up records so this page can be tested immediately."},
+  {icon:"▥",title:"Reports",summary:"Select → Filter → Preview → Export.",why:"Reports are generated deliberately instead of showing an unfiltered table immediately.",flow:["Choose report","Set its specific filters","Generate preview","Export PDF or Excel"],note:"Each report owns its own filter set."},
+  {icon:"♙",title:"Employees",summary:"Clinic users and assigned roles.",why:"One user can have multiple roles such as Doctor + Admin.",flow:["Create or edit employee","Assign one or multiple roles","Enable or disable account"],note:"Super User remains protected from ordinary administration."},
+  {icon:"⌘",title:"Roles & Permissions",summary:"Protected system roles with readable permissions.",why:"Permissions determine sidebar visibility and available actions.",flow:["Select role","Review grouped permissions","Understand resulting access"],note:"System role permissions are read-only in V1."},
+  {icon:"⚙",title:"Configuration",summary:"Make the system fit different clinic types.",why:"Workflow, patient profile, clinical measurements and prescription sections are configurable.",flow:["Configure statuses and transitions","Add dynamic patient fields","Enable specialty measurements","Configure prescription/order sections"],note:"The workflow diagram and colors are generated from the same configuration used by the Live Queue."},
+  {icon:"⚲",title:"Settings",summary:"Clinic identity and operating defaults.",why:"Controls clinic-specific branding, welcome content, timezone, locale and document defaults.",flow:["Set clinic identity","Set timezone and locale","Edit post-login welcome message","Set reminders and prescription defaults"],note:"The login screen belongs to AURAN Technology; the welcome screen after sign-in belongs to the clinic."},
+  {icon:"≡",title:"Audit",summary:"Trace important changes.",why:"Provides accountability across clinical and administrative actions.",flow:["Review actor","Review action","Review entity and time"],note:"Useful for troubleshooting and reviewing configuration changes."}
+ ];
+ return `<div class="help-layout">
+  <aside class="help-nav"><div class="sectionhead"><div><h3>System Guide</h3><p>Detailed product map</p></div></div>${sections.map((s,i)=>`<button data-help-anchor="help-${i}">${s.icon} ${s.title}</button>`).join("")}</aside>
+  <section class="help-content"><div class="help-section"><div class="page-section-head"><span class="pi">?</span><div><h2>Clinic Management V1 Guide</h2><p>This page explains what every major area does, why it exists, and the normal workflow users should follow during a demo or real clinic operation.</p></div></div></div>
+  ${sections.map((s,i)=>`<div class="help-section" id="help-${i}"><div class="help-feature"><span class="help-ico">${s.icon}</span><div><h2>${s.title}</h2><p><b>${s.summary}</b> ${s.why}</p><div class="guide-flow">${s.flow.map((x,n)=>`<div class="guide-step"><span class="num">${n+1}</span><b>${x}</b><small>${n===0?"Start here.":n===s.flow.length-1?"Normal end of this flow.":"Continue to the next step."}</small></div>`).join("")}</div><div class="guide-note">${s.note}</div></div></div></div>`).join("")}</section>
+ </div>`;
+}
+function bindHelp(){$$("[data-help-anchor]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.helpAnchor)?.scrollIntoView({behavior:"smooth",block:"start"}))}
+function auditView(){return `<div class="panel pad"><div class="sectionhead"><div><h2>Audit Log</h2><p>Important clinical, operational and administrative actions</p></div></div><div class="tablewrap"><table><thead><tr><th>Time</th><th>Actor</th><th>Action</th><th>Entity</th></tr></thead><tbody>${db.audit.map(a=>`<tr><td>${fmt(a.at)}</td><td>${a.actor}</td><td>${a.action}</td><td>${a.entity}</td></tr>`).join("")}</tbody></table></div></div>`}
+render();
+</script>
+</body>
+</html>
