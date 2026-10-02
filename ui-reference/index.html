@@ -93,10 +93,90 @@ html[data-theme=light] .area-line{filter:drop-shadow(0 3px 5px rgba(59,130,246,.
 html[data-theme=light] .feed-event{background:#fff;border-color:#E7EAF2}
 html[data-theme=light] .hbar-track{background:#E3E6F1}
 
+
+/* demo-ready CRUD polish */
+.actions{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.btn.sm{padding:6px 9px;border-radius:10px;font-size:11px}.btn.danger{color:#fb7185;border-color:#fb718540;background:#fb71850b}.btn.danger:hover{background:#fb718516;border-color:#fb71856a}.btn.success{color:#10b981;border-color:#10b98140;background:#10b9810b}.btn.ghost{background:transparent}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none!important;box-shadow:none!important}.crud-row{transition:background .15s ease}.crud-row:hover{background:#3b82f608}.modal-sub{color:var(--m);font-size:12px;margin:5px 0 0}.confirm-box{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid #fb718540;background:#fb71850c;border-radius:16px}.confirm-box .icon-badge{color:#fb7185;background:#fb718512;border-color:#fb718530}.form-note{padding:10px 12px;border-radius:12px;background:#3b82f60c;border:1px solid #3b82f625;color:var(--m);font-size:12px}.inline-list{display:grid;gap:7px}.inline-item{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;padding:9px 10px;border:1px solid var(--l);background:var(--chip);border-radius:13px}.toolbar-select{border:1px solid var(--l);background:var(--c2);color:var(--t);border-radius:12px;padding:8px 10px}.empty-state{padding:32px;text-align:center;color:var(--m)}.demo-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:999px;font-size:10px;color:#38bdf8;background:#38bdf810;border:1px solid #38bdf82e}.soft-divider{height:1px;background:var(--l);margin:12px 0}.danger-zone{border-color:#fb718532!important;background:linear-gradient(135deg,#fb718508,transparent),var(--c)!important}.field small.help{color:var(--m);font-size:11px}.status-select{min-width:120px}.modal-body textarea.input{min-height:92px;resize:vertical}
+html[data-theme=light] .btn.danger{background:#fff5f6;border-color:#fecdd3;color:#e11d48}html[data-theme=light] .btn.success{background:#f0fdf8;border-color:#bbf7d0;color:#059669}html[data-theme=light] .inline-item{background:#fff;border-color:#e7eaf2}html[data-theme=light] .form-note{background:#eff6ff;border-color:#dbeafe}
+@media(max-width:700px){.actions{justify-content:flex-start}.actions .btn{flex:1}.modal-foot{position:sticky;bottom:0;background:var(--c2)}}
+
 </style></head><body><div id="root"></div><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
 try{S.lang=localStorage.getItem("al")||"ar";S.theme=localStorage.getItem("at")||"dark"}catch(e){}
+
+S.patients=[
+{id:"P-10421",name:"أحمد مصطفى",nameEn:"Ahmed Mostafa",phone:"0101 234 5678",dob:"1991-05-16",gender:"Male",status:"Active"},
+{id:"P-10388",name:"سارة عادل",nameEn:"Sara Adel",phone:"0102 551 8821",dob:"1997-02-09",gender:"Female",status:"Active"},
+{id:"P-10402",name:"يوسف حسن",nameEn:"Youssef Hassan",phone:"0111 391 2200",dob:"1988-11-22",gender:"Male",status:"Active"},
+{id:"P-10377",name:"نور كمال",nameEn:"Nour Kamal",phone:"0122 902 1171",dob:"1994-08-03",gender:"Female",status:"Active"},
+{id:"P-10350",name:"محمد رضا",nameEn:"Mohamed Reda",phone:"0100 771 4520",dob:"1984-03-12",gender:"Male",status:"Active"}
+];
+S.currentPatientId="P-10421";S.editingId=null;S.deleteTarget=null;
+S.employees=[
+{id:"U-001",name:"Ahmed Shahine",email:"ahmed@auran.clinic",roles:["Super User"],status:"Active"},
+{id:"U-002",name:"Mona Salem",email:"mona@auran.clinic",roles:["Doctor"],status:"Active"},
+{id:"U-003",name:"Karim Yassin",email:"karim@auran.clinic",roles:["Doctor","Reports Viewer"],status:"Active"},
+{id:"U-004",name:"Doaa Mohamed",email:"doaa@auran.clinic",roles:["Reception"],status:"Active"},
+{id:"U-005",name:"Hany Sameh",email:"hany@auran.clinic",roles:["Nurse"],status:"Disabled"}
+];
+S.roles=[
+{name:"Super User",description:"Protected full clinic access",permissions:[]},
+{name:"Administrator",description:"Clinic administration",permissions:[]},
+{name:"Doctor",description:"Clinical work, patients and visits",permissions:["Patient_View","MedicalProfile_View","Measurement_View","Visit_View","Visit_Start","Visit_Update","Visit_Complete","Diagnosis_Create","Diagnosis_Update","Prescription_View","Prescription_Create","Prescription_Update","ClinicalOrder_View","ClinicalOrder_Create","FollowUp_View","FollowUp_Create","FollowUp_Update"]},
+{name:"Reception",description:"Reception and queue operations",permissions:["Patient_View","Patient_Create","Patient_Update","Queue_View","Queue_CheckIn","Queue_Move"]},
+{name:"Reports Viewer",description:"Read and export reports",permissions:["Reports_View","Reports_Generate","Reports_ExportPdf","Reports_ExportExcel"]}
+];
+S.selectedRole="Doctor";
+S.followups=[
+{id:"F-00741",patientId:"P-10421",titleAr:"متابعة ضغط الدم",titleEn:"Blood pressure follow-up",date:"2026-10-02",status:"Today",doctor:"Dr. Mona Salem"},
+{id:"F-00738",patientId:"P-10377",titleAr:"مراجعة نتائج التحاليل",titleEn:"Review lab results",date:"2026-09-30",status:"Overdue",doctor:"Dr. Kareem Yassin"},
+{id:"F-00745",patientId:"P-10388",titleAr:"مراجعة خطة العلاج",titleEn:"Treatment plan review",date:"2026-10-05",status:"Upcoming",doctor:"Dr. Mona Salem"},
+{id:"F-00749",patientId:"P-10402",titleAr:"متابعة عامة",titleEn:"General follow-up",date:"2026-10-08",status:"Upcoming",doctor:"Dr. Laila Hassan"}
+];
+S.visits=[
+{id:"V-009841",patientId:"P-10388",doctor:"Dr. Mona Salem",status:"Active",started:"10:18"},
+{id:"V-009818",patientId:"P-10421",doctor:"Dr. Kareem Yassin",status:"Pending docs",started:"09:42"},
+{id:"V-009812",patientId:"P-10377",doctor:"Dr. Mona Salem",status:"Completed",started:"09:14"},
+{id:"V-009799",patientId:"P-10350",doctor:"Dr. Laila Hassan",status:"Completed",started:"08:51"},
+{id:"V-009788",patientId:"P-10402",doctor:"Dr. Kareem Yassin",status:"Completed",started:"08:22"}
+];
+S.currentVisitId="V-009841";S.clinicalDraft={chief:"",exam:"",diagnosis:"",plan:"",followup:""};
+S.prescriptions=["Metformin 500mg","Amlodipine 5mg"];S.clinicalOrders=["CBC","HbA1c"];
+S.measurements=[
+{id:"M-01",date:"2026-10-01",type:"BP",value:"145/92",unit:"mmHg"},
+{id:"M-02",date:"2026-10-01",type:"Pulse",value:"82",unit:"bpm"},
+{id:"M-03",date:"2026-09-18",type:"Weight",value:"86",unit:"kg"},
+{id:"M-04",date:"2026-09-18",type:"Glucose",value:"118",unit:"mg/dL"}
+];
+S.measurementTypes=[
+{id:"MT-01",name:"Blood Pressure",code:"BP",unit:"mmHg",valueType:"Composite",active:true},
+{id:"MT-02",name:"Glucose",code:"GLU",unit:"mg/dL",valueType:"Decimal",active:true},
+{id:"MT-03",name:"Weight",code:"WT",unit:"kg",valueType:"Decimal",active:true},
+{id:"MT-04",name:"Temperature",code:"TEMP",unit:"°C",valueType:"Decimal",active:true},
+{id:"MT-05",name:"Pulse",code:"PULSE",unit:"bpm",valueType:"Integer",active:true},
+{id:"MT-06",name:"Oxygen Saturation",code:"SPO2",unit:"%",valueType:"Integer",active:true}
+];
+S.platformClinics=[
+{id:"cln_aur_001",code:"AUR-001",name:"AURAN Demo Clinic",status:"Active",city:"Cairo",created:"2026-08-14"},
+{id:"cln_aur_002",code:"AUR-002",name:"Nile Health Center",status:"Active",city:"Giza",created:"2026-09-02"},
+{id:"cln_aur_003",code:"AUR-003",name:"Nova Medical",status:"Suspended",city:"Alexandria",created:"2026-09-18"}
+];S.selectedClinicId="cln_aur_001";
+S.auditEvents=[
+["10:42","PatientCheckedIn","P-10421","Ahmed Shahine","cor-71A8"],
+["10:18","VisitStarted","V-009841","Mona Salem","cor-9F21"],
+["09:48","RolePermissionsUpdated","Doctor","Ahmed Shahine","cor-1A22"],
+["09:21","UserUpdated","Mona Salem","Ahmed Shahine","cor-0B19"],
+["08:55","PatientCreated","P-10377","Doaa Mohamed","cor-88C2"]
+];
+S.modalPayload={};
+const DEMO_PERSIST=["patients","employees","roles","followups","visits","prescriptions","clinicalOrders","measurements","measurementTypes","medicalFields","flow","platformClinics","auditEvents"];
+try{let d=JSON.parse(localStorage.getItem("auranDemoData")||"null");if(d)DEMO_PERSIST.forEach(k=>{if(d[k])S[k]=d[k]})}catch(e){}
+function persistDemo(){try{localStorage.setItem("auranDemoData",JSON.stringify(Object.fromEntries(DEMO_PERSIST.map(k=>[k,S[k]]))))}catch(e){}}
+function patientById(id){return S.patients.find(x=>x.id===id)||S.patients[0]}
+function patientName(id){let x=patientById(id);return A()?x.name:x.nameEn}
+function nextId(prefix,items,width=5){let nums=items.map(x=>parseInt(String(x.id||"").replace(/\D/g,""))||0);return prefix+String(Math.max(0,...nums)+1).padStart(width,"0")}
+function addAudit(event,entity){let tm=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"}),cor="cor-"+Math.random().toString(16).slice(2,6).toUpperCase();S.auditEvents.unshift([tm,event,entity,"Ahmed Shahine",cor]);S.auditEvents=S.auditEvents.slice(0,30)}
+
 const R=document.getElementById("root"),A=()=>S.lang==="ar",t=(a,e)=>A()?a:e;
 const ICONS={
 dashboard:'<path d="M4 4h6v6H4zM14 4h6v4h-6zM14 12h6v8h-6zM4 14h6v6H4z"/>',
@@ -132,7 +212,7 @@ function areaChart(values,labels,id="area"){let W=700,H=170,pad=12,max=Math.max(
 function queueDonut(){return `<div class="donut-wrap"><div class="donut"><div class="donut-center"><b>9</b><small class="muted">${t("داخل المسار","in flow")}</small></div></div><div class="legend"><div class="legend-row"><span class="legend-dot" style="background:#38BDF8"></span>${t("تم الوصول","Checked In")} · 2</div><div class="legend-row"><span class="legend-dot" style="background:#6366F1"></span>${t("في الانتظار","Waiting")} · 2</div><div class="legend-row"><span class="legend-dot" style="background:#14B8A6"></span>${t("جاهز","Ready")} · 1</div><div class="legend-row"><span class="legend-dot" style="background:#F59E0B"></span>${t("مع الطبيب","In Visit")} · 1</div></div></div>`}
 function toast(msg){let old=document.querySelector(".toast");if(old)old.remove();let el=document.createElement("div");el.className="toast";el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),1800)}
 const N=[["dashboard","نظرة عامة","Dashboard"],["patients","المرضى","Patients"],["queue","قائمة الانتظار","Live Queue"],["visits","الزيارات","Visits"],["follow","المتابعات","Follow-ups"],["reports","التقارير","Reports"],["employees","الموظفون","Employees"],["roles","الأدوار والصلاحيات","Roles & Permissions"],["settings","الإعدادات والتكوين","Settings & Configuration"],["audit","سجل التدقيق","Audit Log"]];
-function save(){document.documentElement.dataset.theme=S.theme;document.documentElement.dir=A()?"rtl":"ltr";document.documentElement.lang=S.lang;try{localStorage.setItem("al",S.lang);localStorage.setItem("at",S.theme)}catch(e){}}
+function save(){document.documentElement.dataset.theme=S.theme;document.documentElement.dir=A()?"rtl":"ltr";document.documentElement.lang=S.lang;try{localStorage.setItem("al",S.lang);localStorage.setItem("at",S.theme);persistDemo()}catch(e){}}
 function user(){return `<div class="user"><button class="btn user-trigger" data-a="user"><span class="avatar">AS</span><span class="user-copy"><b>Ahmed Shahine</b><small>Super User</small></span><span>⌄</span></button><div id="pop" class="pop hide"><div class="pop-head"><span class="avatar">AS</span><div><b>Ahmed Shahine</b><br><small class="muted">ahmed@auran.clinic</small><br>${p("Super User","ok")}</div></div><button class="menu-row" data-a="profile"><span>${t("إعدادات الملف الشخصي","Profile settings")}</span><span>›</span></button><div class="menu-row"><span>${t("اللغة","Language")}</span><span class="seg"><button class="${S.lang==="ar"?"active":""}" data-a="setAr">AR</button><button class="${S.lang==="en"?"active":""}" data-a="setEn">EN</button></span></div><button class="menu-row" data-a="theme"><span>${t("الوضع الداكن","Dark mode")}</span><span class="switch ${S.theme==="dark"?"on":""}"></span></button><button class="menu-row bad" data-a="logout"><span>${t("تسجيل الخروج","Sign out")}</span><span>↗</span></button></div></div>`}
 function H(title,sub,act=""){return `<header class="head"><div><h1>${title}</h1><p>${sub}</p></div>${act}${user()}</header>`}
 function shell(x){if(S.screen==="login")return x;let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));return `<div class="app"><aside class="side"><div class="brand"><div class="mark">A</div><div><b>AURAN Clinic</b><br><small>Clinic Operating System</small></div></div><nav class="nav">${N.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",17)}</span><span>${t(n[1],n[2])}</span></button>`).join("")}</nav></aside><main class="main">${x}</main><div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div></div>`}
