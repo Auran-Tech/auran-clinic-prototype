@@ -369,6 +369,8 @@ function render(){
  let photo=document.getElementById("profilePhotoInput");if(photo)photo.onchange=()=>{let f=photo.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{S.profileData.photo=rd.result;persistDemo();toast(t("تم تحديث الصورة في العرض","Profile photo updated in demo"));render()};rd.readAsDataURL(f)}
 }
 document.addEventListener("click",e=>{
+ let roleBtn=e.target.closest("[data-role-name]");if(roleBtn){S.selectedRole=roleBtn.dataset.roleName;render();return}
+ let perm=e.target.closest("[data-permission-toggle]");if(perm&&!perm.disabled){let role=S.roles.find(x=>x.name===S.selectedRole),name=perm.dataset.permissionToggle;if(role){role.permissions=role.permissions||[];role.permissions=role.permissions.includes(name)?role.permissions.filter(x=>x!==name):[...role.permissions,name];persistDemo();render()}return}
  let n=e.target.closest("[data-nav]");if(n){S.screen=n.dataset.nav;location.hash="/"+S.screen;render();return}
  let rr=e.target.closest("[data-r]");if(rr){S.report=rr.dataset.r;S.step=1;render();return}
  let tt=e.target.closest("[data-tab]");if(tt){S.tab=tt.dataset.tab;render();return}
@@ -376,38 +378,103 @@ document.addEventListener("click",e=>{
  let pg=e.target.closest("[data-pgroup]");if(pg){S.roleGroup=pg.dataset.pgroup;render();return}
  let ro=e.target.closest("[data-role-option]");if(ro){let rv=ro.dataset.roleOption;S.selectedRoles=S.selectedRoles.includes(rv)?S.selectedRoles.filter(x=>x!==rv):[...S.selectedRoles,rv];render();return}
  let a=e.target.closest("[data-a]");if(!a){let pop=document.getElementById("pop");if(pop&&!e.target.closest(".user"))pop.classList.add("hide");return}
- let q=a.dataset.a;
- if(q==="user"){document.getElementById("pop")?.classList.toggle("hide")}
- else if(q==="theme"){S.theme=S.theme==="dark"?"light":"dark";render()}
- else if(q==="lang"){S.lang=S.lang==="ar"?"en":"ar";render()}
- else if(q==="profile"){S.screen="profile";location.hash="/profile";render()}
- else if(q==="setAr"){S.lang="ar";render()}
- else if(q==="setEn"){S.lang="en";render()}
- else if(q==="logout"){S.screen="login";location.hash="/login";render()}
- else if(q==="login"){S.screen="dashboard";location.hash="/dashboard";render()}else if(q==="platformLogin"){S.screen="platformLogin";location.hash="/platformLogin";render()}else if(q==="clinicLogin"){S.screen="login";location.hash="/login";render()}else if(q==="platformEnter"||q==="platformClinics"){S.screen="platformClinics";location.hash="/platformClinics";render()}else if(q==="platformClinic"){S.screen="platformClinic";location.hash="/platformClinic";render()}else if(q==="platformAudit"){S.screen="platformAudit";location.hash="/platformAudit";render()}else if(q==="platformLogout"){S.screen="platformLogin";location.hash="/platformLogin";render()}else if(q==="clinicSuspend"){toast(t("تم إيقاف العيادة وإلغاء الجلسات النشطة في النموذج","Clinic suspended and active sessions invalidated in prototype"))}else if(q==="uxStates"){S.screen="states";location.hash="/states";render()}
- else if(q==="patient"){S.screen="patientProfile";location.hash="/patientProfile";render()}
- else if(q==="clinical"){S.screen="clinical";location.hash="/clinical";render()}
+ let q=a.dataset.a,id=a.dataset.id,stage=a.dataset.stage;
+ const go=s=>{S.screen=s;location.hash="/"+s;render()};
+ if(q==="user")document.getElementById("pop")?.classList.toggle("hide");
+ else if(q==="theme"){S.theme=S.theme==="dark"?"light":"dark";S.profileData.theme=S.theme;render()}
+ else if(q==="lang"){S.lang=S.lang==="ar"?"en":"ar";S.profileData.language=S.lang;render()}
+ else if(q==="profile")go("profile");
+ else if(q==="setAr"){S.lang="ar";S.profileData.language="ar";render()}
+ else if(q==="setEn"){S.lang="en";S.profileData.language="en";render()}
+ else if(q==="logout")go("login");
+ else if(q==="login")go("dashboard");
+ else if(q==="forgotPassword"){S.modal="forgotPassword";S.modalPayload={};render()}
+ else if(q==="platformLogin")go("platformLogin");
+ else if(q==="clinicLogin")go("login");
+ else if(q==="platformEnter"||q==="platformClinics")go("platformClinics");
+ else if(q==="platformAudit")go("platformAudit");
+ else if(q==="platformLogout")go("platformLogin");
+ else if(q==="uxStates")go("states");
+ else if(q==="newPatient"){S.modal="patient";S.modalPayload={};render()}
+ else if(q==="openPatient"||q==="patient"){S.currentPatientId=id||S.currentPatientId;S.patientTab="overview";go("patientProfile")}
+ else if(q==="editPatient"){S.modal="patient";S.modalPayload={id:id||S.currentPatientId};render()}
+ else if(q==="deletePatient"){let x=patientById(id);openDelete("patient",id,A()?x.name:x.nameEn)}
+ else if(q==="editMedical"){S.modal="medical";S.modalPayload={};render()}
+ else if(q==="startVisit"){let pid=S.currentPatientId,newId=nextId("V-",S.visits,6),doc="Dr. Mona Salem";S.visits.unshift({id:newId,patientId:pid,doctor:doc,status:"Active",started:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});S.currentVisitId=newId;S.clinicalDraft={chief:"",exam:"",diagnosis:"",plan:"",followup:""};addAudit("VisitStarted",newId);persistDemo();go("clinical")}
+ else if(q==="newMeasurement"){S.modal="measurement";S.modalPayload={};render()}
+ else if(q==="editMeasurement"){S.modal="measurement";S.modalPayload={id};render()}
+ else if(q==="deleteMeasurement"){let x=S.measurements.find(x=>x.id===id);openDelete("measurement",id,x?.type||id)}
+ else if(q==="addPrescription"){S.modal="prescription";S.modalPayload={};render()}
+ else if(q==="deletePrescription"){S.prescriptions.splice(+id,1);addAudit("PrescriptionDeleted",S.currentVisitId);persistDemo();toast(t("تم حذف الوصفة من العرض","Prescription removed from demo"));render()}
+ else if(q==="addClinicalOrder"){S.modal="clinicalOrder";S.modalPayload={};render()}
+ else if(q==="deleteClinicalOrder"){S.clinicalOrders.splice(+id,1);addAudit("ClinicalOrderDeleted",S.currentVisitId);persistDemo();toast(t("تم حذف الأمر من العرض","Clinical order removed from demo"));render()}
+ else if(q==="filePreview"){S.modal="filePreview";S.modalPayload={name:id};render()}
+ else if(q==="downloadDemoFile"){let blob=new Blob(["AURAN Clinic demo document\n"+(S.modalPayload.name||"document")],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),ln=document.createElement("a");ln.href=url;ln.download=(S.modalPayload.name||"auran-demo")+".txt";ln.click();setTimeout(()=>URL.revokeObjectURL(url),800);toast(t("تم إنشاء نسخة تجريبية","Demo copy generated"))}
+ else if(q==="queueArrival"){S.modal="arrival";S.modalPayload={};render()}
  else if(q==="queueBoard"){S.queueView="board";render()}
  else if(q==="queueList"){S.queueView="list";render()}
- else if(q==="done"){S.modal="completeVisit";render()}
+ else if(q==="queueOpenPatient"){S.currentPatientId=id;S.patientTab="overview";go("patientProfile")}
+ else if(q==="queueStartVisit"){let m=queueMeta(id),pid=m.id,newId=nextId("V-",S.visits,6),doctor=m.doctor==="Unassigned"?"Dr. Mona Salem":m.doctor==="Dr. Mona"?"Dr. Mona Salem":m.doctor==="Dr. Kareem"?"Dr. Kareem Yassin":m.doctor;S.currentPatientId=pid;S.visits.unshift({id:newId,patientId:pid,doctor,status:"Active",started:new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"})});S.q.ready=S.q.ready.filter(x=>x!==id);if(!S.q.visit.includes(id))S.q.visit.push(id);S.currentVisitId=newId;S.clinicalDraft={chief:"",exam:"",diagnosis:"",plan:"",followup:""};addAudit("VisitStarted",newId);persistDemo();go("clinical")}
+ else if(q==="queueRemove"){openDelete("queue",id,id);S.modalPayload.stage=stage}
+ else if(q==="openVisit"||q==="clinical"){if(id)S.currentVisitId=id;let v=S.visits.find(x=>x.id===S.currentVisitId);if(v)S.currentPatientId=v.patientId;go("clinical")}
+ else if(q==="quickCompleteVisit"){S.currentVisitId=id;S.modal="completeVisit";S.modalPayload={};render()}
+ else if(q==="reopenVisit"){let v=S.visits.find(x=>x.id===id);if(v){v.status="Active";addAudit("VisitReopened",id);persistDemo();toast(t("تمت إعادة فتح الزيارة","Visit reopened"));render()}}
+ else if(q==="saveClinical"){addAudit("ClinicalDraftSaved",S.currentVisitId);persistDemo();toast(t("تم حفظ المسودة","Draft saved"))}
+ else if(q==="done"){S.modal="completeVisit";S.modalPayload={};render()}
+ else if(q==="newFollowup"){S.modal="followup";S.modalPayload={};render()}
+ else if(q==="editFollowup"){S.modal="followup";S.modalPayload={id};render()}
+ else if(q==="deleteFollowup"){let x=S.followups.find(x=>x.id===id);openDelete("followup",id,A()?x?.titleAr:x?.titleEn)}
+ else if(q==="completeFollowup"){let x=S.followups.find(x=>x.id===id);if(x){x.status="Completed";addAudit("FollowUpCompleted",id);persistDemo();toast(t("تم إكمال المتابعة","Follow-up completed"));render()}}
+ else if(q==="newEmployee"){S.selectedRoles=["Doctor"];S.modal="employee";S.modalPayload={};render()}
+ else if(q==="editEmployee"){let x=S.employees.find(x=>x.id===id);S.selectedRoles=[...(x?.roles||[])];S.modal="employee";S.modalPayload={id};render()}
+ else if(q==="toggleEmployee"){let x=S.employees.find(x=>x.id===id);if(x?.roles.includes("Super User")&&x.status==="Active"){toast(t("لا يمكن تعطيل آخر Super User نشط","Cannot disable the last active Super User"));return}if(x){x.status=x.status==="Active"?"Disabled":"Active";addAudit("UserStatusChanged",id);persistDemo();render()}}
+ else if(q==="deleteEmployee"){let x=S.employees.find(x=>x.id===id);openDelete("employee",id,x?.name||id)}
+ else if(q==="newRole"){S.modal="role";S.modalPayload={};render()}
+ else if(q==="editRole"){S.modal="role";S.modalPayload={id:id||S.selectedRole};render()}
+ else if(q==="deleteRole")openDelete("role",id,id)
+ else if(q==="saveRole"){addAudit("RolePermissionsUpdated",S.selectedRole);persistDemo();toast(t("تم حفظ صلاحيات الدور","Role permissions saved"))}
+ else if(q==="newWorkflowState"){S.modal="workflowState";S.modalPayload={};render()}
+ else if(q==="editWorkflowState"){S.modal="workflowState";S.modalPayload={index:+id};render()}
+ else if(q==="deleteWorkflowState")openDelete("workflowState",id,S.flow[+id])
+ else if(q==="workflowSettings"){S.modal="workflowSettings";S.modalPayload={};render()}
+ else if(q==="newTransition"){S.modal="transition";S.modalPayload={};render()}
+ else if(q==="editTransition"){S.modal="transition";S.modalPayload={id};render()}
+ else if(q==="deleteTransition")openDelete("transition",id,id)
+ else if(q==="newMedicalField"){S.modal="medicalField";S.modalPayload={};render()}
+ else if(q==="editMedicalField"){S.modal="medicalField";S.modalPayload={index:+id};render()}
+ else if(q==="deleteMedicalField")openDelete("medicalField",id,S.medicalFields[+id])
+ else if(q==="newMeasurementType"){S.modal="measurementType";S.modalPayload={};render()}
+ else if(q==="editMeasurementType"){S.modal="measurementType";S.modalPayload={id};render()}
+ else if(q==="toggleMeasurementType"){let x=S.measurementTypes.find(x=>x.id===id);if(x){x.active=!x.active;addAudit("MeasurementTypeStatusChanged",id);persistDemo();render()}}
+ else if(q==="deleteMeasurementType"){let x=S.measurementTypes.find(x=>x.id===id);openDelete("measurementType",id,x?.name||id)}
+ else if(q==="editCounter"){S.modal="counter";S.modalPayload={id};render()}
+ else if(q==="saveGeneral"){S.settingsData.clinicName=document.getElementById("settingClinicName")?.value||S.settingsData.clinicName;S.settingsData.clinicCode=document.getElementById("settingClinicCode")?.value||S.settingsData.clinicCode;S.settingsData.timezone=document.getElementById("settingTimezone")?.value||S.settingsData.timezone;S.settingsData.language=document.getElementById("settingLanguage")?.value||S.settingsData.language;S.settingsData.dateFormat=document.getElementById("settingDateFormat")?.value||S.settingsData.dateFormat;S.settingsData.phone=document.getElementById("settingPhone")?.value||S.settingsData.phone;addAudit("ClinicSettingsUpdated","General");persistDemo();toast(t("تم حفظ الإعدادات العامة","General settings saved"))}
+ else if(q==="saveSecurity"){S.settingsData.sessionHours=+document.getElementById("settingSessionHours")?.value||8;addAudit("SecuritySettingsUpdated","Security");persistDemo();toast(t("تم حفظ إعدادات الأمان","Security settings saved"))}
+ else if(q==="saveBrand"){S.settingsData.displayName=document.getElementById("settingDisplayName")?.value||S.settingsData.displayName;S.settingsData.accent=document.getElementById("settingAccent")?.value||S.settingsData.accent;addAudit("BrandingUpdated","Branding");persistDemo();toast(t("تم حفظ الهوية","Branding saved"));render()}
+ else if(q==="save"){addAudit("SettingsSaved",S.tab||S.screen);persistDemo();toast(t("تم حفظ التغييرات","Changes saved"))}
+ else if(q==="saveProfile"){S.profileData.name=document.getElementById("profileName")?.value||S.profileData.name;S.profileData.email=document.getElementById("profileEmail")?.value||S.profileData.email;S.profileData.language=document.getElementById("profileLanguage")?.value||S.profileData.language;S.profileData.theme=document.getElementById("profileTheme")?.value||S.profileData.theme;S.lang=S.profileData.language;S.theme=S.profileData.theme;persistDemo();toast(t("تم حفظ الملف الشخصي","Profile saved"));render()}
+ else if(q==="changePhoto")document.getElementById("profilePhotoInput")?.click()
+ else if(q==="changePassword"){S.modal="password";S.modalPayload={};render()}
+ else if(q==="manageSessions"){S.modal="sessions";S.modalPayload={};render()}
+ else if(q==="revokeSession"){toast(t("تم إلغاء الجلسة التجريبية","Demo session revoked"));S.modal=null;render()}
+ else if(q==="exportAudit"){let rows=S.auditEvents.map(r=>r.map(v=>"\""+String(v).replaceAll("\"","\"\"")+"\"").join(",")),csv=["Time,Event,Entity,Actor,Correlation ID",...rows].join("\n"),blob=new Blob([csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),ln=document.createElement("a");ln.href=url;ln.download="auran-audit.csv";ln.click();setTimeout(()=>URL.revokeObjectURL(url),800);toast(t("تم تصدير سجل التدقيق","Audit log exported"))}
+ else if(q==="clearAudit"){S.auditEvents=[["10:42","PatientCheckedIn","P-10421","Ahmed Shahine","cor-71A8"],["10:18","VisitStarted","V-009841","Mona Salem","cor-9F21"],["09:48","RolePermissionsUpdated","Doctor","Ahmed Shahine","cor-1A22"]];persistDemo();toast(t("تمت إعادة بيانات السجل التجريبية","Demo audit log reset"));render()}
+ else if(q==="newClinic"){S.modal="clinic";S.modalPayload={};render()}
+ else if(q==="manageClinic"){S.selectedClinicId=id;go("platformClinic")}
+ else if(q==="editClinic"){S.modal="clinic";S.modalPayload={id:id||S.selectedClinicId};render()}
+ else if(q==="toggleClinicStatus"||q==="clinicSuspend"){let cid=id||S.selectedClinicId,c=S.platformClinics.find(x=>x.id===cid);if(c){c.status=c.status==="Active"?"Suspended":"Active";persistDemo();toast(c.status==="Active"?t("تمت إعادة تفعيل العيادة","Clinic reactivated"):t("تم إيقاف العيادة وإلغاء الجلسات النشطة في العرض","Clinic suspended; active sessions invalidated in demo"));render()}}
  else if(q==="reportBack"){S.report=null;S.step=0;render()}
  else if(q==="reportFilters"){S.step=1;render()}
- else if(q==="resetReport"){toast(t("تم مسح الفلاتر","Filters reset"))}
+ else if(q==="resetReport")toast(t("تم مسح الفلاتر","Filters reset"))
  else if(q==="preview"){S.step=2;S.reportTime=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});render()}
  else if(q==="refresh"){S.reportTime=new Date().toLocaleTimeString([],{hour:"2-digit",minute:"2-digit"});toast(t("تم تحديث التقرير","Report refreshed"));render()}
- else if(q==="pdf"){exportReport("pdf")}
- else if(q==="xls"){exportReport("xls")}
- else if(q==="refreshDash"){toast(t("تم تحديث بيانات لوحة التحكم","Dashboard refreshed"))}
- else if(q==="save"){toast(t("تم حفظ التغييرات","Changes saved"))}
- else if(q==="noop"){toast(t("تم تنفيذ الإجراء في النموذج","Action executed in prototype"))}
- else if(q==="sw"){a.classList.toggle("on")}
- else if(q==="newEmployee"||q==="editEmployee"){S.modal="employee";render()}
- else if(q==="newPatient"){S.modal="patient";render()}
- else if(q==="queueArrival"){S.modal="arrival";render()}
- else if(q==="newRole"){S.modal="role";render()}
- else if(q==="modal"){S.modal="generic";render()}
- else if(q==="closeModal"){S.modal=null;render()}
- else if(q==="saveModal"){let done=S.modal==="completeVisit",kind=S.modal;S.modal=null;if(done){S.screen="follow";location.hash="/follow";toast(t("تم إكمال الزيارة","Visit completed"))}else{toast(kind==="patient"?t("تم تسجيل المريض","Patient registered"):kind==="arrival"?t("تمت إضافة المريض لقائمة الانتظار","Patient added to queue"):kind==="role"?t("تم إنشاء الدور","Role created"):t("تم حفظ التغييرات","Changes saved"))}render()}
+ else if(q==="pdf")exportReport("pdf")
+ else if(q==="xls")exportReport("xls")
+ else if(q==="refreshDash")toast(t("تم تحديث بيانات لوحة التحكم","Dashboard refreshed"))
+ else if(q==="sw")a.classList.toggle("on")
+ else if(q==="noop")toast(t("الإجراء يعمل داخل نسخة العرض","Action is available in the demo"))
+ else if(q==="closeModal"){S.modal=null;S.modalPayload={};render()}
+ else if(q==="saveModal"){if(S.modal==="confirmDelete")performDelete();else saveModalData()}
 });
 function dnd(){document.querySelectorAll(".pc").forEach(x=>{x.ondragstart=e=>e.dataTransfer.setData("text/plain",JSON.stringify({n:x.dataset.p,f:x.dataset.from}))});document.querySelectorAll("[data-lane]").forEach(l=>{l.ondragover=e=>{e.preventDefault();l.classList.add("drop")};l.ondragleave=()=>l.classList.remove("drop");l.ondrop=e=>{e.preventDefault();l.classList.remove("drop");let d=JSON.parse(e.dataTransfer.getData("text/plain")),to=l.dataset.lane;if(d.f!==to){S.q[d.f]=S.q[d.f].filter(x=>x!==d.n);S.q[to].push(d.n);render()}}});let from=null;document.querySelectorAll("[data-w]").forEach(x=>{x.ondragstart=()=>from=+x.dataset.w;x.ondragover=e=>e.preventDefault();x.ondrop=()=>{let to=+x.dataset.w;if(from!==null&&from!==to){let v=S.flow.splice(from,1)[0];S.flow.splice(to,0,v);toast(t("تم تحديث ترتيب المسار","Workflow order updated"));render()}}});let mf=null;document.querySelectorAll("[data-mf]").forEach(x=>{x.ondragstart=()=>mf=+x.dataset.mf;x.ondragover=e=>e.preventDefault();x.ondrop=()=>{let to=+x.dataset.mf;if(mf!==null&&mf!==to){let v=S.medicalFields.splice(mf,1)[0];S.medicalFields.splice(to,0,v);toast(t("تم تحديث ترتيب الحقول","Field order updated"));render()}}})}
 let h=location.hash.replace("#/","");if(N.some(n=>n[0]===h)||["login","clinical","profile","patientProfile","states","platformLogin","platformClinics","platformClinic","platformAudit"].includes(h))S.screen=h;render();
