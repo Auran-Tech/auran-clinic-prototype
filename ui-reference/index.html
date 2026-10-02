@@ -410,13 +410,14 @@ function render(){
  dnd();
  document.querySelectorAll("button.btn:not([data-a]):not([data-nav])").forEach(x=>x.dataset.a="noop");
  let ps=document.getElementById("permSearch");if(ps)ps.oninput=()=>{let q=ps.value.toLowerCase();document.querySelectorAll("[data-permission]").forEach(el=>el.style.display=el.dataset.permission.includes(q)?"":"none")};
- const bindSearch=(id,sel,key)=>{let el=document.getElementById(id);if(el)el.oninput=()=>{let q=el.value.toLowerCase();document.querySelectorAll(sel).forEach(row=>{let val=row.dataset[key]||"";row.style.display=val.includes(q)?"":"none"})}};
- bindSearch("patientSearch","[data-patient-row]","patientRow");bindSearch("queueSearch","[data-queue-item]","queueItem");
- const bindCompound=(searchId,selector,keyName,filters)=>{let search=document.getElementById(searchId),controls=filters.map(f=>({el:document.getElementById(f.id),key:f.key,contains:!!f.contains}));let apply=()=>{let q=(search?.value||"").toLowerCase();document.querySelectorAll(selector).forEach(row=>{let text=(row.dataset[keyName]||"").toLowerCase(),ok=!q||text.includes(q);controls.forEach(f=>{let v=f.el?.value||"All";if(v!=="All"){let rv=row.dataset[f.key]||"";ok=ok&&(f.contains?rv.toLowerCase().includes(v.toLowerCase()):rv===v)}});row.style.display=ok?"":"none"})};if(search)search.oninput=apply;controls.forEach(f=>{if(f.el)f.el.onchange=apply})};
- bindCompound("visitSearch","[data-visit-row]","visitRow",[{id:"visitStatusFilter",key:"status"},{id:"visitDoctorFilter",key:"doctor"}]);
- bindCompound("followSearch","[data-follow-row]","followRow",[{id:"followStatusFilter",key:"status"}]);
- bindCompound("employeeSearch","[data-employee-row]","employeeRow",[{id:"employeeStatusFilter",key:"status"}]);
- bindCompound("auditSearch","[data-audit-row]","auditRow",[{id:"auditEventFilter",key:"event",contains:true}]);
+ const bindStateSearch=(id,key,pageKey)=>{let el=document.getElementById(id);if(el)el.oninput=()=>{let v=el.value;S.listFilters[key]=v;S.pages[pageKey]=1;render();requestAnimationFrame(()=>{let n=document.getElementById(id);if(n){n.focus();try{n.setSelectionRange(v.length,v.length)}catch(e){}}})}};
+ const bindStateSelect=(id,key,pageKey)=>{let el=document.getElementById(id);if(el)el.onchange=()=>{S.listFilters[key]=el.value;S.pages[pageKey]=1;render()}};
+ bindStateSearch("patientSearch","patients","patients");
+ bindStateSearch("visitSearch","visits","visits");bindStateSelect("visitStatusFilter","visitStatus","visits");bindStateSelect("visitDoctorFilter","visitDoctor","visits");
+ bindStateSearch("followSearch","follow","follow");bindStateSelect("followStatusFilter","followStatus","follow");
+ bindStateSearch("employeeSearch","employees","employees");bindStateSelect("employeeStatusFilter","employeeStatus","employees");
+ bindStateSearch("auditSearch","audit","audit");bindStateSelect("auditEventFilter","auditEvent","audit");
+ let qs=document.getElementById("queueSearch");if(qs)qs.oninput=()=>{let q=qs.value.toLowerCase();document.querySelectorAll("[data-queue-item]").forEach(row=>row.style.display=(row.dataset.queueItem||"").includes(q)?"":"none")};
  let qd=document.getElementById("queueDoctorFilter");if(qd){qd.value=S.queueDoctorFilter||"All";qd.onchange=()=>{S.queueDoctorFilter=qd.value;render()}}
  let qp=document.getElementById("queuePriorityFilter");if(qp){qp.value=S.queuePriorityFilter||"All";qp.onchange=()=>{S.queuePriorityFilter=qp.value;render()}}
  document.querySelectorAll(".clinical-input").forEach(el=>el.oninput=()=>{S.clinicalDraft[el.dataset.clinical]=el.value;persistDemo()});
