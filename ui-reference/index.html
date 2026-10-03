@@ -1322,6 +1322,64 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
   letter-spacing:.01em!important;
 }
 
+
+/* UX Guidelines / Design System */
+.design-doc{display:grid;gap:14px}
+.design-section{padding:20px!important}
+.design-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px}
+.design-section-head h2,.design-mobile-cta h2{margin:4px 0 5px;font-size:18px}
+.design-section-head p,.design-mobile-cta p{margin:0;color:var(--m);font-size:11px;line-height:1.6}
+.design-kicker{font-size:8px;font-weight:850;letter-spacing:.14em;color:var(--p)}
+.foundation-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}
+.foundation-block{padding:16px;border:1px solid var(--l);border-radius:16px;background:var(--c2)}
+.foundation-block h3{margin:0 0 14px}
+.type-sample{display:flex;align-items:baseline;gap:12px;padding:8px 0;border-bottom:1px solid var(--l)}
+.type-sample:last-of-type{border-bottom:0}.type-sample span{font-size:10px;color:var(--m);font-weight:500}
+.type-display{font-size:28px;font-weight:750}.type-heading{font-size:18px;font-weight:700}.type-body{font-size:14px;font-weight:500}.type-caption{font-size:10px;font-weight:650}
+.token-line{display:grid;grid-template-columns:42px 1fr;align-items:center;gap:9px;padding:6px 0}.token-line code{border:1px solid var(--l);border-radius:7px;padding:5px;text-align:center}.token-line span{font-size:11px;color:var(--m)}
+.radius-demo{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.radius-demo span{height:52px;border:1px solid color-mix(in srgb,var(--p) 24%,var(--l));background:color-mix(in srgb,var(--p) 6%,transparent);display:grid;place-items:center;font-size:10px}.radius-demo span:nth-child(1){border-radius:8px}.radius-demo span:nth-child(2){border-radius:10px}.radius-demo span:nth-child(3){border-radius:14px}.radius-demo span:nth-child(4){border-radius:20px}
+.color-grid{display:grid;grid-template-columns:repeat(5,minmax(110px,1fr));gap:10px}.color-token{display:flex;align-items:center;gap:9px;padding:10px;border:1px solid var(--l);border-radius:13px}.color-token>span{width:32px;height:32px;border-radius:10px;border:1px solid var(--l);flex:0 0 auto}.color-token div{display:grid;gap:2px;min-width:0}.color-token b{font-size:10px}.color-token code{font-size:8px;color:var(--m);overflow:hidden;text-overflow:ellipsis}
+.icon-guideline{display:grid;grid-template-columns:1fr 260px;gap:14px}.icon-showcase{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.icon-reference{display:grid;place-items:center;gap:7px;min-height:76px;padding:10px;border:1px solid var(--l);border-radius:13px;background:var(--c2)}.icon-reference>span{width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--p) 8%,transparent);color:var(--p);display:grid;place-items:center}.icon-reference small{font-size:8.5px;text-align:center;color:var(--m)}
+.icon-rules{display:grid;grid-template-columns:1fr 1fr;gap:8px}.icon-rules>div{padding:12px;border:1px solid var(--l);border-radius:13px}.icon-rules b{display:block;font-size:15px}.icon-rules small{color:var(--m);font-size:9px}
+.component-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.control-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.design-search{position:relative}.design-search>svg{position:absolute;inset-inline-start:11px;top:50%;transform:translateY(-50%);z-index:2;color:var(--m)}.design-search .input{padding-inline-start:34px}
+.design-id{display:inline-block;padding:6px 9px;border:1px solid var(--l);border-radius:8px;background:color-mix(in srgb,var(--p) 6%,transparent);direction:ltr;unicode-bidi:isolate}.design-table{min-width:600px}
+.design-state{border:1px solid var(--l);border-radius:15px;background:var(--c2)}
+.layout-rules{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.layout-rules>div{padding:14px;border:1px solid var(--l);border-radius:14px}.layout-rules b{font-size:11px}.layout-rules p{margin:6px 0 0;color:var(--m);font-size:9.5px;line-height:1.55}
+.design-mobile-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(135deg,color-mix(in srgb,var(--p) 7%,var(--c2)),var(--c2))!important}
+
+/* Clinic staff mobile app design showcase */
+.mobile-design-page{display:grid;gap:14px}
+.mobile-design-notes{padding:18px!important}.mobile-design-notes h2{margin:4px 0 6px}.mobile-design-notes p{max-width:900px}
+.mobile-principles{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.mobile-principles span{display:inline-flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid var(--l);border-radius:999px;font-size:9px;color:var(--m);background:var(--c2)}
+.phone-showcase{display:grid;grid-template-columns:390px minmax(0,1fr);gap:22px;align-items:start}
+.phone-frame{width:390px;height:790px;border:8px solid #0A0F18;border-radius:38px;background:#F7F9FC;color:#0F172A;box-shadow:0 28px 70px rgba(0,0,0,.28);overflow:hidden;position:relative;margin:0 auto;direction:inherit}
+.phone-status{height:28px;padding:8px 18px 0;display:flex;align-items:center;justify-content:space-between;font-size:9px;font-weight:750}
+.mobile-app-header{height:59px;padding:9px 14px 10px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E6EBF2;background:#fff}.mobile-app-header>div:first-child{display:grid;gap:1px}.mobile-app-header small{font-size:8px;color:#7C899B}.mobile-app-header b{font-size:14px}
+.mobile-head-actions{display:flex;align-items:center;gap:8px}.mobile-head-actions button{position:relative;width:34px;height:34px;border:1px solid #E3E8EF;border-radius:10px;background:#fff;color:#64748B;display:grid;place-items:center}.mobile-head-actions button i{position:absolute;width:7px;height:7px;border-radius:50%;background:#EF4444;top:4px;inset-inline-end:4px;border:2px solid #fff}.mobile-avatar{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#64748B,#6366F1);color:#fff;font-size:9px;font-weight:800}
+.mobile-screen-scroll{height:646px;overflow:hidden;padding:12px 13px 90px;background:#F4F7FB}
+.mobile-clinic-chip{height:39px;display:flex;align-items:center;gap:8px;padding:0 10px;border:1px solid #E4E9F0;border-radius:11px;background:#fff;color:#475569}.mobile-clinic-chip>span:nth-child(2){display:grid;line-height:1.05;flex:1}.mobile-clinic-chip small{font-size:7px;color:#94A3B8}.mobile-clinic-chip b{font-size:9.5px}
+.mobile-hero{margin-top:10px;padding:15px;border-radius:17px;background:linear-gradient(135deg,#2563EB,#6366F1);color:#fff;display:flex;align-items:center;justify-content:space-between;box-shadow:0 10px 24px rgba(59,130,246,.22)}.mobile-hero>div{display:grid}.mobile-hero small{font-size:8px;opacity:.78}.mobile-hero strong{font-size:30px;line-height:1;margin:5px 0 2px}.mobile-hero span{font-size:8px;opacity:.82}.mobile-hero-icon{width:45px;height:45px;border-radius:14px;background:#ffffff20;display:grid;place-items:center}
+.mobile-section-head{display:flex;align-items:flex-end;justify-content:space-between;margin:14px 1px 7px}.mobile-section-head>div{display:grid;gap:2px}.mobile-section-head b{font-size:10.5px}.mobile-section-head small{font-size:7.5px;color:#94A3B8}.mobile-link{font-size:8px;color:#2563EB;font-weight:700}
+.mobile-kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.mobile-kpi-grid>div{padding:9px 6px;border:1px solid #E5EAF1;border-radius:12px;background:#fff;display:grid;gap:4px;justify-items:start}.mobile-kpi-grid b{font-size:17px}.mobile-kpi-grid small{font-size:6.8px;color:#7C899B}.mkpi-icon{width:25px;height:25px;border-radius:8px;display:grid;place-items:center}.mkpi-icon.blue{background:#EFF6FF;color:#2563EB}.mkpi-icon.green{background:#ECFDF5;color:#059669}.mkpi-icon.orange{background:#FFF7ED;color:#EA580C}.mkpi-icon.purple{background:#F5F3FF;color:#7C3AED}
+.mobile-quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.mobile-quick-grid button{min-height:62px;border:1px solid #E5EAF1;border-radius:12px;background:#fff;color:#475569;display:grid;place-items:center;align-content:center;gap:5px;font-size:7px}.mobile-quick-grid button span{width:27px;height:27px;border-radius:8px;background:#EFF6FF;color:#2563EB;display:grid;place-items:center}
+.mobile-patient-card{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:9px;margin-bottom:6px;border:1px solid #E4E9F0;border-radius:12px;background:#fff}.mobile-patient-avatar{width:32px;height:32px;border-radius:10px;background:#EEF2FF;color:#4F46E5;display:grid;place-items:center;font-size:8px;font-weight:800}.mobile-patient-copy{display:grid;gap:3px;min-width:0}.mobile-patient-copy b{font-size:9px}.mobile-patient-copy small{font-size:7px;color:#8491A5}
+.mobile-alert-row{display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:10px;margin-bottom:6px;border:1px solid #F3DFDF;border-radius:12px;background:#fff}.mobile-alert-row>span:first-child{width:29px;height:29px;border-radius:9px;background:#FFF1F2;color:#E11D48;display:grid;place-items:center}.mobile-alert-row div{display:grid;gap:2px}.mobile-alert-row b{font-size:8.5px}.mobile-alert-row small{font-size:7px;color:#8491A5}
+.mobile-bottom-nav{position:absolute;bottom:0;inset-inline:0;height:70px;padding:7px 8px 8px;border-top:1px solid #E4E9F0;background:#fff;display:grid;grid-template-columns:repeat(5,1fr);z-index:5}.mobile-bottom-nav button{position:relative;border:0;background:transparent;color:#94A3B8;display:grid;place-items:center;align-content:center;gap:3px;font-size:6.5px;border-radius:10px}.mobile-bottom-nav button.on{color:#2563EB;background:#EFF6FF}.mobile-bottom-nav button i{position:absolute;top:4px;inset-inline-end:10px;min-width:14px;height:14px;padding:0 3px;border-radius:999px;background:#EF4444;color:#fff;font:700 7px/14px sans-serif}
+.mobile-screen-library{padding:20px;border:1px solid var(--l);border-radius:20px;background:var(--c2)}.mobile-screen-library>h3{margin:0 0 14px}.mobile-screen-list{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.mobile-screen-list>div{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;padding:12px;border:1px solid var(--l);border-radius:13px}.mobile-screen-list>div>span{width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--p) 8%,transparent);color:var(--p);display:grid;place-items:center}.mobile-screen-list>div div{display:grid;gap:3px}.mobile-screen-list b{font-size:10.5px}.mobile-screen-list small{font-size:8.5px;color:var(--m)}
+.mobile-excluded{margin-top:14px;padding:14px;border:1px solid color-mix(in srgb,#F59E0B 25%,var(--l));border-radius:14px;background:color-mix(in srgb,#F59E0B 6%,var(--c2))}.mobile-excluded b{font-size:10px}.mobile-excluded p{margin:6px 0 0;font-size:9px;color:var(--m);line-height:1.6}
+
+@media(max-width:1050px){
+ .color-grid{grid-template-columns:repeat(3,1fr)}.icon-guideline{grid-template-columns:1fr}.icon-showcase{grid-template-columns:repeat(4,1fr)}
+ .control-grid,.layout-rules{grid-template-columns:repeat(2,1fr)}
+ .phone-showcase{grid-template-columns:1fr}.mobile-screen-library{max-width:760px;margin:0 auto;width:100%}
+}
+@media(max-width:700px){
+ .foundation-grid,.control-grid,.layout-rules{grid-template-columns:1fr}.color-grid{grid-template-columns:repeat(2,1fr)}.icon-showcase{grid-template-columns:repeat(3,1fr)}
+ .design-section{padding:15px!important}.design-section-head,.design-mobile-cta{align-items:flex-start;flex-direction:column}.design-mobile-cta .btn{width:100%}
+ .phone-frame{width:min(390px,100%);height:760px;border-width:6px}.mobile-screen-scroll{height:616px}
+ .mobile-screen-list{grid-template-columns:1fr}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1513,7 +1571,7 @@ function user(){let u=S.profileData||{name:"Ahmed Shahine",email:"ahmed@auran.cl
 function notificationsMenu(){let unread=S.notifications.filter(x=>!x.read).length;return `<div class="notification-wrap"><button class="navbar-icon" data-a="notifications" aria-label="${t("الإشعارات","Notifications")}">${ic("bell",18)}${unread?`<span class="notification-badge">${unread}</span>`:""}</button><div id="notificationPop" class="navbar-dropdown hide"><div class="notification-head"><div><h3>${t("الإشعارات","Notifications")}</h3><small class="muted">${unread?t(unread+" غير مقروء",unread+" unread"):t("كل الإشعارات مقروءة","You're all caught up")}</small></div>${unread?`<button data-a="markNotifications">${t("تحديد الكل كمقروء","Mark all read")}</button>`:""}</div><div class="notification-list">${S.notifications.length?S.notifications.map(n=>`<button class="notification-item ${n.read?"":"unread"}" data-a="openNotification" data-id="${n.id}" data-target="${n.screen}"><span class="notification-dot"></span><span class="notification-copy"><b>${A()?n.titleAr:n.titleEn}</b><small>${A()?n.bodyAr:n.bodyEn}</small></span><span class="notification-time">${n.time}</span></button>`).join(""):`<div class="notification-empty">${t("لا توجد إشعارات جديدة","No notifications")}</div>`}</div></div></div>`}
 function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","Main branch")],["New Cairo",t("فرع القاهرة الجديدة","New Cairo branch")],["Nasr City",t("فرع مدينة نصر","Nasr City branch")]];return `<div class="location-wrap"><button class="location-trigger" data-a="locations">${ic("branches",16)}<span class="location-copy"><small>${t("الفرع","Branch")}</small><b>${S.currentLocation}</b></span><span class="chev" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4 4-4"/></svg></span></button><div id="locationPop" class="navbar-dropdown location-menu hide">${locs.map(x=>`<button class="location-option ${S.currentLocation===x[0]?"on":""}" data-a="selectLocation" data-id="${x[0]}"><span class="loc-icon">${ic("branches",14)}</span><span><b>${x[0]}</b><small>${x[1]}</small></span>${S.currentLocation===x[0]?`<span class="loc-check">✓</span>`:""}</button>`).join("")}</div></div>`}
 
-function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
+function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("مرجع تجربة المستخدم","UX Guidelines")],mobileDesign:[t("النظام","System"),t("تصميم تطبيق الموبايل","Mobile App Design")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
 function topbar(){
 return `<header class="topbar app-header">
   <div class="app-header-start">
@@ -1828,11 +1886,222 @@ function platformLogin(){return `<div class="login"><div class="art"><div class=
 function platformClinics(){let all=S.platformClinics,pg=pageData("platformClinics",all),rows=pg.items,active=all.filter(x=>x.status==="Active").length,suspended=all.length-active;return platformShell(`${PH(t("العيادات","Clinics"),t("Provisioning وحالة العيادات على مستوى المنصة","Platform-level clinic provisioning and status"),`<button class="btn p" data-a="newClinic">${ic("plus",14)}${t("إنشاء عيادة","Create clinic")}</button>`)}<div class="grid s3"><div class="card stat"><small>${t("إجمالي العيادات","Total clinics")}</small><b>${all.length}</b></div><div class="card stat"><small>${t("نشطة","Active")}</small><b class="ok">${active}</b></div><div class="card stat"><small>${t("موقوفة","Suspended")}</small><b class="bad">${suspended}</b></div></div><div class="card top scroll"><table class="table"><thead><tr><th>Code</th><th>${t("العيادة","Clinic")}</th><th>Status</th><th>${t("المدينة","City")}</th><th>${t("تاريخ الإنشاء","Created")}</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr><td dir="ltr">${r.code}</td><td><b>${r.name}</b></td><td>${p(r.status,r.status==="Active"?"ok":"bad")}</td><td>${r.city}</td><td dir="ltr">${r.created}</td><td><div class="actions"><button class="btn sm" data-a="manageClinic" data-id="${r.id}">${t("إدارة","Manage")}</button><button class="btn sm" data-a="editClinic" data-id="${r.id}">${t("تعديل","Edit")}</button></div></td></tr>`).join("")}</tbody></table>${pager("platformClinics",pg)}</div>`,"platformClinics")}
 function platformClinic(){let c=S.platformClinics.find(x=>x.id===S.selectedClinicId)||S.platformClinics[0];return platformShell(`${PH(t("إدارة العيادة","Clinic Management"),c.code+" · "+c.name,`<div class="actions"><button class="btn" data-a="platformClinics">${t("رجوع","Back")}</button><button class="btn" data-a="editClinic" data-id="${c.id}">${t("تعديل","Edit")}</button></div>`)}<div class="grid s2"><div class="card"><div class="row"><div><h3>${t("معلومات الـ Provisioning","Provisioning")}</h3><small class="muted">${t("حالة العيادة وحدود الأمان","Clinic status and security boundary")}</small></div>${p(c.status,c.status==="Active"?"ok":"bad")}</div><div class="row"><span>Clinic ID</span><code>${c.id}</code></div><div class="row"><span>Code</span><b>${c.code}</b></div><div class="row"><span>${t("المدينة","City")}</span><b>${c.city}</b></div></div><div class="card"><h3>${t("المستخدمون الأوليون","Initial users")}</h3><div class="row"><div><b>Initial Super User</b><br><small class="muted">ahmed@auran.clinic</small></div>${p(t("محمي","Protected"),"warn")}</div><div class="row"><div><b>Initial Admin</b><br><small class="muted">admin@auran.clinic</small></div>${p("Active","ok")}</div></div></div><div class="card top ${c.status==="Suspended"?"danger-zone":""}"><div class="row"><div><h3>${t("حالة العيادة","Clinic status")}</h3><small class="muted">${t("تغيير الحالة يسجل في Platform Audit ويؤثر على الجلسات النشطة.","Status changes are written to Platform Audit and affect active sessions.")}</small></div><button class="btn ${c.status==="Active"?"danger":"success"}" data-a="toggleClinicStatus" data-id="${c.id}">${ic(c.status==="Active"?"alert":"check",15)}${c.status==="Active"?t("إيقاف العيادة","Suspend clinic"):t("إعادة التفعيل","Reactivate clinic")}</button></div></div>`,"platformClinic")}
 function platformAudit(){let all=S.platformAuditEvents,pg=pageData("platformAudit",all),rows=pg.items;return platformShell(`${PH(t("تدقيق المنصة","Platform Audit"),t("أحداث المنصة فقط — منفصلة عن Clinic Audit","Platform-level events only — separate from Clinic Audit"),`<button class="btn" data-a="exportPlatformAudit">${ic("excel",14)}${t("تصدير CSV","Export CSV")}</button>`)}<div class="card scroll"><table class="table"><thead><tr><th>Time</th><th>Event</th><th>Target</th><th>Details</th><th>Correlation ID</th></tr></thead><tbody>${rows.map(r=>`<tr>${r.map((v,i)=>`<td ${i===4?'dir="ltr"':""}>${v}</td>`).join("")}</tr>`).join("")}</tbody></table>${pager("platformAudit",pg)}</div>`,"platformAudit")}
-function states(){let cards=[[t("تحميل","Loading"),`<div class="spinner"></div><p class="muted">${t("جار تحميل البيانات...","Loading data...")}</p>`],[t("لا توجد بيانات","Empty"),`<div class="icon-badge">${ic("file",20)}</div><p class="muted">${t("لا توجد عناصر لعرضها.","Nothing to show yet.")}</p>`],[t("خطأ","Error"),`<div class="icon-badge bad">${ic("alert",20)}</div><p class="muted">${t("تعذر تحميل البيانات.","Could not load data.")}</p><button class="btn" data-a="stateRetry">${t("إعادة المحاولة","Retry")}</button>`],[t("غير مصرح","Forbidden"),`<div class="icon-badge warn">${ic("lock",20)}</div><p class="muted">${t("لا تملك الصلاحية المطلوبة.","You do not have the required permission.")}</p>`],[t("غير متصل","Offline"),`<div class="icon-badge">${ic("refresh",20)}</div><p class="muted">${t("تم حفظ النص السريري محلياً لحين إعادة الاتصال.","Clinical draft preserved until reconnect.")}</p>`],[t("معطل","Disabled"),`<button class="btn" disabled>${t("إجراء غير متاح","Unavailable action")}</button><p class="muted">${t("وضح دائماً سبب التعطيل للمستخدم.","Always explain why the action is disabled.")}</p>`]];return shell(H(t("حالات تجربة المستخدم","UX States"),t("مرجع حالات Loading / Empty / Error / Forbidden / Offline / Disabled","Reference for loading, empty, error, forbidden, offline and disabled states"))+`<div class="state-grid">${cards.map(x=>`<div class="card state-demo"><div><h3>${x[0]}</h3>${x[1]}</div></div>`).join("")}</div>`)}
+function states(){
+let feedback=[
+[t("تحميل","Loading"),`<div class="spinner"></div><p class="muted">${t("جار تحميل البيانات...","Loading data...")}</p>`],
+[t("لا توجد بيانات","Empty"),`<div class="icon-badge">${ic("file",20)}</div><p class="muted">${t("لا توجد عناصر لعرضها.","Nothing to show yet.")}</p><button class="btn sm">${t("إجراء مقترح","Suggested action")}</button>`],
+[t("خطأ","Error"),`<div class="icon-badge bad">${ic("alert",20)}</div><p class="muted">${t("تعذر تحميل البيانات.","Could not load data.")}</p><button class="btn sm" data-a="stateRetry">${t("إعادة المحاولة","Retry")}</button>`],
+[t("غير مصرح","Forbidden"),`<div class="icon-badge warn">${ic("lock",20)}</div><p class="muted">${t("لا تملك الصلاحية المطلوبة.","You do not have the required permission.")}</p>`],
+[t("غير متصل","Offline"),`<div class="icon-badge">${ic("refresh",20)}</div><p class="muted">${t("سيتم الاحتفاظ بالمسودة حتى عودة الاتصال.","Draft is preserved until reconnect.")}</p>`],
+[t("معطل","Disabled"),`<button class="btn" disabled>${t("إجراء غير متاح","Unavailable action")}</button><p class="muted">${t("وضح سبب التعطيل دائماً.","Always explain why it is disabled.")}</p>`]
+];
+let palette=[
+["Primary","#3B82F6"],["Indigo","#6366F1"],["Info","#38BDF8"],["Success","#10B981"],["Warning","#F59E0B"],["Danger","#EF4444"],
+[t("النص","Text"),"var(--t)"],[t("النص الثانوي","Muted"),"var(--m)"],[t("الحدود","Border"),"var(--l)"],[t("السطح","Surface"),"var(--c2)"]
+];
+let iconSet=[["dashboard",t("لوحة التحكم","Dashboard")],["patients",t("المرضى","Patients")],["queue",t("الانتظار","Queue")],["visits",t("الزيارات","Visits")],["follow",t("المتابعات","Follow-ups")],["doctor",t("طبيب","Doctor")],["reports",t("التقارير","Reports")],["roles",t("الصلاحيات","Permissions")],["audit",t("التدقيق","Audit")],["settings",t("الإعدادات","Settings")],["alert",t("تنبيه","Alert")],["check",t("نجاح","Success")]];
+return shell(
+H(
+ t("مرجع تجربة المستخدم","UX & UI Guidelines"),
+ t("مرجع موحد للتصميم، الحالات، المكونات، الألوان، الخطوط، الأيقونات، والمسافات","Single reference for design states, components, colors, typography, icons, and spacing"),
+ `<button class="btn p" data-nav="mobileDesign">${ic("patients",14)}${t("تصميم تطبيق الموبايل","Mobile App Design")}</button>`
+)+
+`<div class="design-doc">
+
+<section class="card design-section">
+  <div class="design-section-head"><div><span class="design-kicker">FOUNDATIONS</span><h2>${t("الأساس البصري","Visual foundation")}</h2><p>${t("القواعد الأساسية التي يجب استخدامها في كل شاشة جديدة.","Core rules to use across every new screen.")}</p></div></div>
+  <div class="foundation-grid">
+    <div class="foundation-block">
+      <h3>${t("الخطوط","Typography")}</h3>
+      <div class="type-sample type-display">Aa <span>${t("عنوان رئيسي","Page title")} · 28px / 750</span></div>
+      <div class="type-sample type-heading">Aa <span>${t("عنوان قسم","Section title")} · 18px / 700</span></div>
+      <div class="type-sample type-body">Aa <span>${t("نص أساسي","Body")} · 12–14px / 400–600</span></div>
+      <div class="type-sample type-caption">Aa <span>${t("وصف صغير","Caption")} · 9–11px / 500–700</span></div>
+      <small class="muted">Inter / Poppins · Arabic uses the system Arabic fallback · Numeric IDs use monospace only when needed.</small>
+    </div>
+    <div class="foundation-block">
+      <h3>${t("المسافات والحواف","Spacing & radius")}</h3>
+      <div class="token-line"><code>4</code><span>Micro gap</span></div>
+      <div class="token-line"><code>8</code><span>Control gap</span></div>
+      <div class="token-line"><code>12</code><span>Compact padding</span></div>
+      <div class="token-line"><code>16</code><span>Default padding</span></div>
+      <div class="token-line"><code>24</code><span>Section spacing</span></div>
+      <div class="radius-demo"><span>8</span><span>10</span><span>14</span><span>20</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="card design-section">
+  <div class="design-section-head"><div><span class="design-kicker">COLOR</span><h2>${t("نظام الألوان","Color system")}</h2><p>${t("الألوان الدلالية ثابتة، مع دعم كامل للوضع الفاتح والداكن.","Semantic colors remain consistent across light and dark themes.")}</p></div><button class="btn sm" data-a="theme">${t("تبديل الوضع","Toggle theme")}</button></div>
+  <div class="color-grid">${palette.map(x=>`<div class="color-token"><span style="background:${x[1]}"></span><div><b>${x[0]}</b><code>${x[1]}</code></div></div>`).join("")}</div>
+</section>
+
+<section class="card design-section">
+  <div class="design-section-head"><div><span class="design-kicker">ICONS</span><h2>${t("نظام الأيقونات","Icon system")}</h2><p>${t("استخدم SVG line icons بنفس الـstroke، بدون خلط رموز Unicode داخل الأزرار.","Use consistent SVG line icons; avoid mixing Unicode symbols inside controls.")}</p></div></div>
+  <div class="icon-guideline">
+    <div class="icon-showcase">${iconSet.map(x=>`<div class="icon-reference"><span>${ic(x[0],19)}</span><small>${x[1]}</small></div>`).join("")}</div>
+    <div class="icon-rules">
+      <div><b>14px</b><small>${t("داخل الأزرار الصغيرة","Small buttons")}</small></div>
+      <div><b>16–18px</b><small>${t("التنقل والمدخلات","Navigation & inputs")}</small></div>
+      <div><b>20–24px</b><small>${t("الحالات والبطاقات","States & cards")}</small></div>
+      <div><b>1.8–2px</b><small>Stroke width</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="card design-section">
+ <div class="design-section-head"><div><span class="design-kicker">CONTROLS</span><h2>${t("الأزرار والتحكم","Buttons & controls")}</h2></div></div>
+ <div class="component-row">
+   <button class="btn p">${ic("plus",14)}${t("إجراء رئيسي","Primary action")}</button>
+   <button class="btn">${ic("settings",14)}${t("إجراء ثانوي","Secondary")}</button>
+   <button class="btn success">${ic("check",14)}${t("نجاح","Success")}</button>
+   <button class="btn danger">${ic("alert",14)}${t("حذف","Destructive")}</button>
+   <button class="btn" disabled>${t("معطل","Disabled")}</button>
+ </div>
+ <div class="control-grid top">
+   <div class="field"><label>${t("حقل نصي","Text input")}</label><input class="input" value="${t("قيمة تجريبية","Sample value")}"></div>
+   <div class="field"><label>${t("قائمة اختيار","Select")}</label><select class="input"><option>${t("اختيار","Select option")}</option></select></div>
+   <div class="field"><label>${t("بحث","Search")}</label><div class="design-search">${ic("search",15)}<input class="input" placeholder="${t("ابحث هنا...","Search here...")}"></div></div>
+   <div class="field"><label>${t("مفتاح","Switch")}</label><div class="component-row"><button class="switch on"></button><button class="switch"></button></div></div>
+ </div>
+</section>
+
+<section class="card design-section">
+ <div class="design-section-head"><div><span class="design-kicker">DATA</span><h2>${t("عرض البيانات","Data presentation")}</h2><p>${t("IDs والأرقام تظل LTR داخلياً، بينما محاذاة العمود تتبع اتجاه الصفحة.","IDs and numeric values stay internally LTR while column alignment follows page direction.")}</p></div></div>
+ <div class="component-row">
+   <span class="pill ok">${t("نشط","Active")}</span>
+   <span class="pill warn">${t("معلق","Pending")}</span>
+   <span class="pill bad">${t("متأخر","Overdue")}</span>
+   <span class="pill">${t("افتراضي","Neutral")}</span>
+   <code class="design-id" dir="ltr">V-009841</code>
+ </div>
+ <div class="scroll top"><table class="table design-table"><thead><tr><th>${t("الرقم التعريفي","ID")}</th><th>${t("المريض","Patient")}</th><th>${t("الحالة","Status")}</th><th>${t("التاريخ","Date")}</th></tr></thead><tbody><tr><td class="id-cell"><b class="id-value" dir="ltr">P-10421</b></td><td>${t("أحمد مصطفى","Ahmed Mostafa")}</td><td><span class="pill ok">${t("نشط","Active")}</span></td><td><span dir="ltr">2026-10-03</span></td></tr></tbody></table></div>
+</section>
+
+<section class="card design-section">
+ <div class="design-section-head"><div><span class="design-kicker">FEEDBACK</span><h2>${t("حالات النظام","System states")}</h2><p>${t("كل شاشة يجب أن تحتوي على حالات واضحة للتحميل والفراغ والخطأ والصلاحيات والاتصال والتعطيل.","Every screen must define loading, empty, error, permission, connectivity, and disabled states.")}</p></div></div>
+ <div class="state-grid">${feedback.map(x=>`<div class="state-demo design-state"><div><h3>${x[0]}</h3>${x[1]}</div></div>`).join("")}</div>
+</section>
+
+<section class="card design-section">
+ <div class="design-section-head"><div><span class="design-kicker">LAYOUT</span><h2>${t("قواعد التخطيط","Layout rules")}</h2></div></div>
+ <div class="layout-rules">
+   <div><b>Desktop</b><p>${t("Sidebar ثابت + Navbar + محتوى بعرض مرن. أقصى عرض للمحتوى للحفاظ على القراءة.","Fixed sidebar + navbar + fluid content with readable max-width.")}</p></div>
+   <div><b>Tablet</b><p>${t("قلل عدد الأعمدة، اخفِ التفاصيل الثانوية، واحتفظ بالإجراءات الأساسية.","Reduce columns, hide secondary metadata, preserve primary actions.")}</p></div>
+   <div><b>Mobile</b><p>${t("بطاقات بدلاً من الجداول الواسعة، bottom navigation، وإجراء رئيسي واحد واضح لكل شاشة.","Use cards instead of wide tables, bottom navigation, and one obvious primary action per screen.")}</p></div>
+   <div><b>RTL / LTR</b><p>${t("استخدم logical CSS properties مثل inline-start/end ولا تثبت left/right إلا للبيانات الرقمية المعزولة.","Use logical CSS properties; isolate machine-readable values instead of forcing whole cells to LTR.")}</p></div>
+ </div>
+</section>
+
+<section class="card design-section design-mobile-cta">
+ <div><span class="design-kicker">MOBILE PRODUCT</span><h2>${t("تطبيق العيادة للموبايل","Clinic Staff Mobile App")}</h2><p>${t("نسخة موبايل للعاملين داخل العيادة، وليست تطبيق مريض. تعرض التشغيل اليومي بنفس منطق الويب ولكن بتجربة مناسبة للموبايل.","A staff-facing clinic mobile app—not a patient app. It mirrors daily clinic operations with a mobile-first experience.")}</p></div>
+ <button class="btn p" data-nav="mobileDesign">${ic("arrow",14)}${t("فتح التصميم","Open design")}</button>
+</section>
+
+</div>`
+)}
+
+function mobileDesign(){
+let mobileNav=[
+["dashboard",t("الرئيسية","Home"),"dashboard"],
+["patients",t("المرضى","Patients"),"patients"],
+["queue",t("الانتظار","Queue"),"queue"],
+["visits",t("الزيارات","Visits"),"visits"],
+["follow",t("المتابعات","Follow"),"follow"]
+];
+return shell(
+H(
+ t("تصميم تطبيق العيادة للموبايل","Clinic Mobile App Design"),
+ t("تطبيق للعاملين داخل العيادة بنفس وظائف النظام الأساسية، وليس تطبيقاً للمريض","Staff-facing clinic app mirroring core web workflows; not a patient app"),
+ `<button class="btn" data-nav="states">${ic("arrow",14)}${t("العودة لمرجع التصميم","Back to UX Guidelines")}</button>`
+)+
+`<div class="mobile-design-page">
+  <div class="mobile-design-notes card">
+    <span class="design-kicker">PRODUCT DIRECTION</span>
+    <h2>${t("نفس النظام، تجربة موبايل مختلفة","Same product, mobile-first interaction")}</h2>
+    <p class="muted">${t("لا ننقل صفحات الويب كما هي. نحافظ على نفس الصلاحيات والبيانات والـworkflows، لكن نستخدم بطاقات، bottom navigation، وquick actions مناسبة للاستخدام أثناء الحركة داخل العيادة.","Do not shrink desktop pages. Keep the same permissions, data, and workflows, but use cards, bottom navigation, and quick actions for staff working on the move.")}</p>
+    <div class="mobile-principles">
+      <span>${ic("roles",15)} ${t("نفس RBAC","Same RBAC")}</span>
+      <span>${ic("refresh",15)} ${t("نفس البيانات الحية","Same live data")}</span>
+      <span>${ic("doctor",15)} ${t("للعاملين فقط","Staff only")}</span>
+      <span>${ic("globe",15)} RTL / LTR</span>
+    </div>
+  </div>
+
+  <div class="phone-showcase">
+    <div class="phone-frame">
+      <div class="phone-status"><span>9:41</span><span>● ● ◒</span></div>
+      <div class="mobile-app-header">
+        <div><small>${t("صباح الخير","Good morning")}</small><b>Ahmed</b></div>
+        <div class="mobile-head-actions"><button>${ic("bell",17)}<i></i></button><span class="mobile-avatar">AS</span></div>
+      </div>
+      <div class="mobile-screen-scroll">
+        <div class="mobile-clinic-chip">${ic("branches",14)}<span><small>${t("الفرع","Branch")}</small><b>Main Clinic</b></span><span>⌄</span></div>
+
+        <div class="mobile-hero">
+          <div><small>${t("تشغيل العيادة اليوم","Clinic today")}</small><strong>24</strong><span>${t("زيارة نشطة","active visits")}</span></div>
+          <span class="mobile-hero-icon">${ic("activity",22)}</span>
+        </div>
+
+        <div class="mobile-section-head"><div><b>${t("نظرة سريعة","At a glance")}</b><small>${t("الحالة الحالية","Current status")}</small></div></div>
+        <div class="mobile-kpi-grid">
+          <div><span class="mkpi-icon blue">${ic("queue",16)}</span><b>5</b><small>${t("في الانتظار","Waiting")}</small></div>
+          <div><span class="mkpi-icon green">${ic("doctor",16)}</span><b>3</b><small>${t("مع الطبيب","In visit")}</small></div>
+          <div><span class="mkpi-icon orange">${ic("follow",16)}</span><b>2</b><small>${t("متأخرة","Overdue")}</small></div>
+          <div><span class="mkpi-icon purple">${ic("file",16)}</span><b>4</b><small>${t("توثيق معلق","Pending docs")}</small></div>
+        </div>
+
+        <div class="mobile-section-head"><div><b>${t("إجراءات سريعة","Quick actions")}</b><small>${t("الأكثر استخداماً","Most used")}</small></div></div>
+        <div class="mobile-quick-grid">
+          <button data-nav="patients"><span>${ic("plus",17)}</span>${t("مريض جديد","New patient")}</button>
+          <button data-nav="queue"><span>${ic("queue",17)}</span>${t("تسجيل وصول","Check in")}</button>
+          <button data-nav="visits"><span>${ic("doctor",17)}</span>${t("بدء زيارة","Start visit")}</button>
+          <button data-nav="follow"><span>${ic("follow",17)}</span>${t("متابعة","Follow-up")}</button>
+        </div>
+
+        <div class="mobile-section-head"><div><b>${t("قائمة الانتظار","Live queue")}</b><small>${t("آخر تحديث الآن","Updated now")}</small></div><span class="mobile-link">${t("عرض الكل","View all")}</span></div>
+        <div class="mobile-patient-card">
+          <span class="mobile-patient-avatar">YM</span>
+          <div class="mobile-patient-copy"><b>${t("يوسف حسن","Youssef Hassan")}</b><small><span dir="ltr">P-10402</span> · ${t("انتظار 19 دقيقة","Waiting 19 min")}</small></div>
+          <span class="pill warn">${t("مرتفع","High")}</span>
+        </div>
+        <div class="mobile-patient-card">
+          <span class="mobile-patient-avatar">NK</span>
+          <div class="mobile-patient-copy"><b>${t("نور كمال","Nour Kamal")}</b><small><span dir="ltr">P-10377</span> · ${t("انتظار 12 دقيقة","Waiting 12 min")}</small></div>
+          <span class="pill">${t("عادي","Normal")}</span>
+        </div>
+
+        <div class="mobile-section-head"><div><b>${t("يحتاج انتباه","Needs attention")}</b><small>${t("أولوية التشغيل","Operational priority")}</small></div></div>
+        <div class="mobile-alert-row"><span>${ic("alert",16)}</span><div><b>${t("متابعة متأخرة","Overdue follow-up")}</b><small><span dir="ltr">F-00738</span> · ${t("متأخرة يومين","2 days overdue")}</small></div><span>›</span></div>
+        <div class="mobile-alert-row"><span>${ic("file",16)}</span><div><b>${t("توثيق غير مكتمل","Incomplete documentation")}</b><small><span dir="ltr">V-009818</span> · Dr. Kareem</small></div><span>›</span></div>
+      </div>
+      <div class="mobile-bottom-nav">${mobileNav.map((n,i)=>`<button class="${i===0?"on":""}" data-nav="${n[0]}">${ic(n[2],17)}<span>${n[1]}</span>${n[0]==="queue"?'<i>2</i>':""}</button>`).join("")}</div>
+    </div>
+
+    <div class="mobile-screen-library">
+      <h3>${t("الشاشات الأساسية في التطبيق","Core mobile screens")}</h3>
+      <div class="mobile-screen-list">
+        <div><span>${ic("dashboard",18)}</span><div><b>${t("Dashboard","Dashboard")}</b><small>${t("KPIs، النشاط، الإجراءات السريعة","KPIs, activity, quick actions")}</small></div></div>
+        <div><span>${ic("patients",18)}</span><div><b>${t("المرضى","Patients")}</b><small>${t("بحث، ملف المريض، التسجيل","Search, profile, registration")}</small></div></div>
+        <div><span>${ic("queue",18)}</span><div><b>${t("قائمة الانتظار","Live Queue")}</b><small>${t("تحريك الحالات والتعيين للطبيب","Move stages and assign doctors")}</small></div></div>
+        <div><span>${ic("visits",18)}</span><div><b>${t("الزيارات","Visits")}</b><small>${t("مساحة الطبيب والتوثيق","Doctor workspace and documentation")}</small></div></div>
+        <div><span>${ic("follow",18)}</span><div><b>${t("المتابعات","Follow-ups")}</b><small>${t("المستحق والمتأخر والقادم","Due, overdue, upcoming")}</small></div></div>
+        <div><span>${ic("bell",18)}</span><div><b>${t("الإشعارات","Notifications")}</b><small>${t("الأحداث المهمة والتنبيهات","Operational alerts and events")}</small></div></div>
+        <div><span>${ic("user",18)}</span><div><b>${t("الحساب","Profile")}</b><small>${t("اللغة، المظهر، تسجيل الخروج","Language, appearance, sign out")}</small></div></div>
+      </div>
+      <div class="mobile-excluded">
+        <b>${t("غير موجود في هذا التطبيق","Not part of this app")}</b>
+        <p>${t("لا يوجد تسجيل مريض ذاتي، حجز مواعيد للمريض، ملف مريض شخصي، دفع، أو patient portal. هذا التطبيق خاص بفريق العيادة فقط.","No patient self-registration, patient appointment booking, personal patient portal, payments, or patient-facing flows. This app is clinic staff only.")}</p>
+      </div>
+    </div>
+  </div>
+</div>`
+)}
+
 function login(){return `<div class="login"><div class="art"><div class="page-enter" style="max-width:720px;position:relative;z-index:1"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>${t("نظام تشغيل العيادة","Clinic Operating System")}</small></div></div><h1>${t("كل لحظة داخل العيادة، مرتبطة بما بعدها.","Every clinic moment, connected to what comes next.")}</h1><p class="muted">${t("من الاستقبال إلى الطبيب ثم التوثيق والمتابعة — تجربة تشغيلية واحدة حيّة.","From reception to doctor, documentation and follow-up — one living operational experience.")}</p><div class="journey"><span></span><i></i><span></span><i></i><span></span><i></i><span></span></div><p class="muted">${t("وصول","Arrival")} · ${t("انتظار","Queue")} · ${t("زيارة","Visit")} · ${t("متابعة","Follow-up")}</p></div></div><div class="loginbox"><div class="card" style="width:min(430px,100%);position:relative;overflow:hidden"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>${t("دخول آمن للعيادة","Secure clinic access")}</small></div></div><h2>${t("مرحباً بعودتك","Welcome back")}</h2><p class="muted">${t("أكمل من حيث توقفت في تشغيل العيادة.","Continue where you left off in clinic operations.")}</p><div class="field"><label>Email</label><input id="clinicLoginEmail" class="input" value="ahmed@auran.clinic"></div><div class="field top"><label>${t("كلمة المرور","Password")}</label><input id="clinicLoginPassword" class="input" type="password" value="password"></div><div class="row"><label><input type="checkbox" checked> ${t("تذكرني","Remember me")}</label><button data-a="forgotPassword" style="border:0;background:transparent;color:#60a5fa;cursor:pointer">${t("نسيت كلمة المرور؟","Forgot password?")}</button></div><button class="btn p" style="width:100%;padding:12px" data-a="login">${t("دخول العيادة","Enter clinic")}</button><br><br><button class="btn" style="width:100%" data-a="platformLogin">${ic("lock",15)}${t("دخول مسؤول المنصة","Platform Admin")}</button><div class="row"><small class="muted">${t("لغة الواجهة والمظهر","Language & appearance")}</small><div><button class="btn" data-a="lang">${t("EN","AR")}</button> <button class="btn" data-a="theme">${S.theme==="dark"?"☀":"◐"}</button></div></div></div></div></div>`}
 function render(){
- save();let x={dashboard:dash,patients,patientProfile,queue,visits,clinical,follow,reports,employees,roles,settings,profile,audit,states,login,platformLogin,platformClinics,platformClinic,platformAudit}[S.screen]||dash;
- R.innerHTML=x()+modalHtml()+(["login","platformLogin","platformClinics","platformClinic","platformAudit","states"].includes(S.screen)?"":`<button class="ux-fab" data-a="uxStates" title="UX States">${ic("activity",18)}</button>`);
+ save();let x={dashboard:dash,patients,patientProfile,queue,visits,clinical,follow,reports,employees,roles,settings,profile,audit,states,mobileDesign,login,platformLogin,platformClinics,platformClinic,platformAudit}[S.screen]||dash;
+ R.innerHTML=x()+modalHtml()+(["login","platformLogin","platformClinics","platformClinic","platformAudit","states","mobileDesign"].includes(S.screen)?"":`<button class="ux-fab" data-a="uxStates" title="UX States">${ic("activity",18)}</button>`);
  dnd();
  document.querySelectorAll("button.btn:not([data-a]):not([data-nav])").forEach(x=>x.dataset.a="noop");
  let ps=document.getElementById("permSearch");if(ps)ps.oninput=()=>{let q=ps.value.toLowerCase();document.querySelectorAll("[data-permission]").forEach(el=>el.style.display=el.dataset.permission.includes(q)?"":"none")};
