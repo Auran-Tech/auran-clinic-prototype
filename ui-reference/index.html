@@ -1380,6 +1380,48 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
  .mobile-screen-list{grid-template-columns:1fr}
 }
 
+
+/* Complete mobile screen gallery */
+.mobile-screen-gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+  gap:26px 22px;
+  align-items:start;
+}
+.mobile-screen-spec{display:grid;gap:9px;justify-items:center}
+.mobile-screen-label{width:min(390px,100%);display:grid;gap:2px;padding-inline:4px}
+.mobile-screen-label b{font-size:12px}
+.mobile-screen-label small{font-size:9px;color:var(--m)}
+.phone-frame-spec{height:790px}
+.mobile-app-header.compact{height:58px}
+.mobile-spec-scroll{height:646px;overflow:hidden}
+.mobile-search-bar{height:38px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;padding:0 10px;border:1px solid #E4E9F0;border-radius:11px;background:#fff;color:#8793A5;font-size:8px}.mobile-search-bar button{width:28px;height:28px;border:0;border-radius:8px;background:#F1F5F9;color:#64748B;display:grid;place-items:center}
+.mobile-primary-wide{width:100%;height:38px;margin-top:8px;border:0;border-radius:11px;background:#2563EB;color:#fff;font-size:8px;font-weight:750;display:flex;align-items:center;justify-content:center;gap:6px}
+.mobile-filter-chips{display:flex;gap:6px;overflow:hidden;margin-top:9px}.mobile-filter-chips span{white-space:nowrap;padding:6px 9px;border:1px solid #E5EAF1;border-radius:999px;background:#fff;color:#7C899B;font-size:7px}.mobile-filter-chips span.on{background:#EFF6FF;border-color:#BFDBFE;color:#2563EB;font-weight:750}
+.mobile-list-card{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;padding:10px;margin-bottom:6px;border:1px solid #E4E9F0;border-radius:12px;background:#fff}.mobile-list-card>div{display:grid;gap:3px;min-width:0}.mobile-list-card b{font-size:9px}.mobile-list-card small{font-size:7px;color:#8491A5}.mobile-row-arrow{color:#94A3B8;font-size:15px}
+.mobile-patient-avatar.lg{width:42px;height:42px;border-radius:13px;font-size:10px}
+.mobile-patient-hero{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:12px;border:1px solid #E4E9F0;border-radius:14px;background:#fff}.mobile-patient-hero>div{display:grid;gap:3px}.mobile-patient-hero b{font-size:10px}.mobile-patient-hero small{font-size:7px;color:#8491A5}.mobile-patient-hero.compact{padding:10px}
+.mobile-action-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.mobile-action-strip button{border:1px solid #E4E9F0;border-radius:11px;background:#fff;color:#475569;min-height:50px;display:grid;place-items:center;align-content:center;gap:4px;font-size:7px}.mobile-action-strip button svg{color:#2563EB}
+.mobile-tabs{display:flex;gap:5px;margin:10px 0 7px;overflow:hidden}.mobile-tabs span{padding:6px 8px;border-radius:999px;font-size:7px;color:#7C899B;background:#fff;border:1px solid #E5EAF1}.mobile-tabs span.on{background:#2563EB;color:#fff;border-color:#2563EB}
+.mobile-info-card{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;padding:0;border:1px solid #E4E9F0;border-radius:12px;overflow:hidden;background:#E4E9F0}.mobile-info-card>div{display:grid;gap:3px;padding:9px;background:#fff}.mobile-info-card small{font-size:6.5px;color:#94A3B8}.mobile-info-card b{font-size:7.5px}
+.mobile-metric-row{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:8px;padding:9px 10px;margin-bottom:5px;border:1px solid #E4E9F0;border-radius:10px;background:#fff}.mobile-metric-row span{font-size:8px}.mobile-metric-row b{font-size:11px}.mobile-metric-row small{font-size:6.5px;color:#94A3B8}
+.live-dot-label{display:flex;align-items:center;gap:4px;font-size:7px;color:#059669;font-weight:750}.live-dot-label i{width:6px;height:6px;border-radius:50%;background:#10B981}
+.mobile-queue-card{padding:10px;margin-bottom:7px;border:1px solid #E4E9F0;border-radius:13px;background:#fff}.mobile-queue-top{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center}.mobile-queue-top>div{display:grid;gap:3px}.mobile-queue-top b{font-size:8.5px}.mobile-queue-top small{font-size:6.8px;color:#8491A5}.mobile-queue-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:7px;border-top:1px solid #EEF1F5}.mobile-queue-foot span{display:flex;align-items:center;gap:4px;font-size:7px;color:#8491A5}.mobile-queue-foot button{border:0;border-radius:8px;background:#EFF6FF;color:#2563EB;padding:6px 8px;font-size:7px;font-weight:700}
+.mobile-visit-card,.mobile-follow-card{padding:11px;margin-bottom:7px;border:1px solid #E4E9F0;border-radius:13px;background:#fff}.mobile-title-code{display:flex;align-items:center;justify-content:space-between;gap:9px}.mobile-title-code b{font-size:9px;min-width:0}.mobile-title-code code{font-size:7px;color:#64748B;border:1px solid #E5EAF1;border-radius:7px;padding:4px 6px;background:#F8FAFC}.mobile-visit-card>small,.mobile-follow-card>small{display:block;margin-top:5px;font-size:7px;color:#8491A5}.mobile-card-bottom{display:flex;align-items:center;gap:7px;margin-top:9px;padding-top:7px;border-top:1px solid #EEF1F5;font-size:7px;color:#8491A5}.mobile-card-bottom .mobile-row-arrow,.mobile-card-bottom button{margin-inline-start:auto}.mobile-card-bottom button{border:0;border-radius:8px;background:#EFF6FF;color:#2563EB;padding:6px 8px;font-size:7px}
+.mobile-autosave{display:flex;align-items:center;gap:5px;margin:8px 2px;color:#059669;font-size:7px}.mobile-autosave span{width:6px;height:6px;border-radius:50%;background:#10B981}
+.mobile-clinical-section{display:grid;gap:5px;margin-bottom:8px}.mobile-clinical-section label{font-size:7.5px;font-weight:750;color:#475569}.mobile-clinical-section textarea{min-height:62px;padding:9px;border:1px solid #E3E8EF;border-radius:10px;background:#fff;color:#334155;resize:none;font:7.5px/1.5 inherit}
+.mobile-inline-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}.mobile-inline-actions button{height:34px;border:1px solid #E4E9F0;border-radius:9px;background:#fff;color:#475569;display:flex;align-items:center;justify-content:center;gap:5px;font-size:7px}
+.mobile-sticky-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:7px;margin-top:12px}.mobile-sticky-actions button{height:38px;border:1px solid #DDE3EB;border-radius:10px;background:#fff;color:#475569;font-size:7.5px;font-weight:750}.mobile-sticky-actions button.primary{background:#2563EB;color:#fff;border-color:#2563EB}
+.mobile-notification-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-size:7px;color:#64748B}.mobile-notification-head button{border:0;background:transparent;color:#2563EB;font-size:7px;font-weight:700}
+.mobile-notification-card{position:relative;display:grid;grid-template-columns:auto 1fr;gap:9px;padding:10px;margin-bottom:6px;border:1px solid #E4E9F0;border-radius:12px;background:#fff}.mobile-notification-card.unread{background:#F8FBFF;border-color:#DCEBFF}.mobile-notification-icon{width:31px;height:31px;border-radius:10px;background:#EFF6FF;color:#2563EB;display:grid;place-items:center}.mobile-notification-card>div{display:grid;gap:3px}.mobile-notification-card b{font-size:8px}.mobile-notification-card small{font-size:6.8px;line-height:1.45;color:#7C899B}.mobile-notification-card em{font-size:6px;color:#A0AABD;font-style:normal}.mobile-notification-card>i{position:absolute;top:10px;inset-inline-end:10px;width:6px;height:6px;border-radius:50%;background:#2563EB}
+.mobile-profile-card{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:center;padding:13px;border:1px solid #E4E9F0;border-radius:14px;background:#fff}.mobile-avatar.xl{width:46px;height:46px;border-radius:14px}.mobile-profile-card>div{display:grid;gap:3px}.mobile-profile-card b{font-size:10px}.mobile-profile-card small{font-size:7px;color:#8491A5}.mobile-profile-card .pill{width:max-content;margin-top:2px}
+.mobile-settings-group{margin-top:12px}.mobile-settings-group>small{display:block;margin:0 3px 6px;font-size:6.5px;color:#94A3B8;font-weight:800;letter-spacing:.08em}.mobile-settings-group button{width:100%;display:grid;grid-template-columns:auto 1fr auto;gap:9px;align-items:center;padding:10px;border:0;border-bottom:1px solid #EEF1F5;background:#fff;color:#475569;text-align:start}.mobile-settings-group button:first-of-type{border-radius:12px 12px 0 0}.mobile-settings-group button:last-of-type{border-radius:0 0 12px 12px;border-bottom:0}.mobile-settings-group button>span{width:29px;height:29px;border-radius:9px;background:#F1F5F9;display:grid;place-items:center;color:#64748B}.mobile-settings-group button>div{display:grid;gap:2px}.mobile-settings-group b{font-size:8px}.mobile-settings-group small{font-size:6.5px;color:#94A3B8}.mobile-settings-group em{font-size:13px;color:#94A3B8;font-style:normal}.mobile-logout{width:100%;height:38px;margin-top:14px;border:1px solid #FECACA;border-radius:10px;background:#FFF7F7;color:#DC2626;display:flex;align-items:center;justify-content:center;gap:6px;font-size:8px;font-weight:700}
+.mobile-mini-chevron{font-size:10px;color:#94A3B8}
+
+@media(max-width:820px){
+ .mobile-screen-gallery{grid-template-columns:1fr}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -2001,102 +2043,153 @@ H(
 </div>`
 )}
 
-function mobileDesign(){
-let mobileNav=[
+function mobilePhoneFrame(title,subtitle,body,active="dashboard",headerAction=""){
+let nav=[
 ["dashboard",t("الرئيسية","Home"),"dashboard"],
 ["patients",t("المرضى","Patients"),"patients"],
 ["queue",t("الانتظار","Queue"),"queue"],
 ["visits",t("الزيارات","Visits"),"visits"],
 ["follow",t("المتابعات","Follow"),"follow"]
 ];
+return `<article class="mobile-screen-spec">
+  <div class="mobile-screen-label"><b>${title}</b><small>${subtitle}</small></div>
+  <div class="phone-frame phone-frame-spec">
+    <div class="phone-status"><span>9:41</span><span>● ● ◒</span></div>
+    <div class="mobile-app-header compact">
+      <div><small>AURAN Clinic</small><b>${title}</b></div>
+      <div class="mobile-head-actions">${headerAction||`<button>${ic("bell",17)}<i></i></button><span class="mobile-avatar">AS</span>`}</div>
+    </div>
+    <div class="mobile-screen-scroll mobile-spec-scroll">${body}</div>
+    <div class="mobile-bottom-nav">${nav.map(n=>`<button class="${active===n[0]?"on":""}" data-nav="${n[0]}">${ic(n[2],17)}<span>${n[1]}</span>${n[0]==="queue"?'<i>2</i>':""}</button>`).join("")}</div>
+  </div>
+</article>`
+}
+
+function mobileDesign(){
+let dashboardBody=`
+<div class="mobile-clinic-chip">${ic("branches",14)}<span><small>${t("الفرع","Branch")}</small><b>Main Clinic</b></span><span class="mobile-mini-chevron">⌄</span></div>
+<div class="mobile-hero"><div><small>${t("تشغيل العيادة اليوم","Clinic today")}</small><strong>24</strong><span>${t("زيارة نشطة","active visits")}</span></div><span class="mobile-hero-icon">${ic("activity",22)}</span></div>
+<div class="mobile-section-head"><div><b>${t("نظرة سريعة","At a glance")}</b><small>${t("الحالة الحالية","Current status")}</small></div></div>
+<div class="mobile-kpi-grid">
+ <div><span class="mkpi-icon blue">${ic("queue",16)}</span><b>5</b><small>${t("في الانتظار","Waiting")}</small></div>
+ <div><span class="mkpi-icon green">${ic("doctor",16)}</span><b>3</b><small>${t("مع الطبيب","In visit")}</small></div>
+ <div><span class="mkpi-icon orange">${ic("follow",16)}</span><b>2</b><small>${t("متأخرة","Overdue")}</small></div>
+ <div><span class="mkpi-icon purple">${ic("file",16)}</span><b>4</b><small>${t("توثيق معلق","Pending docs")}</small></div>
+</div>
+<div class="mobile-section-head"><div><b>${t("إجراءات سريعة","Quick actions")}</b><small>${t("الأكثر استخداماً","Most used")}</small></div></div>
+<div class="mobile-quick-grid">
+ <button><span>${ic("plus",17)}</span>${t("مريض جديد","New patient")}</button>
+ <button><span>${ic("queue",17)}</span>${t("تسجيل وصول","Check in")}</button>
+ <button><span>${ic("doctor",17)}</span>${t("بدء زيارة","Start visit")}</button>
+ <button><span>${ic("follow",17)}</span>${t("متابعة","Follow-up")}</button>
+</div>
+<div class="mobile-section-head"><div><b>${t("قائمة الانتظار","Live queue")}</b><small>${t("آخر تحديث الآن","Updated now")}</small></div><span class="mobile-link">${t("عرض الكل","View all")}</span></div>
+<div class="mobile-patient-card"><span class="mobile-patient-avatar">YM</span><div class="mobile-patient-copy"><b>${t("يوسف حسن","Youssef Hassan")}</b><small><span dir="ltr">P-10402</span> · ${t("انتظار 19 دقيقة","Waiting 19 min")}</small></div><span class="pill warn">${t("مرتفع","High")}</span></div>
+<div class="mobile-patient-card"><span class="mobile-patient-avatar">NK</span><div class="mobile-patient-copy"><b>${t("نور كمال","Nour Kamal")}</b><small><span dir="ltr">P-10377</span> · ${t("انتظار 12 دقيقة","Waiting 12 min")}</small></div><span class="pill">${t("عادي","Normal")}</span></div>`;
+
+let patientsBody=`
+<div class="mobile-search-bar">${ic("search",15)}<span>${t("ابحث بالاسم، ID، أو الهاتف","Search name, ID, or phone")}</span><button>${ic("filter",14)}</button></div>
+<button class="mobile-primary-wide">${ic("plus",15)}${t("تسجيل مريض جديد","Register new patient")}</button>
+<div class="mobile-filter-chips"><span class="on">${t("الكل","All")}</span><span>${t("نشط","Active")}</span><span>${t("حديث","Recent")}</span></div>
+<div class="mobile-section-head"><div><b>${t("المرضى","Patients")}</b><small>5 ${t("نتائج","results")}</small></div></div>
+${[["AM","أحمد مصطفى","Ahmed Mostafa","P-10421","0101 234 5678"],["SA","سارة عادل","Sara Adel","P-10388","0102 551 8821"],["YH","يوسف حسن","Youssef Hassan","P-10402","0111 391 2200"],["NK","نور كمال","Nour Kamal","P-10377","0122 902 1171"]].map(x=>`<div class="mobile-list-card"><span class="mobile-patient-avatar">${x[0]}</span><div><b>${t(x[1],x[2])}</b><small><span dir="ltr">${x[3]}</span> · <span dir="ltr">${x[4]}</span></small></div><span class="mobile-row-arrow">›</span></div>`).join("")}`;
+
+let profileBody=`
+<div class="mobile-patient-hero"><span class="mobile-patient-avatar lg">AM</span><div><b>${t("أحمد مصطفى","Ahmed Mostafa")}</b><small><span dir="ltr">P-10421</span> · 35 ${t("سنة","years")}</small></div><span class="pill ok">${t("نشط","Active")}</span></div>
+<div class="mobile-action-strip"><button>${ic("doctor",15)}<span>${t("بدء زيارة","Start visit")}</span></button><button>${ic("follow",15)}<span>${t("متابعة","Follow-up")}</span></button><button>${ic("plus",15)}<span>${t("قياس","Measurement")}</span></button></div>
+<div class="mobile-tabs"><span class="on">${t("نظرة عامة","Overview")}</span><span>${t("طبي","Medical")}</span><span>${t("زيارات","Visits")}</span></div>
+<div class="mobile-info-card"><div><small>${t("الهاتف","Phone")}</small><b dir="ltr">0101 234 5678</b></div><div><small>${t("تاريخ الميلاد","Date of birth")}</small><b dir="ltr">1991-05-16</b></div><div><small>${t("آخر زيارة","Last visit")}</small><b dir="ltr">2026-10-01</b></div></div>
+<div class="mobile-section-head"><div><b>${t("تنبيهات طبية","Clinical alerts")}</b></div></div>
+<div class="mobile-alert-row"><span>${ic("alert",16)}</span><div><b>${t("حساسية مؤكدة","Confirmed allergy")}</b><small>Penicillin</small></div><span>›</span></div>
+<div class="mobile-section-head"><div><b>${t("آخر القياسات","Recent measurements")}</b></div><span class="mobile-link">${t("عرض الكل","View all")}</span></div>
+<div class="mobile-metric-row"><span>BP</span><b>145/92</b><small>mmHg</small></div><div class="mobile-metric-row"><span>Pulse</span><b>82</b><small>bpm</small></div>`;
+
+let queueBody=`
+<div class="mobile-search-bar">${ic("search",15)}<span>${t("بحث في قائمة الانتظار","Search live queue")}</span><button>${ic("filter",14)}</button></div>
+<div class="mobile-filter-chips"><span class="on">${t("الكل","All")}</span><span>${t("انتظار","Waiting")}</span><span>${t("جاهز","Ready")}</span><span>${t("مع الطبيب","In visit")}</span></div>
+<div class="mobile-section-head"><div><b>${t("قائمة الانتظار المباشرة","Live Queue")}</b><small>6 ${t("مرضى","patients")}</small></div><span class="live-dot-label"><i></i>Live</span></div>
+${[
+["YH","يوسف حسن","Youssef Hassan","P-10402","19m","Waiting","Dr. Mona"],
+["NK","نور كمال","Nour Kamal","P-10377","12m","Waiting","Unassigned"],
+["MR","محمد رضا","Mohamed Reda","P-10350","08m","Ready","Dr. Kareem"],
+["MS","منى سمير","Mona Samir","P-10409","—","In Visit","Dr. Mona"]
+].map((x,i)=>`<div class="mobile-queue-card"><div class="mobile-queue-top"><span class="mobile-patient-avatar">${x[0]}</span><div><b>${t(x[1],x[2])}</b><small><span dir="ltr">${x[3]}</span> · ${x[6]}</small></div><span class="pill ${i===0?"warn":i===2?"ok":""}">${x[5]}</span></div><div class="mobile-queue-foot"><span>${ic("clock",13)} ${x[4]}</span><button>${i<2?t("نقل المرحلة","Move stage"):i===2?t("بدء زيارة","Start visit"):t("فتح الزيارة","Open visit")}</button></div></div>`).join("")}`;
+
+let visitsBody=`
+<div class="mobile-search-bar">${ic("search",15)}<span>${t("ابحث في الزيارات","Search visits")}</span><button>${ic("filter",14)}</button></div>
+<div class="mobile-filter-chips"><span class="on">${t("الكل","All")}</span><span>${t("نشطة","Active")}</span><span>${t("توثيق معلق","Pending docs")}</span><span>${t("مكتملة","Completed")}</span></div>
+<div class="mobile-section-head"><div><b>${t("الزيارات","Visits")}</b><small>5 ${t("زيارات","visits")}</small></div></div>
+${[
+["V-009841","سارة عادل","Sara Adel","Dr. Mona Salem","Active","10:18"],
+["V-009818","أحمد مصطفى","Ahmed Mostafa","Dr. Kareem Yassin","Pending docs","09:42"],
+["V-009812","نور كمال","Nour Kamal","Dr. Mona Salem","Completed","09:14"]
+].map(x=>`<div class="mobile-visit-card"><div class="mobile-title-code"><b>${t(x[1],x[2])}</b><code dir="ltr">${x[0]}</code></div><small>${x[3]}</small><div class="mobile-card-bottom"><span class="pill ${x[4]==="Active"?"ok":x[4]==="Pending docs"?"warn":""}">${x[4]}</span><span dir="ltr">${x[5]}</span><span class="mobile-row-arrow">›</span></div></div>`).join("")}`;
+
+let clinicalBody=`
+<div class="mobile-patient-hero compact"><span class="mobile-patient-avatar lg">SA</span><div><b>${t("سارة عادل","Sara Adel")}</b><small><span dir="ltr">V-009841</span> · Dr. Mona Salem</small></div><span class="pill ok">${t("نشطة","Active")}</span></div>
+<div class="mobile-autosave"><span></span>${t("تم حفظ المسودة","Draft saved")}</div>
+<div class="mobile-clinical-section"><label>${t("الشكوى الرئيسية","Chief complaint")}</label><textarea>${t("صداع متكرر منذ ثلاثة أيام...","Recurring headache for three days...")}</textarea></div>
+<div class="mobile-clinical-section"><label>${t("الفحص السريري","Clinical examination")}</label><textarea>${t("المؤشرات الحيوية مستقرة...","Vitals stable...")}</textarea></div>
+<div class="mobile-clinical-section"><label>${t("التشخيص","Diagnosis")}</label><textarea>${t("يكتب الطبيب التشخيص هنا...","Doctor enters diagnosis here...")}</textarea></div>
+<div class="mobile-inline-actions"><button>${ic("plus",14)}${t("وصفة","Prescription")}</button><button>${ic("plus",14)}${t("أمر سريري","Clinical order")}</button></div>
+<div class="mobile-sticky-actions"><button>${t("حفظ المسودة","Save draft")}</button><button class="primary">${t("إكمال الزيارة","Complete visit")}</button></div>`;
+
+let followBody=`
+<div class="mobile-search-bar">${ic("search",15)}<span>${t("بحث بالمريض أو ID","Search patient or ID")}</span><button>${ic("filter",14)}</button></div>
+<button class="mobile-primary-wide">${ic("plus",15)}${t("متابعة جديدة","New follow-up")}</button>
+<div class="mobile-filter-chips"><span class="on">${t("الكل","All")}</span><span>${t("اليوم","Today")}</span><span>${t("قادمة","Upcoming")}</span><span>${t("متأخرة","Overdue")}</span></div>
+${[
+["F-00741","متابعة ضغط الدم","Blood pressure follow-up","أحمد مصطفى","Ahmed Mostafa","Today","2026-10-03"],
+["F-00738","مراجعة نتائج التحاليل","Review lab results","نور كمال","Nour Kamal","Overdue","2026-09-30"],
+["F-00745","مراجعة خطة العلاج","Treatment plan review","سارة عادل","Sara Adel","Upcoming","2026-10-05"]
+].map(x=>`<div class="mobile-follow-card"><div class="mobile-title-code"><b>${t(x[1],x[2])}</b><code dir="ltr">${x[0]}</code></div><small>${t("المريض","Patient")}: ${t(x[3],x[4])}</small><div class="mobile-card-bottom"><span class="pill ${x[5]==="Overdue"?"bad":x[5]==="Today"?"warn":"ok"}">${x[5]}</span><span dir="ltr">${x[6]}</span><button>${t("فتح","Open")}</button></div></div>`).join("")}`;
+
+let notificationsBody=`
+<div class="mobile-notification-head"><span>${t("3 غير مقروء","3 unread")}</span><button>${t("تحديد الكل كمقروء","Mark all read")}</button></div>
+${[
+["file","توثيق زيارة معلق","Visit documentation pending","الزيارة V-009818 ما زالت تحتاج استكمال التوثيق.","Visit V-009818 still needs documentation.","8m",true],
+["follow","متابعة متأخرة","Overdue follow-up","المتابعة F-00738 متأخرة وتحتاج مراجعة.","Follow-up F-00738 is overdue.","18m",true],
+["clock","انتظار أطول من المعتاد","Queue wait needs attention","مريض ينتظر منذ 22 دقيقة.","A patient has been waiting for 22 minutes.","24m",true],
+["roles","تم تحديث الصلاحيات","Permissions updated","تم تعديل صلاحيات دور Doctor.","Doctor role permissions were updated.","1h",false]
+].map(x=>`<div class="mobile-notification-card ${x[6]?"unread":""}"><span class="mobile-notification-icon">${ic(x[0],16)}</span><div><b>${t(x[1],x[2])}</b><small>${t(x[3],x[4])}</small><em>${x[5]}</em></div>${x[6]?'<i></i>':""}</div>`).join("")}`;
+
+let settingsBody=`
+<div class="mobile-profile-card"><span class="mobile-avatar xl">AS</span><div><b>Ahmed Shahine</b><small>ahmed@auran.clinic</small><span class="pill">Super User</span></div></div>
+<div class="mobile-settings-group"><small>${t("الحساب","ACCOUNT")}</small><button><span>${ic("user",16)}</span><div><b>${t("الملف الشخصي","Profile")}</b><small>${t("الاسم والصورة والبيانات","Name, photo, details")}</small></div><em>›</em></button><button><span>${ic("globe",16)}</span><div><b>${t("اللغة","Language")}</b><small>${A()?"العربية":"English"}</small></div><em>›</em></button><button><span>${ic("moon",16)}</span><div><b>${t("المظهر","Appearance")}</b><small>${t("فاتح / داكن","Light / Dark")}</small></div><em>›</em></button></div>
+<div class="mobile-settings-group"><small>${t("العيادة","CLINIC")}</small><button><span>${ic("branches",16)}</span><div><b>${t("الفرع الحالي","Current branch")}</b><small>Main Clinic</small></div><em>›</em></button><button><span>${ic("bell",16)}</span><div><b>${t("الإشعارات","Notifications")}</b><small>${t("تفضيلات التنبيه","Alert preferences")}</small></div><em>›</em></button></div>
+<button class="mobile-logout">${ic("logout",15)}${t("تسجيل الخروج","Sign out")}</button>`;
+
 return shell(
 H(
  t("تصميم تطبيق العيادة للموبايل","Clinic Mobile App Design"),
- t("تطبيق للعاملين داخل العيادة بنفس وظائف النظام الأساسية، وليس تطبيقاً للمريض","Staff-facing clinic app mirroring core web workflows; not a patient app"),
+ t("الشاشات الكاملة لتطبيق العاملين داخل العيادة، بنفس صلاحيات وبيانات النظام","Complete staff-facing mobile screens using the same permissions and clinic data"),
  `<button class="btn" data-nav="states">${ic("arrow",14)}${t("العودة لمرجع التصميم","Back to UX Guidelines")}</button>`
 )+
 `<div class="mobile-design-page">
-  <div class="mobile-design-notes card">
-    <span class="design-kicker">PRODUCT DIRECTION</span>
-    <h2>${t("نفس النظام، تجربة موبايل مختلفة","Same product, mobile-first interaction")}</h2>
-    <p class="muted">${t("لا ننقل صفحات الويب كما هي. نحافظ على نفس الصلاحيات والبيانات والـworkflows، لكن نستخدم بطاقات، bottom navigation، وquick actions مناسبة للاستخدام أثناء الحركة داخل العيادة.","Do not shrink desktop pages. Keep the same permissions, data, and workflows, but use cards, bottom navigation, and quick actions for staff working on the move.")}</p>
-    <div class="mobile-principles">
-      <span>${ic("roles",15)} ${t("نفس RBAC","Same RBAC")}</span>
-      <span>${ic("refresh",15)} ${t("نفس البيانات الحية","Same live data")}</span>
-      <span>${ic("doctor",15)} ${t("للعاملين فقط","Staff only")}</span>
-      <span>${ic("globe",15)} RTL / LTR</span>
-    </div>
-  </div>
-
-  <div class="phone-showcase">
-    <div class="phone-frame">
-      <div class="phone-status"><span>9:41</span><span>● ● ◒</span></div>
-      <div class="mobile-app-header">
-        <div><small>${t("صباح الخير","Good morning")}</small><b>Ahmed</b></div>
-        <div class="mobile-head-actions"><button>${ic("bell",17)}<i></i></button><span class="mobile-avatar">AS</span></div>
-      </div>
-      <div class="mobile-screen-scroll">
-        <div class="mobile-clinic-chip">${ic("branches",14)}<span><small>${t("الفرع","Branch")}</small><b>Main Clinic</b></span><span>⌄</span></div>
-
-        <div class="mobile-hero">
-          <div><small>${t("تشغيل العيادة اليوم","Clinic today")}</small><strong>24</strong><span>${t("زيارة نشطة","active visits")}</span></div>
-          <span class="mobile-hero-icon">${ic("activity",22)}</span>
-        </div>
-
-        <div class="mobile-section-head"><div><b>${t("نظرة سريعة","At a glance")}</b><small>${t("الحالة الحالية","Current status")}</small></div></div>
-        <div class="mobile-kpi-grid">
-          <div><span class="mkpi-icon blue">${ic("queue",16)}</span><b>5</b><small>${t("في الانتظار","Waiting")}</small></div>
-          <div><span class="mkpi-icon green">${ic("doctor",16)}</span><b>3</b><small>${t("مع الطبيب","In visit")}</small></div>
-          <div><span class="mkpi-icon orange">${ic("follow",16)}</span><b>2</b><small>${t("متأخرة","Overdue")}</small></div>
-          <div><span class="mkpi-icon purple">${ic("file",16)}</span><b>4</b><small>${t("توثيق معلق","Pending docs")}</small></div>
-        </div>
-
-        <div class="mobile-section-head"><div><b>${t("إجراءات سريعة","Quick actions")}</b><small>${t("الأكثر استخداماً","Most used")}</small></div></div>
-        <div class="mobile-quick-grid">
-          <button data-nav="patients"><span>${ic("plus",17)}</span>${t("مريض جديد","New patient")}</button>
-          <button data-nav="queue"><span>${ic("queue",17)}</span>${t("تسجيل وصول","Check in")}</button>
-          <button data-nav="visits"><span>${ic("doctor",17)}</span>${t("بدء زيارة","Start visit")}</button>
-          <button data-nav="follow"><span>${ic("follow",17)}</span>${t("متابعة","Follow-up")}</button>
-        </div>
-
-        <div class="mobile-section-head"><div><b>${t("قائمة الانتظار","Live queue")}</b><small>${t("آخر تحديث الآن","Updated now")}</small></div><span class="mobile-link">${t("عرض الكل","View all")}</span></div>
-        <div class="mobile-patient-card">
-          <span class="mobile-patient-avatar">YM</span>
-          <div class="mobile-patient-copy"><b>${t("يوسف حسن","Youssef Hassan")}</b><small><span dir="ltr">P-10402</span> · ${t("انتظار 19 دقيقة","Waiting 19 min")}</small></div>
-          <span class="pill warn">${t("مرتفع","High")}</span>
-        </div>
-        <div class="mobile-patient-card">
-          <span class="mobile-patient-avatar">NK</span>
-          <div class="mobile-patient-copy"><b>${t("نور كمال","Nour Kamal")}</b><small><span dir="ltr">P-10377</span> · ${t("انتظار 12 دقيقة","Waiting 12 min")}</small></div>
-          <span class="pill">${t("عادي","Normal")}</span>
-        </div>
-
-        <div class="mobile-section-head"><div><b>${t("يحتاج انتباه","Needs attention")}</b><small>${t("أولوية التشغيل","Operational priority")}</small></div></div>
-        <div class="mobile-alert-row"><span>${ic("alert",16)}</span><div><b>${t("متابعة متأخرة","Overdue follow-up")}</b><small><span dir="ltr">F-00738</span> · ${t("متأخرة يومين","2 days overdue")}</small></div><span>›</span></div>
-        <div class="mobile-alert-row"><span>${ic("file",16)}</span><div><b>${t("توثيق غير مكتمل","Incomplete documentation")}</b><small><span dir="ltr">V-009818</span> · Dr. Kareem</small></div><span>›</span></div>
-      </div>
-      <div class="mobile-bottom-nav">${mobileNav.map((n,i)=>`<button class="${i===0?"on":""}" data-nav="${n[0]}">${ic(n[2],17)}<span>${n[1]}</span>${n[0]==="queue"?'<i>2</i>':""}</button>`).join("")}</div>
-    </div>
-
-    <div class="mobile-screen-library">
-      <h3>${t("الشاشات الأساسية في التطبيق","Core mobile screens")}</h3>
-      <div class="mobile-screen-list">
-        <div><span>${ic("dashboard",18)}</span><div><b>${t("Dashboard","Dashboard")}</b><small>${t("KPIs، النشاط، الإجراءات السريعة","KPIs, activity, quick actions")}</small></div></div>
-        <div><span>${ic("patients",18)}</span><div><b>${t("المرضى","Patients")}</b><small>${t("بحث، ملف المريض، التسجيل","Search, profile, registration")}</small></div></div>
-        <div><span>${ic("queue",18)}</span><div><b>${t("قائمة الانتظار","Live Queue")}</b><small>${t("تحريك الحالات والتعيين للطبيب","Move stages and assign doctors")}</small></div></div>
-        <div><span>${ic("visits",18)}</span><div><b>${t("الزيارات","Visits")}</b><small>${t("مساحة الطبيب والتوثيق","Doctor workspace and documentation")}</small></div></div>
-        <div><span>${ic("follow",18)}</span><div><b>${t("المتابعات","Follow-ups")}</b><small>${t("المستحق والمتأخر والقادم","Due, overdue, upcoming")}</small></div></div>
-        <div><span>${ic("bell",18)}</span><div><b>${t("الإشعارات","Notifications")}</b><small>${t("الأحداث المهمة والتنبيهات","Operational alerts and events")}</small></div></div>
-        <div><span>${ic("user",18)}</span><div><b>${t("الحساب","Profile")}</b><small>${t("اللغة، المظهر، تسجيل الخروج","Language, appearance, sign out")}</small></div></div>
-      </div>
-      <div class="mobile-excluded">
-        <b>${t("غير موجود في هذا التطبيق","Not part of this app")}</b>
-        <p>${t("لا يوجد تسجيل مريض ذاتي، حجز مواعيد للمريض، ملف مريض شخصي، دفع، أو patient portal. هذا التطبيق خاص بفريق العيادة فقط.","No patient self-registration, patient appointment booking, personal patient portal, payments, or patient-facing flows. This app is clinic staff only.")}</p>
-      </div>
-    </div>
-  </div>
+ <div class="mobile-design-notes card">
+   <span class="design-kicker">MOBILE PRODUCT SPEC</span>
+   <h2>${t("شاشات الموبايل الأساسية مكتملة","Core mobile screens")}</h2>
+   <p class="muted">${t("هذه الشاشات مرجع التنفيذ لتطبيق موظفي العيادة. نفس الـRBAC والـclinic isolation والـworkflow الموجود في الويب، لكن بتصميم mobile-first. لا توجد أي patient-facing flows.","These screens are the implementation reference for the clinic staff app. They keep the same RBAC, clinic isolation, and workflows as web, with mobile-first interaction. No patient-facing flows are included.")}</p>
+   <div class="mobile-principles"><span>${ic("roles",15)} ${t("نفس RBAC","Same RBAC")}</span><span>${ic("refresh",15)} ${t("نفس البيانات الحية","Same live data")}</span><span>${ic("doctor",15)} ${t("للعاملين فقط","Staff only")}</span><span>${ic("globe",15)} RTL / LTR</span></div>
+ </div>
+ <div class="mobile-screen-gallery">
+   ${mobilePhoneFrame(t("الرئيسية","Dashboard"),t("KPIs والإجراءات السريعة","KPIs & quick actions"),dashboardBody,"dashboard")}
+   ${mobilePhoneFrame(t("المرضى","Patients"),t("البحث والتسجيل","Search & registration"),patientsBody,"patients")}
+   ${mobilePhoneFrame(t("ملف المريض","Patient Profile"),t("الملف السريري والقياسات","Clinical profile & measurements"),profileBody,"patients")}
+   ${mobilePhoneFrame(t("قائمة الانتظار","Live Queue"),t("الحركة المباشرة داخل العيادة","Live clinic flow"),queueBody,"queue")}
+   ${mobilePhoneFrame(t("الزيارات","Visits"),t("الزيارات النشطة والمكتملة","Active & completed visits"),visitsBody,"visits")}
+   ${mobilePhoneFrame(t("مساحة الطبيب","Doctor Workspace"),t("التوثيق السريري أثناء الزيارة","Clinical documentation"),clinicalBody,"visits")}
+   ${mobilePhoneFrame(t("المتابعات","Follow-ups"),t("المستحق والمتأخر والقادم","Due, overdue & upcoming"),followBody,"follow")}
+   ${mobilePhoneFrame(t("الإشعارات","Notifications"),t("تنبيهات التشغيل والأحداث","Operational alerts"),notificationsBody,"dashboard")}
+   ${mobilePhoneFrame(t("الحساب والإعدادات","Profile & Settings"),t("اللغة والمظهر والفرع","Language, theme & branch"),settingsBody,"dashboard")}
+ </div>
+ <div class="mobile-excluded card">
+   <b>${t("حدود المنتج","Product boundary")}</b>
+   <p>${t("هذا تطبيق موظفي العيادة فقط: لا يوجد تسجيل ذاتي للمريض، حجز مواعيد للمريض، patient portal، دفع، أو أي شاشة موجهة للمريض.","This is a clinic staff app only: no patient self-registration, patient appointment booking, patient portal, payments, or patient-facing screens.")}</p>
+ </div>
 </div>`
-)}
+)
+}
 
 function login(){return `<div class="login"><div class="art"><div class="page-enter" style="max-width:720px;position:relative;z-index:1"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>${t("نظام تشغيل العيادة","Clinic Operating System")}</small></div></div><h1>${t("كل لحظة داخل العيادة، مرتبطة بما بعدها.","Every clinic moment, connected to what comes next.")}</h1><p class="muted">${t("من الاستقبال إلى الطبيب ثم التوثيق والمتابعة — تجربة تشغيلية واحدة حيّة.","From reception to doctor, documentation and follow-up — one living operational experience.")}</p><div class="journey"><span></span><i></i><span></span><i></i><span></span><i></i><span></span></div><p class="muted">${t("وصول","Arrival")} · ${t("انتظار","Queue")} · ${t("زيارة","Visit")} · ${t("متابعة","Follow-up")}</p></div></div><div class="loginbox"><div class="card" style="width:min(430px,100%);position:relative;overflow:hidden"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>${t("دخول آمن للعيادة","Secure clinic access")}</small></div></div><h2>${t("مرحباً بعودتك","Welcome back")}</h2><p class="muted">${t("أكمل من حيث توقفت في تشغيل العيادة.","Continue where you left off in clinic operations.")}</p><div class="field"><label>Email</label><input id="clinicLoginEmail" class="input" value="ahmed@auran.clinic"></div><div class="field top"><label>${t("كلمة المرور","Password")}</label><input id="clinicLoginPassword" class="input" type="password" value="password"></div><div class="row"><label><input type="checkbox" checked> ${t("تذكرني","Remember me")}</label><button data-a="forgotPassword" style="border:0;background:transparent;color:#60a5fa;cursor:pointer">${t("نسيت كلمة المرور؟","Forgot password?")}</button></div><button class="btn p" style="width:100%;padding:12px" data-a="login">${t("دخول العيادة","Enter clinic")}</button><br><br><button class="btn" style="width:100%" data-a="platformLogin">${ic("lock",15)}${t("دخول مسؤول المنصة","Platform Admin")}</button><div class="row"><small class="muted">${t("لغة الواجهة والمظهر","Language & appearance")}</small><div><button class="btn" data-a="lang">${t("EN","AR")}</button> <button class="btn" data-a="theme">${S.theme==="dark"?"☀":"◐"}</button></div></div></div></div></div>`}
 function render(){
