@@ -785,6 +785,176 @@ html[data-theme=light] .navbar-icon{color:#66758B!important}
 html[data-theme=light] .navbar-icon:hover{background:#EFF6FF!important;color:#2563EB!important}
 .topbar .avatar{background:linear-gradient(135deg,#64748B,#6366F1)!important}
 
+
+/* AURAN Clinic — Modern Medical navigation redesign */
+.app{grid-template-columns:264px minmax(0,1fr)}
+.side{
+  width:auto;
+  padding:14px 12px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  overflow:hidden;
+}
+.brand{
+  min-height:66px;
+  padding:8px 9px 15px;
+  margin-bottom:10px;
+  border-bottom:1px solid var(--l);
+  gap:11px;
+}
+.brand .mark,.brand-logo-img{width:40px;height:40px;min-width:40px;border-radius:13px}
+.brand-copy{min-width:0;display:grid;gap:1px;line-height:1.1}
+.brand-copy b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-copy small{font-size:10px;letter-spacing:.01em}
+.nav{
+  flex:1;
+  overflow-y:auto;
+  overflow-x:hidden;
+  padding:2px 3px 12px;
+  scrollbar-width:thin;
+}
+.nav-section{margin:0 0 13px}
+.nav-section-title{
+  padding:7px 11px 6px;
+  color:var(--m);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  opacity:.86;
+}
+.nav button{
+  position:relative;
+  min-height:42px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:2px 0;
+  padding:8px 10px;
+  border-radius:11px;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--m);
+  font-size:12px;
+  font-weight:550;
+  box-shadow:none;
+}
+.nav button:hover{
+  transform:none;
+  background:#3b82f60c;
+  color:var(--t);
+  border-color:#3b82f614;
+}
+.nav button.on{
+  background:#3b82f612;
+  color:#60a5fa;
+  border-color:#3b82f622;
+  box-shadow:none;
+}
+.nav button.on:before{
+  content:"";
+  position:absolute;
+  inset-block:8px;
+  inset-inline-start:-4px;
+  width:3px;
+  border-radius:999px;
+  background:linear-gradient(180deg,#38bdf8,#6366f1);
+  box-shadow:0 0 12px #3b82f65c;
+}
+.nav-ico{
+  width:30px!important;
+  height:30px!important;
+  min-width:30px;
+  border-radius:9px!important;
+  display:grid!important;
+  place-items:center;
+  color:inherit;
+}
+.nav button.on .nav-ico{background:#3b82f615!important}
+.nav-label{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-count{
+  margin-inline-start:auto;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  display:grid;
+  place-items:center;
+  border-radius:999px;
+  background:#ef4444;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  box-shadow:0 4px 10px #ef444438;
+}
+.side-footer{
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:10px 11px 7px;
+  margin-top:auto;
+  border-top:1px solid var(--l);
+}
+.side-status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#10b981;
+  box-shadow:0 0 0 4px #10b98116;
+  flex:0 0 auto;
+}
+.side-footer-copy{display:grid;gap:2px;min-width:0}
+.side-footer-copy b{font-size:10px;font-weight:700}
+.side-footer-copy small{font-size:9px;color:var(--m)}
+.sidebar-collapsed{grid-template-columns:82px minmax(0,1fr)}
+.sidebar-collapsed .side{padding-inline:10px}
+.sidebar-collapsed .brand{justify-content:center;padding-inline:0}
+.sidebar-collapsed .brand-copy,
+.sidebar-collapsed .nav-section-title,
+.sidebar-collapsed .nav-label,
+.sidebar-collapsed .nav-count,
+.sidebar-collapsed .side-footer-copy{display:none}
+.sidebar-collapsed .nav button{justify-content:center;padding-inline:5px}
+.sidebar-collapsed .nav button.on:before{inset-inline-start:-3px}
+.sidebar-collapsed .side-footer{justify-content:center}
+html[data-theme=light] .side{
+  background:#F8F9FD!important;
+  border-color:#fff!important;
+  box-shadow:0 12px 32px rgba(77,91,138,.10),inset 0 1px 0 #fff!important;
+}
+html[data-theme=light] .nav-section-title{color:#8491A5}
+html[data-theme=light] .nav button{color:#5F6F85}
+html[data-theme=light] .nav button:hover{
+  background:#F0F5FC!important;
+  border-color:#E5EDF8!important;
+  color:#172033!important;
+}
+html[data-theme=light] .nav button.on{
+  background:#EAF3FF!important;
+  border-color:#D7E8FF!important;
+  color:#2563EB!important;
+}
+html[data-theme=light] .nav button.on .nav-ico{background:#DCEBFF!important;color:#2563EB!important}
+html[data-theme=dark] .side{
+  background:linear-gradient(180deg,#081525 0%,#0B1829 100%)!important;
+  border-color:#1C2B40!important;
+  box-shadow:12px 0 38px #0206172b!important;
+}
+html[data-theme=dark] .nav-section-title{color:#718097}
+html[data-theme=dark] .nav button{color:#A0AEC0}
+html[data-theme=dark] .nav button:hover{background:#13243A!important;border-color:#1A3352!important;color:#E8EEF7!important}
+html[data-theme=dark] .nav button.on{
+  background:linear-gradient(90deg,#15365a,#102942)!important;
+  border-color:#24517c!important;
+  color:#79B8FF!important;
+}
+html[data-theme=dark] .nav button.on .nav-ico{background:#1C4771!important;color:#8BC4FF!important}
+@media(max-width:700px){
+  .app,.sidebar-collapsed{display:block}
+  .side{display:none}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -979,7 +1149,30 @@ function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","
 function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
 function topbar(){return `<nav class="topbar"><button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="topbar-actions">${locationMenu()}<span class="navbar-separator"></span>${notificationsMenu()}<span class="navbar-separator"></span>${user()}</div></nav>`}
 function H(title,sub,act=""){let m=currentPageLabel();return `<header class="head"><div class="page-label"><span class="label-dot"></span><span>${m[0]}</span><span>›</span><span>${m[1]}</span></div><div class="page-heading-row"><div class="page-title-copy"><h1>${title}</h1><p>${sub}</p></div>${act?`<div class="page-actions">${act}</div>`:""}</div></header>`}
-function shell(x){if(S.screen==="login")return x;let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""}"><aside class="side"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>Clinic Operating System</small></div></div><nav class="nav">${N.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",17)}</span><span>${t(n[1],n[2])}</span></button>`).join("")}</nav></aside><main class="main">${topbar()}<section class="content-body"><div class="workspace-frame"><div class="page-content-surface">${x}</div></div></section></main><div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div></div>`}
+function shell(x){
+if(S.screen==="login")return x;
+let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));
+let groups=[
+  [t("مساحة العمل","WORKSPACE"),["dashboard"]],
+  [t("العيادة","CLINICAL"),["patients","queue","visits","follow"]],
+  [t("الإدارة","MANAGEMENT"),["reports","employees"]],
+  [t("النظام","SYSTEM"),["roles","settings","audit"]]
+];
+let navHtml=groups.map(g=>{
+  let items=N.filter(n=>g[1].includes(n[0]));
+  if(!items.length)return "";
+  return `<div class="nav-section"><div class="nav-section-title">${g[0]}</div>${items.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}" title="${t(n[1],n[2])}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",17)}</span><span class="nav-label">${t(n[1],n[2])}</span>${n[0]==="queue"&&S.q.waiting.length?`<span class="nav-count">${S.q.waiting.length}</span>`:""}</button>`).join("")}</div>`;
+}).join("");
+return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""}">
+<aside class="side">
+  <div class="brand">${clinicBrandMark()}<div class="brand-copy"><b>${clinicBrandName()}</b><small>Clinic Operating System</small></div></div>
+  <nav class="nav">${navHtml}</nav>
+  <div class="side-footer"><span class="side-status-dot"></span><div class="side-footer-copy"><b>${t("النظام يعمل","System online")}</b><small>AURAN Clinic</small></div></div>
+</aside>
+<main class="main">${topbar()}<section class="content-body"><div class="workspace-frame"><div class="page-content-surface">${x}</div></div></section></main>
+<div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div>
+</div>`;
+}
 
 function dash(){return shell(`<div class="page-enter">${H(t("نظرة عامة","Dashboard"),t("صورة تشغيلية مباشرة للعيادة اليوم","Live operational view of the clinic today"),`<button class="btn" data-a="refreshDash">${ic("refresh",15)}${t("تحديث","Refresh")}</button>`)}<div class="grid s4 ring-card-grid">${ringCard(t("إكمال الزيارات","Visit completion"),78,"31",t("من 40 زيارة بدأت اليوم","of 40 visits started today"),"#38BDF8","visits")}${ringCard(t("الالتزام بزمن الانتظار","Queue SLA"),86,"11m",t("متوسط الانتظار الحالي","current average wait"),"#6366F1","queue")}${ringCard(t("اكتمال التوثيق","Documentation complete"),93,"4",t("زيارات ما زالت معلقة","visits still pending"),"#10B981","visits")}${ringCard(t("المتابعات في موعدها","Follow-ups on time"),64,"44",t("مكتملة خلال الفترة","completed in period"),"#3B82F6","follow")}</div><div class="chart-two-col top"><div class="card chart-card"><div class="row"><div><h3 style="margin:0">${t("الزيارات خلال الأسبوع","Visits during the week")}</h3><small class="muted">${t("اتجاه حجم الزيارات اليومية","Daily visit-volume trend")}</small></div><span class="pill ok">+12%</span></div>${areaChart([21,29,26,35,33,44,39],["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"dashVisits")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("النشاط المباشر","Live activity")}</h3><small class="muted">${t("أحدث حركة داخل العيادة","Latest clinic activity")}</small></div><span class="pill ok">${t("مباشر","Live")}</span></div><div class="live-feed top">${[[t("تم تسجيل مريض","Patient registered"),"نور كمال · P-10377","2m","plus"],[t("بدأت زيارة","Visit started"),"سارة عادل · Dr. Mona Salem","5m","doctor"],[t("تم إكمال زيارة","Visit completed"),"V-009812 · نور كمال","12m","check"],[t("متابعة متأخرة","Follow-up overdue"),"F-00738 · أحمد مصطفى","18m","alert"]].map(x=>`<div class="feed-event"><span class="feed-icon">${ic(x[3],15)}</span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><small class="muted">${x[2]}</small></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("توزيع قائمة الانتظار","Queue distribution")}</h3><small class="muted">${t("الحالات الحالية داخل المسار","Current workflow stages")}</small></div><button class="btn" data-nav="queue">${ic("arrow",14)}${t("فتح","Open")}</button></div>${queueDonut()}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("ضغط الأطباء","Doctor workload")}</h3><small class="muted">${t("نسبة الحمل التشغيلي الحالية","Current operational load")}</small></div>${ic("doctor",20)}</div><div class="hbar-list top">${[["Dr. Mona Salem","3 active · 2 waiting",78],["Dr. Kareem Yassin","2 active · 1 waiting",54],["Dr. Laila Hassan","1 active · 3 ready",61]].map((x,i)=>`<div class="hbar-row"><div class="row"><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><b>${x[2]}%</b></div><div class="hbar-track"><div class="hbar-fill" style="width:${x[2]}%;animation-delay:${i*80}ms"></div></div></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("يحتاج انتباه","Needs attention")}</h3><small class="muted">${t("حسب أولوية التشغيل","Operational priority")}</small></div>${ic("alert",20)}</div>${[["أحمد مصطفى",t("انتظار 22 دقيقة","Waiting 22 min"),"queue"],["V-009818",t("توثيق غير مكتمل","Documentation incomplete"),"visits"],["F-00738",t("متابعة متأخرة يومين","Follow-up overdue 2 days"),"follow"]].map(x=>`<div class="row clickable" data-nav="${x[2]}"><div style="display:flex;gap:9px;align-items:center"><span class="activity-dot"></span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div></div>${ic("arrow",15)}</div>`).join("")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("إجراءات سريعة","Quick actions")}</h3><small class="muted">${t("أكثر الإجراءات استخداماً","Common actions")}</small></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" class="top"><button class="btn p" data-a="newPatient">${ic("plus",15)}${t("تسجيل مريض","Register patient")}</button><button class="btn" data-a="queueArrival">${ic("queue",15)}${t("تسجيل وصول","Register arrival")}</button><button class="btn" data-nav="visits">${ic("doctor",15)}${t("الزيارات","Visits")}</button><button class="btn" data-nav="reports">${ic("reports",15)}${t("التقارير","Reports")}</button></div></div></div></div>`)}
 function patients(){let q=(S.listFilters.patients||"").toLowerCase(),filtered=S.patients.filter(r=>(r.id+" "+r.name+" "+r.nameEn+" "+r.phone).toLowerCase().includes(q)),pg=pageData("patients",filtered),rs=pg.items;return shell(H(t("المرضى","Patients"),t("البحث والتسجيل وإدارة بيانات المرضى","Search, register, and manage patient records"),b(t("تسجيل مريض","Register patient"),"newPatient","p"))+`<div class="card"><div class="screen-toolbar"><input id="patientSearch" class="input" value="${S.listFilters.patients||""}" placeholder="${t("بحث بالاسم أو رقم المريض أو الهاتف","Search name, patient ID, or phone")}"><span class="push demo-badge">${ic("activity",12)} DEMO DATA</span></div><div class="scroll"><table class="table"><thead><tr><th>ID</th><th>${t("الاسم","Name")}</th><th>${t("الهاتف","Phone")}</th><th>${t("الحالة","Status")}</th><th></th></tr></thead><tbody>${rs.map(r=>`<tr class="crud-row" data-patient-row="${(r.id+" "+r.name+" "+r.nameEn+" "+r.phone).toLowerCase()}"><td dir="ltr"><b>${r.id}</b></td><td><b>${A()?r.name:r.nameEn}</b></td><td dir="ltr">${r.phone}</td><td>${p(r.status==="Active"?t("نشط","Active"):t("غير نشط","Inactive"),r.status==="Active"?"ok":"")}</td><td><div class="actions"><button class="btn sm" data-a="openPatient" data-id="${r.id}">${ic("patients",13)}${t("فتح","Open")}</button><button class="btn sm" data-a="editPatient" data-id="${r.id}">${ic("settings",13)}${t("تعديل","Edit")}</button><button class="btn sm danger" data-a="deletePatient" data-id="${r.id}">${ic("alert",13)}${t("حذف","Delete")}</button></div></td></tr>`).join("")}</tbody></table></div>${S.patients.length?"":`<div class="empty-state">${t("لا يوجد مرضى بعد.","No patients yet.")}</div>`}${pager("patients",pg)}</div>`)}
