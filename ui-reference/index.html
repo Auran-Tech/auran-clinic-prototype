@@ -727,6 +727,64 @@ html[data-theme=light] .side .nav button.on .nav-ico{color:#fff!important;backgr
   .topbar .user-trigger{width:38px!important;padding:3px!important}
 }
 
+
+/* navbar final cleanup v8 — option 2 without nested capsule */
+.topbar-actions{
+  margin-inline-start:auto!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+}
+.navbar-separator{display:none!important}
+.location-trigger,.topbar .user-trigger{
+  height:40px!important;
+  border:1px solid var(--l)!important;
+  border-radius:13px!important;
+  background:color-mix(in srgb,var(--c2) 92%,transparent)!important;
+  box-shadow:none!important;
+}
+.navbar-icon{
+  width:40px!important;height:40px!important;min-width:40px!important;
+  border:0!important;border-radius:12px!important;
+  background:transparent!important;box-shadow:none!important;
+}
+.location-trigger:hover,.topbar .user-trigger:hover,.navbar-icon:hover{
+  transform:none!important;
+}
+.location-trigger:hover,.topbar .user-trigger:hover{
+  border-color:#3b82f650!important;
+  background:#3b82f609!important;
+}
+.navbar-icon:hover{background:#3b82f60b!important;color:#60A5FA!important}
+.location-trigger>svg{color:#60A5FA!important;stroke:#60A5FA!important}
+.topbar .user-trigger .chev{
+  width:20px!important;height:20px!important;border-radius:7px!important;
+  background:#3b82f608!important;
+}
+html[data-theme=dark] .location-trigger,
+html[data-theme=dark] .topbar .user-trigger{
+  background:#101B2D!important;
+  border-color:#263449!important;
+}
+html[data-theme=dark] .location-trigger:hover,
+html[data-theme=dark] .topbar .user-trigger:hover{
+  background:#132238!important;
+  border-color:#355072!important;
+}
+html[data-theme=dark] .navbar-icon{color:#A5B2C5!important}
+html[data-theme=light] .location-trigger,
+html[data-theme=light] .topbar .user-trigger{
+  background:#FFFFFF!important;
+  border-color:#E5EAF2!important;
+}
+html[data-theme=light] .navbar-icon{color:#66758B!important}
+html[data-theme=light] .navbar-icon:hover{background:#EFF6FF!important;color:#2563EB!important}
+.topbar .avatar{background:linear-gradient(135deg,#64748B,#6366F1)!important}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
