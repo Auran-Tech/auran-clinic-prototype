@@ -955,6 +955,93 @@ html[data-theme=dark] .nav button.on .nav-ico{background:#1C4771!important;color
   .side{display:none}
 }
 
+
+/* AURAN Navigation v10 — single final source of truth */
+.app{display:grid!important;grid-template-columns:246px minmax(0,1fr)!important;min-height:100vh!important;align-items:stretch!important}
+.side{
+ position:sticky!important;top:0!important;height:100vh!important;margin:0!important;padding:16px 12px!important;
+ border:0!important;border-inline-end:1px solid var(--l)!important;border-radius:0!important;
+ background:var(--c2)!important;box-shadow:none!important;backdrop-filter:none!important;
+ display:flex!important;flex-direction:column!important;overflow:hidden!important
+}
+.brand{height:64px!important;min-height:64px!important;margin:0 0 10px!important;padding:7px 8px 14px!important;border-bottom:1px solid var(--l)!important;display:flex!important;align-items:center!important;gap:10px!important}
+.brand .mark,.brand-logo-img{width:38px!important;height:38px!important;min-width:38px!important;border-radius:12px!important}
+.brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important;line-height:1.15!important}
+.brand-copy b{font-size:14px!important;font-weight:800!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.brand-copy small{margin-top:3px!important;font-size:9px!important;color:var(--m)!important}
+.nav{flex:1!important;overflow-y:auto!important;overflow-x:hidden!important;padding:0 2px 14px!important}
+.nav-section{margin:0 0 12px!important;padding:0!important}
+.nav-section-title{display:block!important;padding:7px 10px 5px!important;color:var(--m)!important;font-size:9px!important;font-weight:800!important;letter-spacing:.09em!important;opacity:.72!important}
+.nav button{
+ width:100%!important;height:40px!important;min-height:40px!important;margin:2px 0!important;padding:4px 8px!important;
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;
+ border:0!important;border-radius:10px!important;background:transparent!important;color:var(--m)!important;
+ box-shadow:none!important;transform:none!important;font-size:12px!important;font-weight:600!important;text-align:start!important
+}
+.nav button:before{display:none!important}
+.nav .nav-ico{width:30px!important;height:30px!important;min-width:30px!important;border:0!important;border-radius:9px!important;background:transparent!important;color:inherit!important;display:grid!important;place-items:center!important}
+.nav button:hover{background:color-mix(in srgb,var(--p) 7%,transparent)!important;color:var(--t)!important}
+.nav button.on{background:color-mix(in srgb,var(--p) 11%,transparent)!important;color:var(--p)!important}
+.nav button.on .nav-ico{background:color-mix(in srgb,var(--p) 11%,transparent)!important;color:var(--p)!important}
+.nav-label{display:block!important;min-width:0!important;flex:1!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.nav-count{margin-inline-start:auto!important;min-width:19px!important;height:19px!important;padding:0 5px!important;border-radius:999px!important;background:#EF4444!important;color:#fff!important;display:grid!important;place-items:center!important;font-size:9px!important;font-weight:800!important}
+.sidebar-collapsed,.app.sidebar-collapsed{grid-template-columns:72px minmax(0,1fr)!important}
+.sidebar-collapsed .side,.app.sidebar-collapsed .side{padding:16px 10px!important}
+.sidebar-collapsed .brand,.app.sidebar-collapsed .brand{justify-content:center!important;padding-inline:0!important}
+.sidebar-collapsed .brand-copy,.sidebar-collapsed .nav-section-title,.sidebar-collapsed .nav-label,.sidebar-collapsed .nav-count,
+.app.sidebar-collapsed .brand-copy,.app.sidebar-collapsed .nav-section-title,.app.sidebar-collapsed .nav-label,.app.sidebar-collapsed .nav-count{display:none!important}
+.sidebar-collapsed .nav button,.app.sidebar-collapsed .nav button{width:44px!important;height:44px!important;margin:3px auto!important;padding:0!important;justify-content:center!important}
+.sidebar-collapsed .nav .nav-ico,.app.sidebar-collapsed .nav .nav-ico{width:34px!important;height:34px!important}
+
+.main{min-width:0!important;width:100%!important;margin:0!important;padding:0!important}
+.topbar{
+ position:sticky!important;top:0!important;z-index:90!important;height:64px!important;margin:0!important;padding:0 20px!important;border-radius:0!important;
+ border:0!important;border-bottom:1px solid var(--l)!important;background:color-mix(in srgb,var(--c2) 96%,transparent)!important;
+ box-shadow:none!important;backdrop-filter:blur(14px)!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important
+}
+.topbar-primary{display:flex!important;align-items:center!important;gap:11px!important;min-width:0!important}
+.topbar-menu{width:38px!important;height:38px!important;min-width:38px!important;border:1px solid var(--l)!important;border-radius:10px!important;background:transparent!important;color:var(--m)!important;display:grid!important;place-items:center!important;padding:0!important}
+.topbar-menu svg{width:18px!important;height:18px!important}
+.topbar-page{display:grid!important;min-width:0!important;line-height:1.1!important}
+.topbar-page small{color:var(--m)!important;font-size:9px!important;margin-bottom:3px!important}
+.topbar-page b{color:var(--t)!important;font-size:13px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.topbar-actions{margin:0!important;padding:0!important;display:flex!important;align-items:center!important;gap:7px!important;flex-direction:row!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.navbar-separator{width:1px!important;height:24px!important;background:var(--l)!important;margin:0 2px!important}
+.location-trigger{height:38px!important;min-width:138px!important;padding:0 10px!important;border:1px solid var(--l)!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;transform:none!important}
+.navbar-icon{width:38px!important;height:38px!important;min-width:38px!important;border:1px solid var(--l)!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;transform:none!important}
+.topbar .user-trigger{height:38px!important;min-width:0!important;padding:3px 7px!important;border:1px solid var(--l)!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important}
+.topbar .avatar{width:30px!important;height:30px!important;border-radius:9px!important}
+.location-trigger:hover,.navbar-icon:hover,.topbar .user-trigger:hover,.topbar-menu:hover{background:color-mix(in srgb,var(--p) 7%,transparent)!important;border-color:color-mix(in srgb,var(--p) 25%,var(--l))!important;transform:none!important}
+html[data-theme=light] .side,html[data-theme=light] .topbar{background:#FFFFFF!important;border-color:#E7EBF2!important}
+html[data-theme=dark] .side{background:#091523!important;border-color:#1B2A3D!important}
+html[data-theme=dark] .topbar{background:#0B1726!important;border-color:#1B2A3D!important}
+
+.permission-layout{grid-template-columns:240px minmax(0,1fr)!important;gap:14px!important}
+.role-panel{padding:12px!important}.role-panel-head{padding:5px 5px 10px!important}.role-panel-head small{display:block!important;color:var(--m)!important;margin-top:3px!important;font-size:10px!important}
+.role-item span:first-child{display:grid!important;gap:2px!important}.role-item small{color:var(--m)!important;font-size:9px!important}
+.permission-title-row{display:flex!important;align-items:flex-start!important;justify-content:space-between!important;gap:12px!important}.permission-title-row h2{margin:0!important}.permission-title-row p{margin:5px 0 0!important}
+.permission-search-wrap{position:relative!important;flex:1!important;min-width:220px!important}.permission-search-wrap>svg{position:absolute!important;inset-inline-start:11px!important;top:50%!important;transform:translateY(-50%)!important;color:var(--m)!important;z-index:2!important}.permission-search-wrap .input{padding-inline-start:35px!important}
+.permission-row{grid-template-columns:minmax(240px,1fr) minmax(120px,.55fr) auto!important;gap:12px!important}.permission-name{display:grid!important;gap:4px!important}.permission-name b{font-size:12px!important}.permission-name code{width:max-content!important;color:var(--m)!important;font-size:9px!important;background:transparent!important;padding:0!important}
+.audit-card .screen-toolbar{display:flex!important;gap:9px!important;align-items:center!important}.audit-card .permission-search-wrap{max-width:460px!important}
+
+@media(max-width:900px){
+ .permission-layout{grid-template-columns:1fr!important}
+ .role-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .topbar .user-copy{display:none!important}.topbar .user-trigger{width:38px!important;padding:3px!important;justify-content:center!important}.topbar .user-trigger .chev{display:none!important}
+}
+@media(max-width:700px){
+ .app,.sidebar-collapsed,.app.sidebar-collapsed{display:block!important}
+ .side{display:none!important}
+ .topbar{height:58px!important;padding:0 10px!important}
+ .topbar-page{display:none!important}
+ .location-trigger{width:38px!important;min-width:38px!important;padding:0!important;justify-content:center!important}
+ .location-trigger .location-copy,.location-trigger .chev{display:none!important}
+ .navbar-separator{display:none!important}
+ .permission-row{grid-template-columns:1fr auto!important}.permission-row>small{grid-column:1/-1!important;grid-row:2!important}
+ .role-list{grid-template-columns:1fr!important}
+ .audit-card .screen-toolbar{align-items:stretch!important}.audit-card .permission-search-wrap{max-width:none!important;width:100%!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1147,31 +1234,38 @@ function notificationsMenu(){let unread=S.notifications.filter(x=>!x.read).lengt
 function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","Main branch")],["New Cairo",t("فرع القاهرة الجديدة","New Cairo branch")],["Nasr City",t("فرع مدينة نصر","Nasr City branch")]];return `<div class="location-wrap"><button class="location-trigger" data-a="locations">${ic("branches",16)}<span class="location-copy"><small>${t("الفرع","Branch")}</small><b>${S.currentLocation}</b></span><span class="chev">⌄</span></button><div id="locationPop" class="navbar-dropdown location-menu hide">${locs.map(x=>`<button class="location-option ${S.currentLocation===x[0]?"on":""}" data-a="selectLocation" data-id="${x[0]}"><span class="loc-icon">${ic("branches",14)}</span><span><b>${x[0]}</b><small>${x[1]}</small></span>${S.currentLocation===x[0]?`<span class="loc-check">✓</span>`:""}</button>`).join("")}</div></div>`}
 
 function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
-function topbar(){return `<nav class="topbar"><button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="topbar-actions">${locationMenu()}<span class="navbar-separator"></span>${notificationsMenu()}<span class="navbar-separator"></span>${user()}</div></nav>`}
+function topbar(){
+let page=currentPageLabel();
+return `<nav class="topbar">
+<div class="topbar-primary">
+  <button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <div class="topbar-page"><small>${page[0]}</small><b>${page[1]}</b></div>
+</div>
+<div class="topbar-actions">${locationMenu()}<span class="navbar-separator"></span>${notificationsMenu()}${user()}</div>
+</nav>`
+}
 function H(title,sub,act=""){let m=currentPageLabel();return `<header class="head"><div class="page-label"><span class="label-dot"></span><span>${m[0]}</span><span>›</span><span>${m[1]}</span></div><div class="page-heading-row"><div class="page-title-copy"><h1>${title}</h1><p>${sub}</p></div>${act?`<div class="page-actions">${act}</div>`:""}</div></header>`}
 function shell(x){
 if(S.screen==="login")return x;
 let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));
 let groups=[
-  [t("مساحة العمل","WORKSPACE"),["dashboard"]],
+  [t("الرئيسية","WORKSPACE"),["dashboard"]],
   [t("العيادة","CLINICAL"),["patients","queue","visits","follow"]],
   [t("الإدارة","MANAGEMENT"),["reports","employees"]],
   [t("النظام","SYSTEM"),["roles","settings","audit"]]
 ];
 let navHtml=groups.map(g=>{
-  let items=N.filter(n=>g[1].includes(n[0]));
-  if(!items.length)return "";
-  return `<div class="nav-section"><div class="nav-section-title">${g[0]}</div>${items.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}" title="${t(n[1],n[2])}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",17)}</span><span class="nav-label">${t(n[1],n[2])}</span>${n[0]==="queue"&&S.q.waiting.length?`<span class="nav-count">${S.q.waiting.length}</span>`:""}</button>`).join("")}</div>`;
+ let items=N.filter(n=>g[1].includes(n[0]));
+ return `<section class="nav-section"><div class="nav-section-title">${g[0]}</div>${items.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}" title="${t(n[1],n[2])}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",18)}</span><span class="nav-label">${t(n[1],n[2])}</span>${n[0]==="queue"&&S.q.waiting.length?`<span class="nav-count">${S.q.waiting.length}</span>`:""}</button>`).join("")}</section>`;
 }).join("");
 return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""}">
 <aside class="side">
-  <div class="brand">${clinicBrandMark()}<div class="brand-copy"><b>${clinicBrandName()}</b><small>Clinic Operating System</small></div></div>
-  <nav class="nav">${navHtml}</nav>
-  <div class="side-footer"><span class="side-status-dot"></span><div class="side-footer-copy"><b>${t("النظام يعمل","System online")}</b><small>AURAN Clinic</small></div></div>
+ <div class="brand">${clinicBrandMark()}<div class="brand-copy"><b>${clinicBrandName()}</b><small>${t("نظام إدارة العيادة","Clinic Management")}</small></div></div>
+ <nav class="nav">${navHtml}</nav>
 </aside>
 <main class="main">${topbar()}<section class="content-body"><div class="workspace-frame"><div class="page-content-surface">${x}</div></div></section></main>
 <div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div>
-</div>`;
+</div>`
 }
 
 function dash(){return shell(`<div class="page-enter">${H(t("نظرة عامة","Dashboard"),t("صورة تشغيلية مباشرة للعيادة اليوم","Live operational view of the clinic today"),`<button class="btn" data-a="refreshDash">${ic("refresh",15)}${t("تحديث","Refresh")}</button>`)}<div class="grid s4 ring-card-grid">${ringCard(t("إكمال الزيارات","Visit completion"),78,"31",t("من 40 زيارة بدأت اليوم","of 40 visits started today"),"#38BDF8","visits")}${ringCard(t("الالتزام بزمن الانتظار","Queue SLA"),86,"11m",t("متوسط الانتظار الحالي","current average wait"),"#6366F1","queue")}${ringCard(t("اكتمال التوثيق","Documentation complete"),93,"4",t("زيارات ما زالت معلقة","visits still pending"),"#10B981","visits")}${ringCard(t("المتابعات في موعدها","Follow-ups on time"),64,"44",t("مكتملة خلال الفترة","completed in period"),"#3B82F6","follow")}</div><div class="chart-two-col top"><div class="card chart-card"><div class="row"><div><h3 style="margin:0">${t("الزيارات خلال الأسبوع","Visits during the week")}</h3><small class="muted">${t("اتجاه حجم الزيارات اليومية","Daily visit-volume trend")}</small></div><span class="pill ok">+12%</span></div>${areaChart([21,29,26,35,33,44,39],["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"dashVisits")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("النشاط المباشر","Live activity")}</h3><small class="muted">${t("أحدث حركة داخل العيادة","Latest clinic activity")}</small></div><span class="pill ok">${t("مباشر","Live")}</span></div><div class="live-feed top">${[[t("تم تسجيل مريض","Patient registered"),"نور كمال · P-10377","2m","plus"],[t("بدأت زيارة","Visit started"),"سارة عادل · Dr. Mona Salem","5m","doctor"],[t("تم إكمال زيارة","Visit completed"),"V-009812 · نور كمال","12m","check"],[t("متابعة متأخرة","Follow-up overdue"),"F-00738 · أحمد مصطفى","18m","alert"]].map(x=>`<div class="feed-event"><span class="feed-icon">${ic(x[3],15)}</span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><small class="muted">${x[2]}</small></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("توزيع قائمة الانتظار","Queue distribution")}</h3><small class="muted">${t("الحالات الحالية داخل المسار","Current workflow stages")}</small></div><button class="btn" data-nav="queue">${ic("arrow",14)}${t("فتح","Open")}</button></div>${queueDonut()}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("ضغط الأطباء","Doctor workload")}</h3><small class="muted">${t("نسبة الحمل التشغيلي الحالية","Current operational load")}</small></div>${ic("doctor",20)}</div><div class="hbar-list top">${[["Dr. Mona Salem","3 active · 2 waiting",78],["Dr. Kareem Yassin","2 active · 1 waiting",54],["Dr. Laila Hassan","1 active · 3 ready",61]].map((x,i)=>`<div class="hbar-row"><div class="row"><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><b>${x[2]}%</b></div><div class="hbar-track"><div class="hbar-fill" style="width:${x[2]}%;animation-delay:${i*80}ms"></div></div></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("يحتاج انتباه","Needs attention")}</h3><small class="muted">${t("حسب أولوية التشغيل","Operational priority")}</small></div>${ic("alert",20)}</div>${[["أحمد مصطفى",t("انتظار 22 دقيقة","Waiting 22 min"),"queue"],["V-009818",t("توثيق غير مكتمل","Documentation incomplete"),"visits"],["F-00738",t("متابعة متأخرة يومين","Follow-up overdue 2 days"),"follow"]].map(x=>`<div class="row clickable" data-nav="${x[2]}"><div style="display:flex;gap:9px;align-items:center"><span class="activity-dot"></span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div></div>${ic("arrow",15)}</div>`).join("")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("إجراءات سريعة","Quick actions")}</h3><small class="muted">${t("أكثر الإجراءات استخداماً","Common actions")}</small></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" class="top"><button class="btn p" data-a="newPatient">${ic("plus",15)}${t("تسجيل مريض","Register patient")}</button><button class="btn" data-a="queueArrival">${ic("queue",15)}${t("تسجيل وصول","Register arrival")}</button><button class="btn" data-nav="visits">${ic("doctor",15)}${t("الزيارات","Visits")}</button><button class="btn" data-nav="reports">${ic("reports",15)}${t("التقارير","Reports")}</button></div></div></div></div>`)}
@@ -1255,7 +1349,59 @@ Roles:["Role_View","Role_Create","Role_Update","Role_Delete","Permission_View","
 Settings:["Settings_View","Settings_General","Settings_Workflow","Settings_MedicalFields","Settings_Measurements","Settings_Counters","Settings_Security","Settings_Branding"],
 Audit:["Audit_View","Audit_Export"]
 };
-function roles(){let role=S.roles.find(x=>x.name===S.selectedRole)||S.roles[0],draft=ensureRoleDraft(role),groups=["All",...Object.keys(PG)],items=Object.entries(PG).flatMap(([g,ps])=>ps.map(x=>({g,x}))).filter(x=>S.roleGroup==="All"||x.g===S.roleGroup),selected=new Set(draft.permissions||[]),protectedRole=role.name==="Super User";return shell(H(t("الأدوار والصلاحيات","Roles & Permissions"),t("إدارة الأدوار والصلاحيات بشكل عملي","Manage roles and permissions interactively"),b(t("دور جديد","New role"),"newRole","p"))+`<div class="permission-layout"><div class="card"><div class="row"><div><b>${t("الأدوار","Roles")}</b><br><small class="muted">${S.roles.length} ${t("أدوار","roles")}</small></div></div><div class="role-list">${S.roles.map(x=>`<button class="role-item ${x.name===role.name?"on":""}" data-role-name="${x.name}"><span><b>${x.name}</b><br><small>${x.name==="Super User"?Object.values(PG).flat().length:(x.permissions||[]).length} permissions</small></span><span>›</span></button>`).join("")}</div></div><div><div class="card"><div class="row"><div><h2 style="margin:0">${role.name}</h2><p class="muted">${role.description||""}</p></div><div class="actions"><button class="btn sm" data-a="editRole" data-id="${role.name}">${t("تعديل","Edit")}</button>${!protectedRole?`<button class="btn sm danger" data-a="deleteRole" data-id="${role.name}">${t("حذف","Delete")}</button>`:""}<button class="btn sm" data-a="cancelRole">${t("إلغاء","Cancel")}</button>${b(t("حفظ التغييرات","Save changes"),"saveRole","p")}</div></div>${protectedRole?`<div class="form-note">${t("Super User دور محمي ولا يمكن حذفه.","Super User is protected and cannot be deleted.")}</div>`:""}</div><div class="permission-toolbar top"><input id="permSearch" class="input" placeholder="${t("بحث في الصلاحيات...","Search permissions...")}"><span class="pill">${protectedRole?Object.values(PG).flat().length:selected.size} / ${Object.values(PG).flat().length}</span></div><div class="group-chips">${groups.map(g=>`<button class="${S.roleGroup===g?"on":""}" data-pgroup="${g}">${g}</button>`).join("")}</div><div class="permission-stack top">${items.map(o=>`<div class="permission-row" data-permission="${o.x.toLowerCase()}"><div><b dir="ltr">${o.x}</b><br><small>${o.g}</small></div><small>${t("السماح للدور بتنفيذ هذا الإجراء","Allow this role to perform this action")}</small><button class="switch ${protectedRole||selected.has(o.x)?"on":""}" data-permission-toggle="${o.x}" ${protectedRole?"disabled":""}></button></div>`).join("")}</div></div></div>`)}
+const PERMISSION_GROUP_I18N={
+Patients:["المرضى","Patients"],Queue:["قائمة الانتظار","Queue"],Visits:["الزيارات","Visits"],Clinical:["العمل السريري","Clinical"],
+FollowUps:["المتابعات","Follow-ups"],Reports:["التقارير","Reports"],Users:["المستخدمون","Users"],Roles:["الأدوار والصلاحيات","Roles & Permissions"],
+Settings:["الإعدادات","Settings"],Audit:["سجل التدقيق","Audit"]
+};
+const PERMISSION_I18N={
+Patient_View:["عرض المرضى","View patients"],Patient_Create:["إضافة مريض","Create patient"],Patient_Update:["تعديل بيانات المريض","Update patient"],Patient_Delete:["حذف مريض","Delete patient"],
+Queue_View:["عرض قائمة الانتظار","View queue"],Queue_CheckIn:["تسجيل وصول المريض","Check in patient"],Queue_Move:["نقل المريض بين المراحل","Move patient between stages"],
+Visit_View:["عرض الزيارات","View visits"],Visit_Start:["بدء زيارة","Start visit"],Visit_Update:["تعديل زيارة","Update visit"],Visit_Complete:["إكمال زيارة","Complete visit"],
+MedicalProfile_View:["عرض الملف الطبي","View medical profile"],Measurement_View:["عرض القياسات","View measurements"],Diagnosis_Create:["إضافة تشخيص","Create diagnosis"],Diagnosis_Update:["تعديل التشخيص","Update diagnosis"],
+Prescription_View:["عرض الوصفات","View prescriptions"],Prescription_Create:["إنشاء وصفة","Create prescription"],Prescription_Update:["تعديل الوصفة","Update prescription"],
+ClinicalOrder_View:["عرض الأوامر السريرية","View clinical orders"],ClinicalOrder_Create:["إنشاء أمر سريري","Create clinical order"],
+FollowUp_View:["عرض المتابعات","View follow-ups"],FollowUp_Create:["إنشاء متابعة","Create follow-up"],FollowUp_Update:["تعديل متابعة","Update follow-up"],FollowUp_Complete:["إكمال متابعة","Complete follow-up"],FollowUp_Cancel:["إلغاء متابعة","Cancel follow-up"],
+Reports_View:["عرض التقارير","View reports"],Reports_Generate:["إنشاء تقرير","Generate reports"],Reports_ExportPdf:["تصدير PDF","Export PDF"],Reports_ExportExcel:["تصدير Excel","Export Excel"],Reports_Audit:["عرض تقارير التدقيق","View audit reports"],Reports_DoctorActivity:["عرض نشاط الأطباء","View doctor activity"],
+User_View:["عرض المستخدمين","View users"],User_Create:["إضافة مستخدم","Create user"],User_Update:["تعديل مستخدم","Update user"],User_Disable:["تعطيل مستخدم","Disable user"],User_ResetPassword:["إعادة تعيين كلمة المرور","Reset password"],User_AssignRoles:["تعيين الأدوار","Assign roles"],
+Role_View:["عرض الأدوار","View roles"],Role_Create:["إنشاء دور","Create role"],Role_Update:["تعديل دور","Update role"],Role_Delete:["حذف دور","Delete role"],Permission_View:["عرض الصلاحيات","View permissions"],Permission_Assign:["تعيين الصلاحيات","Assign permissions"],
+Settings_View:["عرض الإعدادات","View settings"],Settings_General:["الإعدادات العامة","General settings"],Settings_Workflow:["إعدادات مسار العمل","Workflow settings"],Settings_MedicalFields:["إعدادات الحقول الطبية","Medical field settings"],Settings_Measurements:["إعدادات القياسات","Measurement settings"],Settings_Counters:["إعدادات العدادات","Counter settings"],Settings_Security:["إعدادات الأمان","Security settings"],Settings_Branding:["إعدادات الهوية","Branding settings"],
+Audit_View:["عرض سجل التدقيق","View audit log"],Audit_Export:["تصدير سجل التدقيق","Export audit log"]
+};
+function permissionLabel(code){let x=PERMISSION_I18N[code];if(x)return t(x[0],x[1]);return code.replaceAll("_"," ")}
+function permissionGroupLabel(group){if(group==="All")return t("الكل","All");let x=PERMISSION_GROUP_I18N[group];return x?t(x[0],x[1]):group}
+const AUDIT_EVENT_I18N={
+PatientCheckedIn:["تم تسجيل وصول مريض","Patient checked in"],VisitStarted:["تم بدء زيارة","Visit started"],RolePermissionsUpdated:["تم تحديث صلاحيات الدور","Role permissions updated"],UserUpdated:["تم تحديث مستخدم","User updated"],PatientCreated:["تم إنشاء مريض","Patient created"],
+ClinicStatusChanged:["تم تغيير حالة العيادة","Clinic status changed"],PlatformLogin:["تسجيل دخول المنصة","Platform login"],ClinicCreated:["تم إنشاء عيادة","Clinic created"],InitialSuperUserCreated:["تم إنشاء المستخدم الرئيسي الأول","Initial super user created"]
+};
+function auditEventLabel(event){let x=AUDIT_EVENT_I18N[event];return x?t(x[0],x[1]):event}
+function auditEntityTypeLabel(v){let m={Patient:["مريض","Patient"],Visit:["زيارة","Visit"],User:["مستخدم","User"],Role:["دور","Role"]};return m[v]?t(m[v][0],m[v][1]):v}
+function roles(){
+let role=S.roles.find(x=>x.name===S.selectedRole)||S.roles[0],
+draft=ensureRoleDraft(role),
+groups=["All",...Object.keys(PG)],
+items=Object.entries(PG).flatMap(([g,ps])=>ps.map(x=>({g,x}))).filter(x=>S.roleGroup==="All"||x.g===S.roleGroup),
+selected=new Set(draft.permissions||[]),
+protectedRole=role.name==="Super User";
+return shell(
+H(t("الأدوار والصلاحيات","Roles & Permissions"),t("إدارة الأدوار والصلاحيات والوصول للنظام","Manage roles, permissions, and system access"),b(t("دور جديد","New role"),"newRole","p"))+
+`<div class="permission-layout">
+<div class="card role-panel">
+  <div class="role-panel-head"><div><b>${t("الأدوار","Roles")}</b><small>${S.roles.length} ${t("أدوار","roles")}</small></div></div>
+  <div class="role-list">${S.roles.map(x=>`<button class="role-item ${x.name===role.name?"on":""}" data-role-name="${x.name}"><span><b>${x.name}</b><small>${x.name==="Super User"?Object.values(PG).flat().length:(x.permissions||[]).length} ${t("صلاحية","permissions")}</small></span><span>›</span></button>`).join("")}</div>
+</div>
+<div class="permission-main">
+  <div class="card permission-head-card">
+    <div class="permission-title-row"><div><h2>${role.name}</h2><p class="muted">${role.description||""}</p></div><div class="actions"><button class="btn sm" data-a="editRole" data-id="${role.name}">${t("تعديل","Edit")}</button>${!protectedRole?`<button class="btn sm danger" data-a="deleteRole" data-id="${role.name}">${t("حذف","Delete")}</button>`:""}<button class="btn sm" data-a="cancelRole">${t("إلغاء","Cancel")}</button>${b(t("حفظ التغييرات","Save changes"),"saveRole","p")}</div></div>
+    ${protectedRole?`<div class="form-note">${t("دور Super User محمي ويملك كل الصلاحيات ولا يمكن حذفه.","Super User is protected, has all permissions, and cannot be deleted.")}</div>`:""}
+  </div>
+  <div class="permission-toolbar top"><div class="permission-search-wrap">${ic("search",15)}<input id="permSearch" class="input" placeholder="${t("ابحث باسم الصلاحية أو الكود...","Search permission name or code...")}"></div><span class="pill">${protectedRole?Object.values(PG).flat().length:selected.size} / ${Object.values(PG).flat().length}</span></div>
+  <div class="group-chips">${groups.map(g=>`<button class="${S.roleGroup===g?"on":""}" data-pgroup="${g}">${permissionGroupLabel(g)}</button>`).join("")}</div>
+  <div class="permission-stack top">${items.map(o=>`<div class="permission-row" data-permission="${(permissionLabel(o.x)+" "+o.x+" "+permissionGroupLabel(o.g)).toLowerCase()}"><div class="permission-name"><b>${permissionLabel(o.x)}</b><code dir="ltr">${o.x}</code></div><small>${permissionGroupLabel(o.g)}</small><button class="switch ${protectedRole||selected.has(o.x)?"on":""}" data-permission-toggle="${o.x}" ${protectedRole?"disabled":""}></button></div>`).join("")}</div>
+</div>
+</div>`
+)}
+
 function settings(){let T=[["general",t("عام","General")],["workflow",t("مسار العمل","Workflow")],["medical",t("حقول الملف الطبي","Medical Fields")],["measure",t("أنواع القياسات","Measurements")],["counters",t("العدادات","Counters")],["security",t("الأمان","Security")],["brand",t("الهوية","Branding")]];return shell(H(t("الإعدادات والتكوين","Settings & Configuration"),t("إدارة كل إعدادات العيادة من مركز واحد","Manage all clinic configuration from one hub"))+`<div class="settings"><div class="card tabs">${T.map(x=>`<button class="${S.tab===x[0]?"on":""}" data-tab="${x[0]}">${x[1]}</button>`).join("")}</div><div><div class="card settings-head-card"><h2>${T.find(x=>x[0]===S.tab)[1]}</h2><p class="muted">${S.tab==="workflow"?t("صمم مراحل التشغيل وقواعد الانتقال بينها.","Design operational states and transition rules."):S.tab==="medical"?t("تحكم في الحقول الديناميكية وترتيب ظهورها.","Manage dynamic fields and their display order."):S.tab==="measure"?t("عرّف أنواع القياسات والوحدات وأنواع القيم.","Define measurement types, units and value types."):S.tab==="counters"?t("اضبط صيغ أرقام المرضى والزيارات والمتابعات.","Configure patient, visit and follow-up number formats."):S.tab==="security"?t("سياسات الجلسات والتوكن وحماية الحسابات.","Session, token and account protection policies."):S.tab==="brand"?t("تخصيص محدود لهوية العيادة مع الحفاظ على AURAN.","Controlled clinic customization while preserving AURAN identity."):t("هوية العيادة والمنطقة الزمنية واللغة الافتراضية.","Clinic identity, timezone and default language.")}</p></div>${settingBody()}</div></div>`)}
 function settingBody(){
 if(S.tab==="workflow")return `<div class="card"><div class="row"><div><h3>${t("المسار الرئيسي","Primary workflow")}</h3><small class="muted">${t("اسحب الحالات لإعادة الترتيب، وأضف أو عدّل أو احذف الحالات الانتقالية.","Drag to reorder, then add, edit, or remove workflow states.")}</small></div><div class="actions"><button class="btn p" data-a="newWorkflowState">${ic("plus",14)}${t("إضافة حالة","Add state")}</button><button class="btn" data-a="workflowSettings">${ic("settings",14)}${t("خصائص المسار","Workflow settings")}</button></div></div><div class="flow-editor">${S.flow.map((x,i)=>`<div class="flow-state" draggable="true" data-w="${i}"><div class="row"><span class="num">${i+1}</span><span class="drag">⋮⋮</span></div><h3>${x}</h3><small class="muted">${i===0?t("بداية المسار","Entry state"):i===S.flow.length-1?t("حالة نهائية","Terminal state"):t("حالة تشغيل","Operational state")}</small><div class="actions top"><button class="btn sm" data-a="editWorkflowState" data-id="${i}">${t("تعديل","Edit")}</button>${i>0&&i<S.flow.length-1?`<button class="btn sm danger" data-a="deleteWorkflowState" data-id="${i}">${t("حذف","Delete")}</button>`:""}</div></div>${i<S.flow.length-1?`<div class="flow-link">→</div>`:""}`).join("")}</div><div class="row"><div><h3>${t("قواعد الانتقال","Transition Rules")}</h3><small class="muted">${t("من → إلى + الصلاحية المطلوبة","From → To + required permission")}</small></div><button class="btn p" data-a="newTransition">${ic("plus",14)}${t("إضافة انتقال","Add transition")}</button></div>${S.transitions.map(x=>`<div class="transition-grid"><b>${x.from}</b><span>→</span><b>${x.to}</b><code>${x.permission}</code><div class="actions"><button class="btn sm" data-a="editTransition" data-id="${x.id}">${t("تعديل","Edit")}</button><button class="btn sm danger" data-a="deleteTransition" data-id="${x.id}">×</button></div></div>`).join("")}</div>`;
@@ -1324,7 +1470,21 @@ function modalHtml(){if(!S.modal)return "";let k=S.modal,p=S.modalPayload||{},ti
  else {title=t("إضافة / تعديل","Create / Edit");body=`<div class="form-note">${t("هذه النافذة تعمل داخل نسخة العرض وتحدّث الحالة محلياً.","This modal updates the local demo state.")}</div>`}
  return `<div class="modal-backdrop" data-modal-backdrop><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><div class="modal-head"><div><h3 id="modal-title" style="margin:0">${title}</h3><p class="modal-sub">${t("AURAN Clinic — سير عمل العرض","AURAN Clinic — Demo workflow")}</p></div><button type="button" class="btn modal-close" data-a="closeModal" aria-label="${t("إغلاق","Close")}">×</button></div><div class="modal-body"><div class="validation-summary">${t("راجع الحقول المعلّمة قبل الحفظ.","Please fix the highlighted fields before saving.")}</div>${body}</div><div class="modal-foot">${showSave?`<button type="button" class="btn modal-cancel" data-a="closeModal">${t("إلغاء","Cancel")}</button><button type="button" class="btn p modal-save ${k==="confirmDelete"||k==="resetDemo"?"danger":""}" data-a="saveModal">${ic(k==="confirmDelete"||k==="resetDemo"?"alert":"check",14)}${saveLabel}</button>`:`<button type="button" class="btn modal-cancel" data-a="closeModal">${t("إغلاق","Close")}</button>`}</div></div></div>`}
 
-function audit(){let all=S.auditEvents,q=(S.listFilters.audit||"").toLowerCase(),filtered=all.filter(r=>(!q||r.join(" ").toLowerCase().includes(q))&&(S.listFilters.auditEvent==="All"||r[1].toLowerCase().includes(S.listFilters.auditEvent.toLowerCase()))),pg=pageData("audit",filtered),rows=pg.items;return shell(H(t("سجل التدقيق","Audit Log"),t("تتبع الأحداث الحساسة وربطها بـ Correlation ID","Trace sensitive events with Correlation IDs"),`<div class="actions"><button class="btn" data-a="exportAudit">${ic("excel",14)}${t("تصدير CSV","Export CSV")}</button><button class="btn" data-a="clearAudit">${ic("refresh",14)}${t("إعادة بيانات العرض","Reset demo log")}</button></div>`)+`<div class="grid s3"><div class="card status-card"><span class="icon-badge">${ic("audit",18)}</span><div><small class="muted">${t("أحداث ظاهرة","Visible events")}</small><b style="display:block;font-size:24px">${all.length}</b></div></div><div class="card status-card"><span class="icon-badge">${ic("user",18)}</span><div><small class="muted">${t("منفذون مختلفون","Unique actors")}</small><b style="display:block;font-size:24px">${new Set(all.map(x=>x[3])).size}</b></div></div><div class="card status-card"><span class="icon-badge">${ic("activity",18)}</span><div><small class="muted">Correlation IDs</small><b style="display:block;font-size:24px">${all.length}</b></div></div></div><div class="card top"><div class="screen-toolbar"><input id="auditSearch" class="input" value="${S.listFilters.audit||""}" placeholder="${t("بحث في الحدث أو الكيان أو Correlation ID...","Search event, entity or Correlation ID...")}"><select id="auditEventFilter" class="toolbar-select"><option value="All" ${S.listFilters.auditEvent==="All"?"selected":""}>${t("كل الأحداث","All events")}</option>${["Patient","Visit","User","Role"].map(v=>`<option ${S.listFilters.auditEvent===v?"selected":""}>${v}</option>`).join("")}</select></div><div class="scroll"><table class="table"><thead><tr><th>Time</th><th>Event</th><th>Entity</th><th>Actor</th><th>Correlation ID</th></tr></thead><tbody>${rows.map(r=>`<tr data-audit-row="${r.join(" ").toLowerCase()}" data-event="${r[1]}"><td dir="ltr">${r[0]}</td><td><span class="audit-event"><span class="activity-dot"></span><b>${r[1]}</b></span></td><td>${r[2]}</td><td>${r[3]}</td><td><code>${r[4]}</code></td></tr>`).join("")}</tbody></table></div>${pager("audit",pg)}</div>`)}
+function audit(){
+let all=S.auditEvents,
+q=(S.listFilters.audit||"").toLowerCase(),
+filtered=all.filter(r=>{
+  let searchable=(r.join(" ")+" "+auditEventLabel(r[1])).toLowerCase();
+  let filterOk=S.listFilters.auditEvent==="All"||r[1].toLowerCase().includes(S.listFilters.auditEvent.toLowerCase());
+  return (!q||searchable.includes(q))&&filterOk;
+}),
+pg=pageData("audit",filtered),rows=pg.items;
+return shell(
+H(t("سجل التدقيق","Audit Log"),t("تتبع الأحداث الحساسة ومن قام بها باستخدام Correlation ID","Track sensitive activity, actors, and Correlation IDs"),`<div class="actions"><button class="btn" data-a="exportAudit">${ic("excel",14)}${t("تصدير CSV","Export CSV")}</button><button class="btn" data-a="clearAudit">${ic("refresh",14)}${t("إعادة بيانات العرض","Reset demo log")}</button></div>`)+
+`<div class="grid s3"><div class="card status-card"><span class="icon-badge">${ic("audit",18)}</span><div><small class="muted">${t("إجمالي الأحداث","Total events")}</small><b style="display:block;font-size:24px">${all.length}</b></div></div><div class="card status-card"><span class="icon-badge">${ic("user",18)}</span><div><small class="muted">${t("منفذون مختلفون","Unique actors")}</small><b style="display:block;font-size:24px">${new Set(all.map(x=>x[3])).size}</b></div></div><div class="card status-card"><span class="icon-badge">${ic("activity",18)}</span><div><small class="muted">${t("معرّفات التتبع","Correlation IDs")}</small><b style="display:block;font-size:24px">${all.length}</b></div></div></div>
+<div class="card top audit-card"><div class="screen-toolbar"><div class="permission-search-wrap">${ic("search",15)}<input id="auditSearch" class="input" value="${S.listFilters.audit||""}" placeholder="${t("ابحث في الحدث أو الكيان أو معرّف التتبع...","Search event, entity, or Correlation ID...")}"></div><select id="auditEventFilter" class="toolbar-select"><option value="All" ${S.listFilters.auditEvent==="All"?"selected":""}>${t("كل الأحداث","All events")}</option>${["Patient","Visit","User","Role"].map(v=>`<option value="${v}" ${S.listFilters.auditEvent===v?"selected":""}>${auditEntityTypeLabel(v)}</option>`).join("")}</select></div>
+<div class="scroll"><table class="table"><thead><tr><th>${t("الوقت","Time")}</th><th>${t("الحدث","Event")}</th><th>${t("الكيان","Entity")}</th><th>${t("المنفذ","Actor")}</th><th>${t("معرّف التتبع","Correlation ID")}</th></tr></thead><tbody>${rows.map(r=>`<tr data-audit-row="${(r.join(" ")+" "+auditEventLabel(r[1])).toLowerCase()}" data-event="${r[1]}"><td dir="ltr">${r[0]}</td><td><span class="audit-event"><span class="activity-dot"></span><b>${auditEventLabel(r[1])}</b></span></td><td dir="ltr">${r[2]}</td><td>${r[3]}</td><td><code dir="ltr">${r[4]}</code></td></tr>`).join("")}</tbody></table></div>${pager("audit",pg)}</div>`
+)}
 
 function PH(title,sub,act=""){return `<header class="head"><div><span class="platform-badge">AURAN PLATFORM</span><h1 style="margin-top:7px">${title}</h1><p>${sub}</p></div>${act}<button class="btn user-trigger" data-a="platformAccount"><span class="avatar">PA</span><span class="user-copy"><b>Platform Admin</b><small>platform@auran.tech</small></span></button></header>`}
 function platformShell(x,screen){return `<div class="platform-app"><aside class="platform-side"><div class="brand"><div class="mark">A</div><div><b>AURAN</b><br><span class="platform-badge">PLATFORM ADMIN</span></div></div><button class="${screen==="platformClinics"||screen==="platformClinic"?"on":""}" data-a="platformClinics">${ic("dashboard",16)} ${t("العيادات","Clinics")}</button><button class="${screen==="platformAudit"?"on":""}" data-a="platformAudit">${ic("audit",16)} ${t("تدقيق المنصة","Platform Audit")}</button><button data-a="platformLogout">${ic("logout",16)} ${t("تسجيل الخروج","Sign out")}</button></aside><main class="platform-main">${x}</main></div>`}
