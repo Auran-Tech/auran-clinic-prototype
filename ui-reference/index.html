@@ -134,7 +134,7 @@ html[data-theme=light] #toast-container>div{background:rgba(255,255,255,.98)!imp
 /* navbar/content refinement v4 */
 .topbar{justify-content:flex-start!important;height:62px!important;padding:0 20px!important;direction:ltr;background:color-mix(in srgb,var(--b) 88%,transparent)!important}
 .topbar-left{display:none!important}.topbar-actions{margin:0!important;display:flex!important;align-items:center!important;gap:7px!important;direction:ltr}
-[dir=rtl] .topbar-actions{direction:rtl}
+[dir=rtl] .topbar-actions{direction:rtl;flex-direction:row-reverse}
 .location-wrap{position:relative}.location-trigger{height:38px;display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid var(--l);border-radius:12px;background:var(--chip);color:var(--t);cursor:pointer;transition:.16s}.location-trigger:hover{border-color:#3b82f65a;background:#3b82f60c;transform:translateY(-1px)}.location-trigger .location-copy{display:grid;text-align:start;line-height:1.05}.location-trigger .location-copy small{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--m);font-weight:800}.location-trigger .location-copy b{font-size:11px;font-weight:700}.location-trigger .chev{color:var(--m);font-size:10px}
 .location-menu{width:250px!important}.location-option{width:100%;display:flex;align-items:center;gap:10px;padding:10px;border:0;border-radius:12px;background:transparent;color:var(--t);text-align:start;cursor:pointer}.location-option:hover{background:#3b82f60d}.location-option.on{background:#3b82f611}.location-option .loc-icon{width:31px;height:31px;border-radius:10px;display:grid;place-items:center;background:#3b82f612;color:#60a5fa}.location-option b{font-size:11px}.location-option small{display:block;color:var(--m);font-size:9px;margin-top:2px}.location-option .loc-check{margin-inline-start:auto;color:#10B981}
 .topbar .navbar-icon,.topbar .user-trigger,.location-trigger{box-shadow:none!important}.topbar .user-trigger{padding:3px 8px!important}.topbar .avatar{width:31px;height:31px;border-radius:10px}.topbar .user-copy b{font-size:11px}.topbar .user-copy small{font-size:9px}
@@ -498,11 +498,13 @@ document.addEventListener("click",e=>{
  let pt=e.target.closest("[data-ptab]");if(pt){S.patientTab=pt.dataset.ptab;render();return}
  let pg=e.target.closest("[data-pgroup]");if(pg){S.roleGroup=pg.dataset.pgroup;render();return}
  let ro=e.target.closest("[data-role-option]");if(ro){let rv=ro.dataset.roleOption;S.selectedRoles=S.selectedRoles.includes(rv)?S.selectedRoles.filter(x=>x!==rv):[...S.selectedRoles,rv];refreshEmployeeRolePicker();return}
- let a=e.target.closest("[data-a]");if(!a){let pop=document.getElementById("pop"),np=document.getElementById("notificationPop");if(pop&&!e.target.closest(".user"))pop.classList.add("hide");if(np&&!e.target.closest(".notification-wrap"))np.classList.add("hide");return}
+ let a=e.target.closest("[data-a]");if(!a){let pop=document.getElementById("pop"),np=document.getElementById("notificationPop"),lp=document.getElementById("locationPop");if(pop&&!e.target.closest(".user"))pop.classList.add("hide");if(np&&!e.target.closest(".notification-wrap"))np.classList.add("hide");if(lp&&!e.target.closest(".location-wrap"))lp.classList.add("hide");return}
  let q=a.dataset.a,id=a.dataset.id,stage=a.dataset.stage;
  const go=s=>{S.screen=s;location.hash="/"+s;render()};
- if(q==="user"){document.getElementById("notificationPop")?.classList.add("hide");document.getElementById("pop")?.classList.toggle("hide")}
- else if(q==="notifications"){document.getElementById("pop")?.classList.add("hide");document.getElementById("notificationPop")?.classList.toggle("hide")}
+ if(q==="user"){document.getElementById("notificationPop")?.classList.add("hide");document.getElementById("locationPop")?.classList.add("hide");document.getElementById("pop")?.classList.toggle("hide")}
+ else if(q==="notifications"){document.getElementById("pop")?.classList.add("hide");document.getElementById("locationPop")?.classList.add("hide");document.getElementById("notificationPop")?.classList.toggle("hide")}
+ else if(q==="locations"){document.getElementById("pop")?.classList.add("hide");document.getElementById("notificationPop")?.classList.add("hide");document.getElementById("locationPop")?.classList.toggle("hide")}
+ else if(q==="selectLocation"){S.currentLocation=id||"Main Clinic";persistDemo();toastInfo(t("تم تغيير الموقع إلى ","Location changed to ")+S.currentLocation);render()}
  else if(q==="markNotifications"){S.notifications.forEach(n=>n.read=true);persistDemo();toastInfo(t("تم تحديد كل الإشعارات كمقروءة","All notifications marked as read"));render()}
  else if(q==="openNotification"){let n=S.notifications.find(x=>x.id===id);if(n){n.read=true;persistDemo();go(a.dataset.target||n.screen||"dashboard")}}
  else if(q==="theme"){S.theme=S.theme==="dark"?"light":"dark";S.profileData.theme=S.theme;render()}
