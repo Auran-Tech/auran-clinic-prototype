@@ -1197,6 +1197,38 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
   background:color-mix(in srgb,var(--p) 8%,transparent)!important;
 }
 
+
+/* Navbar chevron SVG consistency fix */
+.app-header .chev{
+  width:20px!important;
+  height:20px!important;
+  min-width:20px!important;
+  display:grid!important;
+  place-items:center!important;
+  margin-inline-start:4px!important;
+  padding:0!important;
+  border-radius:7px!important;
+  background:transparent!important;
+  color:var(--m)!important;
+  line-height:0!important;
+  flex:0 0 auto!important;
+}
+.app-header .chev svg{
+  width:13px!important;
+  height:13px!important;
+  display:block!important;
+  stroke:currentColor!important;
+}
+.header-location .location-trigger,
+.header-user .user-trigger{
+  align-items:center!important;
+}
+.header-location .location-trigger:hover .chev,
+.header-user .user-trigger:hover .chev{
+  background:color-mix(in srgb,var(--p) 8%,transparent)!important;
+  color:var(--t)!important;
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1384,9 +1416,9 @@ function clinicBrandName(){return S.settingsData?.displayName||S.settingsData?.c
 
 
 
-function user(){let u=S.profileData||{name:"Ahmed Shahine",email:"ahmed@auran.clinic"},initials=u.name.split(/\s+/).filter(Boolean).map(x=>x[0]).slice(0,2).join("").toUpperCase()||"AS",av=u.photo?`style="background-image:url('${u.photo}');background-size:cover;color:transparent"`:"";return `<div class="user"><button class="btn user-trigger" data-a="user" aria-label="${t("قائمة المستخدم","User menu")}"><span class="avatar" ${av}>${initials}</span><span class="user-copy"><b>${u.name}</b><small>Super User</small></span><span class="chev">⌄</span></button><div id="pop" class="pop navbar-dropdown hide"><div class="pop-head"><span class="avatar" ${av}>${initials}</span><div><b>${u.name}</b><br><small class="muted">${u.email}</small><br>${p("Super User","ok")}</div></div><button class="menu-row" data-a="profile"><span>${t("إعدادات الملف الشخصي","Profile settings")}</span><span>›</span></button><div class="menu-row"><span>${t("اللغة","Language")}</span><span class="seg"><button class="${S.lang==="ar"?"active":""}" data-a="setAr">AR</button><button class="${S.lang==="en"?"active":""}" data-a="setEn">EN</button></span></div><button class="menu-row" data-a="theme"><span>${t("الوضع الداكن","Dark mode")}</span><span class="switch ${S.theme==="dark"?"on":""}"></span></button><button class="menu-row bad" data-a="logout"><span>${t("تسجيل الخروج","Sign out")}</span><span>↗</span></button></div></div>`}
+function user(){let u=S.profileData||{name:"Ahmed Shahine",email:"ahmed@auran.clinic"},initials=u.name.split(/\s+/).filter(Boolean).map(x=>x[0]).slice(0,2).join("").toUpperCase()||"AS",av=u.photo?`style="background-image:url('${u.photo}');background-size:cover;color:transparent"`:"";return `<div class="user"><button class="btn user-trigger" data-a="user" aria-label="${t("قائمة المستخدم","User menu")}"><span class="avatar" ${av}>${initials}</span><span class="user-copy"><b>${u.name}</b><small>Super User</small></span><span class="chev" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4 4-4"/></svg></span></button><div id="pop" class="pop navbar-dropdown hide"><div class="pop-head"><span class="avatar" ${av}>${initials}</span><div><b>${u.name}</b><br><small class="muted">${u.email}</small><br>${p("Super User","ok")}</div></div><button class="menu-row" data-a="profile"><span>${t("إعدادات الملف الشخصي","Profile settings")}</span><span>›</span></button><div class="menu-row"><span>${t("اللغة","Language")}</span><span class="seg"><button class="${S.lang==="ar"?"active":""}" data-a="setAr">AR</button><button class="${S.lang==="en"?"active":""}" data-a="setEn">EN</button></span></div><button class="menu-row" data-a="theme"><span>${t("الوضع الداكن","Dark mode")}</span><span class="switch ${S.theme==="dark"?"on":""}"></span></button><button class="menu-row bad" data-a="logout"><span>${t("تسجيل الخروج","Sign out")}</span><span>↗</span></button></div></div>`}
 function notificationsMenu(){let unread=S.notifications.filter(x=>!x.read).length;return `<div class="notification-wrap"><button class="navbar-icon" data-a="notifications" aria-label="${t("الإشعارات","Notifications")}">${ic("bell",18)}${unread?`<span class="notification-badge">${unread}</span>`:""}</button><div id="notificationPop" class="navbar-dropdown hide"><div class="notification-head"><div><h3>${t("الإشعارات","Notifications")}</h3><small class="muted">${unread?t(unread+" غير مقروء",unread+" unread"):t("كل الإشعارات مقروءة","You're all caught up")}</small></div>${unread?`<button data-a="markNotifications">${t("تحديد الكل كمقروء","Mark all read")}</button>`:""}</div><div class="notification-list">${S.notifications.length?S.notifications.map(n=>`<button class="notification-item ${n.read?"":"unread"}" data-a="openNotification" data-id="${n.id}" data-target="${n.screen}"><span class="notification-dot"></span><span class="notification-copy"><b>${A()?n.titleAr:n.titleEn}</b><small>${A()?n.bodyAr:n.bodyEn}</small></span><span class="notification-time">${n.time}</span></button>`).join(""):`<div class="notification-empty">${t("لا توجد إشعارات جديدة","No notifications")}</div>`}</div></div></div>`}
-function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","Main branch")],["New Cairo",t("فرع القاهرة الجديدة","New Cairo branch")],["Nasr City",t("فرع مدينة نصر","Nasr City branch")]];return `<div class="location-wrap"><button class="location-trigger" data-a="locations">${ic("branches",16)}<span class="location-copy"><small>${t("الفرع","Branch")}</small><b>${S.currentLocation}</b></span><span class="chev">⌄</span></button><div id="locationPop" class="navbar-dropdown location-menu hide">${locs.map(x=>`<button class="location-option ${S.currentLocation===x[0]?"on":""}" data-a="selectLocation" data-id="${x[0]}"><span class="loc-icon">${ic("branches",14)}</span><span><b>${x[0]}</b><small>${x[1]}</small></span>${S.currentLocation===x[0]?`<span class="loc-check">✓</span>`:""}</button>`).join("")}</div></div>`}
+function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","Main branch")],["New Cairo",t("فرع القاهرة الجديدة","New Cairo branch")],["Nasr City",t("فرع مدينة نصر","Nasr City branch")]];return `<div class="location-wrap"><button class="location-trigger" data-a="locations">${ic("branches",16)}<span class="location-copy"><small>${t("الفرع","Branch")}</small><b>${S.currentLocation}</b></span><span class="chev" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8l4 4 4-4"/></svg></span></button><div id="locationPop" class="navbar-dropdown location-menu hide">${locs.map(x=>`<button class="location-option ${S.currentLocation===x[0]?"on":""}" data-a="selectLocation" data-id="${x[0]}"><span class="loc-icon">${ic("branches",14)}</span><span><b>${x[0]}</b><small>${x[1]}</small></span>${S.currentLocation===x[0]?`<span class="loc-check">✓</span>`:""}</button>`).join("")}</div></div>`}
 
 function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
 function topbar(){
