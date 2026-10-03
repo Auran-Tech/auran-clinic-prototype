@@ -585,6 +585,148 @@ html[data-theme=light] .side{
   .topbar .user-trigger{min-width:38px!important;width:38px!important}
 }
 
+
+/* navbar/sidebar visual refinement v7 */
+.topbar{
+  height:60px!important;
+  margin:10px 16px 0!important;
+  padding:0 12px!important;
+  border-radius:15px!important;
+  border:1px solid color-mix(in srgb,var(--l) 85%,transparent)!important;
+  background:color-mix(in srgb,var(--c2) 96%,transparent)!important;
+  box-shadow:none!important;
+}
+html[data-theme=dark] .topbar{
+  background:#0D1728!important;
+  border-color:rgba(148,163,184,.15)!important;
+}
+html[data-theme=light] .topbar{
+  background:#FFFFFF!important;
+  border-color:#E6EAF1!important;
+  box-shadow:none!important;
+}
+.topbar-menu{
+  width:38px!important;height:38px!important;min-width:38px!important;
+  border-radius:10px!important;color:var(--m)!important;
+}
+.topbar-menu:hover{background:#3b82f60d!important;color:var(--t)!important;transform:none!important}
+.topbar-actions{
+  margin-inline-start:auto!important;
+  gap:0!important;
+  padding:3px!important;
+  border:1px solid color-mix(in srgb,var(--l) 80%,transparent);
+  border-radius:13px;
+  background:color-mix(in srgb,var(--chip) 62%,transparent);
+}
+html[data-theme=dark] .topbar-actions{
+  background:rgba(255,255,255,.018);
+  border-color:rgba(148,163,184,.10);
+}
+html[data-theme=light] .topbar-actions{
+  background:#F7F9FC;
+  border-color:#EDF0F5;
+}
+.navbar-separator{
+  width:1px;height:24px;flex:0 0 1px;
+  background:var(--l);margin:0 3px;
+}
+.location-trigger,.navbar-icon,.topbar .user-trigger{
+  height:38px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transition:background .15s ease,color .15s ease!important;
+}
+.location-trigger:hover,.navbar-icon:hover,.topbar .user-trigger:hover{
+  background:#3b82f60d!important;
+  transform:none!important;
+}
+.location-trigger{
+  padding:0 10px!important;
+  gap:8px!important;
+  color:var(--t)!important;
+}
+.location-trigger>svg{color:#60A5FA!important}
+.location-trigger .location-copy{display:block!important}
+.location-trigger .location-copy b{font-size:11.5px!important;font-weight:700!important}
+.location-trigger .chev{margin-inline-start:4px!important;color:var(--m)!important}
+.navbar-icon{
+  width:38px!important;min-width:38px!important;color:#94A3B8!important;
+}
+.navbar-icon:hover{color:#60A5FA!important}
+.notification-badge{
+  top:1px!important;inset-inline-end:0!important;
+  min-width:17px!important;height:17px!important;
+  border:2px solid var(--c2)!important;
+  font-size:8px!important;
+}
+.topbar .user-trigger{
+  padding:3px 7px!important;gap:8px!important;
+}
+.topbar .avatar{
+  width:30px!important;height:30px!important;border-radius:9px!important;
+  box-shadow:none!important;
+}
+.topbar .user-copy b{font-size:11.5px!important;font-weight:700!important}
+.topbar .user-copy small{font-size:8.5px!important;color:var(--m)!important;margin-top:2px!important}
+.topbar .user-trigger .chev{width:18px;height:18px;border-radius:6px;background:var(--chip);display:grid;place-items:center;color:var(--m);font-size:9px!important}
+html[data-theme=dark] .topbar .user-trigger .chev{background:rgba(255,255,255,.035)}
+.navbar-dropdown{margin-top:8px!important;border-radius:14px!important}
+
+/* Sidebar icon system */
+.side .nav button{
+  color:#8190A8!important;
+  border-radius:12px!important;
+  transition:background .15s ease,color .15s ease!important;
+}
+.side .nav-ico{
+  width:31px!important;height:31px!important;
+  border-radius:10px!important;
+  color:#8291A9!important;
+  background:transparent!important;
+  border:1px solid transparent!important;
+  transition:background .15s ease,color .15s ease,border-color .15s ease!important;
+}
+.side .nav button:hover{
+  background:#3b82f608!important;
+  color:var(--t)!important;
+}
+.side .nav button:hover .nav-ico{
+  color:#60A5FA!important;
+  background:#3b82f60e!important;
+  border-color:#3b82f618!important;
+  transform:none!important;
+}
+.side .nav button.on{
+  background:linear-gradient(90deg,#3B82F616,transparent)!important;
+  color:var(--t)!important;
+}
+.side .nav button.on .nav-ico{
+  color:#FFFFFF!important;
+  background:linear-gradient(135deg,#3B82F6,#6366F1)!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  transform:none!important;
+}
+html[data-theme=light] .side .nav button{color:#68758A!important}
+html[data-theme=light] .side .nav button.on{background:linear-gradient(90deg,#6366F112,transparent)!important;color:#0F172A!important}
+html[data-theme=light] .side .nav button:hover .nav-ico{color:#4F46E5!important;background:#EEF2FF!important;border-color:#E0E7FF!important}
+html[data-theme=light] .side .nav button.on .nav-ico{color:#fff!important;background:linear-gradient(135deg,#6366F1,#3B82F6)!important}
+.app.sidebar-collapsed .side .nav button.on{
+  background:transparent!important;
+}
+.app.sidebar-collapsed .side .nav button.on .nav-ico{
+  width:38px!important;height:38px!important;border-radius:12px!important;
+}
+@media(max-width:760px){
+  .topbar{margin:8px 10px 0!important;padding:0 8px!important}
+  .topbar-actions{gap:0!important}
+  .navbar-separator{display:none}
+  .location-trigger{width:38px!important;padding:0!important}
+  .topbar .user-trigger{width:38px!important;padding:3px!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -777,7 +919,7 @@ function notificationsMenu(){let unread=S.notifications.filter(x=>!x.read).lengt
 function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","Main branch")],["New Cairo",t("فرع القاهرة الجديدة","New Cairo branch")],["Nasr City",t("فرع مدينة نصر","Nasr City branch")]];return `<div class="location-wrap"><button class="location-trigger" data-a="locations">${ic("branches",16)}<span class="location-copy"><small>${t("الفرع","Branch")}</small><b>${S.currentLocation}</b></span><span class="chev">⌄</span></button><div id="locationPop" class="navbar-dropdown location-menu hide">${locs.map(x=>`<button class="location-option ${S.currentLocation===x[0]?"on":""}" data-a="selectLocation" data-id="${x[0]}"><span class="loc-icon">${ic("branches",14)}</span><span><b>${x[0]}</b><small>${x[1]}</small></span>${S.currentLocation===x[0]?`<span class="loc-check">✓</span>`:""}</button>`).join("")}</div></div>`}
 
 function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
-function topbar(){return `<nav class="topbar"><button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="topbar-actions">${locationMenu()}${notificationsMenu()}${user()}</div></nav>`}
+function topbar(){return `<nav class="topbar"><button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button><div class="topbar-actions">${locationMenu()}<span class="navbar-separator"></span>${notificationsMenu()}<span class="navbar-separator"></span>${user()}</div></nav>`}
 function H(title,sub,act=""){let m=currentPageLabel();return `<header class="head"><div class="page-label"><span class="label-dot"></span><span>${m[0]}</span><span>›</span><span>${m[1]}</span></div><div class="page-heading-row"><div class="page-title-copy"><h1>${title}</h1><p>${sub}</p></div>${act?`<div class="page-actions">${act}</div>`:""}</div></header>`}
 function shell(x){if(S.screen==="login")return x;let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""}"><aside class="side"><div class="brand">${clinicBrandMark()}<div><b>${clinicBrandName()}</b><br><small>Clinic Operating System</small></div></div><nav class="nav">${N.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",17)}</span><span>${t(n[1],n[2])}</span></button>`).join("")}</nav></aside><main class="main">${topbar()}<section class="content-body"><div class="workspace-frame"><div class="page-content-surface">${x}</div></div></section></main><div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div></div>`}
 
