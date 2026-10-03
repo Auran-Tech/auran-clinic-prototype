@@ -1168,6 +1168,35 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
   .header-user .avatar{width:30px!important;height:30px!important}
 }
 
+
+/* Navbar dropdown chevron alignment fix */
+.app-header .chev{
+  width:18px!important;
+  height:18px!important;
+  min-width:18px!important;
+  display:grid!important;
+  place-items:center!important;
+  margin:0!important;
+  padding:0!important;
+  border-radius:6px!important;
+  background:transparent!important;
+  color:var(--m)!important;
+  font-size:10px!important;
+  line-height:1!important;
+  transform:none!important;
+  flex:0 0 auto!important;
+}
+.header-location .location-trigger .chev,
+.header-user .user-trigger .chev{
+  margin-inline-start:4px!important;
+  align-self:center!important;
+}
+.header-location .location-trigger:hover .chev,
+.header-user .user-trigger:hover .chev{
+  color:var(--t)!important;
+  background:color-mix(in srgb,var(--p) 8%,transparent)!important;
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
