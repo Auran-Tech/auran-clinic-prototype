@@ -1229,6 +1229,78 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
   color:var(--t)!important;
 }
 
+
+/* Follow-ups page refinement */
+.follow-kpi .icon-badge{flex:0 0 auto!important}
+.follow-kpi b{display:block!important;font-size:24px!important;line-height:1.05!important;margin-top:4px!important}
+
+.follow-card{padding:14px!important}
+.follow-toolbar{display:flex!important;align-items:center!important;gap:10px!important;margin-bottom:8px!important}
+.follow-search-wrap{position:relative!important;flex:1!important;max-width:430px!important;min-width:220px!important}
+.follow-search-wrap>svg{position:absolute!important;inset-inline-start:11px!important;top:50%!important;transform:translateY(-50%)!important;color:var(--m)!important;z-index:2!important}
+.follow-search-wrap .input{max-width:none!important;padding-inline-start:35px!important}
+
+.follow-list{display:grid!important;gap:8px!important}
+.follow-item.follow-row{
+  display:grid!important;
+  grid-template-columns:minmax(260px,1.45fr) minmax(140px,.72fr) minmax(118px,.58fr) auto!important;
+  gap:16px!important;
+  align-items:center!important;
+  padding:13px 14px!important;
+  border:1px solid var(--l)!important;
+  border-radius:14px!important;
+  background:var(--c2)!important;
+  transition:background .15s ease,border-color .15s ease!important
+}
+.follow-item.follow-row:hover{
+  background:color-mix(in srgb,var(--p) 4%,var(--c2))!important;
+  border-color:color-mix(in srgb,var(--p) 20%,var(--l))!important
+}
+.follow-main{min-width:0!important;display:grid!important;gap:7px!important}
+.follow-title-row{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important}
+.follow-title{min-width:0!important;display:flex!important;align-items:center!important;gap:9px!important}
+.follow-title>b{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-size:12.5px!important}
+.follow-id{
+  direction:ltr!important;
+  unicode-bidi:isolate!important;
+  flex:0 0 auto!important;
+  min-width:66px!important;
+  padding:4px 7px!important;
+  border:1px solid var(--l)!important;
+  border-radius:8px!important;
+  background:color-mix(in srgb,var(--p) 6%,transparent)!important;
+  color:var(--m)!important;
+  font:700 9.5px/1.1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace!important;
+  text-align:center!important;
+  letter-spacing:.02em!important
+}
+.follow-patient{display:flex!important;align-items:center!important;gap:7px!important;min-width:0!important;font-size:10.5px!important}
+.follow-patient b{min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;font-weight:650!important}
+.follow-meta{display:grid!important;gap:4px!important;min-width:0!important}
+.follow-meta small{font-size:9px!important}
+.follow-meta b{font-size:11px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.follow-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;white-space:nowrap!important}
+.follow-actions .btn.sm{min-width:auto!important}
+
+[dir=rtl] .follow-id,[dir=ltr] .follow-id{direction:ltr!important;text-align:center!important}
+[dir=rtl] .follow-title-row,[dir=rtl] .follow-patient,[dir=rtl] .follow-actions{direction:rtl!important}
+[dir=ltr] .follow-title-row,[dir=ltr] .follow-patient,[dir=ltr] .follow-actions{direction:ltr!important}
+
+@media(max-width:980px){
+ .follow-item.follow-row{grid-template-columns:minmax(240px,1fr) minmax(120px,.55fr) auto!important}
+ .follow-item.follow-row .follow-meta:nth-of-type(3){display:none!important}
+}
+@media(max-width:700px){
+ .follow-toolbar{align-items:stretch!important}
+ .follow-search-wrap{max-width:none!important;width:100%!important}
+ .follow-item.follow-row{grid-template-columns:1fr!important;gap:10px!important;padding:12px!important}
+ .follow-title-row{align-items:flex-start!important}
+ .follow-title{align-items:flex-start!important;flex-wrap:wrap!important}
+ .follow-title>b{white-space:normal!important}
+ .follow-actions{justify-content:flex-start!important;flex-wrap:wrap!important}
+ .follow-item.follow-row>.hide-mobile{display:none!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1483,7 +1555,50 @@ function queueMeta(name){let q=QM[name];if(q)return q;let pt=S.patients.find(x=>
 function queue(){let ls=[["checked",t("تم الوصول","Checked In"),t("تم التسجيل في الاستقبال","Arrived at reception")],["waiting",t("في الانتظار","Waiting"),t("ينتظر التقييم","Waiting for assessment")],["ready",t("جاهز","Ready"),t("جاهز للطبيب","Ready for doctor")],["visit",t("مع الطبيب","In Visit"),t("زيارة نشطة","Active consultation")],["done",t("مكتمل","Completed"),t("زيارة مكتملة","Visit completed")]],doc=S.queueDoctorFilter||"All",pri=S.queuePriorityFilter||"All";let visible=(stage,n)=>{let m=queueMeta(n);return (doc==="All"||m.doctor===doc)&&(pri==="All"||m.priority===pri)};let total=Object.values(S.q).reduce((a,x)=>a+x.length,0);let list=Object.entries(S.q).flatMap(([stage,arr])=>arr.filter(n=>visible(stage,n)).map(n=>({stage,n})));let board=`<div class="queue">${ls.map(l=>`<div class="card lane" data-lane="${l[0]}"><div class="lane-head"><div><b>${l[1]}</b><small>${l[2]}</small></div>${p(S.q[l[0]].length)}</div>${S.q[l[0]].filter(n=>visible(l[0],n)).map(n=>{let m=queueMeta(n);return `<div class="pc" draggable="true" data-queue-item="${(n+" "+m.id).toLowerCase()}" data-p="${n}" data-from="${l[0]}"><div class="pc-top"><b>${n}</b>${m.priority==="High"?p(t("أولوية","Priority"),"warn"):""}</div><small dir="ltr">${m.id}</small><div class="pc-meta"><span>${t("انتظار","Wait")}: ${m.wait}</span><span>${m.room}</span></div><div class="pc-meta"><span>${m.doctor}</span><div class="actions">${l[0]==="ready"?`<button class="btn sm p" data-a="queueStartVisit" data-id="${n}">${t("بدء زيارة","Start")}</button>`:`<button class="btn sm" data-a="queueOpenPatient" data-id="${m.id}">${t("ملف","Profile")}</button>`}${l[0]!=="done"?`<button class="btn sm danger" data-a="queueRemove" data-id="${n}" data-stage="${l[0]}">×</button>`:""}</div></div></div>`}).join("")}</div>`).join("")}</div>`;let listView=`<div class="card queue-list">${list.map(x=>{let m=queueMeta(x.n),label=ls.find(z=>z[0]===x.stage)[1];return `<div class="qrow" data-queue-item="${(x.n+" "+m.id).toLowerCase()}"><div><b>${x.n}</b><br><small class="muted" dir="ltr">${m.id}</small></div>${p(label)}<span>${m.wait}</span><span>${m.doctor}</span><div class="actions">${x.stage==="ready"?`<button class="btn sm p" data-a="queueStartVisit" data-id="${x.n}">${t("بدء","Start")}</button>`:`<button class="btn sm" data-a="queueOpenPatient" data-id="${m.id}">${t("فتح","Open")}</button>`}${x.stage!=="done"?`<button class="btn sm danger" data-a="queueRemove" data-id="${x.n}" data-stage="${x.stage}">×</button>`:""}</div></div>`}).join("")}</div>`;return shell(H(t("قائمة الانتظار المباشرة","Live Queue"),t("تشغيل مباشر مع السحب والإفلات بين المراحل","Real-time operations with drag & drop between stages"),b(t("تسجيل وصول","Register arrival"),"queueArrival","p"))+`<div class="queue-kpis">${[[t("إجمالي داخل المسار","In flow"),total],[t("متوسط الانتظار","Avg wait"),"11m"],[t("جاهز الآن","Ready now"),S.q.ready.length],[t("مع الطبيب","In visit"),S.q.visit.length]].map(x=>`<div class="card stat"><small>${x[0]}</small><b>${x[1]}</b></div>`).join("")}</div><div class="queue-toolbar"><input id="queueSearch" class="input" placeholder="${t("بحث بالاسم أو رقم المريض","Search patient or ID")}"><select id="queueDoctorFilter" class="toolbar-select"><option value="All">${t("كل الأطباء","All doctors")}</option><option>Dr. Mona</option><option>Dr. Kareem</option><option>Unassigned</option></select><select id="queuePriorityFilter" class="toolbar-select"><option value="All">${t("كل الأولويات","All priorities")}</option><option>Normal</option><option>High</option></select><span class="pill ok">${t("تحديث مباشر","Live updates")}</span><div class="view-switch"><button class="${S.queueView==="board"?"on":""}" data-a="queueBoard">${t("لوحة","Board")}</button><button class="${S.queueView==="list"?"on":""}" data-a="queueList">${t("قائمة","List")}</button></div></div>${S.queueView==="board"?board:listView}`)}
 function visits(){let all=S.visits,q=(S.listFilters.visits||"").toLowerCase(),filtered=all.filter(r=>(!q||(r.id+" "+patientName(r.patientId)+" "+r.doctor+" "+r.status).toLowerCase().includes(q))&&(S.listFilters.visitStatus==="All"||r.status===S.listFilters.visitStatus)&&(S.listFilters.visitDoctor==="All"||r.doctor===S.listFilters.visitDoctor)),pg=pageData("visits",filtered),rows=pg.items;return shell(H(t("الزيارات","Visits"),t("متابعة الزيارات الجارية والمكتملة والتوثيق المعلق","Track active, completed and pending-documentation visits"))+`<div class="grid s4">${[[t("جارية","Active"),all.filter(x=>x.status==="Active").length,"activity"],[t("مكتملة","Completed"),all.filter(x=>x.status==="Completed").length,"check"],[t("توثيق معلق","Pending docs"),all.filter(x=>x.status==="Pending docs").length,"file"],[t("متوسط مدة الزيارة","Avg visit time"),"18m","clock"]].map(x=>`<div class="card status-card interactive"><span class="icon-badge">${ic(x[2],18)}</span><div><small class="muted">${x[0]}</small><b style="display:block;font-size:24px">${x[1]}</b></div></div>`).join("")}</div><div class="card top"><div class="screen-toolbar"><input id="visitSearch" class="input" value="${S.listFilters.visits||""}" placeholder="${t("بحث برقم الزيارة أو المريض...","Search visit ID or patient...")}"><select id="visitStatusFilter" class="toolbar-select"><option value="All" ${S.listFilters.visitStatus==="All"?"selected":""}>${t("كل الحالات","All statuses")}</option><option ${S.listFilters.visitStatus==="Active"?"selected":""}>Active</option><option ${S.listFilters.visitStatus==="Pending docs"?"selected":""}>Pending docs</option><option ${S.listFilters.visitStatus==="Completed"?"selected":""}>Completed</option></select><select id="visitDoctorFilter" class="toolbar-select"><option value="All" ${S.listFilters.visitDoctor==="All"?"selected":""}>${t("كل الأطباء","All doctors")}</option>${["Dr. Mona Salem","Dr. Kareem Yassin","Dr. Laila Hassan"].map(v=>`<option ${S.listFilters.visitDoctor===v?"selected":""}>${v}</option>`).join("")}</select><span class="push pill">${all.length} ${t("زيارات","visits")}</span></div><div class="scroll"><table class="table"><thead><tr><th>ID</th><th>${t("المريض","Patient")}</th><th>${t("الطبيب","Doctor")}</th><th>${t("الحالة","Status")}</th><th>${t("بدأت","Started")}</th><th></th></tr></thead><tbody>${rows.map(r=>`<tr data-visit-row="${(r.id+" "+patientName(r.patientId)+" "+r.doctor+" "+r.status).toLowerCase()}" data-status="${r.status}" data-doctor="${r.doctor}"><td dir="ltr"><b>${r.id}</b></td><td>${patientName(r.patientId)}</td><td>${r.doctor}</td><td>${p(r.status,r.status==="Active"?"ok":r.status==="Pending docs"?"warn":"")}</td><td dir="ltr">${r.started}</td><td><div class="actions"><button class="btn sm" data-a="openVisit" data-id="${r.id}">${ic("doctor",13)}${t("فتح","Open")}</button>${r.status==="Active"?`<button class="btn sm success" data-a="quickCompleteVisit" data-id="${r.id}">${t("إكمال","Complete")}</button>`:r.status==="Completed"?`<button class="btn sm" data-a="reopenVisit" data-id="${r.id}">${t("إعادة فتح","Reopen")}</button>`:""}</div></td></tr>`).join("")}</tbody></table></div>${pager("visits",pg)}</div>`)}
 function clinical(){let v=S.visits.find(x=>x.id===S.currentVisitId)||S.visits[0],pt=patientById(v?.patientId||S.currentPatientId);S.currentPatientId=pt.id;let fields=[["chief",t("الشكوى الرئيسية","Chief complaint"),t("سبب الزيارة كما وصفه المريض...","Patient-reported reason for visit...")],["exam",t("الفحص السريري","Clinical examination"),t("نتائج الفحص السريري...","Clinical examination findings...")],["diagnosis",t("التشخيص","Diagnosis"),t("التشخيص يكتبه الطبيب فقط...","Diagnosis entered by the doctor only...")],["plan",t("خطة العلاج","Treatment plan"),t("الخطة العلاجية...","Treatment plan...")],["followup",t("المتابعة","Follow-up"),t("موعد وتعليمات المتابعة...","Follow-up date and instructions...")]];return shell(H(t("مساحة الطبيب","Doctor Workspace"),(v?.id||"V-DEMO")+" — "+patientName(pt.id),`<div class="actions">${b(t("حفظ مسودة","Save draft"),"saveClinical")} ${b(t("إكمال الزيارة","Complete visit"),"done","p")}</div>`)+`<div class="card patient-hero"><div class="patient-avatar">${(A()?pt.name:pt.nameEn).split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase()}</div><div><h2 style="margin:0">${A()?pt.name:pt.nameEn}</h2><p class="muted" style="margin:4px 0">${pt.id} · ${v?.doctor||"Dr. Mona Salem"} · ${t("بدأت","Started")} ${v?.started||"10:18"}</p></div>${p(v?.status||"Active",v?.status==="Active"?"ok":v?.status==="Pending docs"?"warn":"")}</div><div class="workspace-grid top"><div>${fields.map(x=>`<div class="card section-card top"><div class="row"><b>${x[1]}</b><span class="autosave">${t("حفظ تلقائي","Autosaved")}</span></div><textarea class="input clinical-input" data-clinical="${x[0]}" placeholder="${x[2]}">${S.clinicalDraft[x[0]]||""}</textarea></div>`).join("")}</div><aside><div class="card sticky"><h3>${t("السياق السريري","Clinical context")}</h3><div class="row"><span>BP</span><b>145/92</b></div><div class="row"><span>Pulse</span><b>82 bpm</b></div><div class="row"><span>Glucose</span><b>118 mg/dL</b></div><div class="row"><span>Weight</span><b>86 kg</b></div><h3>${t("الحساسية","Allergies")}</h3><div class="row"><b class="bad">Penicillin</b>${p(t("مؤكد","Confirmed"),"bad")}</div><h3>${t("إجراءات سريعة","Quick actions")}</h3><button class="btn" style="width:100%;margin-bottom:7px" data-a="addPrescription">${ic("plus",14)}${t("إضافة وصفة","Add prescription")}</button><button class="btn" style="width:100%;margin-bottom:7px" data-a="addClinicalOrder">${ic("plus",14)}${t("إضافة أمر سريري","Add clinical order")}</button><button class="btn" style="width:100%" data-a="newFollowup">${ic("follow",14)}${t("إنشاء متابعة","Create follow-up")}</button><div class="soft-divider"></div><h3>${t("الوصفات النشطة","Active prescriptions")}</h3><div class="inline-list">${S.prescriptions.map((x,i)=>`<div class="inline-item"><span>${x}</span><button class="btn sm danger" data-a="deletePrescription" data-id="${i}">×</button></div>`).join("")}</div><h3>${t("الأوامر","Orders")}</h3><div class="inline-list">${S.clinicalOrders.map((x,i)=>`<div class="inline-item"><span>${x}</span><button class="btn sm danger" data-a="deleteClinicalOrder" data-id="${i}">×</button></div>`).join("")}</div><p class="muted" style="font-size:11px;margin-top:14px">${t("لا توجد قرارات طبية آلية؛ النظام يسجل مدخلات الطبيب فقط.","No automated medical decisions; the system records doctor input only.")}</p></div></aside></div>`)}
-function follow(){let all=S.followups,q=(S.listFilters.follow||"").toLowerCase(),filtered=all.filter(x=>(!q||(x.id+" "+patientName(x.patientId)+" "+x.titleAr+" "+x.titleEn).toLowerCase().includes(q))&&(S.listFilters.followStatus==="All"||x.status===S.listFilters.followStatus)),pg=pageData("follow",filtered),items=pg.items;return shell(H(t("المتابعات","Follow-ups"),t("المستحق والمتأخر والقادم والمكتمل","Due, overdue, upcoming and completed"),b(t("متابعة جديدة","New follow-up"),"newFollowup","p"))+`<div class="grid s4">${[[t("مستحقة اليوم","Due today"),all.filter(x=>x.status==="Today").length,"clock"],[t("قادمة","Upcoming"),all.filter(x=>x.status==="Upcoming").length,"follow"],[t("متأخرة","Overdue"),all.filter(x=>x.status==="Overdue").length,"alert"],[t("مكتملة","Completed"),all.filter(x=>x.status==="Completed").length,"check"]].map((x,i)=>`<div class="card status-card interactive"><span class="icon-badge">${ic(x[2],18)}</span><div><small class="muted">${x[0]}</small><b style="display:block;font-size:24px" class="${i===2?"bad":""}">${x[1]}</b></div></div>`).join("")}</div><div class="card top"><div class="screen-toolbar"><input id="followSearch" class="input" value="${S.listFilters.follow||""}" placeholder="${t("بحث بالمريض أو رقم المتابعة...","Search patient or follow-up ID...")}"><select id="followStatusFilter" class="toolbar-select"><option value="All" ${S.listFilters.followStatus==="All"?"selected":""}>${t("كل الحالات","All statuses")}</option>${["Today","Upcoming","Overdue","Completed"].map(v=>`<option ${S.listFilters.followStatus===v?"selected":""}>${v}</option>`).join("")}</select></div>${items.map(x=>`<div class="follow-item" data-follow-row="${(x.id+" "+patientName(x.patientId)+" "+x.titleAr+" "+x.titleEn).toLowerCase()}" data-status="${x.status}"><div><b>${A()?x.titleAr:x.titleEn}</b><br><small class="muted">${x.id} · ${patientName(x.patientId)}</small></div><div class="hide-mobile"><small class="muted">${t("الطبيب","Doctor")}</small><br><b>${x.doctor}</b></div><div class="hide-mobile"><small class="muted">${t("التاريخ","Date")}</small><br><b dir="ltr">${x.date}</b></div><div class="actions">${p(x.status,x.status==="Overdue"?"bad":x.status==="Today"?"warn":x.status==="Completed"?"":"ok")}${x.status!=="Completed"?`<button class="btn sm success" data-a="completeFollowup" data-id="${x.id}">✓</button>`:""}<button class="btn sm" data-a="editFollowup" data-id="${x.id}">${t("تعديل","Edit")}</button><button class="btn sm danger" data-a="deleteFollowup" data-id="${x.id}">${t("حذف","Delete")}</button></div></div>`).join("")}${pager("follow",pg)}</div>`)}
+function follow(){
+let all=S.followups,
+q=(S.listFilters.follow||"").toLowerCase(),
+filtered=all.filter(x=>(!q||(x.id+" "+patientName(x.patientId)+" "+x.titleAr+" "+x.titleEn).toLowerCase().includes(q))&&(S.listFilters.followStatus==="All"||x.status===S.listFilters.followStatus)),
+pg=pageData("follow",filtered),items=pg.items;
+return shell(
+H(t("المتابعات","Follow-ups"),t("المستحق والمتأخر والقادم والمكتمل","Due, overdue, upcoming and completed"),b(t("متابعة جديدة","New follow-up"),"newFollowup","p"))+
+`<div class="grid s4 follow-kpis">${[
+[t("مستحقة اليوم","Due today"),all.filter(x=>x.status==="Today").length,"clock"],
+[t("قادمة","Upcoming"),all.filter(x=>x.status==="Upcoming").length,"follow"],
+[t("متأخرة","Overdue"),all.filter(x=>x.status==="Overdue").length,"alert"],
+[t("مكتملة","Completed"),all.filter(x=>x.status==="Completed").length,"check"]
+].map((x,i)=>`<div class="card status-card interactive follow-kpi"><span class="icon-badge">${ic(x[2],18)}</span><div><small class="muted">${x[0]}</small><b class="${i===2?"bad":""}">${x[1]}</b></div></div>`).join("")}</div>
+<div class="card top follow-card">
+  <div class="screen-toolbar follow-toolbar">
+    <div class="follow-search-wrap">${ic("search",15)}<input id="followSearch" class="input" value="${S.listFilters.follow||""}" placeholder="${t("بحث بالمريض أو رقم المتابعة...","Search patient or follow-up ID...")}"></div>
+    <select id="followStatusFilter" class="toolbar-select">
+      <option value="All" ${S.listFilters.followStatus==="All"?"selected":""}>${t("كل الحالات","All statuses")}</option>
+      ${["Today","Upcoming","Overdue","Completed"].map(v=>`<option value="${v}" ${S.listFilters.followStatus===v?"selected":""}>${v==="Today"?t("اليوم","Today"):v==="Upcoming"?t("قادمة","Upcoming"):v==="Overdue"?t("متأخرة","Overdue"):t("مكتملة","Completed")}</option>`).join("")}
+    </select>
+  </div>
+
+  <div class="follow-list">
+  ${items.map(x=>`<div class="follow-item follow-row" data-follow-row="${(x.id+" "+patientName(x.patientId)+" "+x.titleAr+" "+x.titleEn).toLowerCase()}" data-status="${x.status}">
+    <div class="follow-main">
+      <div class="follow-title-row">
+        <div class="follow-title"><b>${A()?x.titleAr:x.titleEn}</b><span class="follow-id" dir="ltr">${x.id}</span></div>
+        ${p(x.status,x.status==="Overdue"?"bad":x.status==="Today"?"warn":x.status==="Completed"?"":"ok")}
+      </div>
+      <div class="follow-patient"><span class="muted">${t("المريض","Patient")}</span><b>${patientName(x.patientId)}</b></div>
+    </div>
+    <div class="follow-meta hide-mobile"><small class="muted">${t("الطبيب","Doctor")}</small><b>${x.doctor}</b></div>
+    <div class="follow-meta hide-mobile"><small class="muted">${t("التاريخ","Date")}</small><b dir="ltr">${x.date}</b></div>
+    <div class="follow-actions">
+      ${x.status!=="Completed"?`<button class="btn sm success" data-a="completeFollowup" data-id="${x.id}" title="${t("إكمال المتابعة","Complete follow-up")}">${ic("check",13)}</button>`:""}
+      <button class="btn sm" data-a="editFollowup" data-id="${x.id}">${t("تعديل","Edit")}</button>
+      <button class="btn sm danger" data-a="deleteFollowup" data-id="${x.id}">${t("حذف","Delete")}</button>
+    </div>
+  </div>`).join("")}
+  </div>
+  ${pager("follow",pg)}
+</div>`
+)
+}
 
 function reportDefs(){return [
 ["patients",t("تقرير المرضى","Patients Report")],
