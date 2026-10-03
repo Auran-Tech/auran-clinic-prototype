@@ -1042,6 +1042,132 @@ html[data-theme=dark] .topbar{background:#0B1726!important;border-color:#1B2A3D!
  .audit-card .screen-toolbar{align-items:stretch!important}.audit-card .permission-search-wrap{max-width:none!important;width:100%!important}
 }
 
+
+/* AURAN Navbar v13 — centered search, branch, notifications, profile only */
+.topbar.app-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:95!important;
+  height:68px!important;
+  margin:0!important;
+  padding:0 18px!important;
+  display:grid!important;
+  grid-template-columns:48px minmax(280px,620px) auto!important;
+  align-items:center!important;
+  gap:18px!important;
+  border:0!important;
+  border-bottom:1px solid var(--l)!important;
+  border-radius:0!important;
+  background:color-mix(in srgb,var(--c2) 97%,transparent)!important;
+  box-shadow:none!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+.app-header-start{display:flex!important;align-items:center!important;justify-self:start!important}
+.app-header-center{width:100%!important;min-width:0!important;justify-self:center!important}
+.app-header-end{display:flex!important;align-items:center!important;gap:8px!important;justify-self:end!important;min-width:0!important}
+.app-header-menu{
+  width:40px!important;height:40px!important;min-width:40px!important;padding:0!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid var(--l)!important;border-radius:11px!important;
+  background:transparent!important;color:var(--m)!important;box-shadow:none!important;transform:none!important
+}
+.app-header-menu svg{width:18px!important;height:18px!important}
+.app-header-menu:hover{
+  background:color-mix(in srgb,var(--p) 7%,transparent)!important;
+  border-color:color-mix(in srgb,var(--p) 24%,var(--l))!important;
+  color:var(--t)!important
+}
+.global-search{
+  width:100%!important;height:42px!important;
+  display:grid!important;grid-template-columns:auto 1fr auto!important;align-items:center!important;gap:9px!important;
+  padding:0 12px!important;border:1px solid var(--l)!important;border-radius:13px!important;
+  background:color-mix(in srgb,var(--c) 76%,transparent)!important;color:var(--m)!important;
+  transition:border-color .15s ease,background .15s ease,box-shadow .15s ease!important
+}
+.global-search:focus-within{
+  border-color:color-mix(in srgb,var(--p) 44%,var(--l))!important;
+  background:var(--c2)!important;
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--p) 9%,transparent)!important
+}
+.global-search input{
+  min-width:0!important;width:100%!important;border:0!important;outline:0!important;background:transparent!important;
+  color:var(--t)!important;font:inherit!important;font-size:11.5px!important;padding:0!important
+}
+.global-search input::placeholder{color:var(--m)!important;opacity:.78!important}
+.search-shortcut{
+  height:24px!important;min-width:42px!important;padding:0 7px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid var(--l)!important;border-radius:7px!important;
+  background:var(--c2)!important;color:var(--m)!important;
+  font-size:8px!important;font-weight:700!important
+}
+.header-location,.header-notifications,.header-user,
+.header-location .location-wrap,.header-notifications .notification-wrap,.header-user .user{position:relative!important}
+.header-location .location-trigger,
+.header-notifications .navbar-icon,
+.header-user .user-trigger{
+  height:40px!important;
+  border:1px solid var(--l)!important;
+  border-radius:11px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  transform:none!important
+}
+.header-location .location-trigger{
+  min-width:148px!important;max-width:182px!important;padding:0 10px!important;
+  display:flex!important;align-items:center!important;gap:8px!important;color:var(--t)!important
+}
+.header-location .location-trigger .location-copy{display:grid!important;min-width:0!important;line-height:1.05!important;text-align:start!important}
+.header-location .location-trigger .location-copy small{font-size:8px!important;color:var(--m)!important;font-weight:750!important}
+.header-location .location-trigger .location-copy b{
+  max-width:108px!important;font-size:10.5px!important;font-weight:750!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+.header-location .location-trigger>svg{color:var(--p)!important}
+.header-location .location-trigger .chev{font-size:9px!important;color:var(--m)!important}
+.header-notifications .navbar-icon{
+  width:40px!important;min-width:40px!important;display:grid!important;place-items:center!important;color:var(--m)!important
+}
+.header-user .user-trigger{
+  min-width:166px!important;padding:3px 8px 3px 4px!important;
+  display:flex!important;align-items:center!important;gap:8px!important
+}
+[dir=rtl] .header-user .user-trigger{padding:3px 4px 3px 8px!important}
+.header-user .avatar{width:32px!important;height:32px!important;min-width:32px!important;border-radius:10px!important}
+.header-user .user-copy{display:grid!important;line-height:1.03!important;text-align:start!important}
+.header-user .user-copy b{font-size:11px!important;font-weight:750!important}
+.header-user .user-copy small{font-size:8.5px!important;color:var(--m)!important}
+.header-user .user-trigger .chev{margin-inline-start:auto!important;font-size:9px!important;color:var(--m)!important}
+.header-location .location-trigger:hover,
+.header-notifications .navbar-icon:hover,
+.header-user .user-trigger:hover{
+  background:color-mix(in srgb,var(--p) 6%,transparent)!important;
+  border-color:color-mix(in srgb,var(--p) 24%,var(--l))!important;
+  color:var(--t)!important
+}
+html[data-theme=light] .topbar.app-header{background:rgba(255,255,255,.97)!important;border-color:#E8ECF2!important}
+html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-color:#1B2A3D!important}
+@media(max-width:1000px){
+  .topbar.app-header{grid-template-columns:48px minmax(220px,1fr) auto!important;gap:12px!important;padding:0 12px!important}
+  .header-user .user-copy,.header-user .user-trigger .chev{display:none!important}
+  .header-user .user-trigger{width:40px!important;min-width:40px!important;padding:3px!important;justify-content:center!important}
+  .header-location .location-trigger{min-width:132px!important}
+}
+@media(max-width:760px){
+  .topbar.app-header{height:60px!important;grid-template-columns:42px minmax(0,1fr) auto!important;gap:8px!important;padding:0 9px!important}
+  .app-header-menu{width:38px!important;height:38px!important;min-width:38px!important}
+  .global-search{height:38px!important;border-radius:11px!important;padding:0 10px!important}
+  .search-shortcut{display:none!important}
+  .header-location .location-trigger{
+    width:38px!important;min-width:38px!important;padding:0!important;justify-content:center!important
+  }
+  .header-location .location-copy,.header-location .chev{display:none!important}
+  .header-notifications .navbar-icon{width:38px!important;height:38px!important;min-width:38px!important}
+  .header-user .user-trigger{width:38px!important;height:38px!important;min-width:38px!important}
+  .header-user .avatar{width:30px!important;height:30px!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1235,14 +1361,27 @@ function locationMenu(){let locs=[["Main Clinic",t("الفرع الرئيسي","
 
 function currentPageLabel(){let map={dashboard:[t("الرئيسية","Home"),t("نظرة عامة","Dashboard")],patients:[t("العيادة","Clinic"),t("المرضى","Patients")],patientProfile:[t("المرضى","Patients"),t("ملف المريض","Patient profile")],queue:[t("التشغيل","Operations"),t("قائمة الانتظار","Live queue")],visits:[t("العيادة","Clinic"),t("الزيارات","Visits")],clinical:[t("الزيارات","Visits"),t("مساحة الطبيب","Doctor workspace")],follow:[t("العيادة","Clinic"),t("المتابعات","Follow-ups")],reports:[t("التحليلات","Analytics"),t("التقارير","Reports")],employees:[t("الإدارة","Administration"),t("الموظفون","Employees")],roles:[t("الإدارة","Administration"),t("الأدوار والصلاحيات","Roles & permissions")],settings:[t("الإدارة","Administration"),t("الإعدادات","Settings")],profile:[t("الحساب","Account"),t("الملف الشخصي","Profile")],audit:[t("الإدارة","Administration"),t("سجل التدقيق","Audit log")],states:[t("النظام","System"),t("حالات الواجهة","UX states")]};return map[S.screen]||[t("العيادة","Clinic"),t("مساحة العمل","Workspace")]}
 function topbar(){
-let page=currentPageLabel();
-return `<nav class="topbar">
-<div class="topbar-primary">
-  <button class="topbar-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-  <div class="topbar-page"><small>${page[0]}</small><b>${page[1]}</b></div>
-</div>
-<div class="topbar-actions">${locationMenu()}<span class="navbar-separator"></span>${notificationsMenu()}${user()}</div>
-</nav>`
+return `<header class="topbar app-header">
+  <div class="app-header-start">
+    <button class="app-header-menu" data-a="toggleSidebar" aria-label="${t("طي القائمة الجانبية","Toggle sidebar")}">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+
+  <div class="app-header-center">
+    <div class="global-search">
+      ${ic("search",16)}
+      <input aria-label="${t("بحث سريع","Quick search")}" placeholder="${t("ابحث عن مريض، زيارة، أو تقرير...","Search patient, visit, or report...")}">
+      <span class="search-shortcut">Ctrl K</span>
+    </div>
+  </div>
+
+  <div class="app-header-end">
+    <div class="header-location">${locationMenu()}</div>
+    <div class="header-notifications">${notificationsMenu()}</div>
+    <div class="header-user">${user()}</div>
+  </div>
+</header>`
 }
 function H(title,sub,act=""){let m=currentPageLabel();return `<header class="head"><div class="page-label"><span class="label-dot"></span><span>${m[0]}</span><span>›</span><span>${m[1]}</span></div><div class="page-heading-row"><div class="page-title-copy"><h1>${title}</h1><p>${sub}</p></div>${act?`<div class="page-actions">${act}</div>`:""}</div></header>`}
 function shell(x){
