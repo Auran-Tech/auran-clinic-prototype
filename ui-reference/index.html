@@ -1622,6 +1622,128 @@ img,svg,video,canvas{max-width:100%}
   .table{min-width:0!important}
 }
 
+
+/* Mobile sidebar drawer — no bottom navigation */
+.mobile-sidebar-overlay,.mobile-sidebar-close{display:none}
+.mobile-dock{display:none!important}
+
+@media(max-width:760px){
+  body{overflow-x:hidden!important}
+  .app,.app.sidebar-collapsed,.sidebar-collapsed{
+    display:block!important;
+    min-height:100vh!important;
+  }
+
+  .side{
+    display:flex!important;
+    position:fixed!important;
+    z-index:220!important;
+    top:0!important;
+    bottom:0!important;
+    inset-inline-start:0!important;
+    width:min(286px,86vw)!important;
+    height:100dvh!important;
+    margin:0!important;
+    padding:14px 12px!important;
+    border-radius:0!important;
+    border:0!important;
+    border-inline-end:1px solid var(--l)!important;
+    box-shadow:18px 0 50px rgba(0,0,0,.28)!important;
+    transform:translateX(calc(-100% - 24px))!important;
+    transition:transform .22s ease!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    background:var(--c2)!important;
+  }
+  [dir=rtl] .side{
+    transform:translateX(calc(100% + 24px))!important;
+    box-shadow:-18px 0 50px rgba(0,0,0,.28)!important;
+  }
+  .mobile-sidebar-open .side{
+    transform:translateX(0)!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+
+  .mobile-sidebar-overlay{
+    display:block!important;
+    position:fixed!important;
+    z-index:210!important;
+    inset:0!important;
+    background:rgba(2,6,23,.58)!important;
+    backdrop-filter:blur(3px)!important;
+    opacity:0!important;
+    visibility:hidden!important;
+    pointer-events:none!important;
+    transition:opacity .2s ease,visibility .2s ease!important;
+  }
+  .mobile-sidebar-open .mobile-sidebar-overlay{
+    opacity:1!important;
+    visibility:visible!important;
+    pointer-events:auto!important;
+  }
+
+  .mobile-sidebar-close{
+    display:grid!important;
+    place-items:center!important;
+    margin-inline-start:auto!important;
+    width:32px!important;
+    height:32px!important;
+    min-width:32px!important;
+    border:1px solid var(--l)!important;
+    border-radius:9px!important;
+    background:transparent!important;
+    color:var(--m)!important;
+    font-size:20px!important;
+    line-height:1!important;
+    cursor:pointer!important;
+  }
+  .mobile-sidebar-close:hover{
+    background:color-mix(in srgb,var(--p) 7%,transparent)!important;
+    color:var(--t)!important;
+  }
+
+  .side .brand{
+    height:62px!important;
+    min-height:62px!important;
+    padding:7px 6px 13px!important;
+  }
+  .side .brand-copy{
+    display:flex!important;
+  }
+  .side .nav-section-title{
+    display:block!important;
+  }
+  .side .nav-label{
+    display:block!important;
+  }
+  .side .nav-count{
+    display:grid!important;
+  }
+  .side .nav button{
+    width:100%!important;
+    height:42px!important;
+    min-height:42px!important;
+    padding:5px 8px!important;
+    justify-content:flex-start!important;
+  }
+  .side .nav .nav-ico{
+    width:31px!important;
+    height:31px!important;
+  }
+
+  .main{padding-bottom:0!important}
+  .content-body{padding-bottom:22px!important}
+
+  .mobile-dock{display:none!important}
+}
+
+/* ensure no legacy mobile dock spacing survives */
+@media(max-width:700px){
+  .main{padding-bottom:0!important}
+  .mobile-dock{display:none!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
@@ -1758,7 +1880,7 @@ function ringCard(title,pct,value,caption,color="var(--ring)",nav=""){return `<d
 function smoothLinePath(pts){if(pts.length<2)return "";let d=`M ${pts[0].x} ${pts[0].y}`;for(let i=0;i<pts.length-1;i++){let p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2,c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6,c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;d+=` C ${c1x} ${c1y}, ${c2x} ${c2y}, ${p2.x} ${p2.y}`}return d}
 function areaChart(values,labels,id="area"){let W=700,H=170,pad=12,max=Math.max(...values),min=Math.min(...values),span=Math.max(1,max-min),pts=values.map((v,i)=>({x:pad+i*(W-pad*2)/(values.length-1),y:16+(max-v)/span*(H-48)})),line=smoothLinePath(pts),area=`${line} L ${W-pad} ${H} L ${pad} ${H} Z`;return `<div class="area-chart"><svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B82F6" stop-opacity=".55"/><stop offset=".55" stop-color="#6366F1" stop-opacity=".16"/><stop offset="1" stop-color="#6366F1" stop-opacity="0"/></linearGradient></defs><g class="area-grid"><line x1="${pad}" y1="35" x2="${W-pad}" y2="35"/><line x1="${pad}" y1="85" x2="${W-pad}" y2="85"/><line x1="${pad}" y1="135" x2="${W-pad}" y2="135"/></g><path class="area-fill" d="${area}" fill="url(#${id})"/><path class="area-line" d="${line}"/>${pts.map((p,i)=>`<circle class="area-dot" cx="${p.x}" cy="${p.y}" r="3.4"><title>${labels[i]}: ${values[i]}</title></circle>`).join("")}</svg><div class="area-labels">${labels.map(x=>`<span>${x}</span>`).join("")}</div></div>`}
 
-S.pendingLogo=null;S.pendingProfilePhoto=null;S.roleDraft=null;S.securityDraft=null;S.sidebarCollapsed=false;S.currentLocation="Main Clinic";
+S.pendingLogo=null;S.pendingProfilePhoto=null;S.roleDraft=null;S.securityDraft=null;S.sidebarCollapsed=false;S.mobileSidebarOpen=false;S.currentLocation="Main Clinic";
 
 S.notifications=[
 {id:"N-001",titleAr:"توثيق زيارة معلق",titleEn:"Visit documentation pending",bodyAr:"الزيارة V-009818 ما زالت تحتاج استكمال التوثيق.",bodyEn:"Visit V-009818 still has pending documentation.",time:"8m",screen:"visits",read:false,icon:"file"},
@@ -1840,7 +1962,6 @@ return `<header class="topbar app-header">
 function H(title,sub,act=""){let m=currentPageLabel();return `<header class="head"><div class="page-label"><span class="label-dot"></span><span>${m[0]}</span><span>›</span><span>${m[1]}</span></div><div class="page-heading-row"><div class="page-title-copy"><h1>${title}</h1><p>${sub}</p></div>${act?`<div class="page-actions">${act}</div>`:""}</div></header>`}
 function shell(x){
 if(S.screen==="login")return x;
-let dock=N.filter(n=>["dashboard","patients","queue","visits","follow"].includes(n[0]));
 let groups=[
   [t("الرئيسية","WORKSPACE"),["dashboard"]],
   [t("العيادة","CLINICAL"),["patients","queue","visits","follow"]],
@@ -1851,14 +1972,14 @@ let navHtml=groups.map(g=>{
  let items=N.filter(n=>g[1].includes(n[0]));
  return `<section class="nav-section"><div class="nav-section-title">${g[0]}</div>${items.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}" title="${t(n[1],n[2])}"><span class="nav-ico">${ic(NAV_ICON[n[0]]||"arrow",18)}</span><span class="nav-label">${t(n[1],n[2])}</span>${n[0]==="queue"&&S.q.waiting.length?`<span class="nav-count">${S.q.waiting.length}</span>`:""}</button>`).join("")}</section>`;
 }).join("");
-return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""}">
+return `<div class="app ${S.sidebarCollapsed?"sidebar-collapsed":""} ${S.mobileSidebarOpen?"mobile-sidebar-open":""}">
+<div class="mobile-sidebar-overlay" data-a="closeMobileSidebar"></div>
 <aside class="side">
- <div class="brand">${clinicBrandMark()}<div class="brand-copy"><b>${clinicBrandName()}</b><small>${t("نظام إدارة العيادة","Clinic Management")}</small></div></div>
+ <div class="brand">${clinicBrandMark()}<div class="brand-copy"><b>${clinicBrandName()}</b><small>${t("نظام إدارة العيادة","Clinic Management")}</small></div><button class="mobile-sidebar-close" data-a="closeMobileSidebar" aria-label="${t("إغلاق القائمة","Close menu")}">×</button></div>
  <nav class="nav">${navHtml}</nav>
 </aside>
 <main class="main">${topbar()}<section class="content-body"><div class="workspace-frame"><div class="page-content-surface">${x}</div></div></section></main>
-<div class="mobile-dock">${dock.map(n=>`<button class="${S.screen===n[0]?"on":""}" data-nav="${n[0]}">${ic(NAV_ICON[n[0]]||"arrow",17)}<span>${t(n[1],n[2])}</span></button>`).join("")}</div>
-</div>`
+</div>`;
 }
 
 function dash(){return shell(`<div class="page-enter">${H(t("نظرة عامة","Dashboard"),t("صورة تشغيلية مباشرة للعيادة اليوم","Live operational view of the clinic today"),`<button class="btn" data-a="refreshDash">${ic("refresh",15)}${t("تحديث","Refresh")}</button>`)}<div class="grid s4 ring-card-grid">${ringCard(t("إكمال الزيارات","Visit completion"),78,"31",t("من 40 زيارة بدأت اليوم","of 40 visits started today"),"#38BDF8","visits")}${ringCard(t("الالتزام بزمن الانتظار","Queue SLA"),86,"11m",t("متوسط الانتظار الحالي","current average wait"),"#6366F1","queue")}${ringCard(t("اكتمال التوثيق","Documentation complete"),93,"4",t("زيارات ما زالت معلقة","visits still pending"),"#10B981","visits")}${ringCard(t("المتابعات في موعدها","Follow-ups on time"),64,"44",t("مكتملة خلال الفترة","completed in period"),"#3B82F6","follow")}</div><div class="chart-two-col top"><div class="card chart-card"><div class="row"><div><h3 style="margin:0">${t("الزيارات خلال الأسبوع","Visits during the week")}</h3><small class="muted">${t("اتجاه حجم الزيارات اليومية","Daily visit-volume trend")}</small></div><span class="pill ok">+12%</span></div>${areaChart([21,29,26,35,33,44,39],["Sat","Sun","Mon","Tue","Wed","Thu","Fri"],"dashVisits")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("النشاط المباشر","Live activity")}</h3><small class="muted">${t("أحدث حركة داخل العيادة","Latest clinic activity")}</small></div><span class="pill ok">${t("مباشر","Live")}</span></div><div class="live-feed top">${[[t("تم تسجيل مريض","Patient registered"),"نور كمال · P-10377","2m","plus"],[t("بدأت زيارة","Visit started"),"سارة عادل · Dr. Mona Salem","5m","doctor"],[t("تم إكمال زيارة","Visit completed"),"V-009812 · نور كمال","12m","check"],[t("متابعة متأخرة","Follow-up overdue"),"F-00738 · أحمد مصطفى","18m","alert"]].map(x=>`<div class="feed-event"><span class="feed-icon">${ic(x[3],15)}</span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><small class="muted">${x[2]}</small></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("توزيع قائمة الانتظار","Queue distribution")}</h3><small class="muted">${t("الحالات الحالية داخل المسار","Current workflow stages")}</small></div><button class="btn" data-nav="queue">${ic("arrow",14)}${t("فتح","Open")}</button></div>${queueDonut()}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("ضغط الأطباء","Doctor workload")}</h3><small class="muted">${t("نسبة الحمل التشغيلي الحالية","Current operational load")}</small></div>${ic("doctor",20)}</div><div class="hbar-list top">${[["Dr. Mona Salem","3 active · 2 waiting",78],["Dr. Kareem Yassin","2 active · 1 waiting",54],["Dr. Laila Hassan","1 active · 3 ready",61]].map((x,i)=>`<div class="hbar-row"><div class="row"><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div><b>${x[2]}%</b></div><div class="hbar-track"><div class="hbar-fill" style="width:${x[2]}%;animation-delay:${i*80}ms"></div></div></div>`).join("")}</div></div></div><div class="grid s2 top"><div class="card"><div class="row"><div><h3 style="margin:0">${t("يحتاج انتباه","Needs attention")}</h3><small class="muted">${t("حسب أولوية التشغيل","Operational priority")}</small></div>${ic("alert",20)}</div>${[["أحمد مصطفى",t("انتظار 22 دقيقة","Waiting 22 min"),"queue"],["V-009818",t("توثيق غير مكتمل","Documentation incomplete"),"visits"],["F-00738",t("متابعة متأخرة يومين","Follow-up overdue 2 days"),"follow"]].map(x=>`<div class="row clickable" data-nav="${x[2]}"><div style="display:flex;gap:9px;align-items:center"><span class="activity-dot"></span><div><b>${x[0]}</b><br><small class="muted">${x[1]}</small></div></div>${ic("arrow",15)}</div>`).join("")}</div><div class="card"><div class="row"><div><h3 style="margin:0">${t("إجراءات سريعة","Quick actions")}</h3><small class="muted">${t("أكثر الإجراءات استخداماً","Common actions")}</small></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" class="top"><button class="btn p" data-a="newPatient">${ic("plus",15)}${t("تسجيل مريض","Register patient")}</button><button class="btn" data-a="queueArrival">${ic("queue",15)}${t("تسجيل وصول","Register arrival")}</button><button class="btn" data-nav="visits">${ic("doctor",15)}${t("الزيارات","Visits")}</button><button class="btn" data-nav="reports">${ic("reports",15)}${t("التقارير","Reports")}</button></div></div></div></div>`)}
@@ -2417,7 +2538,7 @@ document.addEventListener("click",e=>{
  let pageBtn=e.target.closest("[data-page-key]");if(pageBtn&&!pageBtn.disabled){S.pages[pageBtn.dataset.pageKey]=Math.max(1,+pageBtn.dataset.page||1);render();return}
  let roleBtn=e.target.closest("[data-role-name]");if(roleBtn){S.selectedRole=roleBtn.dataset.roleName;S.roleDraft=null;render();return}
  let perm=e.target.closest("[data-permission-toggle]");if(perm&&!perm.disabled){let role=S.roles.find(x=>x.name===S.selectedRole),name=perm.dataset.permissionToggle,draft=ensureRoleDraft(role);draft.permissions=draft.permissions.includes(name)?draft.permissions.filter(x=>x!==name):[...draft.permissions,name];render();return}
- let n=e.target.closest("[data-nav]");if(n){S.screen=n.dataset.nav;location.hash="/"+S.screen;render();return}
+ let n=e.target.closest("[data-nav]");if(n){S.screen=n.dataset.nav;S.mobileSidebarOpen=false;location.hash="/"+S.screen;render();return}
  let rr=e.target.closest("[data-r]");if(rr){S.report=rr.dataset.r;S.step=1;render();return}
  let tt=e.target.closest("[data-tab]");if(tt){S.tab=tt.dataset.tab;render();return}
  let pt=e.target.closest("[data-ptab]");if(pt){S.patientTab=pt.dataset.ptab;render();return}
@@ -2426,7 +2547,8 @@ document.addEventListener("click",e=>{
  let a=e.target.closest("[data-a]");if(!a){let pop=document.getElementById("pop"),np=document.getElementById("notificationPop"),lp=document.getElementById("locationPop");if(pop&&!e.target.closest(".user"))pop.classList.add("hide");if(np&&!e.target.closest(".notification-wrap"))np.classList.add("hide");if(lp&&!e.target.closest(".location-wrap"))lp.classList.add("hide");return}
  let q=a.dataset.a,id=a.dataset.id,stage=a.dataset.stage;
  const go=s=>{S.screen=s;location.hash="/"+s;render()};
- if(q==="toggleSidebar"){S.sidebarCollapsed=!S.sidebarCollapsed;render()}
+ if(q==="toggleSidebar"){if(window.innerWidth<=760){S.mobileSidebarOpen=!S.mobileSidebarOpen}else{S.sidebarCollapsed=!S.sidebarCollapsed}render()}
+ else if(q==="closeMobileSidebar"){S.mobileSidebarOpen=false;render()}
  else if(q==="user"){document.getElementById("notificationPop")?.classList.add("hide");document.getElementById("locationPop")?.classList.add("hide");document.getElementById("pop")?.classList.toggle("hide")}
  else if(q==="notifications"){document.getElementById("pop")?.classList.add("hide");document.getElementById("locationPop")?.classList.add("hide");document.getElementById("notificationPop")?.classList.toggle("hide")}
  else if(q==="locations"){document.getElementById("pop")?.classList.add("hide");document.getElementById("notificationPop")?.classList.add("hide");document.getElementById("locationPop")?.classList.toggle("hide")}
