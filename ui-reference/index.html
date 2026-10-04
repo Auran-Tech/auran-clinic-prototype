@@ -1422,6 +1422,206 @@ html[data-theme=dark] .topbar.app-header{background:#0B1726!important;border-col
  .mobile-screen-gallery{grid-template-columns:1fr}
 }
 
+
+/* Responsive system v16 — final cross-screen layer */
+html,body{max-width:100%;overflow-x:hidden}
+*,*:before,*:after{box-sizing:border-box}
+img,svg,video,canvas{max-width:100%}
+.main,.content-body,.workspace-frame,.page-content-surface,.page-enter,.card{min-width:0}
+.scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable}
+.table{width:100%;max-width:none}
+.input,select,textarea,button{max-width:100%}
+
+/* Wide desktop / ultrawide */
+@media(min-width:1600px){
+  .content-body{width:min(1480px,100%)!important;padding-inline:32px!important}
+  .s4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .s3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .s2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .chart-two-col{grid-template-columns:minmax(0,7fr) minmax(0,5fr)!important}
+  .workspace-grid{grid-template-columns:minmax(0,1fr) 330px!important}
+}
+
+/* Standard desktop / laptop */
+@media(min-width:1200px) and (max-width:1599px){
+  .content-body{width:min(1340px,100%)!important;padding-inline:26px!important}
+  .s4{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .s3{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .s2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+/* Small laptop / landscape tablet */
+@media(max-width:1199px){
+  .content-body{width:100%!important;padding:20px 20px 46px!important}
+  .s4,.ring-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .s3{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .s2{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .chart-two-col{grid-template-columns:1fr!important}
+  .workspace-grid{grid-template-columns:1fr!important}
+  .workspace-grid .sticky{position:static!important}
+  .permission-layout{grid-template-columns:220px minmax(0,1fr)!important}
+  .profile-grid{grid-template-columns:240px minmax(0,1fr)!important}
+  .settings{grid-template-columns:200px minmax(0,1fr)!important}
+  .queue-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .reportgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .transition-grid{grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr)!important}
+  .transition-grid code,.transition-grid .btn{grid-column:1/-1!important}
+  .follow-item.follow-row{grid-template-columns:minmax(220px,1.2fr) minmax(120px,.7fr) auto!important}
+  .follow-item.follow-row .follow-meta:nth-of-type(3){display:none!important}
+  .topbar.app-header{grid-template-columns:46px minmax(220px,1fr) auto!important;gap:12px!important;padding-inline:14px!important}
+  .header-user .user-copy,.header-user .user-trigger .chev{display:none!important}
+  .header-user .user-trigger{width:40px!important;min-width:40px!important;padding:3px!important;justify-content:center!important}
+}
+
+/* Tablet portrait */
+@media(max-width:991px){
+  .app,.app.sidebar-collapsed{grid-template-columns:220px minmax(0,1fr)!important}
+  .sidebar-collapsed,.app.sidebar-collapsed{grid-template-columns:72px minmax(0,1fr)!important}
+  .content-body{padding:18px 16px 44px!important}
+  .s4,.s3,.s2,.ring-card-grid,.queue-kpis,.reportgrid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .permission-layout,.profile-grid,.settings{grid-template-columns:1fr!important}
+  .tabs{display:flex!important;overflow-x:auto!important;gap:6px!important}
+  .tabs button{width:auto!important;white-space:nowrap!important;flex:0 0 auto!important}
+  .role-list{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .patient-hero{grid-template-columns:auto minmax(0,1fr)!important}
+  .patient-hero>.pill,.patient-hero>.actions{grid-column:1/-1!important}
+  .metric-pair{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .form-grid{grid-template-columns:1fr 1fr!important}
+  .queue-list .qrow{grid-template-columns:minmax(160px,1fr) minmax(100px,.7fr) minmax(100px,.6fr) auto!important}
+  .queue-list .qrow>*:nth-child(4){display:none}
+  .control-grid,.layout-rules{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .foundation-grid,.icon-guideline{grid-template-columns:1fr!important}
+  .color-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .icon-showcase{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+  .phone-showcase{grid-template-columns:1fr!important}
+  .mobile-screen-gallery{grid-template-columns:repeat(2,minmax(340px,1fr))!important}
+}
+
+/* Large mobile / small tablet */
+@media(max-width:760px){
+  .app,.app.sidebar-collapsed,.sidebar-collapsed{display:block!important}
+  .side{display:none!important}
+  .main{width:100%!important;min-width:0!important;padding:0!important}
+  .content-body{padding:14px 11px 88px!important}
+  .s4,.s3,.s2,.ring-card-grid,.queue-kpis,.reportgrid,.metric-pair{grid-template-columns:1fr!important}
+  .card{padding:13px!important;border-radius:16px!important}
+  .head{padding:14px!important;border-radius:16px!important;margin-bottom:14px!important}
+  .head h1{font-size:22px!important}
+  .head p{font-size:11px!important}
+  .page-heading-row{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:12px!important}
+  .page-actions{width:100%!important;justify-content:flex-start!important}
+  .page-actions .btn{flex:1 1 auto!important}
+  .topbar.app-header{height:60px!important;grid-template-columns:40px minmax(0,1fr) auto!important;gap:7px!important;padding:0 8px!important}
+  .app-header-menu{width:38px!important;height:38px!important;min-width:38px!important}
+  .global-search{height:38px!important;padding:0 9px!important}
+  .search-shortcut{display:none!important}
+  .header-location .location-trigger{width:38px!important;min-width:38px!important;padding:0!important;justify-content:center!important}
+  .header-location .location-copy,.header-location .chev{display:none!important}
+  .header-notifications .navbar-icon,.header-user .user-trigger{width:38px!important;height:38px!important;min-width:38px!important}
+  .header-user .user-copy,.header-user .chev{display:none!important}
+  .navbar-dropdown,.user .pop,.location-menu{position:fixed!important;top:62px!important;inset-inline:8px!important;width:auto!important;max-width:none!important}
+  .screen-toolbar,.queue-toolbar,.permission-toolbar,.follow-toolbar,.preview-toolbar{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+  .screen-toolbar .input,.queue-toolbar .input,.permission-search-wrap,.follow-search-wrap,.toolbar-select{width:100%!important;max-width:none!important}
+  .screen-toolbar .push,.view-switch{margin-inline-start:0!important}
+  .view-switch{width:100%!important}
+  .view-switch button{flex:1!important}
+  .form-grid{grid-template-columns:1fr!important}
+  .permission-row{grid-template-columns:minmax(0,1fr) auto!important}
+  .permission-row>small{grid-column:1/-1!important}
+  .role-list{grid-template-columns:1fr!important}
+  .patient-hero{grid-template-columns:auto minmax(0,1fr)!important}
+  .patient-tabs,.group-chips,.tabs{overflow-x:auto!important;padding-bottom:4px!important;scrollbar-width:none}
+  .patient-tabs::-webkit-scrollbar,.group-chips::-webkit-scrollbar,.tabs::-webkit-scrollbar{display:none}
+  .queue{grid-template-columns:repeat(5,minmax(250px,82vw))!important;overflow-x:auto!important;scroll-snap-type:x proximity!important;padding-bottom:6px}
+  .queue .lane{scroll-snap-align:start}
+  .queue-list .qrow{grid-template-columns:minmax(0,1fr) auto!important;gap:8px!important}
+  .queue-list .qrow>*:nth-child(n+3):not(:last-child){display:none!important}
+  .follow-item.follow-row{grid-template-columns:1fr!important;gap:10px!important}
+  .follow-item.follow-row>.hide-mobile{display:none!important}
+  .follow-actions{justify-content:flex-start!important;flex-wrap:wrap!important}
+  .transition-grid{grid-template-columns:1fr!important}
+  .transition-grid>*{grid-column:1!important}
+  .flow-editor{overflow-x:auto!important}
+  .flow-state{min-width:78vw!important}
+  .modal-backdrop{padding:8px!important;align-items:end!important}
+  .modal{width:100%!important;max-width:none!important;max-height:94vh!important;border-radius:20px 20px 8px 8px!important}
+  .modal-head,.modal-body,.modal-foot{padding:13px!important}
+  .modal-foot{flex-wrap:wrap!important}
+  .modal-foot .btn{flex:1 1 130px!important}
+  .table{min-width:640px!important}
+  .scroll{margin-inline:-2px!important}
+  .donut-wrap{flex-direction:column!important}
+  .loginbox{padding:16px!important}
+  .loginbox .card{width:100%!important}
+  .art{display:none!important}
+  .login{grid-template-columns:1fr!important}
+  .design-section{padding:14px!important}
+  .foundation-grid,.control-grid,.layout-rules{grid-template-columns:1fr!important}
+  .color-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .icon-showcase{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .mobile-screen-gallery{grid-template-columns:1fr!important}
+  .phone-frame,.phone-frame-spec{width:min(390px,100%)!important}
+}
+
+/* Small phones */
+@media(max-width:480px){
+  .content-body{padding:11px 8px 86px!important}
+  .head{padding:12px!important}
+  .head h1{font-size:20px!important}
+  .card{padding:11px!important}
+  .topbar.app-header{grid-template-columns:38px minmax(0,1fr) auto!important;padding-inline:6px!important;gap:5px!important}
+  .global-search{padding-inline:8px!important}
+  .global-search input{font-size:10.5px!important}
+  .app-header-end{gap:4px!important}
+  .header-location .location-trigger,.header-notifications .navbar-icon,.header-user .user-trigger{width:36px!important;height:36px!important;min-width:36px!important}
+  .app-header-menu{width:36px!important;height:36px!important;min-width:36px!important}
+  .mobile-dock{inset-inline:6px!important;bottom:6px!important;padding:5px!important}
+  .mobile-dock button{padding:5px 6px!important;font-size:8px!important}
+  .mobile-dock svg{width:16px!important;height:16px!important}
+  .page-actions{display:grid!important;grid-template-columns:1fr!important}
+  .actions{justify-content:flex-start!important}
+  .actions .btn{flex:1 1 auto!important}
+  .pill{font-size:9px!important;padding:3px 6px!important}
+  .table{min-width:600px!important}
+  .color-grid{grid-template-columns:1fr!important}
+  .icon-showcase{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .icon-rules{grid-template-columns:1fr!important}
+  .phone-frame,.phone-frame-spec{width:100%!important;border-radius:30px!important;border-width:5px!important}
+  .mobile-kpi-grid,.mobile-quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .mobile-info-card{grid-template-columns:1fr!important}
+}
+
+/* Very small phones */
+@media(max-width:360px){
+  .content-body{padding-inline:6px!important}
+  .topbar.app-header{grid-template-columns:36px minmax(0,1fr) auto!important}
+  .header-location{display:none!important}
+  .global-search input::placeholder{font-size:0}
+  .global-search input::placeholder{color:transparent!important}
+  .mobile-dock button span{display:none!important}
+  .mobile-dock button{min-height:40px!important}
+  .head h1{font-size:19px!important}
+  .btn{padding:8px 9px!important}
+}
+
+/* Height-sensitive screens */
+@media(max-height:700px) and (min-width:761px){
+  .side{overflow-y:auto!important}
+  .nav-section{margin-bottom:7px!important}
+  .nav button{height:36px!important;min-height:36px!important}
+  .brand{height:56px!important;min-height:56px!important}
+}
+
+/* Print keeps content readable */
+@media print{
+  .side,.topbar,.mobile-dock,.ux-fab{display:none!important}
+  .app,.main{display:block!important;width:100%!important}
+  .content-body{width:100%!important;padding:0!important}
+  .card{break-inside:avoid}
+  .scroll{overflow:visible!important}
+  .table{min-width:0!important}
+}
+
 </style></head><body><div id="root"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script><script>
 (()=>{"use strict";
 const S={lang:"ar",theme:"dark",screen:"dashboard",tab:"general",report:null,step:0,reportTime:"10:42",patientTab:"overview",queueView:"board",roleGroup:"All",modal:null,selectedRoles:["Doctor"],medicalFields:["Chronic Conditions","Current Medication","Surgical History","Family History","Smoking Status","Pregnancy Status"],q:{checked:["أحمد مصطفى","سارة عادل"],waiting:["يوسف حسن","نور كمال"],ready:["محمد رضا"],visit:["منى سمير"],done:["عمر علي"]},flow:["Checked In","Waiting","Ready","In Visit","Completed"]};
