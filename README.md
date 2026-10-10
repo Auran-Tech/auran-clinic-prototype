@@ -1,157 +1,28 @@
-# AURAN Clinic Management — Prototype
+# AURAN Clinic V1 — Canonical Source of Truth
 
-Interactive UI/UX prototype for the **AURAN Clinic Management System**.
+This repository is the authoritative product and implementation specification for AURAN Clinic V1, plus the approved interactive prototype (`index.html`). Start with `AGENTS.md`.
 
-This repository contains the current product prototype used for:
+## What an implementation agent gets here
+- Exact V1 scope and approved decisions.
+- Business/security/permission rules.
+- Implementation contracts per module: data, commands/queries, validation, APIs, UI, transactions, audit, edge cases and tests.
+- Backend/frontend/database/API architecture.
+- Screen and user-flow contracts.
+- Engineering Definition of Done and task/acceptance templates.
+- Target OpenAPI surface, logical schema inventory, permission catalog and safe demo seed.
 
-- Product discussions
-- UI/UX reviews
-- Workflow validation
-- Client demonstrations
-- Feature planning
-- Early usability testing
+## Source precedence
+Current product decisions/canonical specs here come first. For foundation behavior already implemented, tested current `Auran-Tech/auran-clinic-backend` code/generated Swagger is the detailed executable reference. Root `index.html` is UX/workflow intent, not production architecture. Legacy specs are references only.
 
-> This is a prototype only. It is not the production application.
+## V1 product
+**Platform:** Platform Admin auth, clinic provisioning, initial protected clinic Super User/Admin, clinic metadata, activation/suspension/reactivation, actor-boundary/session security.
 
----
+**Clinic:** authentication, RBAC/users, settings/configuration, patients, medical/dynamic profile, measurements, live queue/workflow, visits/multi-session/delayed documentation, clinical orders/files, follow-ups, reports, dashboard and audit.
 
-## Live Demo
+**Deferred:** appointment scheduling, subscriptions/commercial billing, branches, patient mobile app, insurance/accounting/pharmacy, external lab/radiology, family linking and advanced distributed/offline architecture.
 
-The prototype is deployed using GitHub Pages.
+## Repository map
+`docs/product` product decisions/scope/personas/glossary; `docs/requirements` functional/NFR/business/permissions; `docs/modules` module implementation contracts; `docs/architecture` system/backend/frontend/database/API/integrations; `docs/design` UI/screens/flows; `docs/engineering` coding/security/testing/DoD; `docs/delivery` implementation order/templates; `specs` machine-oriented target contracts.
 
-**Demo:** Add GitHub Pages URL here
-
----
-
-## Current Scope
-
-The prototype currently demonstrates the planned V1 experience for:
-
-- Authentication
-- Post-login clinic welcome screen
-- Dashboard and statistics
-- Patient management
-- Duplicate patient detection
-- Dynamic patient profiles
-- Live clinic queue
-- Configurable clinic workflow
-- Multi-session patient visits
-- Clinical documentation
-- Prescription sections
-- Attachments and images
-- Pending documentation
-- Patient follow-ups
-- Employees
-- System roles
-- RBAC permissions
-- Permission-aware navigation
-- Reports
-- PDF / Excel export flow
-- Clinic configuration
-- System settings
-- Timezone and localization
-- Audit log
-- System guide
-
----
-
-## Clinic Workflow
-
-The workflow is configurable per clinic.
-
-Different clinics may require different patient stages.
-
-For example:
-
-Patient Check-In  
-→ Waiting  
-→ Doctor  
-→ Drops / Observation  
-→ Waiting Again  
-→ Doctor Re-check  
-→ Exit
-
-The prototype also supports multiple clinical sessions inside the same patient visit.
-
----
-
-## Roles & Permissions
-
-The system uses Role-Based Access Control (RBAC).
-
-A user can have multiple roles.
-
-System roles are protected and cannot be renamed, deleted, or have their built-in permissions modified.
-
-Navigation and available actions change according to the user's effective permissions.
-
-A protected Super User has full system access.
-
----
-
-## Running Locally
-
-No installation is required.
-
-Clone the repository:
-
-git clone <repository-url>
-
-Then open:
-
-index.html
-
-in any modern browser.
-
----
-
-## Technology
-
-This prototype is intentionally implemented as a standalone:
-
-- HTML
-- CSS
-- JavaScript
-- Browser LocalStorage
-
-No backend or database is required for the prototype.
-
----
-
-## Important
-
-The architecture of this prototype does **not** represent the final production architecture.
-
-The production system will be developed separately using:
-
-- .NET Backend API
-- Angular Frontend
-- SQL Server
-- Production authentication and authorization
-- Persistent server-side storage
-
----
-
-## Repository Purpose
-
-This repository should remain focused on the interactive product prototype.
-
-Production source code should be maintained in separate repositories.
-
-Suggested repositories:
-
-- `auran-clinic-prototype`
-- `auran-clinic-api`
-- `auran-clinic-web`
-
----
-
-## Status
-
-**Current Stage:** Interactive Product Prototype
-
-The prototype is actively evolving based on product discussions, clinic requirements, and UI/UX feedback.
-
----
-
-© AURAN Technology
+## Implementation synchronization rule
+Production code may live in separate backend/frontend repos, but an intentional contract/scope change is incomplete until this canonical repo is updated. Do not copy old prototype localStorage/demo auth into production.

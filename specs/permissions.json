@@ -1,0 +1,12 @@
+{
+  "source":"Auran.Clinic.Application.Authorization.SystemPermissionCatalog + approved V1 gaps",
+  "implemented":["Audit_View","Patient_View","Patient_Create","Patient_Edit_Basic","Users_View","Users_Manage","Users_Manage_Status","RBAC_View","RBAC_Manage","Queue_View","Queue_Move","Visit_View","Visit_Start","Visit_Edit","MedicalProfile_View","MedicalProfile_Edit","FollowUp_View","FollowUp_Manage","Reports_View","Reports_Export","Settings_View","Settings_Manage","Files_View","Files_Upload","Attendance_Create_Shift"],
+  "v1PermissionsToAddOrExplicitlyMap":["Config_Manage","Measurement_Create","ClinicalOrders_View","ClinicalOrders_Manage","Dashboard_View","Documentation_Complete","Queue_CheckIn","Queue_Exit"],
+  "roles":{
+    "ADMIN":{"strategy":"ALL_CATALOG_PERMISSIONS"},
+    "RECEPTIONIST":{"permissions":["Patient_View","Patient_Create","Patient_Edit_Basic","Queue_View","Queue_Move","Visit_View","Visit_Start","FollowUp_View","FollowUp_Manage","Files_View","Files_Upload"]},
+    "DOCTOR":{"permissions":["Patient_View","Visit_View","Visit_Start","Visit_Edit","MedicalProfile_View","MedicalProfile_Edit","FollowUp_View","FollowUp_Manage","Reports_View","Files_View","Files_Upload"]},
+    "NURSE":{"permissions":["Patient_View","Queue_View","Queue_Move","Visit_View","MedicalProfile_View","MedicalProfile_Edit","Files_View","Files_Upload"]}
+  },
+  "rules":{"multiRole":"union","superUser":"all clinic permissions, still tenant-scoped","platform":"actor policy; not clinic role permissions","roleDefinitions":"protected system catalog"}
+}
