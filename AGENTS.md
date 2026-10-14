@@ -13,7 +13,7 @@ When details conflict:
 Never silently choose between contradictions. For a genuinely missing medical/commercial/destructive/security decision, record `OPEN_DECISION` and stop only that affected behavior; continue independent work.
 
 ## Mission & architecture
-Build one production-ready configurable multi-clinic product with AURAN Platform and Clinic Workspace security boundaries. Backend .NET 8/ASP.NET Core/EF Core/SQL Server modular monolith; frontend Angular/TypeScript/SCSS. Shared DB with ClinicId tenant boundary. Configuration over customer forks.
+Build one production-ready configurable multi-clinic product with AURAN Platform and Clinic Workspace security boundaries. Backend .NET 10/ASP.NET Core/EF Core/SQL Server modular monolith; frontend React 19/TypeScript/Vite. The current production repositories and their tests determine detailed implementation behavior; do not introduce a parallel Angular application. Shared DB with ClinicId tenant boundary. Configuration over customer forks.
 
 ## V1 boundaries
 Platform Admin/provisioning/suspension are in V1. Clinic modules: auth/RBAC/settings, patients, medical/dynamic profile, measurements, workflow/live queue, visits/sessions/delayed docs, clinical orders/files, follow-ups, reports, dashboard, audit. Deferred: appointments, subscriptions/billing, branches, insurance/accounting/pharmacy, patient mobile, external lab/radiology, family linking, advanced offline, microservices/message broker.
