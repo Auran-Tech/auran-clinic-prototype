@@ -13,3 +13,6 @@ AURAN Clinic records clinician-entered clinical information. Autocomplete may im
 
 ## D-005 — Missing permission gaps are explicit engineering work
 Unfinished modules must use stable atomic permission keys or an explicitly recorded mapping to an existing permission. Role-name checks are forbidden.
+
+## D-006 — Reconcile canonical implementation stack with shipping repositories
+**Implementation alignment (October 14, 2026).** The actively developed frontend repository uses React 19/TypeScript/Vite, not Angular; the backend repository uses .NET 10 LTS, not .NET 8. Update agent and architecture guidance accordingly. This reconciles documentation with shipping code without changing V1 clinical scope or authorization contracts. Any future framework migration requires a separate explicit approved product/engineering decision.
