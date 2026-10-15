@@ -27,3 +27,16 @@ Server-side filtering/pagination/streaming as needed; no loading all tenants; ca
 
 ## Tests
 Filter boundaries/timezone, permission separation, tenant isolation, PDF/Excel content headers, formula injection, empty report, large result behavior.
+
+## Implementation synchronization — October 15, 2026
+
+The current implemented visit-report API uses the existing reporting controller and an incremental GET contract:
+
+- `GET /api/reporting/visits` — visit report preview, requires `Reports_View`.
+- `GET /api/reporting/visits/export` — existing CSV visit export, requires `Reports_Export`.
+- `GET /api/reporting/visits/export/xlsx` — proposed true Excel/OpenXML visit export in backend PR [#149](https://github.com/Auran-Tech/auran-clinic-backend/pull/149). Requires **both** `Reports_View` and `Reports_Export`, uses the same normalized `VisitReportQuery` filters, returns an `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet` download with no patient name in the filename.
+- The React frontend integration is PR [#76](https://github.com/Auran-Tech/auran-clinic-frontend/pull/76). Deploy the API before exposing this new button.
+
+Implementation uses native OpenXML ZIP parts, Unicode-safe inline string cells (never interpreted as formulas), and typed Excel UTC date cells; tests cover those properties and SQL-backed endpoint permission gates. Its current in-memory report query is **not yet certified** for high-volume reports; agree on a query cap/streaming strategy and load test before production.
+
+These GET endpoints are the executable incremental implementation, **not** replacement for the target generalized `POST /api/reports/{reportCode}/preview|export` design above. Other V1 report types, branded paginated PDF generation, export audit policy, clinic-local date presentation and full deployment assurance remain outstanding. Do not mark the full Reports V1 feature complete merely because visit XLSX is implemented.
