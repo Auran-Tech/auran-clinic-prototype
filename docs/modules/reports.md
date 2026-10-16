@@ -40,3 +40,14 @@ The current implemented visit-report API uses the existing reporting controller 
 Implementation uses native OpenXML ZIP parts, Unicode-safe inline string cells (never interpreted as formulas), and typed Excel UTC date cells; tests cover those properties and SQL-backed endpoint permission gates. Its current in-memory report query is **not yet certified** for high-volume reports; agree on a query cap/streaming strategy and load test before production.
 
 These GET endpoints are the executable incremental implementation, **not** replacement for the target generalized `POST /api/reports/{reportCode}/preview|export` design above. Other V1 report types, branded paginated PDF generation, export audit policy, clinic-local date presentation and full deployment assurance remain outstanding. Do not mark the full Reports V1 feature complete merely because visit XLSX is implemented.
+
+## Incremental release safety boundary — October 16, 2026
+
+Backend [PR #151](https://github.com/Auran-Tech/auran-clinic-backend/pull/151) and frontend [PR #79](https://github.com/Auran-Tech/auran-clinic-frontend/pull/79) are merged:
+
+- The existing visit preview, CSV and XLSX endpoints now enforce a **hard maximum of 10,000 rows**. Queries fetch at most 10,001 rows from SQL to detect over-limit responses without silently truncating patient records.
+- If the maximum is exceeded, all three endpoints return **HTTP 413**, error code `report_too_large`. The user must narrow filters and retry. The frontend displays a safe, actionable message.
+- CSV and XLSX now both require **`Reports_View` and `Reports_Export`**, so export cannot grant broader authorization than preview.
+- This limit prevents unbounded report materialization, but it does **not** establish a scalable reporting design. A future contract must support bounded preview pages, continuation/streaming for high-volume export, explicit resource budgets and load testing.
+
+**Clinical acceptance:** No incomplete or silently truncated clinical export may be presented as complete. Limit changes require product/clinical sign-off, documented operational thresholds and regression tests at the exact boundary. The canonical target API and remaining report types remain unchanged.
