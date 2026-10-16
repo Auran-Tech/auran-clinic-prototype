@@ -51,3 +51,15 @@ Backend [PR #151](https://github.com/Auran-Tech/auran-clinic-backend/pull/151) a
 - This limit prevents unbounded report materialization, but it does **not** establish a scalable reporting design. A future contract must support bounded preview pages, continuation/streaming for high-volume export, explicit resource budgets and load testing.
 
 **Clinical acceptance:** No incomplete or silently truncated clinical export may be presented as complete. Limit changes require product/clinical sign-off, documented operational thresholds and regression tests at the exact boundary. The canonical target API and remaining report types remain unchanged.
+
+## Patients report incremental coverage — October 16, 2026
+
+The following first slice is merged in backend [#152](https://github.com/Auran-Tech/auran-clinic-backend/pull/152) and frontend [#80](https://github.com/Auran-Tech/auran-clinic-frontend/pull/80):
+
+- `GET /api/reporting/patients`: patient preview with clinic-local **registration From/To** and optional **Gender** filters, protected by `Reports_View`.
+- `GET /api/reporting/patients/export`: identical bounded report as CSV, protected by **both** `Reports_View` and `Reports_Export`.
+- Columns currently implemented: patient number, name, phone, gender, date of birth, registration UTC timestamp.
+- Clinic isolation derives from the EF tenant query filter; the result limit is 10,000 records with explicit `413 report_too_large` on overflow. CSV neutralizes spreadsheet formulas.
+- A live Playwright test verifies an actual patient registration, preview, CSV download and cross-actor denial against disposable SQL Server.
+
+**Not yet complete:** age at clinic-local reference date, medical conditions summary, patient-specific XLSX and branded PDF, pagination/streaming and generalized POST report contract. Displaying all registration times in user-browser locale may not equal clinic-local display time, so final bilingual/timezone acceptance remains required. Do not label the entire Patients report V1 feature complete.
