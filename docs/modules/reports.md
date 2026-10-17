@@ -63,3 +63,15 @@ The following first slice is merged in backend [#152](https://github.com/Auran-T
 - A live Playwright test verifies an actual patient registration, preview, CSV download and cross-actor denial against disposable SQL Server.
 
 **Not yet complete:** age at clinic-local reference date, medical conditions summary, patient-specific XLSX and branded PDF, pagination/streaming and generalized POST report contract. Displaying all registration times in user-browser locale may not equal clinic-local display time, so final bilingual/timezone acceptance remains required. Do not label the entire Patients report V1 feature complete.
+
+## Clinic Queue report incremental coverage — October 17, 2026
+
+Backend [PR #153](https://github.com/Auran-Tech/auran-clinic-backend/pull/153) and frontend [PR #81](https://github.com/Auran-Tech/auran-clinic-frontend/pull/81) are merged:
+
+- `GET /api/reporting/queue` — tenant-scoped preview, `Reports_View` required.
+- `GET /api/reporting/queue/export` — same bounded report as formula-safe CSV, both `Reports_View` and `Reports_Export` required.
+- Filters: clinic-local From/To queue entry date, doctor GUID, workflow status GUID. Includes patient/doctor, workflow status, entry and exit UTC, and elapsed queue minutes for exited entries only.
+- Uses EF clinic-scoped joins, deterministic ordering, strict 10,000-row limit with HTTP 413 `report_too_large`, and no silent truncation. The duration field stays blank for active entries rather than guessing.
+- Unit date/filter validation and SQL-backed actor-permission checks; Playwright Live Stack verifies clinic actor, Platform denial, reversed date filter and downloaded CSV.
+
+**Still not full V1:** exported Excel, branded PDF, approved clinic-local date/time presentation, separate complete workflow status catalog for filtering, high-volume pagination/streaming, and clinical/operations/privacy review. Existing GET routes are incremental and do not replace the target generalized POST report API.
