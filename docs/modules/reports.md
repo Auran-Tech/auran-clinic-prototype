@@ -75,3 +75,16 @@ Backend [PR #153](https://github.com/Auran-Tech/auran-clinic-backend/pull/153) a
 - Unit date/filter validation and SQL-backed actor-permission checks; Playwright Live Stack verifies clinic actor, Platform denial, reversed date filter and downloaded CSV.
 
 **Still not full V1:** exported Excel, branded PDF, approved clinic-local date/time presentation, separate complete workflow status catalog for filtering, high-volume pagination/streaming, and clinical/operations/privacy review. Existing GET routes are incremental and do not replace the target generalized POST report API.
+
+## Doctor Activity report incremental coverage — October 17, 2026
+
+Backend [PR #154](https://github.com/Auran-Tech/auran-clinic-backend/pull/154) and frontend [PR #82](https://github.com/Auran-Tech/auran-clinic-frontend/pull/82) are merged:
+
+- `GET /api/reporting/doctors` — preview, `Reports_View`.
+- `GET /api/reporting/doctors/export` — formula-safe CSV, requires `Reports_View` and `Reports_Export`.
+- Filters: clinic-local From/To date on visit entry, optional doctor GUID. Includes all clinic users with `DOCTOR` role even if they have zero visits. SQL calculates clinic-scoped metrics.
+- `CurrentQueue` counts queue records with no exit timestamp at request time; **it is deliberately a live operational count independent of selected dates**. `TotalVisits`, `CompletedDocs` and `PendingDocs` are restricted by visit entry dates and doctor. `PendingDocs` includes all statuses except `Completed` (`NotStarted`, `Draft`, `Pending`).
+- Uses the shared 10,000-row hard limit and `413 report_too_large` on overflow, plus clinic/actor authorization.
+- Unit date/query checks, hosted SQL permission matrix and browser E2E including an actual created `DOCTOR`-role user, empty activity counters, Platform actor denial and CSV export.
+
+**Remaining V1:** XLSX and branded PDF formats, approved multilingual/RTL labels and clinic-local display formatting, reliable monitoring/load budgets, generalized reporting API, paging/streaming, and independent security/clinical/privacy/operations acceptance. Dashboard totals remain operational indicators, not clinical completion attestations.
