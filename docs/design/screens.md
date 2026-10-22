@@ -3,6 +3,8 @@
 ## Global shell
 Authenticated clinic shell: branded sidebar/topbar, current user/roles, clinic name, logout, permission-filtered navigation. Navigation: Dashboard, Patients, Live Queue, Visits, Pending Docs, Follow-ups, Reports, Employees, Roles & Permissions, Configuration, Settings, Audit, System Guide as permitted. Every screen defines loading, empty, validation, forbidden and server-error states.
 
+**Startup and connection interruption:** Show the branded Auran loading screen immediately while the frontend bundle and initial `/health/ready` check complete. After readiness succeeds, open the requested screen. Check readiness periodically. On failure, keep the current Clinic or Platform screen in memory and show a compact amber “Retrying Connection (Ns)” banner for three timed retries, then show “Disconnected” with a manual retry button. Continue slower background readiness checks and retry immediately when the browser reports a possible reconnection. Return to the same page only after readiness succeeds; refetch reads. A failed or queued write must never be represented as saved.
+
 ## Platform
 **Platform Login:** email/password, validation, rate-limit error. **Clinics List:** name/code/status/timezone/admin summary, open/provision. **Provision:** clinic Name, CodePrefix, timezone, patient prefix, phone/email/address/website/locale + initial admin fields. **Clinic Detail/Edit:** immutable code, editable operational metadata. **Suspend/Reactivate:** explicit confirmation and warning that suspension invalidates clinic sessions.
 

@@ -1,0 +1,30 @@
+.auran-connection-cover { position: fixed; inset: 0; z-index: 3000; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 50% 15%,#1d3764 0,#0b162a 38%,#070d1c 78%); color: #f1f5fb; font-family: inherit; }
+.auran-connection-cover[hidden] { display: none; }
+.auran-connection-cover.is-retrying { display: flex; align-items: flex-start; justify-content: center; padding: 16px; background: #050c1b9c; }
+.auran-connection-retry-state { width: min(100%,360px); text-align: center; }
+.auran-connection-retry-state .auran-connection-banner { margin: 0; }
+.auran-connection-retry-state > p { margin: 11px 0; padding: 7px 12px; border-radius: 8px; background: #101d34e8; color: #e3ebfa; font-size: .78rem; }
+.auran-connection-cover.is-checking { background: radial-gradient(circle at 50% 30%,#14274a 0,#0b152b 36%,#070d1c 75%); }
+.auran-connection-startup { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.auran-connection-startup-mark { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg,#438bff,#6757dd); box-shadow: 0 16px 42px #315bb766; font-size: 2.2rem; font-weight: 800; }
+.auran-connection-startup-brand { margin: 22px 0 30px; font-size: 1.03rem; font-weight: 900; letter-spacing: .18em; }
+.auran-connection-startup h1 { margin: 0 0 10px; color: #f1f5fb; font-size: clamp(1.5rem,4vw,2rem); }
+.auran-connection-startup #auran-connection-body { margin: 0; color: #a7b8d4; }
+.auran-connection-progress { width: min(220px,70vw); height: 3px; margin-top: 34px; overflow: hidden; border-radius: 999px; background: #294166; }
+.auran-connection-progress span { display: block; width: 42%; height: 100%; border-radius: inherit; background: #5c9bff; animation: auran-connection-progress 1.5s ease-in-out infinite alternate; }
+.auran-connection-card { box-sizing: border-box; width: min(100%,460px); padding: 38px; border: 1px solid #30415e; border-radius: 19px; background: #121e35; box-shadow: 0 26px 75px #02060fcc; text-align: center; }
+.auran-connection-banner { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 47px; margin: -8px -8px 30px; padding: 10px 15px; border-radius: 9px; background: linear-gradient(110deg,#f59e0b,#fbbf24); color: #fff; font-size: .93rem; font-weight: 800; box-shadow: 0 5px 13px #0004; }
+.auran-connection-banner.is-disconnected { background: #8a2d31; }
+.auran-connection-banner svg { flex: 0 0 auto; }
+.auran-connection-banner svg.is-spinning { animation: auran-connection-spin 1.3s linear infinite; }
+.auran-connection-mark { display: grid; place-items: center; width: 62px; height: 62px; margin: 0 auto 19px; border-radius: 17px; background: linear-gradient(135deg,#438bff,#6757dd); box-shadow: 0 11px 25px #315bb755; font-weight: 800; font-size: 1.8rem; }
+.auran-connection-eyebrow { margin: 0 0 12px; color: #91b8f4; font-size: .7rem; font-weight: 800; letter-spacing: .18em; }
+.auran-connection-card h1 { margin: 0 0 13px; color: #f1f5fb; font-size: clamp(1.65rem,4vw,2.05rem); }
+.auran-connection-card .auran-connection-body { margin: 0 auto; max-width: 340px; color: #b7c5dd; font-size: .9rem; line-height: 1.6; }
+.auran-connection-retry { width: 100%; min-height: 45px; margin-top: 26px; border: 0; border-radius: 9px; background: #3d7be0; color: white; font: inherit; font-weight: 700; cursor: pointer; }
+.auran-connection-retry:hover { background: #5290f7; }
+.auran-connection-footnote { margin: 14px 0 0; color: #8ca1bf; font-size: .76rem; }
+@keyframes auran-connection-spin { to { transform: rotate(360deg); } }
+@keyframes auran-connection-progress { from { transform: translateX(-110%); } to { transform: translateX(250%); } }
+@media (max-width: 520px) { .auran-connection-card { padding: 30px 22px; } }
+@media (prefers-reduced-motion: reduce) { .auran-connection-banner svg.is-spinning, .auran-connection-progress span { animation: none; } }

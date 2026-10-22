@@ -2,6 +2,8 @@
 
 This repository is the authoritative product and implementation specification for AURAN Clinic V1, plus the approved interactive prototype (`index.html`). Start with `AGENTS.md`.
 
+The prototype's **UX & UI Guidelines** page previews the branded loading screen, compact retry countdown, and disconnected screen. When served from an origin allowed by the backend CORS policy, open `ui-reference/?healthUrl=<encoded /health/ready URL>` to check actual API/DB readiness. The regular prototype remains a static demo and does not submit or replay offline changes.
+
 ## What an implementation agent gets here
 - Exact V1 scope and approved decisions.
 - Business/security/permission rules.
