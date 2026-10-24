@@ -15,5 +15,11 @@ Dashboard route requires an approved dashboard/read permission if catalog adds o
 ## UI
 Cards + small charts, clear loading/empty/error state, links only when target permission exists. Clinic branding applies but semantic chart labels remain accessible.
 
+The dashboard follows the prototype's four circular cards, seven-day visits chart, live activity, queue distribution, doctor workload, attention list, and quick actions. The chart uses clinic-local dates and real visit counts. Live activity uses current queue entries and must not present them as completed historical events. Queue duration is the measured time since check-in; a Queue SLA percentage requires an approved target and must not be fabricated from prototype sample values. Historical prototype names, percentages, and trend indicators are visual examples only. Widget links follow the destination module's read permission.
+
+Visit completion uses visits that started on the clinic-local current day as its denominator, and only completed visits from that same group as its numerator. Visits completed today from earlier days remain available as a separate reporting count and do not enter this percentage.
+
+The application keeps the prototype's inset dashboard frame, compact header, four metric cards, and taller trend/activity row. The trend header may show the real seven-day visit total in place of the prototype's illustrative percentage. Known workflow status names are localized in the dashboard; custom names remain as configured by the clinic.
+
 ## Tests
 Clinic-local day boundary, tenant isolation, permission-based omission, empty clinic, aggregate correctness and query efficiency.
