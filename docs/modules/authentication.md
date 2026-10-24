@@ -12,6 +12,8 @@ LoginRequest contains credential fields defined by backend (email/password). Suc
 ## Session rules
 Persist only refresh token hash. Successful refresh rotates: submitted refresh is revoked and replacement stored; reuse/replay returns 401. Logout revokes supplied session. User role replacement, deactivation and clinic suspension invalidate affected sessions/access state immediately. Reactivation never resurrects old sessions. Account inactive/clinic inactive blocks login/refresh/access-token state validation.
 
+Clinic Profile Settings also exposes `POST /api/users/me/password`, `GET /api/users/me/sessions`, `POST /api/users/me/sessions/revoke` with a SessionId request body, and `POST /api/users/me/sessions/revoke-all` without a body. A password change requires the current password, follows Identity password policy, revokes every Clinic session for that user, and requires sign-in again. Session listing returns only active sessions owned by the caller, with UTC sign-in and expiry timestamps. Historical sessions without a recorded sign-in timestamp remain revocable and show an unavailable sign-in date; the UI must never render year 1 as a real date. Individual and bulk revocation cannot affect another user or clinic. Bulk revocation includes the current session, so the frontend clears its local session and requires sign-in again. The UI shows a short list initially and lets the user reveal more sessions.
+
 ## Bootstrap
 First Platform Admin can be created only when explicit bootstrap config is enabled. Credentials are environment/secret configuration, never source. After initial bootstrap, disable/remove bootstrap secret values. Re-running must not silently replace an existing platform identity.
 

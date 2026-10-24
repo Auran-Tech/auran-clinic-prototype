@@ -18,6 +18,13 @@ Protected static codes: `ADMIN`, `RECEPTIONIST`, `DOCTOR`, `NURSE`. User may hol
 `POST /api/users/disable-self` allows authenticated user to disable self without ManageStatus, except last active Super User.
 `GET /api/permissions/list` returns stable key/group/localized descriptions.
 
+## Self-service profile
+Authenticated Clinic users can use `GET /api/users/me` and `PUT /api/users/me` to read and update only their own name and email without `Users_Manage`. The server derives the user and clinic from the access token; callers cannot choose another user ID. The update preserves the existing phone number and uses the existing Identity email uniqueness and audit path.
+
+`GET /api/users/me/photo`, `POST /api/users/me/photo`, and `DELETE /api/users/me/photo` are scoped to the current Clinic user. Upload accepts JPEG, PNG, or WebP up to 2 MB. Photos live in a tenant-linked record, separate from the user list, and are removed with the user.
+
+Language and theme are personal browser preferences. Profile Settings offers the same choices as the account menu. Photo changes are saved to the backend; name and email updates are persisted in the existing user and Identity records.
+
 ## Account state
 Use business active state from current backend foundation plus Identity state. Do not resurrect sessions after reactivation. Email uniqueness/Identity conflicts return 409 where applicable.
 
