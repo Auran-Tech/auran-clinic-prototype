@@ -22,10 +22,10 @@ Load entry with concurrency token → verify not exited → verify requested ToS
 Set ExitAtUtc/terminal operational state and history. Close any operationally required active session according to explicit visit rule. Does not mark DocumentationStatus Completed.
 
 ## API target
-`GET /api/queue`, `POST /api/queue/check-in`, `POST /api/queue/{id}/transition`, `POST /api/queue/{id}/exit`, `GET /api/queue/{id}/history`; configuration under `/api/configuration/workflow`. 409 for invalid transition/concurrency/already-exited conflicts.
+`GET /api/queue` returns active entries by default; `includeRecentExits=true` also returns exits from the last 24 hours. `POST /api/queue/check-in`, `POST /api/queue/{id}/transition`, `POST /api/queue/{id}/exit`, `GET /api/queue/{id}/history`; configuration under `/api/configuration/workflow`. 409 for invalid transition/concurrency/already-exited conflicts.
 
 ## UI
-Live board ordered by configured status/sort order; cards show patient, patient number, doctor/assignee, entry/wait duration and permitted next actions. Never show an impossible transition button. Use status name + color, not color alone. Refresh after mutations; optimistic UI only if rollback is reliable.
+Live board ordered by configured status/sort order by default; list headers control server sorting by stage, arrival time, patient name and doctor. A Filters dialog contains search, stage and doctor controls, with a nearby Clear button that clears applied filters immediately. Summary cards show patients in flow, average time since arrival, occupied stages and doctors with active patients; show a loading placeholder until queue data arrives. Cards show patient, patient number, doctor/assignee, entry/wait duration and permitted next actions. The Exited lane displays visits exited in the last 24 hours; active summary counts exclude these visits. Dragging a card to another lane uses the same configured transition and permission checks as the Move action; a final transition requires confirmation. Never show an impossible transition button. Use status name + color, not color alone. Refresh after mutations; optimistic UI only if rollback is reliable. Periodic REST polling is not labeled as live updates.
 
 ## Tests
 Configuration same-tenant FK/invariants; check-in transaction rollback; transition allowed/forbidden; concurrent move conflict; history for every move; exit independent from docs; cross-tenant IDs; permission denial; board empty/loading/error states.

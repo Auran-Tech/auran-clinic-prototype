@@ -12,7 +12,7 @@ Clinic actor only. `Patient_View` for read/search, `Patient_Create` for registra
 PatientNumber format is `{PatientNumberPrefix}-{clinic-local year}-{sequence}` (example `AU-2026-1`). Generation uses a concurrency-safe counter; no `MAX()+1`. Year is interpreted in clinic timezone and sequence resets per configured scope/year.
 
 ## Queries
-- List: paginated; filters/search by patient number, name and phone; tenant scoped.
+- List: paginated and tenant scoped; search by patient number, name or phone; optional gender filter; server sorting by displayed patient number, name, phone and gender columns in either direction. Invalid sort or gender values are rejected.
 - Search: fast type-ahead by normalized name/phone/patient number.
 - Duplicate assistance: exact phone plus fuzzy/name candidates. Exact same normalized phone inside clinic blocks create; same phone in another clinic is irrelevant.
 - Get by id: 404 when not found in current clinic; never reveal cross-tenant existence.
@@ -31,7 +31,7 @@ Editable basic fields: FullName, Phone, Gender, DateOfBirth, Notes. PatientNumbe
 `GET /api/patients`, `GET /api/patients/search`, `GET /api/patients/duplicates`, `POST /api/patients`, `GET /api/patients/{id}`, `PUT /api/patients/{id}`, `GET /api/patients/{id}/timeline`. Use BaseResponse conventions and pagination. 400 validation, 401/403 auth, 404 tenant-safe not found, 409 `PATIENT_PHONE_ALREADY_EXISTS`/number-generation conflict.
 
 ## UI
-Patients screen: search input, Register Patient action, paginated table/cards with Patient Number/Name/Phone/Gender/Age and open action. Registration must encourage search first and show duplicate candidates before final creation. Patient details header shows core demographics and tabs/sections permitted by role.
+Patients screen: Filters button opens search and gender controls; a nearby Clear button clears applied filters immediately. Table headers control server sorting; Register Patient action; paginated table/cards with Patient Number/Name/Phone/Gender/Age and open action. Registration must encourage search first and show duplicate candidates before final creation. Patient details header shows core demographics and tabs/sections permitted by role.
 
 States: loading skeleton; no results; first-patient empty state; duplicate warning; validation; forbidden; server error.
 
