@@ -17,6 +17,8 @@ Today's activity/queue/documentation/follow-up/doctor metrics constrained by per
 ## Patients
 Search/filter/list + Register. Table shows patient number, name, phone, gender, age. Patient detail header + sections: Overview, Medical Profile, Measurements, Visits, Prescriptions/Orders, Investigations/Attachments, Follow-ups, Timeline when enabled/permitted.
 
+The implemented patient profile groups currently available features into Overview, Medical profile, Visits, and Files tabs. Visit-specific measurements, orders, and follow-up actions live inside the active visit workspace under Visits. Avoid presenting empty standalone tabs until patient-wide data contracts exist. A failed active-visit lookup must show an error and must not expose check-in as though the patient had no active visit.
+
 ## Live Queue
 Columns/groups by configured workflow status. Queue card: patient, number, doctor, entry/wait time, next allowed transitions, exit. Check-in flow starts from patient search and doctor selection when required.
 
