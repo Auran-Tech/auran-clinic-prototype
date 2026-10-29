@@ -6,7 +6,7 @@
 ## Flow
 Select report → set filters → Generate Preview → server returns columns/rows/summary metadata → export same normalized filter to PDF or Excel. Validate from<=to and clinic-local date boundaries converted to UTC query range.
 
-The current React Visits report applies its date, doctor, visit-status, and documentation filters from a Filters dialog. The toolbar shows a Clear action when filters are active. Export uses the applied values shown in the preview; changes left in an unsubmitted dialog do not affect export. The three other incremental report panels still expose their own filters in their panels pending a common report selection flow.
+The current React Reports workspace offers four selectable report cards: Visits, Patients, Clinic Queue, and Doctor Activity. It shows one report panel at a time. The Visits report applies its date, doctor, visit-status, and documentation filters from a Filters dialog. The toolbar shows a Clear action when filters are active. Export uses the applied values shown in the preview; changes left in an unsubmitted dialog do not affect export. The three other incremental report panels still expose their own filters in their panels pending a shared filter-dialog interaction.
 
 ## V1 reports
 1. Patients: filters From/To creation date, Gender; columns Patient Number, Name, Phone, Gender, Age, Conditions summary.
